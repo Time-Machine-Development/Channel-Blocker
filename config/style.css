@@ -3,159 +3,86 @@ body {
 	background:#202020;
 }
 
-#outerDiv div{
-	display:block;
-	background:#303030;
-	margin:1em;  //auﬂenabstand
-	padding:1em; //innenabstand
+h2 {
+	color:white;
+	margin:1%; 
 }
 
-#innerDiv selectionContainer {
-	display:inline-block;
-	width:35%;
-	vertical-align:top;
-	margin:0em;
-	padding-top:1em;
-	padding-left:1em;
-	padding-bottom:1em;
-	text-align:center;
+#configurationCheckbox {
+	color:white;
+	background:#161616;
+	margin-left:1%; 
+	margin-top:1%; 
+	margin-bottom:1%; 
 }
 
-#innerDiv selectionContainer select {
+#lable {
+	color:white;
+}
+
+#textField {
 	width:100%;
-	height:15em;
-	color:#ffffff;
+	height:2em;
+	color:white;
 	background:#161616;
-	border:none;
+	border-color:#000000;
+	border:1px;
 }
 
-#innerDiv spacer {
-	display:inline-block;
-	width:32%;
-	vertical-align:top;
-	margin:0em;
-	padding-top:1em;
-	text-align:center;
+#hideable {
+	display:none;
 }
-
-#innerDiv spacer button {
-	display:inline-block;
-	width:10%;
-	height:15em;
-	color:#ffffff;
-	background:#161616;
-	border:none;
-}
-
-#innerDiv spacer button:hover{
-	background:#202020;
-}
-
-#innerDiv spacer div {
-	display:inline-block;
-	width:83%;
-}
-
-#innerDiv aside {
-	display:inline-block;
-	width:30%;
-	vertical-align:top;
-	margin:0em;
-	padding-top:1em;
-	padding-bottom:1em; 
-	padding-left:1em; 
-	padding-right:0em;
-	text-align:center;
-}
-
-#innerDiv aside button{
-	width:100%;
-	height:4em;
-	color:#ffffff;
-	background:#161616;
-	border:none;
-}
-
-#innerDiv aside button:hover{
-	background:#202020;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 #outerDivExp div{
 	display:block;
 	background:#303030;
-	margin:1em; 
-	padding-top:1em;
-	padding-bottom:1em; 
-	padding-left:0.5em; 
-	padding-right:0.5em;
+	margin:1%; 
+	padding:0.5%;
 }
 
 #innerDivExp div{
 	display:block;
 	background:#404040;
 	margin-top:0em; 
-	margin-bottom:1em; 
-	margin-left:0em; 
-	margin-right:0em;
-	padding:0.5em;
-	border:1px;
-	border:1px;
+	margin-bottom:0%; 
+	margin-left:0%; 
+	margin-right:0%;
+	padding:0.5%;
+}
+
+#innerDivExp div.noBg {
+	background:#303030;
 }
 
 #innerDivExp selectionContainer {
 	display:inline-block;
 	width:36%;
 	vertical-align:top;
-	margin:0em;
-	padding:0em;
-	text-align:center;
+	margin:0%;
+	padding:0%;
 }
 
 #innerDivExp spacer {
 	display:inline-block;
-	width:32%;
+	width:31.5%;
 	vertical-align:top;
-	margin:0em;
-	padding:0em;
-	text-align:center;
+	margin:0%;
+	padding:0%;
+	color: white;
+}
+
+#innerDivExp spacer div.inputText {
+	background:#303030;
+	width:100%;
+	text-align: right;
 }
 
 #innerDivExp aside {
 	display:inline-block;
 	width:31.5%;
 	vertical-align:top;
-	margin:0em;
-	padding:0em;
-	text-align:center;
+	margin:0%;
+	padding:0%;
 }
 
 #innerDivExp selectionContainer select {
@@ -198,7 +125,6 @@ body {
 
 #info {
 	color: #ffffff;
-	background:#606060;
 	word-wrap: break-word;
 }
 
