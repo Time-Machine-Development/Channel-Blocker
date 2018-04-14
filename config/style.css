@@ -70,6 +70,7 @@ ul {
 
 .selectionContainer input {
 	margin:0% 1% 0% -2.7%;
+	vertical-align: middle;
 }
 
 .lable {
@@ -207,6 +208,14 @@ ul {
 	position: absolute;
 	bottom: 0em;
 	line-height:1.3em;
-	font-size: 0.86em;
+	font-size: 0.9em;
 	padding:0%;
+}
+
+#checkboxSelectionContainer {
+	vertical-align: middle;
+}
+
+#checkboxLable {
+	vertical-align: middle;
 }
