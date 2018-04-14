@@ -117,6 +117,12 @@ h2 {
 	border:none;
 }
 
+.innerDivExp .selectionContainer select option {
+	padding-top:0.31em;
+	padding-bottom:0.31em;
+	font-size: 2em;
+}
+
 .innerDivExp  .spacer button {
 	display:inline-block;
 	width:7%;
