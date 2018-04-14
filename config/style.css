@@ -205,7 +205,8 @@ ul {
 	color: #ffffff;
 	word-wrap: break-word;
 	position: absolute;
-	bottom: 0;
-	font-size: 0.9em;
+	bottom: 0em;
+	line-height:1.3em;
+	font-size: 0.86em;
 	padding:0%;
 }
