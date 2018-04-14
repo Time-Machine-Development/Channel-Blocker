@@ -23,12 +23,8 @@ h2 {
 	background-color:yellow;	
 }
 
-.configurationCheckbox {
-	color:white;
-	background:#161616;
-	margin-left:1%; 
-	margin-top:1%; 
-	margin-bottom:1%; 
+.selectionContainer input {
+	margin:0% 1% 0% 0%; 
 }
 
 .lable {
