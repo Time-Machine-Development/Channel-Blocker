@@ -38,10 +38,26 @@ h2 {
 
 h3 {
 	font-size: 0.9em;
+	padding:0%;
+	margin:0%;
 }
 
 hr {
   color: #303030;
+}
+
+li {
+	margin-top:0%;
+	margin-bottom:0%;
+	padding-top:0%;
+	padding-bottom:0%;
+}
+
+ul {
+	margin-top:0%;
+	margin-bottom:0%;
+	padding-top:0%;
+	padding-bottom:0%;
 }
 
 .donationBtn {
@@ -191,4 +207,5 @@ hr {
 	position: absolute;
 	bottom: 0;
 	font-size: 0.9em;
+	padding:0%;
 }
