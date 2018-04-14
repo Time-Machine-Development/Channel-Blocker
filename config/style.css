@@ -16,7 +16,7 @@
 
 
 body {
-	background:#202020;
+	background:#2d2d2d;
 	font-family: 'Titillium Web', sans-serif;
 }
 
@@ -43,7 +43,7 @@ h3 {
 }
 
 hr {
-  color: #303030;
+  color: #373737;
 }
 
 li {
@@ -81,7 +81,7 @@ ul {
 	width:100%;
 	height:2em;
 	color:white;
-	background:#161616;
+	background:#336e7b;
 	border-color:#000000;
 	border:1px;
 }
@@ -92,7 +92,7 @@ ul {
 
 .outerDivExp div{
 	display:block;
-	background:#303030;
+	background:#373737;
 	margin:0% 1% 1% 1%;
 	padding:0.5%;
 }
@@ -113,13 +113,13 @@ ul {
 }
 
 .innerDivExp .elementExp {
-	background:#404040;
+	background:#464646;
 	margin-top:0%;
 	margin-bottom:1em;
 }
 
 .innerDivExp .elementExp div{
-	background:#404040;
+	background:#464646;
 }
 
 .innerDivExp .selectionContainer {
@@ -157,7 +157,7 @@ ul {
 	width:100%;
 	height:15em;
 	color:#ffffff;
-	background:#161616;
+	background:#336e7b;
 	border:none;
 }
 
@@ -172,7 +172,7 @@ ul {
 	width:7%;
 	height:15em;
 	color:#ffffff;
-	background:#161616;
+	background:#336e7b;
 	border:none;
 }
 
@@ -182,20 +182,20 @@ ul {
 }
 
 .innerDivExp  .spacer button:hover{
-	background:#202020;
+	background:#2d2d2d;
 }
 
 .innerDivExp aside button{
 	width:100%;
 	height:4em;
 	color:#ffffff;
-	background:#161616;
+	background:#336e7b;
 	border:none;
 	font-size: 0.8em;
 }
 
 .innerDivExp aside button:hover{
-	background:#202020;
+	background:#2d2d2d;
 }
 
 .innerDivExp aside .info {
