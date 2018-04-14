@@ -1,28 +1,19 @@
 
 body {
 	background:#202020;
+	font-family: 'Titillium Web', sans-serif;
 }
 
-h2 {
+h1 {
 	color:white;
 	margin:1%; 
 }
 
-header {
-	display:block;
-	width:100%;
-	margin:0%;
-	padding:0%;
-	background-color:#000000;
-	position: -webkit-sticky;
-	position: sticky;
-	top: 0;
-	border:1px solid #303030;
-	z-index: 1;
-	box-shadow: 0px 10px 28px #101010;
+h2 {
+	color:white;
 }
 
-#donationBtn {
+.donationBtn {
 	margin-left:1%; 
 	margin-top:1%; 
 	margin-bottom:1%;
@@ -30,7 +21,7 @@ header {
 	background-color:yellow;	
 }
 
-#configurationCheckbox {
+.configurationCheckbox {
 	color:white;
 	background:#161616;
 	margin-left:1%; 
@@ -38,11 +29,11 @@ header {
 	margin-bottom:1%; 
 }
 
-#lable {
+.lable {
 	color:white;
 }
 
-#textField {
+.textField {
 	width:100%;
 	height:2em;
 	color:white;
@@ -55,28 +46,39 @@ header {
 	display:none;
 }
 
-#outerDivExp div{
+.outerDivExp div{
 	display:block;
 	background:#303030;
 	margin:1%; 
 	padding:0.5%;
 }
 
-#innerDivExp div{
+.outerDivExpNoBg div{
 	display:block;
-	background:#404040;
-	margin-top:0em; 
+	margin:1%; 
+	padding:0.5%;
+}
+
+.innerDivExp div{
+	display:block;
+	margin-top:0%; 
 	margin-bottom:0%; 
 	margin-left:0%; 
 	margin-right:0%;
 	padding:0.5%;
 }
 
-#innerDivExp div.noBg {
-	background:#303030;
+.innerDivExp .elementExp {
+	background:#404040;
+	margin-top:0%; 
+	margin-bottom:1em;
 }
 
-#innerDivExp selectionContainer {
+.innerDivExp .elementExp div{
+	background:#404040;
+}
+
+.innerDivExp .selectionContainer {
 	display:inline-block;
 	width:36%;
 	vertical-align:top;
@@ -84,7 +86,7 @@ header {
 	padding:0%;
 }
 
-#innerDivExp spacer {
+.innerDivExp .spacer {
 	display:inline-block;
 	width:31.5%;
 	vertical-align:top;
@@ -93,13 +95,12 @@ header {
 	color: white;
 }
 
-#innerDivExp spacer div.inputText {
-	background:#303030;
+.innerDivExp .spacer .inputText {
 	width:100%;
 	text-align: right;
 }
 
-#innerDivExp aside {
+.innerDivExp aside {
 	display:inline-block;
 	width:31.5%;
 	vertical-align:top;
@@ -107,7 +108,7 @@ header {
 	padding:0%;
 }
 
-#innerDivExp selectionContainer select {
+.innerDivExp .selectionContainer select {
 	width:100%;
 	height:15em;
 	color:#ffffff;
@@ -115,25 +116,25 @@ header {
 	border:none;
 }
 
-#innerDivExp spacer button {
+.innerDivExp  .spacer button {
 	display:inline-block;
-	width:10%;
+	width:7%;
 	height:15em;
 	color:#ffffff;
 	background:#161616;
 	border:none;
 }
 
-#innerDivExp spacer div {
+.innerDivExp  .spacer div {
 	display:inline-block;
-	width:86%;
+	width:89%;
 }
 
-#innerDivExp spacer button:hover{
+.innerDivExp  .spacer button:hover{
 	background:#202020;
 }
 
-#innerDivExp aside button{
+.innerDivExp aside button{
 	width:100%;
 	height:4em;
 	color:#ffffff;
@@ -141,11 +142,13 @@ header {
 	border:none;
 }
 
-#innerDivExp aside button:hover{
+.innerDivExp aside button:hover{
 	background:#202020;
 }
 
-#info {
+.info {
+	position:relative;
+	bottom:0;
 	color: #ffffff;
 	word-wrap: break-word;
 }

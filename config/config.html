@@ -4,6 +4,7 @@
   <head>
     <meta charset="utf-8">
 	<link rel="stylesheet" href="style.css">
+	<link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet"> 
   </head>
 
 <body>
@@ -17,146 +18,139 @@
 			}
 		}
 	</script>
-
-	<header>
-		<button id="donationBtn" type="button">Donation</button> 
-		<label for="donationBtn" id="lable">Help us develop this Addon and future projects!</label>
-	</header>
 	
-	<div id="outerDivExp">
-			<div id="innerDivExp">
-				<div id="elementExp" class="noBg">
-					<selectionContainer>
-						<input type="checkbox" onclick="checkboxHandler()" onchange="checkboxHandler()" id="configurationCheckbox" name="configuration" value="conf">
-						<label for="configurationCheckbox" id="lable">advanced view</label>
-					</selectionContainer>
+	<div class="outerDivExp">
+		<div class="innerDivExp">
+			<div class="elementExpNoBg">
+				<button id="donationBtn" class="donationBtn" type="button">Donation</button> 
+				<label for="donationBtn" id="lable" class="lable">Help us develop this Addon and future projects.</label>
+			</div>
+		</div>
+	</div>
+	
+	<div class="outerDivExpNoBg">
+			<div class="innerDivExp">
+				<div class="elementExpNoBg">
+					<div class="selectionContainer">
+						<input type="checkbox" onclick="checkboxHandler()" onchange="checkboxHandler()" id="configurationCheckbox" class"configurationCheckbox" name="configuration" value="conf">
+						<label for="configurationCheckbox" id="lable" class="lable">advanced view</label>
+					</div>
 						
-					<spacer>
+					<div class="spacer">
 						 <div class="inputText">Input:</div>
-					</spacer>
+					</div>
 						
 					<aside>
-						<input type="text" id="textField" name="textField">
+						<input type="text" id="textField" class="textField" name="textField">
 					</aside>
 				</div>
 			</div>
 		</div>
 	
-	<h2>Blocked users/channels</h2>
+	<h1>Blocked users/channels</h1>
 	
-	<div id="outerDivExp">
-		<div id="innerDivExp">
-			<div id="elementExp" class="noBg">
-				<selectionContainer>
+	<div class="outerDivExp">
+		<div class="innerDivExp">
+			<div class="elementExpNoBg">
+				<div class="selectionContainer">
 					<select multiple id="select0">
-						<option value="/user/ARD">"/user/ARD"</option>
-						<option value="/channel/UCzw-D6_8qg5nCokKruJmSnw">"/channel/UCzw-D6_8qg5nCokKruJmSnw"</option>
-						<option value="/channel/UCE6Ubi3ZX6M5ryAco4qLuiQ">"/channel/UCE6Ubi3ZX6M5ryAco4qLuiQ"</option>
-						<option value="/channel/UCDfxwuwJQYqh1t9vYfsBuRw">"/channel/UCDfxwuwJQYqh1t9vYfsBuRw"</option>
-						<option value="/channel/UCDJ6ajiWoPkMz535O6ZSLBA">"/channel/UCDJ6ajiWoPkMz535O6ZSLBA"</option>
-						<option value="/channel/UCabUmLK_hfPskuXCv0ZCB1Q">"/channel/UCabUmLK_hfPskuXCv0ZCB1Q"</option>
-						<option value="/user/3kliksphilip">"/user/3kliksphilip"</option>
-						<option value="/channel/UC1hUsrnHjVSLuigeME8wx3g">"/channel/UC1hUsrnHjVSLuigeME8wx3g"</option>
-						<option value="/user/TracksARTEde">"/user/TracksARTEde"</option>
-						<option value="/channel/UC4qK9mdbDOEcZcaRmOiiyPQ">"/channel/UC4qK9mdbDOEcZcaRmOiiyPQ"</option>
-						<option value="/user/Minotheras">"/user/Minotheras"</option>
-						<option value="/user/feedpunch">"/user/feedpunch"</option>
-						<option value="/channel/UCczpZFcuTcGqIeGxFj6BHGg">"/channel/UCczpZFcuTcGqIeGxFj6BHGg"</option>
-						<option value="/user/soulfire000">"/user/soulfire000"</option>
-						<option value="/channel/UCwWhs_6x42TyRM4Wstoq8HA">"/channel/UCwWhs_6x42TyRM4Wstoq8HA"</option>
-						<option value="/channel/UCfVFSjHQ57zyxajhhRc7i0g">"/channel/UCfVFSjHQ57zyxajhhRc7i0g"</option>
 					</select> 
-				</selectionContainer>
+				</div>
 					
-				<spacer>
+				<div class="spacer">
 					 <button id="deleteBtn0" type="button">X</button> 
 					 <div class="noBg"></div>
-				</spacer>
+				</div>
 					
 				<aside>
 					 <button id="addBtn0" type="button">Add input as blocked channels</button> 
-					<div id="info" class="noBg">Info: Videos of user/channels in this list will be blocked.</div>
+					<div class="info" class="noBg">Info: Videos of user/channels in this list will be blocked.</div>
 				</aside>
 			</div>
 		</div>
 	</div>
 	
 	<hideable id ="hideable">
-		<h2>Exeption from regular expressions</h2>
+		<h1>Exeption from regular expressions</h1>
 		
-		<div id="outerDivExp">
-			<div id="innerDivExp">
-				<div id="elementExp" class="noBg">
-					<selectionContainer>
+		<div class="outerDivExp">
+			<div class="innerDivExp">
+				<div class="elementExpNoBg">
+					<div class="selectionContainer">
 						<select multiple id="select1">
 						</select> 
-					</selectionContainer>
+					</div>
 						
-					<spacer>
+					<div class="spacer">
 						 <button id="deleteBtn1" type="button">X</button> 
 						 <div class="noBg"></div>
-					</spacer>
+					</div>
 						
 					<aside>
 						 <button id="addBtn1" type="button">Add input as exeption from regular expressions</button> 
-						<div id="info" class="noBg">Info: User/channels which are in this list will not be blocked.</div>
+						<div class="info" class="noBg">Info: User/channels which are in this list will not be blocked.</div>
 					</aside>
 				</div>
 			</div>
 		</div>
 		
-		<h2>Blocked videos, channels and comments by regular expressions</h2>
+		<h1>Blocked videos, channels and comments by regular expressions</h1>
 		
-		<div id="outerDivExp">
-			<div id="innerDivExp">
-				<div id="elementExp">
-					<selectionContainer>
+		<div class="outerDivExp">
+			<div class="innerDivExp">
+				
+				<h2>Blocked title</h2>
+				<div class="elementExp">
+					<div class="selectionContainer">
 						<select multiple id="select2">
 						</select> 
-					</selectionContainer>
+					</div>
 						
-					<spacer>
+					<div class="spacer">
 						 <button id="deleteBtn2" type="button">X</button> 
-						 <div>blocked title</div>
-					</spacer>
+						 <div></div>
+					</div>
 						
 					<aside>
 						 <button id="addBtn2" type="button">Add input as regular expression</button> 
-						<div id="info">Info: Every video which has a title that matches any of the regular expressions is blocked.</div>
+						<div class="info">Info: Every video which has a title that matches any of the regular expressions is blocked.</div>
 					</aside>
 				</div>
 					
-				<div id="elementExp">
-					<selectionContainer>
+					
+				<h2>Blocked users/channels</h2>
+				<div class="elementExp">
+					<div class="selectionContainer">
 						<select multiple id="select3">
 						</select> 
-					</selectionContainer>
+					</div>
 						
-					<spacer>
+					<div class="spacer">
 						 <button id="deleteBtn3" type="button">X</button> 
-						 <div>blocked users/channels</div>
-					</spacer>
+						 <div></div>
+					</div>
 						
 					<aside>
 						 <button id="addBtn3" type="button">Add input as regular expression</button> 
-						<div id="info">Info: Every commant, channel and video is blocked, when the channelname/username matches the regular espression is blocked.</div>
+						<div class="info">Info: Every commant, channel and video is blocked, when the channelname/username matches the regular espression is blocked.</div>
 					</aside>
 				</div>
 					
-				<div id="elementExp">
-					<selectionContainer>
+				<h2>Blocked comments</h2>
+				<div class="elementExp">
+					<div class="selectionContainer">
 						<select multiple id="select4">
 						</select> 
-					</selectionContainer>
+					</div>
 						
-					<spacer>
+					<div class="spacer">
 						 <button id="deleteBtn4" type="button">X</button> 
-						 <div>blocked comments</div>
-					</spacer>
+						 <div></div>
+					</div>
 						
 					<aside>
 						<button id="addBtn4" type="button">Add input as regular expression</button> 
-						<div id="info">Info: Every comment whitch has content that matches the the regular espression is blocked.</div>
+						<div class="info">Info: Every comment whitch has content that matches the the regular espression is blocked.</div>
 					</aside>
 				</div>
 			</div>
