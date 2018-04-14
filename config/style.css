@@ -1,3 +1,18 @@
+::-webkit-input-placeholder {
+   font-style: italic;
+}
+
+:-moz-placeholder {
+   font-style: italic;
+}
+
+::-moz-placeholder {
+   font-style: italic;
+}
+
+:-ms-input-placeholder {
+   font-style: italic;
+}
 
 body {
 	background:#202020;
@@ -6,29 +21,42 @@ body {
 
 h1 {
 	color:white;
-	margin:1%; 
+	margin:1% 1% 0% 1%;
+	font-size: 1.2em;
+	font-weight: lighter;
+	padding-bottom: 0%;
 }
 
 h2 {
 	color:white;
-	margin-bottom:0%; 
-	padding-bottom:0%; 
+	margin-bottom:0%;
+	padding-bottom:0%;
+	font-size: 1.05em;
+	font-weight: lighter;
+}
+
+h3 {
+	font-size: 0.9em;
+}
+
+hr {
+  color: #303030;
 }
 
 .donationBtn {
-	margin-left:1%; 
-	margin-top:1%; 
+	margin-left:1%;
+	margin-top:1%;
 	margin-bottom:1%;
 	border-radius: 12px;
-	background-color:yellow;	
+	background-color:yellow;
 }
 
 .configurationCheckbox {
 	color:white;
 	background:#161616;
-	margin-left:1%; 
-	margin-top:1%; 
-	margin-bottom:1%; 
+	margin-left:1%;
+	margin-top:1%;
+	margin-bottom:1%;
 }
 
 .lable {
@@ -51,28 +79,28 @@ h2 {
 .outerDivExp div{
 	display:block;
 	background:#303030;
-	margin:1%; 
+	margin:0% 1% 1% 1%;
 	padding:0.5%;
 }
 
 .outerDivExpNoBg div{
 	display:block;
-	margin:1%; 
+	margin:1%;
 	padding:0.5%;
 }
 
 .innerDivExp div{
 	display:block;
-	margin-top:0%; 
-	margin-bottom:0%; 
-	margin-left:0%; 
+	margin-top:0%;
+	margin-bottom:0%;
+	margin-left:0%;
 	margin-right:0%;
 	padding:0.5%;
 }
 
 .innerDivExp .elementExp {
 	background:#404040;
-	margin-top:0%; 
+	margin-top:0%;
 	margin-bottom:1em;
 }
 
@@ -149,6 +177,7 @@ h2 {
 	color:#ffffff;
 	background:#161616;
 	border:none;
+	font-size: 0.8em;
 }
 
 .innerDivExp aside button:hover{
@@ -164,24 +193,5 @@ h2 {
 	word-wrap: break-word;
 	position: absolute;
 	bottom: 0;
+	font-size: 0.9em;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
