@@ -102,10 +102,11 @@ h2 {
 
 .innerDivExp aside {
 	display:inline-block;
+	background:#000000;
 	width:31.5%;
-	vertical-align:top;
 	margin:0%;
 	padding:0%;
+	position: relative;
 }
 
 .innerDivExp .selectionContainer select {
@@ -146,11 +147,16 @@ h2 {
 	background:#202020;
 }
 
-.info {
-	position:relative;
-	bottom:0;
+.innerDivExp aside .info {
+	height:9em;
+}
+
+.innerDivExp aside .info  .infoText{
 	color: #ffffff;
+	text-align:justify;
 	word-wrap: break-word;
+	position: absolute;
+	bottom: 0;
 }
 
 
