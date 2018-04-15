@@ -9,6 +9,10 @@
 		<link rel="stylesheet" href="style.css">
 
 		<script defer="defer" type="text/javascript" src="js/user_interaction.js"></script>
+		<!--
+		<script defer="defer" type="text/javascript" src="js/content_filler.js"></script>
+		-->
+		<script defer="defer" type="text/javascript" src="js/event_dispatcher.js"></script>
 
 		<title>YTC - Configuration</title>
 	</head>
@@ -21,8 +25,8 @@
 			</div> -->
 			<div class="donationTextDiv">
 				We hope you enjoy a clean YouTube.
-				A subscription at patreon would help us a lot developing this addon and future projects.
-				Or you can just leave a donation, if you like this addon. :)
+				A subscription at patreon would help us a lot developing this add-on and future projects.
+				Or you can just leave a donation, if you like this add-on. :)
 			</div>
 		</div>
 
@@ -40,7 +44,7 @@
 					</div>
 
 					<aside>
-						<input id="textField" class="textField" name="textField" placeholder="user/channel-ID or regular expression" type="text">
+						<input id="input_textfield" class="textField" name="textField" placeholder="user/channel-ID or regular expression" type="text">
 						<h3 class="inputText">Input:</h3>
 					</aside>
 				</div>
@@ -52,18 +56,18 @@
 			<div class="innerDivExp">
 				<div class="elementExpNoBg">
 					<div class="selectionContainer">
-						<select multiple="multiple" id="select0">
+						<select multiple="multiple" id="blocked_users_selection">
 						</select>
 					</div>
 
 					<div class="spacer">
-						 <button id="deleteBtn0" type="button" title="delete marked users/channels from this list">⨯</button>
+						 <button id="blocked_users_delete_btn" type="button" title="delete marked users/channels from this list">⨯</button>
 
 						 <div class="noBg"></div>
 					</div>
 
 					<aside>
-						<button id="addBtn0" type="button">add input as blocked user/channel</button>
+						<button id="blocked_users_add_btn" type="button">add input as blocked user/channel</button>
 						<div class="info">
 							<div class="infoText">
 								<h3>Info:</h3>
@@ -90,17 +94,17 @@
 					<h2>Blocked videos by title</h2>
 					<div class="elementExp">
 						<div class="selectionContainer">
-							<select multiple="multiple" id="select2">
+							<select multiple="multiple" id="title_regexs_selection">
 							</select>
 						</div>
 
 						<div class="spacer">
-							 <button id="deleteBtn2" type="button" title="delete marked regular expressions from this list">⨯</button>
+							 <button id="title_regexs_delete_btn" type="button" title="delete marked regular expressions from this list">⨯</button>
 							 <div></div>
 						</div>
 
 						<aside>
-							 <button id="addBtn2" type="button">add input as regular expression for title of videos</button>
+							 <button id="title_regexs_add_btn" type="button">add input as regular expression for title of videos</button>
 							<div class="info">
 								<div class="infoText">
 									<h3>Info:</h3>Every video whose title matches any of this regular expressions, will be blocked.
@@ -113,17 +117,17 @@
 					<h2>Blocked users/channels by name</h2>
 					<div class="elementExp">
 						<div class="selectionContainer">
-							<select multiple="multiple" id="select3">
+							<select multiple="multiple" id="name_regexs_selection">
 							</select>
 						</div>
 
 						<div class="spacer">
-							 <button id="deleteBtn3" type="button" title="delete marked regular expressions from this list">⨯</button>
+							 <button id="name_regexs_delete_btn" type="button" title="delete marked regular expressions from this list">⨯</button>
 							 <div></div>
 						</div>
 
 						<aside>
-							 <button id="addBtn3" type="button">add input as regular expression for name of users/channels</button>
+							 <button id="name_regexs_add_btn" type="button">add input as regular expression for name of users/channels</button>
 							<div class="info">
 								<div class="infoText">
 									<h3>Info:</h3>
@@ -142,17 +146,17 @@
 					<h2>Blocked comments by comment-content</h2>
 					<div class="elementExp">
 						<div class="selectionContainer">
-							<select multiple="multiple" id="select4">
+							<select multiple="multiple" id="comment_regexs_selection">
 							</select>
 						</div>
 
 						<div class="spacer">
-							 <button id="deleteBtn4" type="button" title="delete marked regular expressions from this list">⨯</button>
+							 <button id="comment_regexs_delete_btn" type="button" title="delete marked regular expressions from this list">⨯</button>
 							 <div></div>
 						</div>
 
 						<aside>
-							<button id="addBtn4" type="button">add input as regular expression for content of comments</button>
+							<button id="comment_regexs_add_btn" type="button">add input as regular expression for content of comments</button>
 							<div class="info">
 								<div class="infoText">
 									<h3>Info:</h3>
@@ -170,17 +174,17 @@
 				<div class="innerDivExp">
 					<div class="elementExpNoBg">
 						<div class="selectionContainer">
-							<select multiple="multiple" id="select1">
+							<select multiple="multiple" id="excluded_users_selection">
 							</select>
 						</div>
 
 						<div class="spacer">
-							 <button id="deleteBtn1" type="button" title="delete marked users/channels from this list">⨯</button>
+							 <button id="excluded_users_delete_btn" type="button" title="delete marked users/channels from this list">⨯</button>
 							 <div class="noBg"></div>
 						</div>
 
 						<aside>
-							<button id="addBtn1" type="button">add input as excluded user/channel from regular expressions</button>
+							<button id="excluded_users_add_btn" type="button">add input as excluded user/channel from regular expressions</button>
 							<div class="info">
 								<div class="infoText">
 									<h3>Info:</h3>

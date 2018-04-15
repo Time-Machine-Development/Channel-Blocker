@@ -14,7 +14,6 @@
    font-style: italic;
 }
 
-
 body {
 	background:#2d2d2d;
 	font-family: 'Titillium Web', sans-serif;
@@ -114,8 +113,6 @@ ul {
 	vertical-align: top;
 	color:#ffffff;
 }
-
-
 
 .selectionContainer input {
 	margin:0% 1% 0% -2.7%;
