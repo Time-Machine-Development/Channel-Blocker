@@ -7,24 +7,18 @@
 
 		<link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet">
 		<link rel="stylesheet" href="style.css">
+
+		<script defer="defer" type="text/javascript" src="js/user_interaction.js"></script>
+
+		<title>YTC - Configuration</title>
 	</head>
 
 	<body>
-		<script>
-			function checkboxHandler() {
-				let showAdvancedView = document.getElementById("configurationCheckbox").checked;
-				if(showAdvancedView === true){
-					document.getElementById("hideable").style.display = "block";
-				}else{
-					document.getElementById("hideable").style.display = "none";
-				}
-			}
-		</script>
 		<div class="donationDiv">
-			<div class="donationBtnDiv">
+			<!-- <div class="donationBtnDiv">
 				<img class="patreon" src="https://c5.patreon.com/external/logo/become_a_patron_button.png" srcset="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png 2x">
 				<button id="donationBtn" class="donationBtn" type="button">Donation</button>
-			</div>
+			</div> -->
 			<div class="donationTextDiv">
 				We hope you enjoy a clean YouTube.
 				A subscription at patreon would help us a lot developing this addon and future projects.
@@ -33,12 +27,12 @@
 		</div>
 
 		<div class="hr"></div>
-		
+
 		<div class="outerDivExpNoBg">
 			<div class="innerDivExp">
 				<div class="elementExpNoBg">
 					<div id="checkboxSelectionContainer" class="selectionContainer">
-						<input class="configurationcheckbox" onclick="checkboxHandler()" onchange="checkboxHandler()" id="configurationCheckbox" name="configuration" value="conf" checked="checked" type="checkbox">
+						<input class="configurationCheckbox" id="configurationCheckbox" name="configuration" value="conf" checked="checked" type="checkbox">
 						<label for="configurationCheckbox" id="checkboxLable" class="lable">advanced view</label>
 					</div>
 
@@ -46,7 +40,7 @@
 					</div>
 
 					<aside>
-						<input id="textField" class="textField" name="textField" placeholder="input goes here..." type="text">
+						<input id="textField" class="textField" name="textField" placeholder="user/channel-ID or regular expression" type="text">
 						<h3 class="inputText">Input:</h3>
 					</aside>
 				</div>
@@ -59,16 +53,6 @@
 				<div class="elementExpNoBg">
 					<div class="selectionContainer">
 						<select multiple="multiple" id="select0">
-							<option value="test1" selected="selected">Ein Testelement</option>
-							<option value="test2">Ein Testelement</option>
-							<option value="test3">Ein Testelement</option>
-							<option value="test4">Ein Testelement</option>
-							<option value="test5">Ein Testelement</option>
-							<option value="test6">Ein Testelement</option>
-							<option value="test7">Ein Testelement</option>
-							<option value="test8">Ein Testelement</option>
-							<option value="test9">Ein Testelement</option>
-							<option value="test10">Ein Testelement</option>
 						</select>
 					</div>
 
@@ -215,9 +199,9 @@
 			</div>
 
 		</div>
-		
+
 		<div class="hr"></div>
-		
+
 		<h4>Contact</h4>
 		<p>email: <a href="mailto:time-machine-development@protonmail.com">time-machine-development@protonmail.com<a></p>
 
