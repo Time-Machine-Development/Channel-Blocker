@@ -23,6 +23,7 @@
 
 	function sendAddMessage(containerId){
 		let input = document.getElementById("input_textfield").value;
+		document.getElementById("input_textfield").value = "";
 
 		sendMessage("add", containerId, input);
 	}
