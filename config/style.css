@@ -62,7 +62,6 @@ a {
 ul {
 	list-style-type: square;
 }
-
 .hr {
 	height:2px;
 	width:98%;
@@ -82,6 +81,10 @@ ul {
 	margin-bottom:0%;
 	padding-top:0%;
 	padding-bottom:0%;
+}
+
+.deleteButtonText {
+	font-size: 1.25em;
 }
 
 .informationSubtitle {
