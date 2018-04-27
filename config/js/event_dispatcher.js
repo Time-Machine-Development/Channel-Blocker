@@ -1,12 +1,5 @@
 {
 	const SENDER = "config_event_dispatcher";
-	const CONTAINER_IDS = [
-		"blocked_users",
-		"title_regexs",
-		"name_regexs",
-		"comment_regexs",
-		"excluded_users"
-	];
 
 	function sendMessage(type, origin, input){
 		browser.runtime.sendMessage(
