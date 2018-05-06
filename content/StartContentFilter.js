@@ -7,6 +7,9 @@
 			for(let elem of child.getElementsByClassName("style-scope ytd-shelf-renderer")){
 				if(elem.id == "title"){
 					console.log("Container: " + elem.textContent);
+					if(checkUserChannelName(elem.textContent)){
+						child.remove();
+					}
 				}
 			}
 			//Empfohlen-container
@@ -21,6 +24,9 @@
 					for(let inElem of elem.getElementsByClassName("yt-simple-endpoint style-scope ytd-video-renderer")){
 						if(inElem.id == "video-title"){
 							console.log("Video: " + inElem.getAttribute("title"));
+							if(checkVideoTilte(inElem.getAttribute("title"))){
+								elem.remove();
+							}
 						}
 					}
 					

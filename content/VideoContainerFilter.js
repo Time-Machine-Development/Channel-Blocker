@@ -16,6 +16,15 @@
 					linkInnerArr[1].style.color = "darkgray";
 					linkInnerArr[2].style.color = "darkgray";
 				}
+			}else{
+				for(let elem of child.getElementsByClassName("style-scope ytd-grid-channel-renderer")){
+					if(elem.id == "title"){
+						console.log("Channel: " + elem.textContent);
+						if(checkUserChannelName(elem.textContent)){
+							child.remove();
+						}
+					}
+				}
 			}
 		}
 		
