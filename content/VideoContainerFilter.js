@@ -3,6 +3,7 @@
 		this.onFound = function(child){
 			let linkInnerArr = child.getElementsByTagName("a");
 			if(linkInnerArr.length >= 3){
+				//GridVideo-Container
 				console.log("GridVideo: '" + linkInnerArr[1].textContent + "' from " + linkInnerArr[2].textContent);
 				
 				if(checkVideoTilte(linkInnerArr[1].textContent)){
@@ -17,6 +18,7 @@
 					linkInnerArr[2].style.color = "darkgray";
 				}
 			}else{
+				//Channel-Container
 				for(let elem of child.getElementsByClassName("style-scope ytd-grid-channel-renderer")){
 					if(elem.id == "title"){
 						console.log("Channel: " + elem.textContent);

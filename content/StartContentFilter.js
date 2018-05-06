@@ -21,17 +21,33 @@
 			//SingleVideo-container
 			for(let elem of child.getElementsByClassName("style-scope ytd-expanded-shelf-contents-renderer")){
 				if(elem.id == "grid-container"){
-					for(let inElem of elem.getElementsByClassName("yt-simple-endpoint style-scope ytd-video-renderer")){
-						if(inElem.id == "video-title"){
-							console.log("Video: " + inElem.getAttribute("title"));
-							if(checkVideoTilte(inElem.getAttribute("title"))){
-								elem.remove();
+					for(videoElem of elem.children){
+						try{
+							let linkInnerArr = videoElem.getElementsByTagName("a");
+							if(linkInnerArr.length >= 3){
+								console.log("Video: '" + linkInnerArr[1].textContent + "' from " + linkInnerArr[2].textContent);
+								
+								if(checkVideoTilte(linkInnerArr[1].textContent)){
+									videoElem.remove();
+								}
+								if(checkUserChannelName(linkInnerArr[2].textContent)){
+									videoElem.remove();
+								}
+								
+								if(debug){
+									linkInnerArr[1].style.color = "darkgray";
+									linkInnerArr[2].style.color = "darkgray";
+								}
+								
+								for(let btnContainerElem of videoElem.getElementsByClassName("text-wrapper style-scope ytd-video-renderer")){
+									btnContainerElem.appendChild(createBtnNode(linkInnerArr[2].textContent));
+								}
 							}
-						}
-					}
-					
-					if(debug){
-						elem.style.background = "green";
+							
+							if(debug){
+								videoElem.style.background = "green";
+							}
+						}catch(e){console.log(e);}
 					}
 				}
 			}

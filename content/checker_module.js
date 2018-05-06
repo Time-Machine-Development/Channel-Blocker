@@ -1,4 +1,6 @@
 
+	console.log("START");
+
 	function check(checkValues){
 		return false;
 	}
