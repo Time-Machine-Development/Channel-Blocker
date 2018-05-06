@@ -13,7 +13,6 @@
 	//Search
 	try{
 		for(elem of document.getElementsByClassName("style-scope ytd-item-section-renderer")){
-			continue;
 			if(elem.id == "contents"){
 				console.log("2");
 				var filter2 = new SearchPageContentFilter(elem);

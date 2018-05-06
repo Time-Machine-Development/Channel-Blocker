@@ -14,6 +14,18 @@
 				}
 			}
 			
+			console.log("COMMENTS: ");
+			for(let elem of child.getElementsByClassName("style-scope ytd-watch")){
+				if(elem.id === "comments"){
+					console.log(elem);
+					console.log("new VideoPageCommentContainerFilter");
+					try{
+						let videoPageCommentContainerFilter = new VideoPageCommentContainerFilter(elem, this);
+					}catch(e){console.log(e);}
+					console.log("/new VideoPageCommentContainerFilter");
+				}
+			}
+			console.log("/COMMENTS");
 		}
 		
 		Filter.call(this, target, parent);
