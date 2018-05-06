@@ -40,4 +40,4 @@
 		for(let filter of this.childFilters){
 			filter.detach();
 		}
-	}
+	};

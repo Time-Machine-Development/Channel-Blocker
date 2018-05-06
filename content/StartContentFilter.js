@@ -29,7 +29,7 @@
 					}
 				}
 			}
-			//gridVideo/chanel-container
+			//gridVideo/channel-container
 			for(let elem of child.getElementsByClassName("style-scope ytd-grid-renderer")){
 				if(elem.id == "items"){
 					var filter2 = new VideoContainerFilter(elem, this);
@@ -60,6 +60,3 @@
 		}
 	};
 	
-	
-	var filter1 = new StartContentFilter(document.getElementsByTagName("ytd-item-section-renderer")[0].parentNode);
-	console.log(filter1.childFilters);
