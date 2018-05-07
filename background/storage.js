@@ -1,10 +1,8 @@
-let storageManager;
-
 {
 	const SENDER = "background_controller_storage"
 	const STORAGE = browser.storage.local;
 
-	storageManager = new StorageManager(STORAGE);
+	let storageManager = new StorageManager(STORAGE);
 	storageManager.initSets();
 
 	function createContentUpdaterMsg(type, target, items){
@@ -29,6 +27,16 @@ let storageManager;
 		};
 	}
 
+	function createContentUpdaterAlertMsg(){
+		return {
+			sender: SENDER,
+			receiver: "content_controller"
+			"event": {
+				type: "storage_grew"
+			}
+		};
+	}
+
 	function onAddMsg(msg){
 		//only continue if changes have been done
 		if(!storageManager.add(msg.event.origin, msg.event.input))
@@ -39,14 +47,16 @@ let storageManager;
 			browser.tabs.sendMessage(Number(tabId), createContentUpdaterMsg("add", msg.event.origin, [msg.event.input]));
 		}
 
-
-		//TODO: send message to content controller to update
+		//send alert message to content controller to update
+		for(let tabId of YT_TAB_IDS.keys()){
+			browser.tabs.sendMessage(Number(tabId), createContentUpdaterAlertMsg());
+		}
 	}
 
 	function onDelMsg(msg){
 		let changed = false;
-		for(let item of input){
-			changed = changed || storageManager.remove(msg.event.origin, msg.event.input);
+		for(let item of msg.event.input){
+			changed = changed || storageManager.remove(msg.event.origin, item);
 		}
 
 		//only continue if changes have been done
@@ -57,8 +67,6 @@ let storageManager;
 		for(let tabId of CONFIG_TAB_IDS.keys()){
 			browser.tabs.sendMessage(Number(tabId), createContentUpdaterMsg("delete", msg.event.origin, msg.event.input));
 		}
-
-		//(maybe)TODO: send message to content controller to update
 	}
 
 	//install listener for "add"- and "delete"-messages from content scripts and config scripts
@@ -76,7 +84,7 @@ let storageManager;
 							browser.tabs.sendMessage(Number(tabId), createContentUpdaterMsg("add", id, storageManager.getHashSet(id).keys()));
 					}
 				}
-			}else if(msg.sender === "TODO_name_of_content_script_blocked_btn_event_dispatcher"){
+			}else if(msg.sender === "content_checker_module"){
 				if(msg.event.type === "add")
 					onAddMsg(msg);
 			}

@@ -1,9 +1,9 @@
 function HashSet(){
 }
 
-HashSet.prototype.add = function(str, val){
+HashSet.prototype.add = function(str){
 	//add str as property to this object
-	this[str] = val;
+	this[str] = undefined;
 }
 
 HashSet.prototype.remove = function(str){
