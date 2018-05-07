@@ -5,6 +5,7 @@
 			let userChannelName;
 			let linkInnerArr = child.getElementsByTagName("a");
 			if(linkInnerArr.length >= 3){
+				userChannelName = linkInnerArr[2].textContent;
 				
 				//GridVideo-Container
 				if(checkVideoTitle(linkInnerArr[1].textContent)){

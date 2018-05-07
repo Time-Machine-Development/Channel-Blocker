@@ -1,5 +1,5 @@
 	
-	function blockUserChannel(userChannelName){
-		consloe.log(userChannelName + " blocked!");
+	function blockUserChannel (userChannelName){
+		console.log(userChannelName + " blocked!");
 		alert(userChannelName + " blocked!");
 	}

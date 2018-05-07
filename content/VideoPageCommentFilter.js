@@ -8,6 +8,9 @@
 					if(checkUserChannelName(elem.firstElementChild.textContent)){
 						child.remove();
 					}
+					
+					//insert button to block channel/user
+					elem.parentNode.insertBefore(createBtnNode(elem.firstElementChild.textContent), elem);
 				}
 			}
 			

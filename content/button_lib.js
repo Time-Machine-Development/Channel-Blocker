@@ -3,9 +3,9 @@
 		let btn = document.createElement("button");
 		btn.setAttribute("type", "button");
 		btn.setAttribute("title", "block '" + userChannelName + "', so you dont see them anymore!");
-		//btn.setAttribute("onclick", "blockUserChannel(" + userChannelName + ")");
-		btn.setAttribute("onclick", "alert(\"" + userChannelName + " BLOCKED\")");
-		btn.setAttribute("style", "color:red; border: none; background-color: Transparent;");
+		let func = function(){blockUserChannel(userChannelName);}
+		btn.addEventListener("click", func); 
+		btn.setAttribute("style", "padding-left:0em; color:red; border: none; background-color: Transparent;");
 		btn.textContent =  "X";
 		return btn;
 	}
