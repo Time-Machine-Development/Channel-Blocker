@@ -1,4 +1,3 @@
-	console.log("SearchPageContentFilter");
 	
 	function SearchPageContentFilter(target, parent) {
 		this.onFound = function(child){
@@ -6,21 +5,20 @@
 			if(child.tagName === "YTD-SHELF-RENDERER"){
 				for(elem of child.getElementsByClassName("style-scope ytd-vertical-list-renderer")){
 					if(elem.id == "items"){
-						console.log("<"+child.tagName+" "+child.className+">");
-						console.log("new SearchPageContentFilter");
 						var filter = new SearchPageContentFilter(elem, this);
 					}
 				}
 			}
 			
+			
 			if(child.tagName === "YTD-VIDEO-RENDERER"){
 				let linkInnerArr = child.getElementsByTagName("a");
 				if(linkInnerArr.length >= 3){
-					console.log("Video: '" + linkInnerArr[1].textContent + "' from " + linkInnerArr[2].textContent);
 					
-					if(checkVideoTilte(linkInnerArr[1].textContent)){
+					if(checkVideoTitle(linkInnerArr[1].textContent)){
 						child.remove();
 					}
+					
 					if(checkUserChannelName(linkInnerArr[2].textContent)){
 						child.remove();
 					}
@@ -30,8 +28,10 @@
 						linkInnerArr[2].style.color = "darkgray";
 					}
 					
-					for(let btnContainerElem of child.getElementsByClassName("text-wrapper style-scope ytd-video-renderer")){
-						btnContainerElem.appendChild(createBtnNode(linkInnerArr[2].textContent));
+					for(let btnContainerElem of child.getElementsByClassName("style-scope ytd-video-meta-block")){
+						if(btnContainerElem.id === "metadata"){
+							btnContainerElem.insertBefore(createBtnNode(linkInnerArr[2].textContent), btnContainerElem.firstChild);
+						}
 					}
 				}
 				

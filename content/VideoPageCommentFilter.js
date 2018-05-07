@@ -1,22 +1,28 @@
 
-	console.log("VideoPageCommentFilter.js");
-				
 	function VideoPageCommentFilter(target, parent) {
 		this.onFound = function(child){
-			console.log("Commant:");
+			
+			//UserChannelName of author
 			for(let elem of child.getElementsByClassName("yt-simple-endpoint style-scope ytd-comment-renderer")){
 				if(elem.id === "author-text"){
-					console.log(elem.firstElementChild.textContent);
+					if(checkUserChannelName(elem.firstElementChild.textContent)){
+						child.remove();
+					}
 				}
 			}
+			
+			//CommentContent
 			for(let elem of child.getElementsByClassName("style-scope ytd-comment-renderer")){
 				if(elem.id === "content-text"){
-					console.log(elem.textContent);
+					if(checkCommentContent(elem.textContent)){
+						child.remove();
+					}
 				}
 			}
+			
+			//Replies
 			for(let elem of child.getElementsByClassName("style-scope ytd-comment-replies-renderer")){
 				if(elem.id === "loaded-replies"){
-					console.log(elem);
 					let videoPageCommentRepliesFilter = new VideoPageCommentRepliesFilter(elem, this);
 				}
 			}

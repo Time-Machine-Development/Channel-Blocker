@@ -1,52 +1,30 @@
-
-	console.log("VideopageManagerFilter");
-				
-	function VideopageManagerFilter(target, parent) {
+		
+	function VideoPageManagerFilter(target, parent) {
 		this.onFound = function(child){
-			console.log(child);
-			console.log("length");
-			console.log(child.children.length);
-			console.log(child.getElementsByClassName("style-scope ytd-watch").length);
 			for(let elem of child.getElementsByClassName("style-scope ytd-watch")){
 				if(elem.tagName === "YTD-WATCH-NEXT-SECONDARY-RESULTS-RENDERER"){
-					console.log(elem);
 					let videoPageWatchFilter = new VideoPageWatchFilter(elem, this);
 				}
 			}
 			
-			console.log("COMMENTS: ");
 			for(let elem of child.getElementsByClassName("style-scope ytd-watch")){
 				if(elem.id === "comments"){
-					console.log(elem);
-					console.log("new VideoPageCommentContainerFilter");
-					try{
-						let videoPageCommentContainerFilter = new VideoPageCommentContainerFilter(elem, this);
-					}catch(e){console.log(e);}
-					console.log("/new VideoPageCommentContainerFilter");
+					let videoPageCommentContainerFilter = new VideoPageCommentContainerFilter(elem, this);
 				}
 			}
-			console.log("/COMMENTS");
 		}
 		
 		Filter.call(this, target, parent);
 	}
 
-	VideopageManagerFilter.prototype = Object.create(Filter.prototype);
+	VideoPageManagerFilter.prototype = Object.create(Filter.prototype);
 
-	VideopageManagerFilter.prototype.constructor = VideopageManagerFilter;
+	VideoPageManagerFilter.prototype.constructor = VideoPageManagerFilter;
 
-	VideopageManagerFilter.prototype.onFoundInit = function(child){
+	VideoPageManagerFilter.prototype.onFoundInit = function(child){
 		this.onFound(child);
-		
-		if(debug){
-			child.style.background = "green";
-		}
 	};
 	
-	VideopageManagerFilter.prototype.onFoundObs = function(child){
+	VideoPageManagerFilter.prototype.onFoundObs = function(child){
 		this.onFound(child);
-		
-		if(debug){
-			child.style.background = "blue";
-		}
 	};

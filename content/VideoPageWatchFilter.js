@@ -1,10 +1,7 @@
-
-	console.log("VideoPageWatchFilter");
-				
+			
 	function VideoPageWatchFilter(target, parent) {
 		this.onFound = function(child){
 			if(child.id === "items"){
-				console.log(child);
 				let videoPageContentFilter = new VideoPageContentFilter(child, this);
 			}
 		}
@@ -18,16 +15,8 @@
 
 	VideoPageWatchFilter.prototype.onFoundInit = function(child){
 		this.onFound(child);
-		
-		if(debug){
-			child.style.background = "green";
-		}
 	};
 	
 	VideoPageWatchFilter.prototype.onFoundObs = function(child){
 		this.onFound(child);
-		
-		if(debug){
-			child.style.background = "blue";
-		}
 	};

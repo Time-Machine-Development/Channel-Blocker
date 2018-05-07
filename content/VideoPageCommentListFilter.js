@@ -1,9 +1,6 @@
-
-	console.log("VideoPageCommentListFilter.js");
-				
+			
 	function VideoPageCommentListFilter(target, parent) {
 		this.onFound = function(child){
-			console.log(child);
 			if(child.id === "contents"){
 				let videoPageCommentFilter = new VideoPageCommentFilter(child, this);
 			}
@@ -18,16 +15,8 @@
 
 	VideoPageCommentListFilter.prototype.onFoundInit = function(child){
 		this.onFound(child);
-		
-		if(debug){
-			child.style.background = "green";
-		}
 	};
 	
 	VideoPageCommentListFilter.prototype.onFoundObs = function(child){
 		this.onFound(child);
-		
-		if(debug){
-			child.style.background = "blue";
-		}
 	};
