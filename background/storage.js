@@ -84,7 +84,7 @@
 							browser.tabs.sendMessage(Number(tabId), createContentUpdaterMsg("add", id, storageManager.getHashSet(id).keys()));
 					}
 				}
-			}else if(msg.sender === "content_checker_module"){
+			}else if(msg.sender === "content_event_dispatcher"){
 				if(msg.event.type === "add")
 					onAddMsg(msg);
 			}
