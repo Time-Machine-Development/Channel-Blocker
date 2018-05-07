@@ -5,9 +5,7 @@
 			//OuterVideo-container
 			for(let elem of child.getElementsByClassName("style-scope ytd-shelf-renderer")){
 				if(elem.id == "title"){
-					if(checkUserChannelName(elem.textContent)){
-						child.remove();
-					}
+					checkUserChannelName(elem.textContent, child);
 					
 					//insert button to block channel/user
 					elem.parentNode.parentNode.parentNode.parentNode.insertBefore(createBtnNode(elem.textContent), elem.parentNode.parentNode.parentNode);
@@ -28,12 +26,8 @@
 						let linkInnerArr = videoElem.getElementsByTagName("a");
 						if(linkInnerArr.length >= 3){
 							
-							if(checkVideoTitle(linkInnerArr[1].textContent)){
-								videoElem.remove();
-							}
-							if(checkUserChannelName(linkInnerArr[2].textContent)){
-								videoElem.remove();
-							}
+							checkVideoTitle(linkInnerArr[1].textContent, videoElem);
+							checkUserChannelName(linkInnerArr[2].textContent, videoElem);
 							
 							//insert button to block channel/user
 							for(let btnContainerElem of videoElem.getElementsByClassName("style-scope ytd-video-meta-block")){

@@ -5,9 +5,7 @@
 			//UserChannelName of author
 			for(let elem of child.getElementsByClassName("yt-simple-endpoint style-scope ytd-comment-renderer")){
 				if(elem.id === "author-text"){
-					if(checkUserChannelName(elem.firstElementChild.textContent)){
-						child.remove();
-					}
+					checkUserChannelName(elem.firstElementChild.textContent, child);
 					
 					//insert button to block channel/user
 					elem.parentNode.insertBefore(createBtnNode(elem.firstElementChild.textContent), elem);
@@ -17,9 +15,7 @@
 			//CommentContent
 			for(let elem of child.getElementsByClassName("style-scope ytd-comment-renderer")){
 				if(elem.id === "content-text"){
-					if(checkCommentContent(elem.textContent)){
-						child.remove();
-					}
+					checkCommentContent(elem.textContent, child);
 				}
 			}
 			

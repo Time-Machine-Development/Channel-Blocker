@@ -4,17 +4,13 @@
 			
 			for(let elem of child.getElementsByClassName("style-scope ytd-compact-video-renderer")){
 				if(elem.id == "video-title"){
-					if(checkVideoTitle(elem.textContent)){
-						child.remove();
-					}
+					checkVideoTitle(elem.textContent, child);
 				}
 			}
 			
 			for(let elem of child.getElementsByClassName("style-scope ytd-video-meta-block")){
 				if(elem.id == "byline"){
-					if(checkUserChannelName(elem.textContent)){
-						child.remove();
-					}
+					checkUserChannelName(elem.textContent, child);
 					
 					//insert button to block channel/user
 					elem.parentNode.parentNode.insertBefore(createBtnNode(elem.textContent), elem.parentNode);

@@ -8,13 +8,8 @@
 				userChannelName = linkInnerArr[2].textContent;
 				
 				//GridVideo-Container
-				if(checkVideoTitle(linkInnerArr[1].textContent)){
-					child.remove();
-				}
-				
-				if(checkUserChannelName(linkInnerArr[2].textContent)){
-					child.remove();
-				}
+				checkVideoTitle(linkInnerArr[1].textContent, child);
+				checkUserChannelName(linkInnerArr[2].textContent, child);
 				
 				if(debug){
 					linkInnerArr[1].style.color = "darkgray";
@@ -26,9 +21,7 @@
 				for(let elem of child.getElementsByClassName("style-scope ytd-grid-channel-renderer")){
 					if(elem.id == "title"){
 						userChannelName = elem.textContent;
-						if(checkUserChannelName(elem.textContent)){
-							child.remove();
-						}
+						checkUserChannelName(elem.textContent, child);
 					}
 				}
 			}

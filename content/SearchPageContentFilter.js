@@ -15,13 +15,8 @@
 				let linkInnerArr = child.getElementsByTagName("a");
 				if(linkInnerArr.length >= 3){
 					
-					if(checkVideoTitle(linkInnerArr[1].textContent)){
-						child.remove();
-					}
-					
-					if(checkUserChannelName(linkInnerArr[2].textContent)){
-						child.remove();
-					}
+					checkVideoTitle(linkInnerArr[1].textContent, child);
+					checkUserChannelName(linkInnerArr[2].textContent, child);
 					
 					if(debug){
 						linkInnerArr[1].style.color = "darkgray";
