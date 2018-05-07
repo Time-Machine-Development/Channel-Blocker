@@ -30,7 +30,7 @@
 	function createContentUpdaterAlertMsg(){
 		return {
 			sender: SENDER,
-			receiver: "content_controller"
+			receiver: "content_controller",
 			"event": {
 				type: "storage_grew"
 			}
