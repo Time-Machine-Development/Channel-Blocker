@@ -1,11 +1,14 @@
 
+	var consoleLog = true;
+
 	function check(checkValues){
 		notifyBackgroundPage(checkValues)
 		return false;
 	}
 
 	function checkVideoTitle(videoTitle, checkedNode){
-		console.log("Title: " + videoTitle.replace(/[\n\r]+|[\s]{2,}/g, ' ').trim());
+		if(consoleLog)
+			console.log("Title: " + videoTitle.replace(/[\n\r]+|[\s]{2,}/g, ' ').trim());
 		let checkValues = {
 			title: videoTitle.replace(/[\n\r]+|[\s]{2,}/g, ' ').trim(),
 			checkedNode: checkedNode
@@ -15,7 +18,8 @@
 	}
 	
 	function checkUserChannelName(userChannelName, checkedNode){
-		console.log("Name: " + userChannelName.replace(/[\n\r]+|[\s]{2,}/g, ' ').trim());
+		if(consoleLog)
+			console.log("Name: " + userChannelName.replace(/[\n\r]+|[\s]{2,}/g, ' ').trim());
 		let checkValues = {
 			name: userChannelName.replace(/[\n\r]+|[\s]{2,}/g, ' ').trim(),
 			checkedNode: checkedNode
@@ -25,7 +29,8 @@
 	}
 	
 	function checkCommentContent(commentContent, checkedNode){
-		console.log("Comment: " + commentContent);
+		if(consoleLog)
+			console.log("Comment: " + commentContent);
 		let checkValues = {
 			comment: commentContent,
 			checkedNode: checkedNode
@@ -38,9 +43,10 @@
 		let checkedNode = checkValues.checkedNode ;
 		checkValues.checkedNode = undefined;
 		let sending = await browser.runtime.sendMessage(checkValues);
-		console.log(sending);
 		if(sending.isBlocked){
 			checkedNode.remove();
+			if(consoleLog)
+				console.log("Blocked " + checkValues.title + " by " + checkValues.name + "  -> " + checkValues.comment);
 		}
 	}
 	
