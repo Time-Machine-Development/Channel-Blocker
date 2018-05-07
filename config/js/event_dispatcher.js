@@ -19,7 +19,9 @@
 		let input = document.getElementById("input_textfield").value;
 		document.getElementById("input_textfield").value = "";
 
-		sendMessage("add", containerId, input);
+		//only accept inputs that contain at least one non-whitespace character
+		if(input.trim() !== "")
+			sendMessage("add", containerId, input);
 	}
 
 	function sendDeleteMessage(containerId){
