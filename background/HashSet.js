@@ -1,9 +1,9 @@
 function HashSet(){
 }
 
-HashSet.prototype.add = function(str){
+HashSet.prototype.add = function(str, val){
 	//add str as property to this object
-	this[str] = true;
+	this[str] = val;
 }
 
 HashSet.prototype.remove = function(str){
@@ -24,4 +24,12 @@ HashSet.prototype.matches = function(str){
 	}
 
 	return false;
+}
+
+HashSet.prototype.keys = function(){
+	return Object.keys(this);
+}
+
+HashSet.prototype.values = function(){
+	return Object.values(this);
 }

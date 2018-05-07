@@ -5,6 +5,7 @@
 		browser.runtime.sendMessage(
 			{
 				sender: SENDER,
+				receiver: "background_controller_storage",
 				"event": {
 					type: 	type,
 					origin: origin,

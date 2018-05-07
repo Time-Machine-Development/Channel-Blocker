@@ -1,0 +1,30 @@
+{
+	"manifest_version": 2,
+	"name": "YT Cleaner",
+	"version": "1.0",
+
+	"description": "TODO",
+
+	"permissions": [
+		"storage",
+		"tabs"
+	],
+
+	"options_ui": {
+    	"page": "config/config.html"
+	},
+
+	"browser_action": {
+		"default_title": "Configuration"
+	},
+
+	"background": {
+		"scripts": [
+			"shared/shared.js",
+			"background/HashSet.js",
+			"background/StorageManager.js",
+			"background/browser_action.js",
+			"background/storage.js"
+		]
+	}
+}
