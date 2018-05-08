@@ -1,18 +1,17 @@
-const USERS_CONTAINER_IDS = [
-	"blocked_users",
-	"excluded_users"
-];
+const ContainerId = {
+	BLOCKED_USERS: 0,
+	TITLE_REGEXS: 1
+	NAME_REGEXS: 2,
+	COMMENT_REGEXS: 3,
+	EXCLUDED_USERS: 4
+};
 
-const REGEXS_CONTAINER_IDS = [
-	"title_regexs",
-	"name_regexs",
-	"comment_regexs"
-];
+const YTContext = {
+	HOME: 0,
+	VIDEO: 1,
+	SEARCH: 2,
+	CHANNEL: 3
+};
 
-const CONTAINER_IDS = [
-	"blocked_users",
-	"title_regexs",
-	"name_regexs",
-	"comment_regexs",
-	"excluded_users"
-];
+Object.freeze(Container);
+Object.freeze(YTContext);
