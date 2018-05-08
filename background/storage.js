@@ -1,5 +1,5 @@
 {
-	const SENDER = "background_controller_storage"
+	const SENDER = "background_controller_storage";
 	const STORAGE = browser.storage.local;
 
 	let storageManager = new StorageManager(STORAGE);
