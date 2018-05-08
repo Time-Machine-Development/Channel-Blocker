@@ -1,17 +1,11 @@
 {
 	const SENDER = "config_event_dispatcher";
-	const CONTAINER_IDS = [
-		"blocked_users",
-		"title_regexs",
-		"name_regexs",
-		"comment_regexs",
-		"excluded_users"
-	];
 
 	function sendMessage(type, origin, input){
 		browser.runtime.sendMessage(
 			{
 				sender: SENDER,
+				receiver: "background_controller_storage",
 				"event": {
 					type: 	type,
 					origin: origin,
@@ -25,7 +19,9 @@
 		let input = document.getElementById("input_textfield").value;
 		document.getElementById("input_textfield").value = "";
 
-		sendMessage("add", containerId, input);
+		//only accept inputs that contain at least one non-whitespace character
+		if(input.trim() !== "")
+			sendMessage("add", containerId, input);
 	}
 
 	function sendDeleteMessage(containerId){
@@ -47,11 +43,11 @@
 	}
 
 	//install onclick functions for all buttons of config.html
-	for(let containerId of CONTAINER_IDS){
-		let addBtnId = containerId + "_add_btn";
-		let deleteBtnId = containerId + "_delete_btn";
+	for(let containerId in ContainerId){
+		let addBtnId = containerId.toLowerCase() + "_add_btn";
+		let deleteBtnId = containerId.toLowerCase() + "_delete_btn";
 
-		document.getElementById(addBtnId).onclick = () => {sendAddMessage(containerId)};
-		document.getElementById(deleteBtnId).onclick = () => {sendDeleteMessage(containerId)};
+		document.getElementById(addBtnId).onclick = () => {sendAddMessage(ContainerId[containerId])};
+		document.getElementById(deleteBtnId).onclick = () => {sendDeleteMessage(ContainerId[containerId])};
 	}
 }

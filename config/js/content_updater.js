@@ -28,7 +28,7 @@
 	}
 
 	function handleMsg(msg){
-		if(msg.sender !== "background_controller" || msg.receiver !== SENDER)
+		if(msg.sender !== "background_controller_storage" || msg.receiver !== SENDER)
 			return;
 
 		if(msg.event.type === "add"){
@@ -43,12 +43,13 @@
 	}
 
 	//install message handler to handle incoming messages from background-script controller
-	browser.runtime.onMessage(handleMsg);
+	browser.runtime.onMessage.addListener(handleMsg);
 
 	//initial content update request (will be answered with "add"-messages from controller)
 	browser.runtime.sendMessage(
 		{
 			sender: SENDER,
+			receiver: "background_controller_storage",
 			"event": {
 				type: "content_update_request"
 			}
