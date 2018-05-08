@@ -7,6 +7,6 @@ for i in $(find . | grep "\.js$" | grep -v "shared"); do
 	then
 		echo $i:
 		cat -n $i | grep -E "USERS_CONTAINER_IDS|REGEXS_CONTAINER_IDS|CONTAINER_IDS"
-		cat -n $i | grep -E "\"blocked_users\"|\"title_regexs\"|\"name_regexs\"|\"comment_regexs\""
+		cat -n $i | grep -E "\"blocked_users\"|\"title_regexs\"|\"name_regexs\"|\"comment_regexs\"|\"excluded_users\""
 	fi
 done
