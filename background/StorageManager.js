@@ -51,21 +51,21 @@ StorageManager.prototype.isBlocked = function(input){
 	if(input.type === "user_name")
 		return
 			this.sets[ContainerId.BLOCKED_USERS].contains(input.id) ||
-			((!this.sets["excluded_users"].contains(input.id)) &&
+			((!this.sets[ContainerId.EXCLUDED_USERS].contains(input.id)) &&
 			this.sets[ContainerId.NAME_REGEXS].matches(input.content))
 		;
 
 	if(type === "video_title")
 		return
 			this.sets[ContainerId.BLOCKED_USERS].contains(input.id) ||
-			((!this.sets["excluded_users"].contains(input.id)) &&
+			((!this.sets[ContainerId.EXCLUDED_USERS].contains(input.id)) &&
 			this.sets[ContainerId.TITLE_REGEXS].matches(input.content))
 		;
 
 	if(type === "comment_content")
 		return
 			this.sets[ContainerId.BLOCKED_USERS].contains(input.id) ||
-			((!this.sets["excluded_users"].contains(input.id)) &&
+			((!this.sets[ContainerId.EXCLUDED_USERS].contains(input.id)) &&
 			this.sets[ContainerId.COMMENT_REGEXS].matches(input.content))
 		;
 }
