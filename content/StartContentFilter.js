@@ -8,7 +8,7 @@
 					checkUserChannelName(elem.textContent, child);
 					
 					//insert button to block channel/user
-					elem.parentNode.parentNode.parentNode.parentNode.insertBefore(createBtnNode(elem.textContent), elem.parentNode.parentNode.parentNode);
+					elem.parentNode.parentNode.after(createContainerBtnNode(elem.textContent));
 				}
 			}
 			
@@ -48,6 +48,7 @@
 					}
 				}
 			}
+			
 			//gridVideo/channel-container
 			for(let elem of child.getElementsByClassName("style-scope ytd-grid-renderer")){
 				if(elem.id == "items"){
