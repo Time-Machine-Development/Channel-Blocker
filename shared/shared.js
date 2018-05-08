@@ -13,5 +13,5 @@ const YTContext = {
 	CHANNEL: 3
 };
 
-Object.freeze(Container);
+Object.freeze(ContainerId);
 Object.freeze(YTContext);
