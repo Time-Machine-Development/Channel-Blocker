@@ -2,14 +2,14 @@ function StorageManager(storage){
 	this.storage = storage;
 	this.sets = {};
 
-	for(let id of CONTAINER_IDS)
-		this.sets[id] = new HashSet();
+	for(let i in ContainerId)
+		this.sets[ContainerId[i]] = new HashSet();
 }
 
 StorageManager.prototype.initSets = async function(){
-	for(let id of CONTAINER_IDS){
+	for(let i in ContainerId){
 		try{
-			Object.assign(this.sets[id], await storage.get(id));
+			Object.assign(this.sets[ContainerId[i]], await storage.get(ContainerId[i]));
 		}catch(storageErr){
 			//do nothing (keep set with ID id empty) if set does not exist in storage
 		}
@@ -46,27 +46,27 @@ id is blocked OR
 */
 StorageManager.prototype.isBlocked = function(input){
 	if(input.type === "user_id")
-		return this.sets["blocked_users"].contains(input.id);
+		return this.sets[ContainerId.BLOCKED_USERS].contains(input.id);
 
 	if(input.type === "user_name")
 		return
-			this.sets["blocked_users"].contains(input.id) ||
+			this.sets[ContainerId.BLOCKED_USERS].contains(input.id) ||
 			((!this.sets["excluded_users"].contains(input.id)) &&
-			this.sets["name_regexs"].matches(input.content))
+			this.sets[ContainerId.NAME_REGEXS].matches(input.content))
 		;
 
 	if(type === "video_title")
 		return
-			this.sets["blocked_users"].contains(input.id) ||
+			this.sets[ContainerId.BLOCKED_USERS].contains(input.id) ||
 			((!this.sets["excluded_users"].contains(input.id)) &&
-			this.sets["title_regexs"].matches(input.content))
+			this.sets[ContainerId.TITLE_REGEXS].matches(input.content))
 		;
 
 	if(type === "comment_content")
 		return
-			this.sets["blocked_users"].contains(input.id) ||
+			this.sets[ContainerId.BLOCKED_USERS].contains(input.id) ||
 			((!this.sets["excluded_users"].contains(input.id)) &&
-			this.sets["comment_regexs"].matches(input.content))
+			this.sets[ContainerId.COMMENT_REGEXS].matches(input.content))
 		;
 }
 

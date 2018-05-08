@@ -79,9 +79,9 @@
 					onDelMsg(msg);
 			}else if(msg.sender === "config_content_updater"){
 				if(msg.event.type === "content_update_request"){
-					for(let id of CONTAINER_IDS){
+					for(let i in ContainerId){
 						for(let tabId of CONFIG_TAB_IDS.keys())
-							browser.tabs.sendMessage(Number(tabId), createContentUpdaterMsg("add", id, storageManager.getHashSet(id).keys()));
+							browser.tabs.sendMessage(Number(tabId), createContentUpdaterMsg("add", ContainerId[i], storageManager.getHashSet(ContainerId[i]).keys()));
 					}
 				}
 			}else if(msg.sender === "content_event_dispatcher"){
