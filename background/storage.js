@@ -87,6 +87,8 @@
 			}else if(msg.sender === "content_event_dispatcher"){
 				if(msg.event.type === "add")
 					onAddMsg(msg);
+			}else if(msg.sender === "content_checker_module"){
+				//TODO: talk about msg-format
 			}
 		}
 	});
