@@ -8,7 +8,7 @@
 		pageUrl = pageUrl.replace("https://www.youtube.com/", "");
 		
 		//Start/TrendsPage(https://www.youtube.com/ , https://www.youtube.com/feed/trending)
-		if(pageUrl === "" || pageUrl === "feed/trending"){
+		if(pageUrl === "" || pageUrl === "feed/trending" || pageUrl.startsWith("user")){
 			try{
 				var startTrendFilter = new StartContentFilter(document.getElementsByTagName("ytd-item-section-renderer")[0].parentNode);
 			}catch(e){
