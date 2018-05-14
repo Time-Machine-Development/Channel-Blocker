@@ -1,0 +1,19 @@
+Startpage:
+- ytd-item-selection-renderer
+- ytd-grid-video-renderer
+- ytd-video-renderer
+- ytd-grid-channel-renderer
+
+Search:
+- ytd-video-renderer
+- ytd-channel-renderer
+- ytd-playlist-renderer [only playlists with only contents from one channel]
+
+Trending:
+- ytd-video-renderer
+- ytd-item-section-renderer
+- ytd-grid-video-renderer
+
+Watch:
+- ytd-compact-autoplay-renderer
+- ytd-compact-video-renderer
