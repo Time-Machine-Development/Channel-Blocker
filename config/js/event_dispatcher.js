@@ -21,7 +21,7 @@
 
 		//only accept inputs that contain at least one non-whitespace character
 		if(input.trim() !== "")
-			sendMessage("add", containerId, input);
+			sendMessage("add", ContainerId[containerId], input);
 	}
 
 	function sendDeleteMessage(containerId){
@@ -36,18 +36,24 @@
 			return options;
 		}
 
-		let selectionId = containerId + "_selection";
+		let selectionId = containerId.toLowerCase() + "_selection";
 		let input = getSelectedOptions(selectionId);
 
-		sendMessage("delete", containerId, input);
+		sendMessage("delete", ContainerId[containerId], input);
 	}
 
 	//install onclick functions for all buttons of config.html
 	for(let containerId in ContainerId){
-		let addBtnId = containerId.toLowerCase() + "_add_btn";
-		let deleteBtnId = containerId.toLowerCase() + "_delete_btn";
+		let containerIdStr = containerId.toLowerCase();
 
-		document.getElementById(addBtnId).onclick = () => {sendAddMessage(ContainerId[containerId])};
-		document.getElementById(deleteBtnId).onclick = () => {sendDeleteMessage(ContainerId[containerId])};
+		let addBtnId = containerIdStr + "_add_btn";
+		let deleteBtnId = containerIdStr + "_delete_btn";
+
+		document.getElementById(addBtnId).onclick = () => {
+			sendAddMessage(containerId)
+		};
+		document.getElementById(deleteBtnId).onclick = () => {
+			sendDeleteMessage(containerId)
+		};
 	}
 }
