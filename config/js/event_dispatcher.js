@@ -2,8 +2,7 @@
 	const SENDER = "config_event_dispatcher";
 
 	function sendMessage(type, origin, input){
-		//browser.runtime.sendMessage(
-		console.log(
+		browser.runtime.sendMessage(
 			{
 				sender: SENDER,
 				receiver: "background_controller_storage",

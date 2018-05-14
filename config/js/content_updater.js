@@ -31,13 +31,15 @@
 		if(msg.sender !== "background_controller_storage" || msg.receiver !== SENDER)
 			return;
 
+		let containerIdStr = (Object.keys(ContainerId)[msg.event.target]).toLowerCase();
+
 		if(msg.event.type === "add"){
 			for(let item of msg.event.items){
-				addOption(msg.event.target, item);
+				addOption(containerIdStr, item);
 			}
 		}else if(msg.event.type === "delete"){
 			for(let item of msg.event.items){
-				deleteOption(msg.event.target, item);
+				deleteOption(containerIdStr, item);
 			}
 		}
 	}
