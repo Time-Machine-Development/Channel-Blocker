@@ -88,7 +88,12 @@
 				if(msg.event.type === "add")
 					onAddMsg(msg);
 			}else if(msg.sender === "content_checker_module"){
-				//TODO: talk about msg-format
+				if(msg.event.type === "check_content"){
+					//send repsond-Promise containing a message which is either true or false
+					return new Promise((resolve) => {
+							resolve(storageManager.isBlocked(msg.event.input));
+					});
+				}
 			}
 		}
 	});
