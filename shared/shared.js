@@ -13,5 +13,12 @@ const YTContext = {
 	CHANNEL: 3
 };
 
+const RegExBlockType = {
+	TITLE: 0,
+	NAME: 1,
+	COMMENT: 2
+};
+
 Object.freeze(ContainerId);
 Object.freeze(YTContext);
+Object.freeze(BockType);

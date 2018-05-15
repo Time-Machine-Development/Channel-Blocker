@@ -2,14 +2,14 @@ function StorageManager(storage){
 	this.storage = storage;
 	this.sets = {};
 
-	for(let i in ContainerId)
-		this.sets[ContainerId[i]] = new HashSet();
+	for(let cId of Object.values(ContainerId))
+	this.sets[cId] = new HashSet();
 }
 
 StorageManager.prototype.initSets = async function(){
-	for(let i in ContainerId){
+	for(let cId of Object.values(ContainerId)){
 		try{
-			Object.assign(this.sets[ContainerId[i]], await storage.get(ContainerId[i]));
+			Object.assign(this.sets[cId], await storage.get(cId));
 		}catch(storageErr){
 			//do nothing (keep set with ID id empty) if set does not exist in storage
 		}
@@ -40,34 +40,31 @@ StorageManager.prototype.getHashSet = function(containerId){
 	return this.sets[containerId];
 }
 
-/* (id, content) is blocked <=>
-id is blocked OR
-(id is not excluded AND content is blocked by regex)
-*/
 StorageManager.prototype.isBlocked = function(input){
-	if(input.type === "user_id")
-		return this.sets[ContainerId.BLOCKED_USERS].contains(input.id);
+	//if input.name exists in list of BLOCKED_USERS, return true
+	if(this.sets[ContainerId.BLOCKED_USERS].contains(input.name))
+		return true;
 
-	if(input.type === "user_name")
-		return
-			this.sets[ContainerId.BLOCKED_USERS].contains(input.id) ||
-			((!this.sets[ContainerId.EXCLUDED_USERS].contains(input.id)) &&
-			this.sets[ContainerId.NAME_REGEXS].matches(input.content))
-		;
+	/*if input.additional does not exist
+	 or input.name exists in list of EXCLUDED_USERS,
+	 return false*/
+	if(input.additional === undefined || this.sets[ContainerId.EXCLUDED_USERS].contains(input.name))
+		return false;
 
-	if(type === "video_title")
-		return
-			this.sets[ContainerId.BLOCKED_USERS].contains(input.id) ||
-			((!this.sets[ContainerId.EXCLUDED_USERS].contains(input.id)) &&
-			this.sets[ContainerId.TITLE_REGEXS].matches(input.content))
-		;
+	//if input.additional.content matches any RegEx ...
+	if(input.additional.type === RegExBlockType.NAME){
+		//... in RegEx-list of NAME_REGEXS, return true, otherwise false
 
-	if(type === "comment_content")
-		return
-			this.sets[ContainerId.BLOCKED_USERS].contains(input.id) ||
-			((!this.sets[ContainerId.EXCLUDED_USERS].contains(input.id)) &&
-			this.sets[ContainerId.COMMENT_REGEXS].matches(input.content))
-		;
+		return this.sets[ContainerId.NAME_REGEXS].matches(input.additional.content);
+	}else if(input.additional.type === RegExBlockType.COMMENT){
+		//... in RegEx-list of COMMENT_REGEXS, return true, otherwise false
+
+		return this.sets[ContainerId.COMMENT_REGEXS].matches(input.additional.content);
+	}else if(input.additional.type === RegExBlockType.TITLE){
+		//... in RegEx-list of TITLE_REGEXS, return true, otherwise false
+
+		return this.sets[ContainerId.TITLE_REGEXS].matches(input.additional.content);
+	}
 }
 
 StorageManager.prototype.updateStorage = async function(containerId){
