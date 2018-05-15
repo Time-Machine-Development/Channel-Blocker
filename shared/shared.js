@@ -21,4 +21,4 @@ const RegExBlockType = {
 
 Object.freeze(ContainerId);
 Object.freeze(YTContext);
-Object.freeze(BockType);
+Object.freeze(RegExBlockType);
