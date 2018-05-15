@@ -69,7 +69,7 @@
 		}
 	}
 
-	//install listener for "add"- and "delete"-messages from content scripts and config scripts
+	//install listener for storage related messages from content scripts and config scripts
 	browser.runtime.onMessage.addListener((msg) => {
 		if(msg.receiver === SENDER){
 			if(msg.sender === "config_event_dispatcher"){
