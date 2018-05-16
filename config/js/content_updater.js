@@ -28,27 +28,30 @@
 	}
 
 	function handleMsg(msg){
-		if(msg.sender !== "background_controller" || msg.receiver !== SENDER)
+		if(msg.sender !== "background_controller_storage" || msg.receiver !== SENDER)
 			return;
+
+		let containerIdStr = (Object.keys(ContainerId)[msg.event.target]).toLowerCase();
 
 		if(msg.event.type === "add"){
 			for(let item of msg.event.items){
-				addOption(msg.event.target, item);
+				addOption(containerIdStr, item);
 			}
 		}else if(msg.event.type === "delete"){
 			for(let item of msg.event.items){
-				deleteOption(msg.event.target, item);
+				deleteOption(containerIdStr, item);
 			}
 		}
 	}
 
 	//install message handler to handle incoming messages from background-script controller
-	browser.runtime.onMessage(handleMsg);
+	browser.runtime.onMessage.addListener(handleMsg);
 
 	//initial content update request (will be answered with "add"-messages from controller)
 	browser.runtime.sendMessage(
 		{
 			sender: SENDER,
+			receiver: "background_controller_storage",
 			"event": {
 				type: "content_update_request"
 			}

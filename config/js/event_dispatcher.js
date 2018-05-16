@@ -5,6 +5,7 @@
 		browser.runtime.sendMessage(
 			{
 				sender: SENDER,
+				receiver: "background_controller_storage",
 				"event": {
 					type: 	type,
 					origin: origin,
@@ -18,7 +19,9 @@
 		let input = document.getElementById("input_textfield").value;
 		document.getElementById("input_textfield").value = "";
 
-		sendMessage("add", containerId, input);
+		//only accept inputs that contain at least one non-whitespace character
+		if(input.trim() !== "")
+			sendMessage("add", ContainerId[containerId], input);
 	}
 
 	function sendDeleteMessage(containerId){
@@ -33,18 +36,24 @@
 			return options;
 		}
 
-		let selectionId = containerId + "_selection";
+		let selectionId = containerId.toLowerCase() + "_selection";
 		let input = getSelectedOptions(selectionId);
 
-		sendMessage("delete", containerId, input);
+		sendMessage("delete", ContainerId[containerId], input);
 	}
 
 	//install onclick functions for all buttons of config.html
-	for(let containerId of CONTAINER_IDS){
-		let addBtnId = containerId + "_add_btn";
-		let deleteBtnId = containerId + "_delete_btn";
+	for(let containerId in ContainerId){
+		let containerIdStr = containerId.toLowerCase();
 
-		document.getElementById(addBtnId).onclick = () => {sendAddMessage(containerId)};
-		document.getElementById(deleteBtnId).onclick = () => {sendDeleteMessage(containerId)};
+		let addBtnId = containerIdStr + "_add_btn";
+		let deleteBtnId = containerIdStr + "_delete_btn";
+
+		document.getElementById(addBtnId).onclick = () => {
+			sendAddMessage(containerId)
+		};
+		document.getElementById(deleteBtnId).onclick = () => {
+			sendDeleteMessage(containerId)
+		};
 	}
 }
