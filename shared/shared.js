@@ -10,7 +10,8 @@ const YTContext = {
 	HOME: 0,
 	VIDEO: 1,
 	SEARCH: 2,
-	CHANNEL: 3
+	CHANNEL_OVERVIEW: 3,
+	CHANNEL_VIDEO: 4
 };
 
 const RegExBlockType = {
