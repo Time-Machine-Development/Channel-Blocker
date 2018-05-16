@@ -13,7 +13,7 @@
 	"content_scripts": [
 		{
 			"matches": ["*://www.youtube.com/*"],
-			"js": ["../shared/shared.js", "checker_module.js", "event_dispatcher.js", "button_lib.js", "Filter.js", "VideoContainerFilter.js", "StartContentFilter.js", "SearchPageContentFilter.js", "VideoPageCommentRepliesFilter.js", "VideoPageCommentFilter.js", "VideoPageCommentListFilter.js", "VideoPageCommentContainerFilter.js", "VideoPageContentFilter.js", "VideoPageWatchFilter.js", "VideoPageManagerFilter.js", "VideoPageAppFilter.js", "content_controller.js"]
+			"js": ["checker_module.js", "event_dispatcher.js", "button_lib.js", "Filter.js", "VideoContainerFilter.js", "StartContentFilter.js", "SearchPageContentFilter.js", "VideoPageCommentRepliesFilter.js", "VideoPageCommentFilter.js", "VideoPageCommentListFilter.js", "VideoPageCommentContainerFilter.js", "VideoPageContentFilter.js", "VideoPageWatchFilter.js", "VideoPageManagerFilter.js", "VideoPageAppFilter.js", "content_controller.js"]
 		}
 	],
 	

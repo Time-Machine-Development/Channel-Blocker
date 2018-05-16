@@ -2,18 +2,23 @@
 	function VideoPageContentFilter(target, parent) {
 		this.onFound = function(child){
 			
-			for(let elem of child.getElementsByClassName("style-scope ytd-compact-video-renderer")){
-				if(elem.id == "video-title"){
-					checkVideoTitle(elem.textContent, child);
-				}
-			}
+			let userName = undefined;
 			
 			for(let elem of child.getElementsByClassName("style-scope ytd-video-meta-block")){
 				if(elem.id == "byline"){
-					checkUserChannelName(elem.textContent, child);
+					userName = elem.textContent;
+					if(userName.length >= 25){
+						elem.textContent = userName.substring(0, 21)+"...";
+					}
 					
 					//insert button to block channel/user
 					elem.parentNode.parentNode.insertBefore(createBtnNode(elem.textContent), elem.parentNode);
+				}
+			}
+			
+			for(let elem of child.getElementsByClassName("style-scope ytd-compact-video-renderer")){
+				if(elem.id == "video-title"){
+					checkVideoTitle(elem.textContent, child);
 				}
 			}
 		}

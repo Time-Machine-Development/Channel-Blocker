@@ -6,7 +6,7 @@
 		let func = function(){blockUserChannel(userChannelName);}
 		btn.addEventListener("click", func); 
 		btn.setAttribute("style", "padding-left:0em; color:red; border: none; background-color: Transparent;");
-		btn.textContent =  "X";
+		btn.textContent =  "✖"; //⨯ ✕ ✖
 		return btn;
 	}
 	
@@ -17,7 +17,7 @@
 		let func = function(){blockUserChannel(userChannelName);}
 		btn.addEventListener("click", func); 
 		btn.setAttribute("style", "padding-right:0em; color:red; border: none; background-color: Transparent;");
-		btn.textContent =  "X";
+		btn.textContent =  "✖";
 		return btn;
 	}
 	
