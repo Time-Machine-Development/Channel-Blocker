@@ -18,6 +18,5 @@ const YTContext = Object.freeze({
 
 const RegExBlockType = Object.freeze({
 	TITLE: 0,
-	NAME: 1,
-	COMMENT: 2
+	COMMENT: 1
 });

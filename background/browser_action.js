@@ -1,33 +1,43 @@
-const CONFIG_TAB_IDS = new HashSet();
+let configTabId = null;
 
 {
-	//open config page if browser action is pressed and save the tabId of the newly created tab (is used in storage)
+	//if an open config page exists make config tab active, otherwise create new config tab and make it active
 	browser.browserAction.onClicked.addListener(() => {
-		browser.tabs.create({
-			active: true,
-			url: "/config/config.html"
-		})
-		.then((tab) => {
-			CONFIG_TAB_IDS.add(tab.id);
-		});
+		if(configTabId === null){
+			browser.tabs.create({
+				active: true,
+				url: "/config/config.html"
+			})
+			.then((tab) => {
+				configTabId = tab.id;
+			});
+		}else{
+			browser.tabs.update(
+				configTabId,
+				{
+					active: true
+				}
+			);
+		}
 	});
 
-	//remove tabId from configTabIds
-	browser.tabs.onRemoved.addListener((id, rm) => {
-		CONFIG_TAB_IDS.remove(id);
+	//if config tab was closed set configTabId to null
+	browser.tabs.onRemoved.addListener((tabId) => {
+		if(tabId === configTabId)
+			configTabId = null;
 	});
 
 	//remove or add tabId from configTabIds if the tab with id tabId has changed it's url from or to valid URL
-	browser.tabs.onUpdated.addListener((id, ci) => {
+	browser.tabs.onUpdated.addListener((tabId, ci) => {
 		if(ci.url){
 			let configURL = browser.runtime.getURL("config/config.html");
 
-			if(CONFIG_TAB_IDS.hasOwnProperty(id)){
+			if(tabId === configTabId){
 				if(ci.url !== configURL)
-					CONFIG_TAB_IDS.remove(id);
+					configTabId = null;
 			}else{
 				if(ci.url === configURL)
-					CONFIG_TAB_IDS.add(id);
+					configTabId = tabId;
 			}
 		}
 	});
