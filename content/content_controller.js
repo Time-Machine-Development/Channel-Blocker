@@ -1,14 +1,8 @@
 
-	function pageUrlChanged(){
-		
-		let pageUrl = window.location.href;
-		
-		console.log("Content-Controller starting filter at '" + pageUrl + "'");
-		
-		pageUrl = pageUrl.replace("https://www.youtube.com/", "");
+	function pageUrlChanged(context){
 		
 		//Start/TrendsPage(https://www.youtube.com/ , https://www.youtube.com/feed/trending)
-		if(pageUrl === "" || pageUrl === "feed/trending" || pageUrl.startsWith("user")){
+		if(context === YTContext.HOME || context === YTContext.TRENDING){
 			try{
 				var startTrendFilter = new StartContentFilter(document.getElementsByTagName("ytd-item-section-renderer")[0].parentNode);
 			}catch(e){
@@ -17,7 +11,7 @@
 		}
 		
 		//SearchPage(https://www.youtube.com/results?search_query=<INPUT>)
-		if(pageUrl.startsWith('results')){
+		if(context === YTContext.SEARCH){
 			try{
 				for(elem of document.getElementsByClassName("style-scope ytd-item-section-renderer")){
 					if(elem.id == "contents"){
@@ -30,7 +24,7 @@
 		}
 		
 		//WatchPage(https://www.youtube.com/watch?v=<ID>)
-		if(pageUrl.startsWith('watch')){
+		if(context === YTContext.VIDEO){
 			try{
 				let list = document.getElementsByTagName("ytd-app");
 				for(elem of list){ 
@@ -42,4 +36,53 @@
 		}
 	}
 	
-	 pageUrlChanged();
+	async function getUrl(){
+		let msg = {
+			sender: "content_controller",
+			receiver: "background_controller_url_update",
+			"event": {
+				type: "context_request"
+			}
+		};
+		
+		let sending = await browser.runtime.sendMessage(msg);
+		
+		pageUrlChanged(sending);
+	}
+	
+	getUrl();
+	
+	function processMessage(msg){
+		console.log(msg);
+		if(msg.receiver !== "content_controller"){
+			return;
+		}
+		
+		pageUrlChanged(msg.event.context);
+	}
+	
+	browser.runtime.onMessage.addListener(processMessage);
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

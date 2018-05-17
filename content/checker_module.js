@@ -1,3 +1,4 @@
+	console.log("CC");
 
 	var consoleLog = true;
 
@@ -49,7 +50,7 @@
 		if(consoleLog)
 			console.log("Comment: " + commentContent);
 		
-		notifyBackgroundPage(msg);
+		notifyBackgroundPage(msg, checkedNode);
 		return false;
 	}
 	
@@ -65,10 +66,14 @@
 			console.log(msg.event.input.name);
 		}
 		
-		if(sending){
-			checkedNode.remove();
-			if(consoleLog)
-				console.log("Blocked " + checkValues.title + " by " + checkValues.name + "  -> " + checkValues.comment);
+		try{
+			if(sending){
+				checkedNode.remove();
+				if(consoleLog)
+					console.log("Blocked " + checkValues.title + " by " + checkValues.name + "  -> " + checkValues.comment);
+			}
+		}catch(e){
+			console.log(e);
 		}
 	}
 	

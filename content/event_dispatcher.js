@@ -3,8 +3,8 @@
 		console.log(userChannelName + " blocked!");
 		alert(userChannelName + " blocked!");
 		let msg = {
-			sender: "background_controller_storage",
-			receiver: "content_event_dispatcher",
+			sender: "content_event_dispatcher",
+			receiver: "background_controller_storage",
 			"event": {
 				type: "add",
 				origin: ContainerId.BLOCKED_USERS,

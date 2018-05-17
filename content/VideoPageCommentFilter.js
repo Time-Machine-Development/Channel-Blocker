@@ -38,11 +38,9 @@
 	VideoPageCommentFilter.prototype.constructor = VideoPageCommentFilter;
 
 	VideoPageCommentFilter.prototype.onFoundInit = function(child){
-		child.style.background = "green";
 		this.onFound(child);
 	};
 	
 	VideoPageCommentFilter.prototype.onFoundObs = function(child){
-		child.style.background = "blue";
 		this.onFound(child);
 	};
