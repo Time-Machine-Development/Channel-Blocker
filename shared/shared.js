@@ -1,25 +1,23 @@
-const ContainerId = {
+const ContainerId = Object.freeze({
 	BLOCKED_USERS: 0,
 	TITLE_REGEXS: 1,
 	NAME_REGEXS: 2,
 	COMMENT_REGEXS: 3,
 	EXCLUDED_USERS: 4
-};
+});
 
-const YTContext = {
+const YTContext = Object.freeze({
 	HOME: 0,
 	VIDEO: 1,
 	SEARCH: 2,
-	CHANNEL_OVERVIEW: 3,
-	CHANNEL_VIDEO: 4
-};
+	TRENDING: 3,
+	CHANNEL_HOME: 4,
+	CHANNEL_VIDEOS: 5,
+	OTHER: 6
+});
 
-const RegExBlockType = {
+const RegExBlockType = Object.freeze({
 	TITLE: 0,
 	NAME: 1,
 	COMMENT: 2
-};
-
-Object.freeze(ContainerId);
-Object.freeze(YTContext);
-Object.freeze(RegExBlockType);
+});

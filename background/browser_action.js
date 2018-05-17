@@ -1,4 +1,4 @@
-let CONFIG_TAB_IDS = new HashSet();
+const CONFIG_TAB_IDS = new HashSet();
 
 {
 	//open config page if browser action is pressed and save the tabId of the newly created tab (is used in storage)
