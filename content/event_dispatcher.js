@@ -7,7 +7,7 @@
 			receiver: "content_event_dispatcher",
 			"event": {
 				type: "add",
-				origin: "blocked_users",
+				origin: ContainerId.BLOCKED_USERS,
 				input: userChannelName
 			}
 		};
