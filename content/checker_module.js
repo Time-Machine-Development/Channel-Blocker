@@ -1,6 +1,5 @@
-	console.log("CC");
 
-	var consoleLog = true;
+	var consoleLog = false;
 
 	function createMsg(userName){
 		return{
@@ -58,12 +57,12 @@
 		
 		let sending = await browser.runtime.sendMessage(msg);
 		
-		console.log(sending);
+		if(consoleLog)console.log(sending);
 		
 		if(sending){
-			console.log(msg.event.input.name);
+			if(consoleLog)console.log(msg.event.input.name);
 		}else{
-			console.log(msg.event.input.name);
+			if(consoleLog)console.log(msg.event.input.name);
 		}
 		
 		try{
