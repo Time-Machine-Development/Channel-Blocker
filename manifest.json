@@ -14,6 +14,11 @@
 		"default_title": "Configuration"
 	},
 
+	"options_ui": {
+		"page": "config/config.html",
+		"open_in_tab": true
+	},
+
 	"background": {
 		"scripts": [
 			"shared/shared.js",
