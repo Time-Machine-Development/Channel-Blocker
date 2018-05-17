@@ -8,7 +8,6 @@
 			for(let elem of child.getElementsByClassName("yt-simple-endpoint style-scope ytd-comment-renderer")){
 				if(elem.id === "author-text"){
 					userName = elem.firstElementChild.textContent;
-					
 					//insert button to block channel/user
 					elem.parentNode.insertBefore(createBtnNode(elem.firstElementChild.textContent), elem);
 				}
@@ -27,6 +26,8 @@
 					let videoPageCommentRepliesFilter = new VideoPageCommentRepliesFilter(elem, this);
 				}
 			}
+			
+		
 		}
 		
 		Filter.call(this, target, parent);
@@ -37,9 +38,11 @@
 	VideoPageCommentFilter.prototype.constructor = VideoPageCommentFilter;
 
 	VideoPageCommentFilter.prototype.onFoundInit = function(child){
+		child.style.background = "green";
 		this.onFound(child);
 	};
 	
 	VideoPageCommentFilter.prototype.onFoundObs = function(child){
+		child.style.background = "blue";
 		this.onFound(child);
 	};

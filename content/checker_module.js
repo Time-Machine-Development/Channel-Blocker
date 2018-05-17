@@ -39,7 +39,7 @@
 		return false;
 	}
 	
-	function checkCommentContent(name, commentContent, checkedNode){
+	function checkCommentContent(userName, commentContent, checkedNode){
 		let msg = createMsg(userName);
 		msg.additional = {
 			type:RegExBlockType.COMMENT,
@@ -54,7 +54,12 @@
 	}
 	
 	async function notifyBackgroundPage(msg, checkedNode) {
+		
 		let sending = await browser.runtime.sendMessage(msg);
+		
+		console.log(sending);
+		
+		sending.style.background = "green";
 		
 		if(sending){
 			checkedNode.remove();
