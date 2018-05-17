@@ -67,7 +67,7 @@ const YT_TAB_IDS = new HashSet();
 	//listen to url updates and send context switch message if url changed to a YTContext
 	function onUpdateHandler(tabId, cInfo, tab){
 		if(YT_TAB_IDS.contains(tabId) && cInfo.status === "complete"){
-			let context = urlToContext(cInfo.url);
+			let context = urlToContext(tab.url);
 
 			if(context !== undefined){
 				//send context switch message
