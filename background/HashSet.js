@@ -1,19 +1,19 @@
 function HashSet(){
 }
 
-HashSet.prototype.add = function(str){
-	//add str as property to this object
-	this[str] = undefined;
+HashSet.prototype.add = function(key, val){
+	//add key as property with value val to this object
+	this[key] = val;
 }
 
-HashSet.prototype.remove = function(str){
-	//set the property which represents the given str to undefined
-	delete this[str];
+HashSet.prototype.remove = function(key){
+	//try to delete key (will only be removed if it exists)
+	delete this[key];
 }
 
-HashSet.prototype.contains = function(str){
-	//return true if str exists as property in this object
-	return (this[str] !== undefined);
+HashSet.prototype.contains = function(key){
+	//return true if key exists as property in this object
+	return this.hasOwnProperty(key);
 }
 
 HashSet.prototype.matches = function(str){
