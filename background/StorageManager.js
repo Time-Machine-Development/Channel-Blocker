@@ -45,18 +45,19 @@ StorageManager.prototype.isBlocked = function(input){
 	if(this.sets[ContainerId.BLOCKED_USERS].contains(input.name))
 		return true;
 
-	/*if input.additional does not exist
-	 or input.name exists in list of EXCLUDED_USERS,
-	 return false*/
-	if(input.additional === undefined || this.sets[ContainerId.EXCLUDED_USERS].contains(input.name))
+	//input.name exists in list of EXCLUDED_USERS, return false
+	if(this.sets[ContainerId.EXCLUDED_USERS].contains(input.name))
 		return false;
 
-	//if input.additional.content matches any RegEx ...
-	if(input.additional.type === RegExBlockType.NAME){
-		//... in RegEx-list of NAME_REGEXS, return true, otherwise false
+	//if input.additional.content matches any RegEx in RegEx-list of NAME_REGEXS, return true
+	if(this.sets[ContainerId.NAME_REGEXS].matches(input.name))
+		return true;
 
-		return this.sets[ContainerId.NAME_REGEXS].matches(input.additional.content);
-	}else if(input.additional.type === RegExBlockType.COMMENT){
+	//if input.additional is not defined, return false
+	if(input.additional === undefined)
+		return false;
+
+	if(input.additional.type === RegExBlockType.COMMENT){
 		//... in RegEx-list of COMMENT_REGEXS, return true, otherwise false
 
 		return this.sets[ContainerId.COMMENT_REGEXS].matches(input.additional.content);
