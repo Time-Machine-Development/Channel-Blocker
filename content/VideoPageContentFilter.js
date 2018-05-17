@@ -18,7 +18,7 @@
 			
 			for(let elem of child.getElementsByClassName("style-scope ytd-compact-video-renderer")){
 				if(elem.id == "video-title"){
-					checkVideoTitle(elem.textContent, child);
+					checkVideoTitle(userName, elem.textContent, child);
 				}
 			}
 		}

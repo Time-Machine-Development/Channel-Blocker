@@ -1,49 +1,62 @@
 
 	var consoleLog = true;
 
-	function check(checkValues){
-		notifyBackgroundPage(checkValues)
-		return false;
+	function createMsg(userName){
+		return{
+			sender: "content_checker_module",
+			receiver: "background_controller_storage",
+			"event": {
+				type: "check_content",
+				input: {
+					name:userName,
+				}
+			}
+		}
 	}
-
-	function checkVideoTitle(videoTitle, checkedNode){
+	
+	function checkUserChannelName(userName, checkedNode){
+		let msg = createMsg(userName);
+					
 		if(consoleLog)
-			console.log("Title: " + videoTitle.replace(/[\n\r]+|[\s]{2,}/g, ' ').trim());
-		let checkValues = {
-			title: videoTitle.replace(/[\n\r]+|[\s]{2,}/g, ' ').trim(),
-			checkedNode: checkedNode
-		};
-		notifyBackgroundPage(checkValues);
+			console.log("Name: " + userName.trim());
+		
+		notifyBackgroundPage(msg, checkedNode);
 		return false;
 	}
 	
-	function checkUserChannelName(userChannelName, checkedNode){
-		if(consoleLog)
-			console.log("Name: " + userChannelName.replace(/[\n\r]+|[\s]{2,}/g, ' ').trim());
-		let checkValues = {
-			name: userChannelName.replace(/[\n\r]+|[\s]{2,}/g, ' ').trim(),
-			checkedNode: checkedNode
+	function checkVideoTitle(userName, videoTitle, checkedNode){
+		let msg = createMsg(userName);
+		msg.additional = {
+			type:RegExBlockType.TITLE,
+			content:videoTitle.trim()
 		};
-		notifyBackgroundPage(checkValues);
+					
+		if(consoleLog)
+			console.log("Title: " + videoTitle.trim());
+		
+		
+		notifyBackgroundPage(msg, checkedNode);
 		return false;
 	}
 	
-	function checkCommentContent(commentContent, checkedNode){
+	function checkCommentContent(name, commentContent, checkedNode){
+		let msg = createMsg(userName);
+		msg.additional = {
+			type:RegExBlockType.COMMENT,
+			content:commentContent.trim()
+		};
+			
 		if(consoleLog)
 			console.log("Comment: " + commentContent);
-		let checkValues = {
-			comment: commentContent,
-			checkedNode: checkedNode
-		};
-		notifyBackgroundPage(checkValues);
+		
+		notifyBackgroundPage(msg);
 		return false;
 	}
 	
-	async function notifyBackgroundPage(checkValues) {
-		let checkedNode = checkValues.checkedNode ;
-		checkValues.checkedNode = undefined;
-		let sending = await browser.runtime.sendMessage(checkValues);
-		if(sending.isBlocked){
+	async function notifyBackgroundPage(msg, checkedNode) {
+		let sending = await browser.runtime.sendMessage(msg);
+		
+		if(sending){
 			checkedNode.remove();
 			if(consoleLog)
 				console.log("Blocked " + checkValues.title + " by " + checkValues.name + "  -> " + checkValues.comment);

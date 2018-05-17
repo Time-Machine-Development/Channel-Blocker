@@ -15,8 +15,7 @@
 				let linkInnerArr = child.getElementsByTagName("a");
 				if(linkInnerArr.length >= 3){
 					
-					checkVideoTitle(linkInnerArr[1].textContent, child);
-					checkUserChannelName(linkInnerArr[2].textContent, child);
+					checkVideoTitle(linkInnerArr[2].textContent, linkInnerArr[1].textContent, child);
 					
 					if(debug){
 						linkInnerArr[1].style.color = "darkgray";

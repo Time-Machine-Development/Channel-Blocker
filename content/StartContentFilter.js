@@ -26,8 +26,7 @@
 						let linkInnerArr = videoElem.getElementsByTagName("a");
 						if(linkInnerArr.length >= 3){
 							
-							checkVideoTitle(linkInnerArr[1].textContent, videoElem);
-							checkUserChannelName(linkInnerArr[2].textContent, videoElem);
+							checkVideoTitle(linkInnerArr[2].textContent, linkInnerArr[1].textContent, videoElem);
 							
 							//insert button to block channel/user
 							for(let btnContainerElem of videoElem.getElementsByClassName("style-scope ytd-video-meta-block")){
