@@ -45,7 +45,7 @@ StorageManager.prototype.isBlocked = function(input){
 	if(this.sets[ContainerId.BLOCKED_USERS].contains(input.name))
 		return true;
 
-	//input.name exists in list of EXCLUDED_USERS, return false
+	//if input.name exists in list of EXCLUDED_USERS, return false
 	if(this.sets[ContainerId.EXCLUDED_USERS].contains(input.name))
 		return false;
 
