@@ -59,7 +59,11 @@
 		
 		console.log(sending);
 		
-		sending.style.background = "green";
+		if(sending){
+			console.log(msg.event.input.name);
+		}else{
+			console.log(msg.event.input.name);
+		}
 		
 		if(sending){
 			checkedNode.remove();
