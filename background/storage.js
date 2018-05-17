@@ -1,10 +1,10 @@
-//{
+{
 	const SENDER = "background_controller_storage";
 	const STORAGE = browser.storage.local;
 
 	let storageManager = new StorageManager(STORAGE);
 	storageManager.initSets();
-{
+
 	function createContentUpdaterMsg(type, target, items){
 		let set = storageManager.getHashSet(target);
 
