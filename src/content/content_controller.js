@@ -1,13 +1,33 @@
 
+	var curFilter = new Array();
+	var oldContext;
+
 	function pageUrlChanged(context){
+		if(oldContext != undefined){
+			oldContext = undefined;
+			location.reload();
+		}
+		
+		oldContext = context;
 		
 		console.log("COntext: " + context);
-		
+		for(actFilter of curFilter){
+			if(actFilter != undefined){
+				actFilter.detach();
+			}
+		}
 		//Start/TrendsPage(https://www.youtube.com/ , https://www.youtube.com/feed/trending)
 		if(context === YTContext.HOME || context === YTContext.TRENDING){
 			console.log("HOME/TRENDING");
 			try{
-				var startTrendFilter = new StartContentFilter(document.getElementsByTagName("ytd-item-section-renderer")[0].parentNode);
+				let selectList = document.getElementsByClassName("style-scope ytd-section-list-renderer");
+				for(elem of selectList){
+					if(elem.id === "contents"){
+						console.log("new StartContentFilter on:");
+						console.log(elem);
+						curFilter.push(new StartContentFilter(elem));
+					}
+				}
 			}catch(e){
 				console.log(e);
 			}
@@ -19,7 +39,7 @@
 			try{
 				for(elem of document.getElementsByClassName("style-scope ytd-item-section-renderer")){
 					if(elem.id == "contents"){
-						var searchFilter = new SearchPageContentFilter(elem);
+						curFilter.push(new SearchPageContentFilter(elem));
 					}
 				}
 			}catch(e){
@@ -33,14 +53,14 @@
 			try{
 				let list = document.getElementsByTagName("ytd-app");
 				for(elem of list){ 
-					var watchFilter = new VideoPageAppFilter(elem);
+					curFilter.push(new VideoPageAppFilter(elem));
 				}
 			}catch(e){
 				console.log(e);
 			}
 		}
 	}
-	
+
 	async function getUrl(){
 		let msg = {
 			sender: "content_controller",
@@ -52,11 +72,11 @@
 		
 		let sending = await browser.runtime.sendMessage(msg);
 		
-		pageUrlChanged(sending);
+		//pageUrlChanged(sending);
 	}
-	
+
 	getUrl();
-	
+
 	function processMessage(msg){
 		console.log(msg);
 		if(msg.receiver !== "content_controller"){
@@ -65,7 +85,7 @@
 		
 		pageUrlChanged(msg.event.context);
 	}
-	
+
 	browser.runtime.onMessage.addListener(processMessage);
 	
 	

@@ -6,7 +6,7 @@
 		let func = function(){blockUserChannel(userChannelName);}
 		btn.addEventListener("click", func); 
 		btn.setAttribute("style", "padding-left:0em; color:red; border: none; background-color: Transparent;");
-		btn.textContent =  "✖"; //⨯ ✕ ✖
+		btn.textContent = "✖";
 		return btn;
 	}
 	
@@ -19,6 +19,24 @@
 		btn.setAttribute("style", "padding-right:0em; color:red; border: none; background-color: Transparent;");
 		btn.textContent =  "✖";
 		return btn;
+	}
+	
+	function createBtnAfter(child, btn){
+		for(ch of child.parentNode.children){
+			if(ch.tagName === "BUTTON"){
+				ch.remove();
+			}
+		}
+		child.after(btn);
+	}
+	
+	function createBtnAtStart(parent, btn){
+		for(ch of parent.children){
+			if(ch.tagName === "BUTTON"){
+				ch.remove();
+			}
+		}
+		parent.insertBefore(btn, parent.firstChild);
 	}
 	
 	

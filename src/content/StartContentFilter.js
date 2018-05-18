@@ -8,7 +8,7 @@
 					checkUserChannelName(elem.textContent, child);
 					
 					//insert button to block channel/user
-					elem.parentNode.parentNode.after(createContainerBtnNode(elem.textContent));
+					createBtnAfter(elem.parentNode.parentNode, createContainerBtnNode(elem.textContent));
 				}
 			}
 			
@@ -31,7 +31,7 @@
 							//insert button to block channel/user
 							for(let btnContainerElem of videoElem.getElementsByClassName("style-scope ytd-video-meta-block")){
 								if(btnContainerElem.id === "metadata"){
-									btnContainerElem.insertBefore(createBtnNode(linkInnerArr[2].textContent), btnContainerElem.firstChild);
+									createBtnAtStart(btnContainerElem, createBtnNode(linkInnerArr[2].textContent));
 								}
 							}
 							
