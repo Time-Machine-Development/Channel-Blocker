@@ -1,57 +1,25 @@
 function CallbackFilter(target, parent) {
-	this.onFound = function(child){
-		
-		let userChannelName;
-		
-		let linkInnerArr = child.getElementsByTagName("a");
-		if(linkInnerArr.length >= 3){
-			userChannelName = linkInnerArr[2].textContent;
-			
-			//GridVideo-Container
-			checkVideoTitle(userChannelName, linkInnerArr[1].textContent, child);
-			
-			if(debug){
-				linkInnerArr[1].style.color = "darkgray";
-				linkInnerArr[2].style.color = "darkgray";
-			}
-		}else{
-			
-			//Channel-Container
-			for(let elem of child.getElementsByClassName("style-scope ytd-grid-channel-renderer")){
-				if(elem.id == "title"){
-					userChannelName = elem.textContent;
-					checkUserChannelName(userChannelName, elem.textContent, child);
-				}
-			}
-		}
-		
-		//insert button to block channel/user
-		for(let btnContainerElem of child.getElementsByClassName("style-scope ytd-grid-video-renderer")){
-			if(btnContainerElem.id === "byline-container"){
-				createBtnAtStart(btnContainerElem, createBtnNode(userChannelName));
-			}
-		}
-	}
+	this.mutationObs = new MutationObserver(this.callbackFunc);
+	this.mutationObs.filterInst = this;
+	let mutationObsOptions = {
+		childList: true,
+		attributes: true,
+		subtree: true
+	};
+	this.mutationObs.observe(target, mutationObsOptions);
 	
-	Filter.call(this, target, parent);
+	this.callback = parent;
+	this.target = target;
+	
+	if(parent !== undefined){
+		parent.childFilters.push(this);
+	}
 }
 
-VideoContainerFilter.prototype = Object.create(Filter.prototype);
-
-VideoContainerFilter.prototype.constructor = VideoContainerFilter;
-
-VideoContainerFilter.prototype.onFoundInit = function(child){
-	this.onFound(child);
-	
-	if(debug){
-		child.style.background = "green";
-	}
+CallbackFilter.prototype.callbackFunc = function(mutationRecArr, observerInst){
+	this.filterInst.callback.reload();
 };
 
-VideoContainerFilter.prototype.onFoundObs = function(child){
-	this.onFound(child);
-	
-	if(debug){
-		child.style.background = "blue";
-	}
+CallbackFilter.prototype.detach = function(){
+	this.mutationObs.disconnect();
 };

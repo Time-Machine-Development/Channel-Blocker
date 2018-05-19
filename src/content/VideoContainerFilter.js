@@ -7,6 +7,8 @@ function VideoContainerFilter(target, parent) {
 		if(linkInnerArr.length >= 3){
 			userChannelName = linkInnerArr[2].textContent;
 			
+			let cFilter = new CallbackFilter(linkInnerArr[2], this);
+			
 			//GridVideo-Container
 			checkVideoTitle(userChannelName, linkInnerArr[1].textContent, child);
 			
@@ -30,6 +32,13 @@ function VideoContainerFilter(target, parent) {
 			if(btnContainerElem.id === "byline-container"){
 				createBtnAtStart(btnContainerElem, createBtnNode(userChannelName));
 			}
+		}
+	}
+	
+	this.reload = function(){
+		console.log("--RELOAD--");
+		for(let childElement of this.target.children){
+			this.onFoundInit(childElement);
 		}
 	}
 	
