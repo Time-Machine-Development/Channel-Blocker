@@ -1,4 +1,4 @@
-function VideoContainerFilter(target, parent) {
+function CallbackFilter(target, parent) {
 	this.onFound = function(child){
 		
 		let userChannelName;
