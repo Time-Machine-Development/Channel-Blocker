@@ -13,6 +13,8 @@ function SearchPageContentFilter(target, parent) {
 		if(child.tagName === "YTD-VIDEO-RENDERER"){
 			let linkInnerArr = child.getElementsByTagName("a");
 			if(linkInnerArr.length >= 3){
+				let cFilter = new CallbackFilter(linkInnerArr[2], this);
+				console.log(linkInnerArr[2].textContent);
 				
 				checkVideoTitle(linkInnerArr[2].textContent, linkInnerArr[1].textContent, child);
 				
@@ -34,6 +36,13 @@ function SearchPageContentFilter(target, parent) {
 		}
 		
 		
+	}
+	
+	this.reload = function(){
+		console.log("--RELOAD--");
+		for(let childElement of this.target.children){
+			this.onFoundInit(childElement);
+		}
 	}
 	
 	Filter.call(this, target, parent);

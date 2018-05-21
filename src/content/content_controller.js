@@ -5,7 +5,11 @@ function pageUrlChanged(context){
 	console.log("COntext: " + context);
 	for(actFilter of curFilter){
 		if(actFilter != undefined){
-			actFilter.detach();
+			try{
+				actFilter.detach();
+			}catch(e){
+				console.log(e);
+			}
 		}
 	}
 	//Start/TrendsPage(https://www.youtube.com/ , https://www.youtube.com/feed/trending)
@@ -31,6 +35,7 @@ function pageUrlChanged(context){
 		try{
 			for(elem of document.getElementsByClassName("style-scope ytd-item-section-renderer")){
 				if(elem.id == "contents"){
+					console.log("new SearchPageContentFilter");
 					curFilter.push(new SearchPageContentFilter(elem));
 				}
 			}

@@ -1,4 +1,4 @@
-var debug = false;
+var debug = true;
 
 function Filter(target, parent) {
 	this.mutationObs = new MutationObserver(this.callbackFunc);

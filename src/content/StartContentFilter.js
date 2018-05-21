@@ -4,6 +4,7 @@ function StartContentFilter(target, parent) {
 		//OuterVideo-container
 		for(let elem of child.getElementsByClassName("style-scope ytd-shelf-renderer")){
 			if(elem.id == "title"){
+				let cFilter = new CallbackFilter(elem, this);
 				checkUserChannelName(elem.textContent, child);
 				
 				//insert button to block channel/user
@@ -24,6 +25,7 @@ function StartContentFilter(target, parent) {
 				for(videoElem of elem.children){
 					let linkInnerArr = videoElem.getElementsByTagName("a");
 					if(linkInnerArr.length >= 3){
+						let cFilter = new CallbackFilter(linkInnerArr[2].parentNode, this);
 						
 						checkVideoTitle(linkInnerArr[2].textContent, linkInnerArr[1].textContent, videoElem);
 						
@@ -52,6 +54,13 @@ function StartContentFilter(target, parent) {
 			if(elem.id == "items"){
 				var filter2 = new VideoContainerFilter(elem, this);
 			}
+		}
+	}
+	
+	this.reload = function(){
+		console.log("--RELOAD--");
+		for(let childElement of this.target.children){
+			this.onFound(childElement);
 		}
 	}
 	
