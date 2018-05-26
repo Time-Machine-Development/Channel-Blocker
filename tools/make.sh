@@ -19,6 +19,10 @@ done
 #copy manifest.json to ./build
 cp ./src/manifest.json ./build/manifest.json
 
+#copy ./src/config/config.html and ./src/config/style.css to ./build
+cp ./src/config/config.html ./build/config/config.html
+cp ./src/config/style.css ./build/config/style.css
+
 #create directory for final project file
 mkdir ./bin
 
