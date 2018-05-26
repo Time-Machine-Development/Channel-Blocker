@@ -1,5 +1,5 @@
 function SearchPageContentFilter(target, parent) {
-	this.onFound = function(child){
+	this.onFound = function(child, useCallbackFilter){
 		
 		if(child.tagName === "YTD-SHELF-RENDERER"){
 			for(elem of child.getElementsByClassName("style-scope ytd-vertical-list-renderer")){
@@ -13,7 +13,9 @@ function SearchPageContentFilter(target, parent) {
 		if(child.tagName === "YTD-VIDEO-RENDERER"){
 			let linkInnerArr = child.getElementsByTagName("a");
 			if(linkInnerArr.length >= 3){
-				let cFilter = new CallbackFilter(linkInnerArr[2], this);
+				if(useCallbackFilter === undefined){
+					let cFilter = new CallbackFilter(linkInnerArr[2], this, child);
+				}
 				console.log(linkInnerArr[2].textContent);
 				
 				checkVideoTitle(linkInnerArr[2].textContent, linkInnerArr[1].textContent, child);
@@ -38,11 +40,9 @@ function SearchPageContentFilter(target, parent) {
 		
 	}
 	
-	this.reload = function(){
+	this.reload = function(child){
 		console.log("--RELOAD--");
-		for(let childElement of this.target.children){
-			this.onFoundInit(childElement);
-		}
+		this.onFoundInit(child, true);
 	}
 	
 	Filter.call(this, target, parent);

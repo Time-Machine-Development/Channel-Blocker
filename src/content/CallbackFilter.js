@@ -1,4 +1,4 @@
-function CallbackFilter(target, parent) {
+function CallbackFilter(target, parent, child) {
 	this.mutationObs = new MutationObserver(this.callbackFunc);
 	this.mutationObs.filterInst = this;
 	let mutationObsOptions = {
@@ -9,6 +9,7 @@ function CallbackFilter(target, parent) {
 	this.mutationObs.observe(target, mutationObsOptions);
 	
 	this.callback = parent;
+	this.child = child;
 	this.target = target;
 	
 	if(parent !== undefined){
@@ -20,10 +21,11 @@ CallbackFilter.prototype.callbackFunc = function(mutationRecArr, observerInst){
 	observerInst.disconnect();
 	for(let mutationRecItem of mutationRecArr){
 		for(let addedNode of mutationRecItem.addedNodes){
-			console.log(addedNode);
+			console.log(addedNode.textContent);
+			this.filterInst.callback.reload(this.filterInst.child);
+			return;
 		}
 	}
-	this.filterInst.callback.reload();
 };
 
 CallbackFilter.prototype.detach = function(){

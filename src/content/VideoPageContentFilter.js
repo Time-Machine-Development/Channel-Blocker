@@ -1,5 +1,5 @@
 function VideoPageContentFilter(target, parent) {
-	this.onFound = function(child){
+	this.onFound = function(child, useCallbackFilter){
 		
 		let userName = undefined;
 		
@@ -12,7 +12,11 @@ function VideoPageContentFilter(target, parent) {
 				
 				//insert button to block channel/user
 				createBtnAtStart(elem.parentNode.parentNode, createBtnNode(elem.textContent), elem.parentNode);
-				let cFilter = new CallbackFilter(elem, this);
+				console.log("useCallbackFilter: "+useCallbackFilter);
+				if(useCallbackFilter === undefined){
+					console.log("new CallbackFilter "+useCallbackFilter);
+					let cFilter = new CallbackFilter(elem, this, child);
+				}
 			}
 		}
 		
@@ -24,10 +28,14 @@ function VideoPageContentFilter(target, parent) {
 		}
 	}
 	
-	this.reload = function(){
+	this.reload = function(child){
 		console.log("--RELOAD--");
-		for(let childElement of this.target.children){
-			this.onFoundInit(childElement);
+		if(child === undefined){
+			for(let childElement of this.target.children){
+				this.onFoundInit(childElement, true);
+			}
+		}else{
+			this.onFoundInit(child, true);
 		}
 	}
 	
