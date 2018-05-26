@@ -3,7 +3,7 @@
 	"name": "YT Cleaner",
 	"version": "1.0",
 
-	"description": "TODO",
+	"description": "Allows you to block YT videos and comments by blacklisting users and/or by using regular expressions.",
 
 	"applications": {
 		"gecko": {
