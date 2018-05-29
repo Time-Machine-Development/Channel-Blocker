@@ -1,4 +1,4 @@
-var consoleLog = false;
+var consoleLog = true;
 
 function createMsg(userName){
 	return{
@@ -25,13 +25,15 @@ function checkUserChannelName(userName, checkedNode){
 
 function checkVideoTitle(userName, videoTitle, checkedNode){
 	let msg = createMsg(userName);
-	msg.additional = {
+	msg.event.input.additional = {
 		type:RegExBlockType.TITLE,
 		content:videoTitle.trim()
 	};
 				
-	if(consoleLog)
+	if(consoleLog){
 		console.log("Title: " + videoTitle.trim());
+		console.log(msg);
+	}
 	
 	
 	notifyBackgroundPage(msg, checkedNode);
@@ -40,7 +42,7 @@ function checkVideoTitle(userName, videoTitle, checkedNode){
 
 function checkCommentContent(userName, commentContent, checkedNode){
 	let msg = createMsg(userName);
-	msg.additional = {
+	msg.event.input.additional = {
 		type:RegExBlockType.COMMENT,
 		content:commentContent.trim()
 	};
