@@ -20,7 +20,8 @@
 		document.getElementById("input_textfield").value = "";
 
 		//only accept inputs that contain at least one non-whitespace character
-		if(input.trim() !== "")
+		input = input.trim();
+		if(input !== "")
 			sendMessage("add", ContainerId[containerId], input);
 	}
 

@@ -10,7 +10,7 @@ function VideoPageCommentRepliesFilter(target, parent) {
 				userName = elem.firstElementChild.textContent;
 				
 				//insert button to block channel/user
-				createBtnAtStart(elem.parentNode, createBtnNode(elem.firstElementChild.textContent), elem);
+				createBtnAtStart(elem.parentNode, createBtnNode(elem.firstElementChild.textContent.trim()), elem);
 			}
 		}
 		

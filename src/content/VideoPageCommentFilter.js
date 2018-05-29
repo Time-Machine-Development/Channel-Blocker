@@ -1,15 +1,17 @@
 function VideoPageCommentFilter(target, parent) {
-	this.onFound = function(child){
+	this.onFound = function(child, useCallbackFilter){
 		
 		let userName = undefined;
 		
 		//UserChannelName of author
 		for(let elem of child.getElementsByClassName("yt-simple-endpoint style-scope ytd-comment-renderer")){
 			if(elem.id === "author-text"){
-				//let cFilter = new CallbackFilter(elem, this);
+				if(useCallbackFilter === undefined){
+					let cFilter = new CallbackFilter(elem, this, child);
+				}
 				userName = elem.firstElementChild.textContent;
 				//insert button to block channel/user
-				createBtnAtStart(elem.parentNode, createBtnNode(elem.firstElementChild.textContent), elem);
+				createBtnAtStart(elem.parentNode, createBtnNode(elem.firstElementChild.textContent.trim()), elem);
 			}
 		}
 		
@@ -31,11 +33,9 @@ function VideoPageCommentFilter(target, parent) {
 	
 	}
 	
-	this.reload = function(){
+	this.reload = function(child){
 		console.log("--RELOAD--");
-		for(let childElement of this.target.children){
-			this.onFoundInit(childElement);
-		}
+		this.onFoundInit(child, true);
 	}
 	
 	Filter.call(this, target, parent);

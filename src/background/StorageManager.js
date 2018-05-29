@@ -8,11 +8,8 @@ function StorageManager(storage){
 
 StorageManager.prototype.initSets = async function(){
 	for(let cId of Object.values(ContainerId)){
-		try{
-			Object.assign(this.sets[cId], await storage.get(cId));
-		}catch(storageErr){
-			//do nothing (keep set with ID id empty) if set does not exist in storage
-		}
+		let storageContainer = await this.storage.get(String(cId));
+		Object.assign(this.sets[cId], storageContainer[String(cId)]);
 	}
 }
 
@@ -69,5 +66,7 @@ StorageManager.prototype.isBlocked = function(input){
 }
 
 StorageManager.prototype.updateStorage = async function(containerId){
-	await this.storage.set({containerId: this.sets[containerId]});
+	let storageUpdate = {};
+	storageUpdate[containerId] = this.sets[containerId];
+	await this.storage.set(storageUpdate);
 }
