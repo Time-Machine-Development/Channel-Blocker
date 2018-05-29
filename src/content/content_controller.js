@@ -59,7 +59,7 @@ function pageUrlChanged(context){
 	}
 }
 
-async function getUrl(refrash){
+async function getUrl(refresh){
 	let msg = {
 		sender: "content_controller",
 		receiver: "background_controller_url_update",
@@ -70,7 +70,7 @@ async function getUrl(refrash){
 	
 	let sending = await browser.runtime.sendMessage(msg);
 	
-	if(refrash !== undefined){
+	if(refresh !== undefined){
 		pageUrlChanged(sending);
 	}
 }
