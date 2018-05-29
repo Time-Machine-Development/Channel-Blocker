@@ -4,9 +4,7 @@ function VideoPageManagerFilter(target, parent) {
 			if(elem.tagName === "YTD-WATCH-NEXT-SECONDARY-RESULTS-RENDERER"){
 				let videoPageWatchFilter = new VideoPageWatchFilter(elem, this);
 			}
-		}
-		
-		for(let elem of child.getElementsByClassName("style-scope ytd-watch")){
+			
 			if(elem.id === "comments"){
 				let videoPageCommentContainerFilter = new VideoPageCommentContainerFilter(elem, this);
 			}
