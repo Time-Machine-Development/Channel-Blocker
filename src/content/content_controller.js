@@ -33,10 +33,11 @@ function pageUrlChanged(context){
 	if(context === YTContext.SEARCH){
 		console.log("SEARCH");
 		try{
-			for(elem of document.getElementsByClassName("style-scope ytd-item-section-renderer")){
-				if(elem.id == "contents"){
-					console.log("new SearchPageContentFilter");
-					curFilter.push(new SearchPageContentFilter(elem));
+			for(elem of document.getElementsByClassName("style-scope ytd-two-column-search-results-renderer")){
+				if(elem.tagName === "YTD-SECTION-LIST-RENDERER"){
+					console.log("SearchPageStartFilter");
+					console.log(elem);
+					curFilter.push(new SearchPageStartFilter(elem));
 				}
 			}
 		}catch(e){
@@ -58,7 +59,7 @@ function pageUrlChanged(context){
 	}
 }
 
-async function getUrl(){
+async function getUrl(refrash){
 	let msg = {
 		sender: "content_controller",
 		receiver: "background_controller_url_update",
@@ -69,7 +70,9 @@ async function getUrl(){
 	
 	let sending = await browser.runtime.sendMessage(msg);
 	
-	//pageUrlChanged(sending);
+	if(refrash !== undefined){
+		pageUrlChanged(sending);
+	}
 }
 
 getUrl();
@@ -79,8 +82,11 @@ function processMessage(msg){
 	if(msg.receiver !== "content_controller"){
 		return;
 	}
-	
-	pageUrlChanged(msg.event.context);
+	if(msg.event.type === "storage_grew"){
+		getUrl(true);
+	}else{
+		pageUrlChanged(msg.event.context);
+	}
 }
 
 browser.runtime.onMessage.addListener(processMessage);	

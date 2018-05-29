@@ -1,5 +1,6 @@
 function SearchPageContentFilter(target, parent) {
 	this.onFound = function(child, useCallbackFilter){
+		console.log(child);
 		
 		if(child.tagName === "YTD-SHELF-RENDERER"){
 			for(elem of child.getElementsByClassName("style-scope ytd-vertical-list-renderer")){
