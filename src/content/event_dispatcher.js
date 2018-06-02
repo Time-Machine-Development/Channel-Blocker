@@ -1,5 +1,4 @@
 function blockUserChannel (userChannelName){
-	console.log(userChannelName + " blocked!");
 	let msg = {
 		sender: "content_event_dispatcher",
 		receiver: "background_controller_storage",

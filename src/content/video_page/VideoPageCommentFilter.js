@@ -14,7 +14,7 @@ VideoPageCommentFilter.prototype.onFound = function(child, useCallbackFilter){
 	for(let elem of child.getElementsByClassName("yt-simple-endpoint style-scope ytd-comment-renderer")){
 		if(elem.id === "author-text"){
 			if(useCallbackFilter === undefined){
-				let cFilter = new CallbackFilter(elem, this, child);
+				new CallbackFilter(elem, this, child);
 			}
 			userName = elem.firstElementChild.textContent;
 			//insert button to block channel/user
@@ -41,6 +41,5 @@ VideoPageCommentFilter.prototype.onFound = function(child, useCallbackFilter){
 };
 
 VideoPageCommentFilter.prototype.reload = function(child){
-	console.log("--RELOAD--");
-	this.onFoundInit(child, true);
+	this.onFound(child, true);
 };

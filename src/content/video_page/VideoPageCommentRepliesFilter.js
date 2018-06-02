@@ -13,7 +13,7 @@ VideoPageCommentRepliesFilter.prototype.onFound = function(child){
 	//UserChannelName of author
 	for(let elem of child.getElementsByClassName("yt-simple-endpoint style-scope ytd-comment-renderer")){
 		if(elem.id === "author-text"){
-			let cFilter = new CallbackFilter(elem, this);
+			new CallbackFilter(elem, this);
 			userName = elem.firstElementChild.textContent;
 
 			//insert button to block channel/user
@@ -31,8 +31,7 @@ VideoPageCommentRepliesFilter.prototype.onFound = function(child){
 };
 
 VideoPageCommentRepliesFilter.prototype.reload = function(){
-	console.log("--RELOAD--");
 	for(let childElement of this.target.children){
-		this.onFoundInit(childElement);
+		this.onFound(childElement);
 	}
 };

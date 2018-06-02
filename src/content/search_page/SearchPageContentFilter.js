@@ -7,7 +7,6 @@ SearchPageContentFilter.prototype = Object.create(Filter.prototype);
 SearchPageContentFilter.prototype.constructor = SearchPageContentFilter;
 
 SearchPageContentFilter.prototype.onFound = function(child, useCallbackFilter){
-	console.log(child);
 
 	if(child.tagName === "YTD-SHELF-RENDERER"){
 		for(elem of child.getElementsByClassName("style-scope ytd-vertical-list-renderer")){
@@ -23,7 +22,6 @@ SearchPageContentFilter.prototype.onFound = function(child, useCallbackFilter){
 			if(useCallbackFilter === undefined){
 				new CallbackFilter(linkInnerArr[2], this, child);
 			}
-			console.log(linkInnerArr[2].textContent);
 
 			checkVideoTitle(linkInnerArr[2].textContent, linkInnerArr[1].textContent, child);
 
@@ -37,6 +35,5 @@ SearchPageContentFilter.prototype.onFound = function(child, useCallbackFilter){
 };
 
 SearchPageContentFilter.prototype.reload = function(child){
-	console.log("--RELOAD--");
 	this.onFound(child, true);
 };

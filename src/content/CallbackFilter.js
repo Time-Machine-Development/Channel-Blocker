@@ -21,7 +21,6 @@ CallbackFilter.prototype.callbackFunc = function(mutationRecArr, observerInst){
 	observerInst.disconnect();
 	for(let mutationRecItem of mutationRecArr){
 		for(let addedNode of mutationRecItem.addedNodes){
-			console.log(addedNode.textContent);
 			this.filterInst.callback.reload(this.filterInst.child);
 			return;
 		}

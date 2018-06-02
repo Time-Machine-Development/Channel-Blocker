@@ -8,8 +8,6 @@ SearchPageSectionFilter.prototype.constructor = SearchPageSectionFilter;
 
 SearchPageSectionFilter.prototype.onFound = function(child){
 	if(child.id === "contents"){
-		console.log("new SearchPageContentFilter");
-		console.log(child);
-		let searchFilter = new SearchPageContentFilter(child, this);
+		new SearchPageContentFilter(child, this);
 	}
 };

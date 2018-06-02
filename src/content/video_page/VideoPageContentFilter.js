@@ -18,9 +18,7 @@ VideoPageContentFilter.prototype.onFound = function(child, useCallbackFilter){
 
 			//insert button to block channel/user
 			createBtnAtStart(elem.parentNode.parentNode, createBtnNode(elem.textContent), elem.parentNode);
-			console.log("useCallbackFilter: "+useCallbackFilter);
 			if(useCallbackFilter === undefined){
-				console.log("new CallbackFilter "+useCallbackFilter);
 				let cFilter = new CallbackFilter(elem, this, child);
 			}
 		}
@@ -35,12 +33,11 @@ VideoPageContentFilter.prototype.onFound = function(child, useCallbackFilter){
 };
 
 VideoPageContentFilter.prototype.reload = function(child){
-	console.log("--RELOAD--");
 	if(child === undefined){
 		for(let childElement of this.target.children){
-			this.onFoundInit(childElement, true);
+			this.onFound(childElement, true);
 		}
 	}else{
-		this.onFoundInit(child, true);
+		this.onFound(child, true);
 	}
 };

@@ -37,7 +37,6 @@ StartContainerFilter.prototype.onFound = function(child){
 };
 
 StartContainerFilter.prototype.reload = function(){
-	console.log("--RELOAD--");
 	for(let childElement of this.target.children){
 		this.onFound(childElement);
 	}
