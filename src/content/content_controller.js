@@ -2,9 +2,9 @@ var curFilter = new Array();
 
 function pageUrlChanged(context){
 	
-	console.log("COntext: " + context);
+	//detaches all currently active Filter
 	for(actFilter of curFilter){
-		if(actFilter != undefined){
+		if(actFilter !== undefined){
 			try{
 				actFilter.detach();
 			}catch(e){
@@ -12,6 +12,7 @@ function pageUrlChanged(context){
 			}
 		}
 	}
+	
 	//Start/TrendsPage(https://www.youtube.com/ , https://www.youtube.com/feed/trending)
 	if(context === YTContext.HOME || context === YTContext.TRENDING){
 		console.log("HOME/TRENDING");
@@ -75,8 +76,6 @@ async function getUrl(refresh){
 	}
 }
 
-getUrl();
-
 function processMessage(msg){
 	console.log(msg);
 	if(msg.receiver !== "content_controller"){
@@ -88,5 +87,7 @@ function processMessage(msg){
 		pageUrlChanged(msg.event.context);
 	}
 }
+
+getUrl();
 
 browser.runtime.onMessage.addListener(processMessage);	

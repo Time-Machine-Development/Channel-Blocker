@@ -11,7 +11,7 @@ SearchPageContentFilter.prototype.onFound = function(child, useCallbackFilter){
 
 	if(child.tagName === "YTD-SHELF-RENDERER"){
 		for(elem of child.getElementsByClassName("style-scope ytd-vertical-list-renderer")){
-			if(elem.id == "items"){
+			if(elem.id === "items"){
 				var filter = new SearchPageContentFilter(elem, this);
 			}
 		}

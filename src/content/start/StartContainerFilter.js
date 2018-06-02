@@ -26,7 +26,7 @@ StartContainerFilter.prototype.onFound = function(child){
 
 		//Channel-Container
 		for(let elem of child.getElementsByClassName("style-scope ytd-grid-channel-renderer")){
-			if(elem.id == "title"){
+			if(elem.id === "title"){
 				userChannelName = elem.textContent;
 				checkUserChannelName(userChannelName, elem.textContent, child);
 			}

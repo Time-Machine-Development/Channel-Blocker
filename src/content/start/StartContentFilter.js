@@ -10,8 +10,9 @@ StartContentFilter.prototype.onFound = function(child){
 
 	//OuterVideo-container
 	for(let elem of child.getElementsByClassName("style-scope ytd-shelf-renderer")){
-		if(elem.id == "title"){
-			let cFilter = new CallbackFilter(elem, this);
+		if(elem.id === "title"){
+			//CallbackFilter to listen to 
+			new CallbackFilter(elem, this);
 			checkUserChannelName(elem.textContent, child);
 
 			//insert button to block channel/user
@@ -28,14 +29,14 @@ StartContentFilter.prototype.onFound = function(child){
 
 	//Empfohlen-container
 	for(let elem of child.getElementsByClassName("style-scope yt-horizontal-list-renderer")){
-		if(elem.id == "items"){
-			var filter2 = new VideoContainerFilter(elem, this);
+		if(elem.id === "items"){
+			new StartContainerFilter(elem, this);
 		}
 	}
 
 	//SingleVideo-container
 	for(let elem of child.getElementsByClassName("style-scope ytd-expanded-shelf-contents-renderer")){
-		if(elem.id == "grid-container"){
+		if(elem.id === "grid-container"){
 			for(videoElem of elem.children){
 				let linkInnerArr = videoElem.getElementsByTagName("a");
 				if(linkInnerArr.length >= 3){
@@ -45,7 +46,7 @@ StartContentFilter.prototype.onFound = function(child){
 
 					//insert button to block channel/user
 					for(let btnContainerElem of videoElem.getElementsByClassName("style-scope ytd-video-meta-block")){
-						if(btnContainerElem.id === "metadata" && linkInnerArr[2].textContent != ""){
+						if(btnContainerElem.id === "metadata" && linkInnerArr[2].textContent !== ""){
 
 							createBtnAtStart(btnContainerElem, createBtnNode(linkInnerArr[2].textContent));
 						}
@@ -66,14 +67,13 @@ StartContentFilter.prototype.onFound = function(child){
 
 	//gridVideo/channel-container
 	for(let elem of child.getElementsByClassName("style-scope ytd-grid-renderer")){
-		if(elem.id == "items"){
-			var filter2 = new VideoContainerFilter(elem, this);
+		if(elem.id === "items"){
+			new StartContainerFilter(elem, this);
 		}
 	}
 };
 
 StartContentFilter.prototype.reload = function(){
-	console.log("--RELOAD--");
 	for(let childElement of this.target.children){
 		this.onFound(childElement);
 	}

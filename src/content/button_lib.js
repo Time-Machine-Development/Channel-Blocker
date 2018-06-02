@@ -35,14 +35,14 @@ function createBtnAtStart(parent, btn, child){
 			ch.remove();
 		}
 	}
-	if(child == undefined){
+	if(child === undefined){
 		parent.insertBefore(btn, parent.firstChild);
 	}else{
 		try{
 			parent.insertBefore(btn, child);
 		}catch(e){
 			console.log(e);
-			if(parent != undefined)
+			if(parent !== undefined)
 			parent.appendChild(btn);
 		}
 	}
