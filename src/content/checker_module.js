@@ -14,9 +14,6 @@ function createMsg(userName){
 function checkUserChannelName(userName, checkedNode){
 	let msg = createMsg(userName);
 				
-	if(consoleLog)
-		console.log("Name: " + userName.trim());
-	
 	notifyBackgroundPage(msg, checkedNode);
 	return false;
 }

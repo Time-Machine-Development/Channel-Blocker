@@ -15,13 +15,10 @@ function pageUrlChanged(context){
 	
 	//Start/TrendsPage(https://www.youtube.com/ , https://www.youtube.com/feed/trending)
 	if(context === YTContext.HOME || context === YTContext.TRENDING){
-		console.log("HOME/TRENDING");
 		try{
 			let selectList = document.getElementsByClassName("style-scope ytd-section-list-renderer");
 			for(elem of selectList){
 				if(elem.id === "contents"){
-					console.log("new StartContentFilter on:");
-					console.log(elem);
 					curFilter.push(new StartContentFilter(elem));
 				}
 			}
@@ -36,8 +33,6 @@ function pageUrlChanged(context){
 		try{
 			for(elem of document.getElementsByClassName("style-scope ytd-two-column-search-results-renderer")){
 				if(elem.tagName === "YTD-SECTION-LIST-RENDERER"){
-					console.log("SearchPageStartFilter");
-					console.log(elem);
 					curFilter.push(new SearchPageStartFilter(elem));
 				}
 			}
