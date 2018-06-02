@@ -11,7 +11,7 @@ function Filter(target, parent) {
 	this.childFilters = new Array();
 
 	for(let childElement of target.children){
-		this.onFoundInit(childElement);
+		this.onFound(childElement);
 	}
 
 	if(parent !== undefined){
@@ -25,7 +25,7 @@ Filter.prototype.onFound = function(child){
 Filter.prototype.callbackFunc = function(mutationRecArr, observerInst){
 	for(let mutationRecItem of mutationRecArr){
 		for(let addedNode of mutationRecItem.addedNodes){
-			this.filterInst.onFoundObs(addedNode);
+			this.filterInst.onFound(addedNode);
 		}
 	}
 };
