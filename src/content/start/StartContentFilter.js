@@ -51,15 +51,6 @@ StartContentFilter.prototype.onFound = function(child){
 							createBtnAtStart(btnContainerElem, createBtnNode(linkInnerArr[2].textContent));
 						}
 					}
-
-					if(debug){
-						linkInnerArr[1].style.color = "darkgray";
-						linkInnerArr[2].style.color = "darkgray";
-					}
-				}
-
-				if(debug){
-					videoElem.style.background = "green";
 				}
 			}
 		}

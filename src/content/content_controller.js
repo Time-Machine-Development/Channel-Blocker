@@ -1,4 +1,4 @@
-var curFilter = new Array();
+let curFilter = new Array();
 
 function pageUrlChanged(context){
 	

@@ -1,6 +1,3 @@
-//DELETE THIS
-var debug = false;
-
 function Filter(target, parent) {
 	this.mutationObs = new MutationObserver(this.callbackFunc);
 	this.mutationObs.filterInst = this;

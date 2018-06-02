@@ -17,11 +17,6 @@ StartContainerFilter.prototype.onFound = function(child){
 
 		//GridVideo-Container
 		checkVideoTitle(userChannelName, linkInnerArr[1].textContent, child);
-
-		if(debug){
-			linkInnerArr[1].style.color = "darkgray";
-			linkInnerArr[2].style.color = "darkgray";
-		}
 	}else{
 
 		//Channel-Container
