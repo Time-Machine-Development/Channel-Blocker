@@ -8,7 +8,14 @@ function StartContentFilter(target, parent) {
 				checkUserChannelName(elem.textContent, child);
 				
 				//insert button to block channel/user
-				createBtnAfter(elem.parentNode.parentNode, createContainerBtnNode(elem.textContent));
+				console.log("TAGNAME: " + elem.parentNode.tagName);
+				if(elem.textContent !== ""){
+					if(elem.parentNode.tagName !== "H2"){
+						createBtnAfter(elem.parentNode.parentNode, createContainerBtnNode(elem.textContent));
+					}else{
+						createBtnAfter(elem.parentNode, createContainerBtnNode(elem.textContent));
+					}
+				}
 			}
 		}
 		
