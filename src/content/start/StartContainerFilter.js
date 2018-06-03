@@ -12,7 +12,7 @@ StartContainerFilter.prototype.onFound = function(child){
 
 	let linkInnerArr = child.getElementsByTagName("a");
 	if(linkInnerArr.length >= 3){
-		let cFilter = new CallbackFilter(linkInnerArr[2], this);
+		new CallbackFilter(linkInnerArr[2], this);
 		userChannelName = linkInnerArr[2].textContent;
 
 		//GridVideo-Container

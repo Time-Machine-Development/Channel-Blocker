@@ -8,6 +8,6 @@ VideoPageWatchFilter.prototype.constructor = VideoPageWatchFilter;
 
 VideoPageWatchFilter.prototype.onFound = function(child){
 	if(child.id === "items"){
-		let videoPageContentFilter = new VideoPageContentFilter(child, this);
+		new VideoPageContentFilter(child, this);
 	}
 };

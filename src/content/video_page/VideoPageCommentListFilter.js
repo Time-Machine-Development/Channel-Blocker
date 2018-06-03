@@ -8,6 +8,6 @@ VideoPageCommentListFilter.prototype.constructor = VideoPageCommentListFilter;
 
 VideoPageCommentListFilter.prototype.onFound = function(child){
 	if(child.id === "contents"){
-		let videoPageCommentFilter = new VideoPageCommentFilter(child, this);
+		new VideoPageCommentFilter(child, this);
 	}
 };

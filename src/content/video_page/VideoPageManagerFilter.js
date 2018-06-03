@@ -9,11 +9,11 @@ VideoPageManagerFilter.prototype.constructor = VideoPageManagerFilter;
 VideoPageManagerFilter.prototype.onFound = function(child){
 	for(let elem of child.getElementsByClassName("style-scope ytd-watch")){
 		if(elem.tagName === "YTD-WATCH-NEXT-SECONDARY-RESULTS-RENDERER"){
-			let videoPageWatchFilter = new VideoPageWatchFilter(elem, this);
+			new VideoPageWatchFilter(elem, this);
 		}
 
 		if(elem.id === "comments"){
-			let videoPageCommentContainerFilter = new VideoPageCommentContainerFilter(elem, this);
+			new VideoPageCommentContainerFilter(elem, this);
 		}
 	}
 };

@@ -8,6 +8,6 @@ VideoPageCommentContainerFilter.prototype.constructor = VideoPageCommentContaine
 
 VideoPageCommentContainerFilter.prototype.onFound = function(child){
 	if(child.tagName === "YTD-ITEM-SECTION-RENDERER"){
-		let videoPageCommentListFilter = new VideoPageCommentListFilter(child, this);
+		new VideoPageCommentListFilter(child, this);
 	}
 };

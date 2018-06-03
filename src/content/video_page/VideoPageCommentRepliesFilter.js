@@ -24,7 +24,7 @@ VideoPageCommentRepliesFilter.prototype.onFound = function(child){
 	//CommentContent
 	for(let elem of child.getElementsByClassName("style-scope ytd-comment-renderer")){
 		if(elem.id === "content-text"){
-			let cFilter = new CallbackFilter(elem, this);
+			new CallbackFilter(elem, this);
 			checkCommentContent(userName, elem.textContent, child);
 		}
 	}

@@ -10,7 +10,7 @@ VideoPageAppFilter.prototype.onFound = function(child){
 	if(child.id === "content"){
 		for(let elem of child.getElementsByClassName("style-scope ytd-app")){
 			if(elem.id === "page-manager"){
-				let videoPageManagerFilter = new VideoPageManagerFilter(elem, this);
+				new VideoPageManagerFilter(elem, this);
 			}
 		}
 	}

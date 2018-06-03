@@ -19,14 +19,13 @@ VideoPageContentFilter.prototype.onFound = function(child, useCallbackFilter){
 			//insert button to block channel/user
 			createBtnAtStart(elem.parentNode.parentNode, createBtnNode(elem.textContent), elem.parentNode);
 			if(useCallbackFilter === undefined){
-				let cFilter = new CallbackFilter(elem, this, child);
+				new CallbackFilter(elem, this, child);
 			}
 		}
 	}
 
 	for(let elem of child.getElementsByClassName("style-scope ytd-compact-video-renderer")){
 		if(elem.id === "video-title"){
-			//let cFilter = new CallbackFilter(elem, this);
 			checkVideoTitle(userName, elem.textContent, child);
 		}
 	}
