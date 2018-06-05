@@ -12,6 +12,7 @@ function pageUrlChanged(context){
 			}
 		}
 	}
+	curFilter.length = 0;
 	
 	//Start/TrendsPage(https://www.youtube.com/ , https://www.youtube.com/feed/trending)
 	if(context === YTContext.HOME || context === YTContext.TRENDING){

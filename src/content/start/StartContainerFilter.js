@@ -1,4 +1,5 @@
 function StartContainerFilter(target, parent) {
+	this.parent = parent;
 	Filter.call(this, target, parent);
 }
 
@@ -6,13 +7,15 @@ StartContainerFilter.prototype = Object.create(Filter.prototype);
 
 StartContainerFilter.prototype.constructor = StartContainerFilter;
 
-StartContainerFilter.prototype.onFound = function(child){
+StartContainerFilter.prototype.onFound = function(child, useCallbackFilter){
 
 	let userChannelName;
 
 	let linkInnerArr = child.getElementsByTagName("a");
 	if(linkInnerArr.length >= 3){
-		new CallbackFilter(linkInnerArr[2], this);
+		if(useCallbackFilter === undefined){
+			new CallbackFilter(linkInnerArr[2], this, child);
+		}
 		userChannelName = linkInnerArr[2].textContent;
 
 		//GridVideo-Container
@@ -36,8 +39,6 @@ StartContainerFilter.prototype.onFound = function(child){
 	}
 };
 
-StartContainerFilter.prototype.reload = function(){
-	for(let childElement of this.target.children){
-		this.onFound(childElement);
-	}
+StartContainerFilter.prototype.reload = function(child){
+	this.onFound(child, true);
 };

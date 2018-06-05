@@ -17,7 +17,7 @@ VideoPageContentFilter.prototype.onFound = function(child, useCallbackFilter){
 			}
 
 			//insert button to block channel/user
-			createBtnAtStart(elem.parentNode.parentNode, createBtnNode(elem.textContent), elem.parentNode);
+			createBtnAtStart(elem.parentNode.parentNode, createBtnNode(userName), elem.parentNode);
 			if(useCallbackFilter === undefined){
 				new CallbackFilter(elem, this, child);
 			}
