@@ -1,0 +1,10 @@
+1. Suche nach videos auf YT.
+2. Klicke beliebiges Video an.
+3. Kehre zur Suche zurück (mit MouseBtn).
+
+Konsequenz:
+Lösche Buttons verrutschen bei Videos, die bei der Suche aus 1. schon
+geladen wurden.
+
+Detail(bzgl. HTML):
+Das btn-Tag rutscht aus der childList seine Partents von Head zum Tail.
