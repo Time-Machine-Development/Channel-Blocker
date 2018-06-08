@@ -1,10 +1,11 @@
-const curFilter = new Array();
+const CUR_FILTER = new Array();
 
 function pageUrlChanged(context){
 	console.log(context);
 	
+	
 	//detaches all currently active Filter
-	for(actFilter of curFilter){
+	for(actFilter of CUR_FILTER){
 		if(actFilter !== undefined){
 			try{
 				actFilter.detach();
@@ -13,15 +14,16 @@ function pageUrlChanged(context){
 			}
 		}
 	}
-	curFilter.length = 0;
+	CUR_FILTER.length = 0;
 	
 	//Start/TrendsPage(https://www.youtube.com/ , https://www.youtube.com/feed/trending)
 	if(context === YTContext.HOME || context === YTContext.TRENDING){
+	console.log("HOME  TRENDING");
 		try{
 			let selectList = document.getElementsByClassName("style-scope ytd-section-list-renderer");
 			for(elem of selectList){
 				if(elem.id === "contents"){
-					curFilter.push(new StartContentFilter(elem));
+					CUR_FILTER.push(new StartContentFilter(elem));
 				}
 			}
 		}catch(e){
@@ -31,10 +33,11 @@ function pageUrlChanged(context){
 	
 	//SearchPage(https://www.youtube.com/results?search_query=<INPUT>)
 	if(context === YTContext.SEARCH){
+	console.log("SEARCH");
 		try{
 			for(elem of document.getElementsByClassName("style-scope ytd-two-column-search-results-renderer")){
 				if(elem.tagName === "YTD-SECTION-LIST-RENDERER"){
-					curFilter.push(new SearchPageStartFilter(elem));
+					CUR_FILTER.push(new SearchPageStartFilter(elem));
 				}
 			}
 		}catch(e){
@@ -44,10 +47,11 @@ function pageUrlChanged(context){
 	
 	//WatchPage(https://www.youtube.com/watch?v=<ID>)
 	if(context === YTContext.VIDEO){
+	console.log("VIDEO");
 		try{
 			let list = document.getElementsByTagName("ytd-app");
 			for(elem of list){ 
-				curFilter.push(new VideoPageAppFilter(elem));
+				CUR_FILTER.push(new VideoPageAppFilter(elem));
 			}
 		}catch(e){
 			console.log(e);
@@ -55,7 +59,7 @@ function pageUrlChanged(context){
 	}
 }
 
-async function getUrl(refresh){
+async function getUrl(){
 	let msg = {
 		sender: "content_controller",
 		receiver: "background_controller_url_update",
@@ -66,9 +70,7 @@ async function getUrl(refresh){
 	
 	let sending = await browser.runtime.sendMessage(msg);
 	
-	if(refresh !== undefined){
-		pageUrlChanged(sending);
-	}
+	pageUrlChanged(sending);
 }
 
 function processMessage(msg){
@@ -76,12 +78,12 @@ function processMessage(msg){
 		return;
 	}
 	if(msg.event.type === "storage_grew"){
-		getUrl(true);
+		getUrl();
 	}else{
 		pageUrlChanged(msg.event.context);
 	}
 }
 
-getUrl(true);
+getUrl();
 
 browser.runtime.onMessage.addListener(processMessage);	

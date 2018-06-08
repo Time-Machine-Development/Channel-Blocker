@@ -72,11 +72,10 @@ function createBtnAtStart(parent, btn, child){
 		parent.insertBefore(btn, parent.firstChild);
 	}else{
 		try{
-			parent.insertBefore(btn, child);
+			parent.insertBefore(btn,child);
 		}catch(e){
-			console.log(e);
-			if(parent !== undefined)
-			parent.appendChild(btn);
+			parent.prepend(btn);
+			
 		}
 	}
 }
