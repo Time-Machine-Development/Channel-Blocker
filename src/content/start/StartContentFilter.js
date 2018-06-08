@@ -1,7 +1,13 @@
 function StartContentFilter(target, parent) {
-	
-	this.reloadFromChild = function(child){
-		for(let elem of child.getElementsByClassName("style-scope ytd-shelf-renderer")){
+	Filter.call(this, target, parent);
+}
+
+StartContentFilter.prototype = Object.create(Filter.prototype);
+
+StartContentFilter.prototype.constructor = StartContentFilter;
+
+StartContentFilter.prototype.reloadFromChild = function(child){
+	for(let elem of child.getElementsByClassName("style-scope ytd-shelf-renderer")){
 		if(elem.id === "title"){
 			checkUserChannelName(elem.textContent, child);
 
@@ -15,14 +21,7 @@ function StartContentFilter(target, parent) {
 			}
 		}
 	}
-	}
-	
-	Filter.call(this, target, parent);
 }
-
-StartContentFilter.prototype = Object.create(Filter.prototype);
-
-StartContentFilter.prototype.constructor = StartContentFilter;
 
 StartContentFilter.prototype.onFound = function(child, useCallbackFilter){
 

@@ -1,4 +1,4 @@
-let curFilter = new Array();
+const curFilter = new Array();
 
 function pageUrlChanged(context){
 	console.log(context);
@@ -82,6 +82,6 @@ function processMessage(msg){
 	}
 }
 
-getUrl();
+getUrl(true);
 
 browser.runtime.onMessage.addListener(processMessage);	
