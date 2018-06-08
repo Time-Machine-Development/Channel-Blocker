@@ -1,4 +1,22 @@
 function StartContentFilter(target, parent) {
+	
+	this.reloadFromChild = function(child){
+		for(let elem of child.getElementsByClassName("style-scope ytd-shelf-renderer")){
+		if(elem.id === "title"){
+			checkUserChannelName(elem.textContent, child);
+
+			//insert button to block channel/user
+			if(elem.textContent !== ""){
+				if(elem.parentNode.tagName !== "H2"){
+					createBtnAfter(elem, createContainerBtnNode(elem.textContent));
+				}else{
+					createBtnAfter(elem.parentNode, createContainerBtnNode(elem.textContent));
+				}
+			}
+		}
+	}
+	}
+	
 	Filter.call(this, target, parent);
 }
 
@@ -16,18 +34,8 @@ StartContentFilter.prototype.onFound = function(child, useCallbackFilter){
 			//insert button to block channel/user
 			if(elem.textContent !== ""){
 				if(elem.parentNode.tagName !== "H2"){
-					console.log("!H2");
-					if(useCallbackFilter === undefined){
-						new CallbackFilter(elem.parentNode.parentNode.parentNode, this, child, true);
-						console.log(elem.parentNode.parentNode.parentNode);
-					}
 					createBtnAfter(elem, createContainerBtnNode(elem.textContent));
 				}else{
-					console.log("H2");
-					if(useCallbackFilter === undefined){
-						new CallbackFilter(elem.parentNode, this, child);
-						console.log(elem.parentNode);
-					}
 					createBtnAfter(elem.parentNode, createContainerBtnNode(elem.textContent));
 				}
 			}
@@ -37,7 +45,7 @@ StartContentFilter.prototype.onFound = function(child, useCallbackFilter){
 	//Recommended-container
 	for(let elem of child.getElementsByClassName("style-scope yt-horizontal-list-renderer")){
 		if(elem.id === "items"){
-			new StartContainerFilter(elem, this);
+			new StartContainerFilter(elem, this, child);
 		}
 	}
 
@@ -66,7 +74,7 @@ StartContentFilter.prototype.onFound = function(child, useCallbackFilter){
 	//gridVideo/channel-container
 	for(let elem of child.getElementsByClassName("style-scope ytd-grid-renderer")){
 		if(elem.id === "items"){
-			new StartContainerFilter(elem, this);
+			new StartContainerFilter(elem, this, child);
 		}
 	}
 };

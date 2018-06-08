@@ -1,5 +1,6 @@
-function StartContainerFilter(target, parent) {
+function StartContainerFilter(target, parent, containerParent) {
 	this.parent = parent;
+	this.containerParent = containerParent;
 	Filter.call(this, target, parent);
 }
 
@@ -41,4 +42,5 @@ StartContainerFilter.prototype.onFound = function(child, useCallbackFilter){
 
 StartContainerFilter.prototype.reload = function(child){
 	this.onFound(child, true);
+	this.parent.reloadFromChild(this.containerParent);
 };

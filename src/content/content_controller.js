@@ -1,6 +1,7 @@
 let curFilter = new Array();
 
 function pageUrlChanged(context){
+	console.log(context);
 	
 	//detaches all currently active Filter
 	for(actFilter of curFilter){
