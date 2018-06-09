@@ -1,3 +1,4 @@
+//SearchPage filter 2/4
 function SearchPageItemSectionFilter(target, parent) {
 	Filter.call(this, target, parent);
 }
