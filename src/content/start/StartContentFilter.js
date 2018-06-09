@@ -14,7 +14,7 @@ StartContentFilter.prototype.reloadFromChild = function(child){
 			//insert button to block channel/user
 			if(elem.textContent !== ""){
 				if(elem.parentNode.tagName !== "H2"){
-					createBtnAfter(elem, createContainerBtnNode(elem.textContent));
+					createBtnAfter(elem.parentNode.parentNode, createContainerBtnNode(elem.textContent));
 				}else{
 					createBtnAfter(elem.parentNode, createContainerBtnNode(elem.textContent));
 				}
@@ -33,7 +33,7 @@ StartContentFilter.prototype.onFound = function(child, useCallbackFilter){
 			//insert button to block channel/user
 			if(elem.textContent !== ""){
 				if(elem.parentNode.tagName !== "H2"){
-					createBtnAfter(elem, createContainerBtnNode(elem.textContent));
+					createBtnAfter(elem.parentNode.parentNode, createContainerBtnNode(elem.textContent));
 				}else{
 					createBtnAfter(elem.parentNode, createContainerBtnNode(elem.textContent));
 				}

@@ -1,3 +1,4 @@
+//Creates a button and returns it
 function createBtnNode(userChannelName){
 	let btn = document.createElement("button");
 	btn.setAttribute("type", "button");
@@ -36,6 +37,7 @@ function createBtnNode(userChannelName){
 	return btn;
 }
 
+//Creates a button and returns it
 function createContainerBtnNode(userChannelName){
 	let btn = document.createElement("button");
 	btn.setAttribute("type", "button");
@@ -53,6 +55,7 @@ function createContainerBtnNode(userChannelName){
 	return btn;
 }
 
+//Creates a button and inserts it after the 'child'-node
 function createBtnAfter(child, btn){
 	for(ch of child.parentNode.children){
 		if(ch.tagName === "BUTTON"){
@@ -62,6 +65,8 @@ function createBtnAfter(child, btn){
 	child.after(btn);
 }
 
+//Takes the button(btn) and inserts it befor the 'child'-node
+//If the 'child'-node isn't a child of the 'patent'-node anymore insert it as fist childNode
 function createBtnAtStart(parent, btn, child){
 	for(ch of parent.children){
 		if(ch.tagName === "BUTTON"){

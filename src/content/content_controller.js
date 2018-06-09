@@ -49,7 +49,7 @@ function pageUrlChanged(context){
 	if(context === YTContext.VIDEO){
 	console.log("VIDEO");
 		try{
-			let list = document.getElementsByTagName("ytd-app");
+			let list = document.getElementsByTagName("ytd-app"); 
 			for(elem of list){ 
 				CUR_FILTER.push(new VideoPageAppFilter(elem));
 			}
