@@ -44,7 +44,7 @@ const YT_TAB_IDS = new HashSet();
 
 		if(msg.sender === "content_controller"){
 			if(msg.event.type === "context_request"){
-				let context = urlToContext(sender.url);
+				let context = urlToContext(sender.tab.url);
 
 				if(context !== undefined){
 					//add tab id to YT_TAB_IDS with value context
