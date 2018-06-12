@@ -1,3 +1,4 @@
+//VideoPage filter 6/8
 function VideoPageCommentListFilter(target, parent) {
 	Filter.call(this, target, parent);
 }
