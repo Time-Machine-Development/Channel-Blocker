@@ -2,20 +2,26 @@ let configTabId = null;
 
 {
 	//if an open config page exists make config tab active, otherwise create new config tab and make it active
-	browser.browserAction.onClicked.addListener(() => {
+	browser.browserAction.onClicked.addListener(async function(){
 		if(configTabId === null){
-			browser.tabs.create({
+			let tab = await browser.tabs.create({
 				active: true,
 				url: "/config/config.html"
-			})
-			.then((tab) => {
-				configTabId = tab.id;
 			});
+
+			configTabId = tab.id;
 		}else{
-			browser.tabs.update(
+			let tab = await browser.tabs.update(
 				configTabId,
 				{
 					active: true
+				}
+			);
+
+			await browser.windows.update(
+				tab.windowId,
+				{
+					focused: true
 				}
 			);
 		}
