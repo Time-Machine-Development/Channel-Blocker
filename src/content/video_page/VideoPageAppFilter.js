@@ -1,3 +1,4 @@
+//VideoPage filter 1/8
 function VideoPageAppFilter(target, parent) {
 	Filter.call(this, target, parent);
 }

@@ -13,7 +13,8 @@
 	},
 	
 	"icons": {
-		"48": "/images/icon.svg"
+		"48": "/images/Ytc_icon_48.png",
+		"96": "/images/Ytc_icon_96.png"
 	},
 
 	"permissions": [
@@ -26,7 +27,8 @@
 	"browser_action": {
 		"default_title": "Configuration",
 		"default_icon": {
-			"16": "/images/icon_2.svg"
+			"16": "/images/Ytc_icon_16.png",
+			"32": "/images/Ytc_icon_32.png"
 		}
 	},
 

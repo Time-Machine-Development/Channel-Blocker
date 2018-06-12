@@ -1,8 +1,17 @@
+//All filter currently active
 const CUR_FILTER = new Array();
 
+//Creates filter, based on the current url
+//context represents the current url with a number:
+//HOME: 0,
+//VIDEO: 1,
+//SEARCH: 2,
+//TRENDING: 3,
+//CHANNEL_HOME: 4,
+//CHANNEL_VIDEOS: 5,
+//OTHER: 6
 function pageUrlChanged(context){
 	console.log(context);
-	
 	
 	//detaches all currently active Filter
 	for(actFilter of CUR_FILTER){
@@ -32,7 +41,7 @@ function pageUrlChanged(context){
 	}
 	
 	//SearchPage(https://www.youtube.com/results?search_query=<INPUT>)
-	if(context === YTContext.SEARCH){
+	if(context === YTContext.SEARCH || context === YTContext.CHANNEL_VIDEOS || context === YTContext.CHANNEL_HOME){
 	console.log("SEARCH");
 		try{
 			for(elem of document.getElementsByClassName("style-scope ytd-two-column-search-results-renderer")){
@@ -49,7 +58,7 @@ function pageUrlChanged(context){
 	if(context === YTContext.VIDEO){
 	console.log("VIDEO");
 		try{
-			let list = document.getElementsByTagName("ytd-app");
+			let list = document.getElementsByTagName("ytd-app"); 
 			for(elem of list){ 
 				CUR_FILTER.push(new VideoPageAppFilter(elem));
 			}
@@ -59,6 +68,7 @@ function pageUrlChanged(context){
 	}
 }
 
+//Send a message to the background_controller_url_updater to receive the current Url
 async function getUrl(){
 	let msg = {
 		sender: "content_controller",
@@ -73,6 +83,8 @@ async function getUrl(){
 	pageUrlChanged(sending);
 }
 
+//Process the Messages for the content_controller from beackgroundscripts
+//Triggert when the storage has changed or the url has changed
 function processMessage(msg){
 	if(msg.receiver !== "content_controller"){
 		return;
@@ -86,4 +98,5 @@ function processMessage(msg){
 
 getUrl();
 
+//Add a listener, to get Messages from the backgroundscripts
 browser.runtime.onMessage.addListener(processMessage);	
