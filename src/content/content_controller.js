@@ -41,7 +41,7 @@ function pageUrlChanged(context){
 	}
 	
 	//SearchPage(https://www.youtube.com/results?search_query=<INPUT>)
-	if(context === YTContext.SEARCH){
+	if(context === YTContext.SEARCH || context === YTContext.CHANNEL_VIDEOS || context === YTContext.CHANNEL_HOME){
 	console.log("SEARCH");
 		try{
 			for(elem of document.getElementsByClassName("style-scope ytd-two-column-search-results-renderer")){
