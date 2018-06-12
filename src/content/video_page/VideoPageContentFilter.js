@@ -16,11 +16,12 @@ VideoPageContentFilter.prototype.onFound = function(child, useCallbackFilter){
 		if(elem.id === "byline"){
 			userName = elem.textContent;
 			//if userName is to long, cuts it
-			if(userName.length >= 25){
-				elem.textContent = userName.substring(0, 21)+"...";
-			}
+			//if(userName.length >= 25){
+			//	elem.textContent = userName.substring(0, 21)+"...";
+			//}
 
 			//insert button to block channel/user
+			if(userName !== "")
 			createBtnAfter(elem.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode, createBtnNode(userName));
 			//Create callbackFilter to listen to changes
 			if(useCallbackFilter === undefined){
