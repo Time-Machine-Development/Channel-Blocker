@@ -1,3 +1,4 @@
+//VideoPage filter 7/8
 function VideoPageCommentFilter(target, parent) {
 	Filter.call(this, target, parent);
 }
@@ -13,6 +14,7 @@ VideoPageCommentFilter.prototype.onFound = function(child, useCallbackFilter){
 	//UserChannelName of author
 	for(let elem of child.getElementsByClassName("yt-simple-endpoint style-scope ytd-comment-renderer")){
 		if(elem.id === "author-text"){
+			//Create callbackFilter to listen to changes
 			if(useCallbackFilter === undefined){
 				new CallbackFilter(elem, this, child);
 			}
@@ -39,6 +41,7 @@ VideoPageCommentFilter.prototype.onFound = function(child, useCallbackFilter){
 
 };
 
+//If the callbackFilter register a change they invoke this function
 VideoPageCommentFilter.prototype.reload = function(child){
 	this.onFound(child, true);
 };

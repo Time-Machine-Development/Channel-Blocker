@@ -1,10 +1,20 @@
-const curFilter = new Array();
+//All filter currently active
+const CUR_FILTER = new Array();
 
+//Creates filter, based on the current url
+//context represents the current url with a number:
+//HOME: 0,
+//VIDEO: 1,
+//SEARCH: 2,
+//TRENDING: 3,
+//CHANNEL_HOME: 4,
+//CHANNEL_VIDEOS: 5,
+//OTHER: 6
 function pageUrlChanged(context){
 	console.log(context);
 	
 	//detaches all currently active Filter
-	for(actFilter of curFilter){
+	for(actFilter of CUR_FILTER){
 		if(actFilter !== undefined){
 			try{
 				actFilter.detach();
@@ -13,15 +23,16 @@ function pageUrlChanged(context){
 			}
 		}
 	}
-	curFilter.length = 0;
+	CUR_FILTER.length = 0;
 	
 	//Start/TrendsPage(https://www.youtube.com/ , https://www.youtube.com/feed/trending)
 	if(context === YTContext.HOME || context === YTContext.TRENDING){
+	console.log("HOME  TRENDING");
 		try{
 			let selectList = document.getElementsByClassName("style-scope ytd-section-list-renderer");
 			for(elem of selectList){
 				if(elem.id === "contents"){
-					curFilter.push(new StartContentFilter(elem));
+					CUR_FILTER.push(new StartContentFilter(elem));
 				}
 			}
 		}catch(e){
@@ -30,11 +41,12 @@ function pageUrlChanged(context){
 	}
 	
 	//SearchPage(https://www.youtube.com/results?search_query=<INPUT>)
-	if(context === YTContext.SEARCH){
+	if(context === YTContext.SEARCH || context === YTContext.CHANNEL_VIDEOS || context === YTContext.CHANNEL_HOME){
+	console.log("SEARCH");
 		try{
 			for(elem of document.getElementsByClassName("style-scope ytd-two-column-search-results-renderer")){
 				if(elem.tagName === "YTD-SECTION-LIST-RENDERER"){
-					curFilter.push(new SearchPageStartFilter(elem));
+					CUR_FILTER.push(new SearchPageStartFilter(elem));
 				}
 			}
 		}catch(e){
@@ -44,10 +56,11 @@ function pageUrlChanged(context){
 	
 	//WatchPage(https://www.youtube.com/watch?v=<ID>)
 	if(context === YTContext.VIDEO){
+	console.log("VIDEO");
 		try{
-			let list = document.getElementsByTagName("ytd-app");
+			let list = document.getElementsByTagName("ytd-app"); 
 			for(elem of list){ 
-				curFilter.push(new VideoPageAppFilter(elem));
+				CUR_FILTER.push(new VideoPageAppFilter(elem));
 			}
 		}catch(e){
 			console.log(e);
@@ -55,7 +68,8 @@ function pageUrlChanged(context){
 	}
 }
 
-async function getUrl(refresh){
+//Send a message to the background_controller_url_updater to receive the current Url
+async function getUrl(){
 	let msg = {
 		sender: "content_controller",
 		receiver: "background_controller_url_update",
@@ -66,22 +80,23 @@ async function getUrl(refresh){
 	
 	let sending = await browser.runtime.sendMessage(msg);
 	
-	if(refresh !== undefined){
-		pageUrlChanged(sending);
-	}
+	pageUrlChanged(sending);
 }
 
+//Process the Messages for the content_controller from beackgroundscripts
+//Triggert when the storage has changed or the url has changed
 function processMessage(msg){
 	if(msg.receiver !== "content_controller"){
 		return;
 	}
 	if(msg.event.type === "storage_grew"){
-		getUrl(true);
+		getUrl();
 	}else{
 		pageUrlChanged(msg.event.context);
 	}
 }
 
-getUrl(true);
+getUrl();
 
+//Add a listener, to get Messages from the backgroundscripts
 browser.runtime.onMessage.addListener(processMessage);	
