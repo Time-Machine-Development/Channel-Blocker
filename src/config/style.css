@@ -99,13 +99,20 @@ ul {
 .donationDiv .donationTextDiv {
 	display:inline-block;
 	width:40%;
-	vertical-align: top;
 	color:#ffffff;
+	border:none;
+}
+
+.donationDiv .donationSpacer {
+	display:inline-block;
+	width:54%;
+	border:none;
 }
 
 .donationDiv .donationBtnDiv {
 	display:inline-block;
-	width:10%;
+	border:none;
+	width:5%;
 }
 
 .donationDiv .donationBtnDiv .patreon {
@@ -113,15 +120,6 @@ ul {
 	width:100%;
 	height:2.4em;
 }
-
-.donationBtn {
-	border-radius: 12px;
-	background-color:yellow;
-	width:100%;
-	height:2.4em;
-}
-
-
 
 .selectionContainer input {
 	margin:0% 1% 0% -2.7%;
