@@ -1,9 +1,9 @@
 {
 	"manifest_version": 2,
-	"name": "YT Cleaner",
+	"name": "YouTube™ Cleaner",
 	"version": "1.0",
 
-	"description": "Allows you to block YT videos and comments by blacklisting users and/or by using regular expressions.",
+	"description": "Allows you to block YouTube™ videos and comments by blacklisting users and/or by using regular expressions.",
 
 	"applications": {
 		"gecko": {
@@ -11,7 +11,7 @@
 	    	"strict_min_version": "52.0"
 	  	}
 	},
-	
+
 	"icons": {
 		"48": "/images/Ytc_icon_48.png",
 		"96": "/images/Ytc_icon_96.png"
@@ -82,7 +82,7 @@
 			]
 		}
 	],
-	
+
 	"web_accessible_resources": [
 		"content/img/close.svg",
 		"content/img/close_2.svg"
