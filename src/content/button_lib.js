@@ -5,7 +5,7 @@ function createBtnNode(userChannelName){
 	btn.setAttribute("title", "Block '" + userChannelName + "'");
 	let func = function(){blockUserChannel(userChannelName);}
 	btn.addEventListener("click", func); 
-	btn.setAttribute("style", "padding-left:0em; color:red; border: none; background-color: Transparent;");
+	btn.setAttribute("style", "padding-left:0em; color:red; border:none; background-color:Transparent; cursor:pointer;");
 	//btn.textContent = "✖";
 	
 	let svg = document.createElement("img");

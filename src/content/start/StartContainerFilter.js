@@ -21,7 +21,12 @@ StartContainerFilter.prototype.onFound = function(child, useCallbackFilter){
 		if(useCallbackFilter === undefined){
 			new CallbackFilter(linkInnerArr[2], this, child);
 		}
-		userChannelName = linkInnerArr[2].textContent;
+		userChannelName = Object.assign(linkInnerArr[2].textContent);
+		
+		//if userName is to long, cuts it
+		if(userChannelName.length >= 21){
+			linkInnerArr[2].textContent = linkInnerArr[2].textContent.substring(0, 19)+"...";
+		}
 
 		//check the videoTitle and userName
 		checkVideoTitle(userChannelName, linkInnerArr[1].textContent, child);
