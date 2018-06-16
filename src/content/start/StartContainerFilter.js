@@ -21,12 +21,7 @@ StartContainerFilter.prototype.onFound = function(child, useCallbackFilter){
 		if(useCallbackFilter === undefined){
 			new CallbackFilter(linkInnerArr[2], this, child);
 		}
-		userChannelName = Object.assign(linkInnerArr[2].textContent);
-		
-		//if userName is to long, cuts it
-		if(userChannelName.length >= 21){
-			linkInnerArr[2].textContent = linkInnerArr[2].textContent.substring(0, 19)+"...";
-		}
+		userChannelName = linkInnerArr[2].textContent;
 
 		//check the videoTitle and userName
 		checkVideoTitle(userChannelName, linkInnerArr[1].textContent, child);
@@ -44,6 +39,7 @@ StartContainerFilter.prototype.onFound = function(child, useCallbackFilter){
 	//Insert button to block channel/user
 	for(let btnContainerElem of child.getElementsByClassName("style-scope ytd-grid-video-renderer")){
 		if(btnContainerElem.id === "byline-container"){
+			btnContainerElem.style["max-height"] = "5rem";
 			createBtnAtStart(btnContainerElem, createBtnNode(userChannelName));
 		}
 	}
