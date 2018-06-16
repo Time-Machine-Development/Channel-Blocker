@@ -21,8 +21,7 @@ StartContainerFilter.prototype.onFound = function(child, useCallbackFilter){
 		if(useCallbackFilter === undefined){
 			new CallbackFilter(linkInnerArr[2], this, child);
 		}
-		userChannelName = (' ' + linkInnerArr[2].textContent).slice(1);
-		
+		userChannelName = linkInnerArr[2].textContent;
 
 		//check the videoTitle and userName
 		checkVideoTitle(userChannelName, linkInnerArr[1].textContent, child);
@@ -41,8 +40,6 @@ StartContainerFilter.prototype.onFound = function(child, useCallbackFilter){
 	for(let btnContainerElem of child.getElementsByClassName("style-scope ytd-grid-video-renderer")){
 		if(btnContainerElem.id === "byline-container"){
 			btnContainerElem.style["max-height"] = "5rem";
-			console.log(btnContainerElem.style);
-			console.log(btnContainerElem.style["max-height"]);
 			createBtnAtStart(btnContainerElem, createBtnNode(userChannelName));
 		}
 	}
