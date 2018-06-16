@@ -96,6 +96,13 @@ ul {
 	margin-left:1%;
 }
 
+.donationDiv .donationTextDiv {
+	display:inline-block;
+	width:40%;
+	vertical-align: top;
+	color:#ffffff;
+}
+
 .donationDiv .donationBtnDiv {
 	display:inline-block;
 	width:10%;
@@ -114,12 +121,7 @@ ul {
 	height:2.4em;
 }
 
-.donationDiv .donationTextDiv {
-	display:inline-block;
-	width:40%;
-	vertical-align: top;
-	color:#ffffff;
-}
+
 
 .selectionContainer input {
 	margin:0% 1% 0% -2.7%;
