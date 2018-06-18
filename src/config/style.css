@@ -232,6 +232,7 @@ ul {
 	padding-top:0.31em;
 	padding-bottom:0.31em;
 	font-size: 1em;
+	cursor: pointer;
 }
 
 .innerDivExp  .spacer button {
