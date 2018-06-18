@@ -241,6 +241,7 @@ ul {
 	color:#ffffff;
 	background:#336e7b;
 	border:none;
+	cursor: pointer;
 }
 
 .innerDivExp  .spacer div {
@@ -259,6 +260,7 @@ ul {
 	background:#336e7b;
 	border:none;
 	font-size: 0.8em;
+	cursor: pointer;
 }
 
 .innerDivExp aside button:hover{
