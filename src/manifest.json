@@ -7,7 +7,7 @@
 
 	"applications": {
 		"gecko": {
-			"id": "yt-cleaner@protonmail.com",
+			"id": "{8263766c-d28e-4460-a2a7-7e7ada52a2d3}",
 	    	"strict_min_version": "52.0"
 	  	}
 	},
