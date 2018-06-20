@@ -6,23 +6,13 @@
 	storageManager.initSets();
 
 	function createContentUpdaterMsg(type, target, items){
-		let set = storageManager.getHashSet(target);
-
-		let msgItems = [];
-		for(let item of items){
-			msgItems.push({
-				id: item,
-				additional: set[item]
-			});
-		}
-
 		return {
 			sender: SENDER,
 			receiver: "config_content_updater",
 			"event": {
 				type: type,
 				target: target,
-				items: msgItems
+				items: items
 			}
 		};
 	}
