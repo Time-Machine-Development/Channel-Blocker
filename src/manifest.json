@@ -84,7 +84,6 @@
 	],
 
 	"web_accessible_resources": [
-		"content/img/close.svg",
-		"content/img/close_2.svg"
+		"content/img/close.svg"
 	]
 }
