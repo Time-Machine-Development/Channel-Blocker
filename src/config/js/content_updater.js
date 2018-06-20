@@ -7,19 +7,15 @@
 		let option = document.createElement("option");
 		selection.appendChild(option);
 
-		option.setAttribute("value", item.id);
-		option.textContent = "\"" + item.id + "\"";
-
-		if(item.additional !== undefined){
-			option.textContent += "(" + item.additional + ")";
-		}
+		option.setAttribute("value", item);
+		option.textContent = "\"" + item + "\"";
 	}
 
 	function deleteOption(containerId, item){
 		let selection = document.getElementById(containerId + "_selection");
 
 		for(let child of selection.childNodes){
-			if(child.nodeType === Node.ELEMENT_NODE && child.getAttribute("value") === item.id){
+			if(child.nodeType === Node.ELEMENT_NODE && child.getAttribute("value") === item){
 				selection.removeChild(child);
 
 				return;
