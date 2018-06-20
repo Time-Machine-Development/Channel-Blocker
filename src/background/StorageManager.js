@@ -17,7 +17,7 @@ StorageManager.prototype.initSets = async function(){
 StorageManager.prototype.add = function(containerId, str){
 	let ret = !this.sets[containerId].hasOwnProperty(str);
 
-	this.sets[containerId].add(str);
+	this.sets[containerId].add(str, true);
 	this.updateStorage(containerId);
 
 	return ret;
