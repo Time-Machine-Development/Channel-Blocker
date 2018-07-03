@@ -22,7 +22,7 @@
 			sender: SENDER,
 			receiver: "content_controller",
 			"event": {
-				type: "storage_grew"
+				type: "storage_modified"
 			}
 		};
 	}
@@ -55,7 +55,7 @@
 		//send delete message to config_content_updater on config tab (if it exists)
 		if(configTabId !== null)
 			browser.tabs.sendMessage(configTabId, createContentUpdaterMsg("delete", msg.event.origin, msg.event.input));
-		
+
 		//send alert message to content controller to update
 		for(let tabId of YT_TAB_IDS.keys()){
 			browser.tabs.sendMessage(Number(tabId), createContentUpdaterAlertMsg());
