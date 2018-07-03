@@ -94,7 +94,5 @@ StartContentFilter.prototype.onFound = function(child, useCallbackFilter){
 
 //If the callbackFilter register a change they invoke this function
 StartContentFilter.prototype.reload = function(child){
-	console.log("RELOAD");
-	console.log(child);
 	this.onFound(child, true);
 };

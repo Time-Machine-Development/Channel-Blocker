@@ -11,7 +11,6 @@ const CUR_FILTER = new Array();
 //CHANNEL_VIDEOS: 5,
 //OTHER: 6
 function pageUrlChanged(context){
-	console.log(context);
 	
 	//detaches all currently active Filter
 	for(actFilter of CUR_FILTER){
@@ -19,7 +18,6 @@ function pageUrlChanged(context){
 			try{
 				actFilter.detach();
 			}catch(e){
-				console.log(e);
 			}
 		}
 	}
@@ -27,7 +25,6 @@ function pageUrlChanged(context){
 	
 	//Start/TrendsPage(https://www.youtube.com/ , https://www.youtube.com/feed/trending)
 	if(context === YTContext.HOME || context === YTContext.TRENDING){
-	console.log("HOME  TRENDING");
 		try{
 			let selectList = document.getElementsByClassName("style-scope ytd-section-list-renderer");
 			for(elem of selectList){
@@ -36,13 +33,11 @@ function pageUrlChanged(context){
 				}
 			}
 		}catch(e){
-			console.log(e);
 		}
 	}
 	
 	//SearchPage(https://www.youtube.com/results?search_query=<INPUT>)
 	if(context === YTContext.SEARCH || context === YTContext.CHANNEL_VIDEOS || context === YTContext.CHANNEL_HOME){
-	console.log("SEARCH");
 		try{
 			for(elem of document.getElementsByClassName("style-scope ytd-two-column-search-results-renderer")){
 				if(elem.tagName === "YTD-SECTION-LIST-RENDERER"){
@@ -50,20 +45,17 @@ function pageUrlChanged(context){
 				}
 			}
 		}catch(e){
-			console.log(e);
 		}
 	}
 	
 	//WatchPage(https://www.youtube.com/watch?v=<ID>)
 	if(context === YTContext.VIDEO){
-	console.log("VIDEO");
 		try{
 			let list = document.getElementsByTagName("ytd-app"); 
 			for(elem of list){ 
 				CUR_FILTER.push(new VideoPageAppFilter(elem));
 			}
 		}catch(e){
-			console.log(e);
 		}
 	}
 }
