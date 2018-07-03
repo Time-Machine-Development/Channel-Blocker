@@ -20,6 +20,11 @@ StartContentFilter.prototype.reloadFromChild = function(child){
 			//if the parentNode is a 'H2' tag the button must be insertet at another position
 			if(elem.textContent !== ""){
 				if(elem.parentNode.tagName !== "H2"){
+					for(ch of elem.parentNode.parentNode.parentNode.parentNode.children){
+						if(ch.tagName === "BUTTON"){
+							ch.remove();
+						}
+					}
 					createBtnAfter(elem.parentNode.parentNode, createContainerBtnNode(elem.textContent));
 				}else{
 					createBtnAfter(elem.parentNode, createContainerBtnNode(elem.textContent));

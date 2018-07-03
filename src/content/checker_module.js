@@ -53,7 +53,13 @@ async function notifyBackgroundPage(msg, checkedNode) {
 	try{
 		if(sending){
 			//Remove the node form webPage
-			checkedNode.remove();
+			//checkedNode.remove();
+			checkedNode.id = "blocked";
+			checkedNode.style["display"] = "none";
+		}else{
+			if(checkedNode.id === "blocked")
+			checkedNode.style["display"] = "";
+			checkedNode.id = "unblocked";
 		}
 	}catch(e){
 		console.log(e);
