@@ -81,7 +81,7 @@ function processMessage(msg){
 	if(msg.receiver !== "content_controller"){
 		return;
 	}
-	if(msg.event.type === "storage_grew"){
+	if(msg.event.type === "storage_modified"){
 		getUrl();
 	}else{
 		pageUrlChanged(msg.event.context);
