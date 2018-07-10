@@ -6,7 +6,7 @@ function createMsg(userName){
 		"event": {
 			type: "check_content",
 			input: {
-				name:userName,
+				name:userName.trim(),
 			}
 		}
 	}
