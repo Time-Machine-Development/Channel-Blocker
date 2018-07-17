@@ -52,6 +52,7 @@
 		{
 			"matches": ["*://www.youtube.com/*"],
 			"js": [
+				"shared/jquery-3.3.1.min.js",
 				"shared/shared.js",
 				"content/checker_module.js",
 				"content/event_dispatcher.js",

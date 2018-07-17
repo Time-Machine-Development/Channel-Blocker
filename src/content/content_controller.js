@@ -82,8 +82,10 @@ function processMessage(msg){
 		return;
 	}
 	if(msg.event.type === "storage_modified"){
+		animationSpeed = 1000;
 		getUrl();
 	}else{
+		animationSpeed = 0;
 		pageUrlChanged(msg.event.context);
 	}
 }

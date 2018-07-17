@@ -1,3 +1,6 @@
+//if true use jquerry
+var animationSpeed = 0;
+
 //HelperFunction to create the raw message for the background_controller_storage, to check a userName, title or comment
 function createMsg(userName){
 	return{
@@ -55,11 +58,12 @@ async function notifyBackgroundPage(msg, checkedNode) {
 			//Remove the node form webPage
 			//checkedNode.remove();
 			checkedNode.id = "blocked";
-			checkedNode.style["display"] = "none";
+			$(checkedNode).hide(animationSpeed);
 		}else{
-			if(checkedNode.id === "blocked")
-			checkedNode.style["display"] = "";
-			checkedNode.id = "unblocked";
+			if(checkedNode.id === "blocked"){
+				$(checkedNode).show(animationSpeed);
+				checkedNode.id = "unblocked";
+			}
 		}
 	}catch(e){
 		console.log(e);
