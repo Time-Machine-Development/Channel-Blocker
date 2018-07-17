@@ -1,0 +1,90 @@
+{
+	"manifest_version": 2,
+	"name": "YouTube™ Cleaner",
+	"version": "1.0.3",
+
+	"description": "Allows you to block YouTube™ videos and comments by blacklisting users and/or by using regular expressions.",
+
+	"applications": {
+		"gecko": {
+			"id": "{8263766c-d28e-4460-a2a7-7e7ada52a2d3}",
+	    	"strict_min_version": "52.0"
+	  	}
+	},
+
+	"icons": {
+		"48": "/images/Ytc_icon_48.png",
+		"96": "/images/Ytc_icon_96.png"
+	},
+
+	"permissions": [
+		"storage",
+		"unlimitedStorage",
+		"tabs",
+		"*://www.youtube.com/*"
+	],
+
+	"browser_action": {
+		"default_title": "Configuration",
+		"default_icon": {
+			"16": "/images/Ytc_icon_16.png",
+			"32": "/images/Ytc_icon_32.png"
+		}
+	},
+
+	"options_ui": {
+		"page": "config/config.html",
+		"open_in_tab": true
+	},
+
+	"background": {
+		"scripts": [
+			"shared/shared.js",
+			"background/HashSet.js",
+			"background/StorageManager.js",
+			"background/browser_action.js",
+			"background/url_update.js",
+			"background/storage.js"
+		]
+	},
+
+	"content_scripts": [
+		{
+			"matches": ["*://www.youtube.com/*"],
+			"js": [
+				"shared/jquery-3.3.1.min.js",
+				"shared/shared.js",
+				"content/checker_module.js",
+				"content/event_dispatcher.js",
+				"content/button_lib.js",
+
+				"content/Filter.js",
+
+				"content/CallbackFilter.js",
+
+				"content/start/StartContainerFilter.js",
+				"content/start/StartContentFilter.js",
+
+				"content/search_page/SearchPageContentFilter.js",
+				"content/search_page/SearchPageSectionFilter.js",
+				"content/search_page/SearchPageItemSectionFilter.js",
+				"content/search_page/SearchPageStartFilter.js",
+
+				"content/video_page/VideoPageCommentRepliesFilter.js",
+				"content/video_page/VideoPageCommentFilter.js",
+				"content/video_page/VideoPageCommentListFilter.js",
+				"content/video_page/VideoPageCommentContainerFilter.js",
+				"content/video_page/VideoPageContentFilter.js",
+				"content/video_page/VideoPageWatchFilter.js",
+				"content/video_page/VideoPageManagerFilter.js",
+				"content/video_page/VideoPageAppFilter.js",
+
+				"content/content_controller.js"
+			]
+		}
+	],
+
+	"web_accessible_resources": [
+		"content/img/close.svg"
+	]
+}
