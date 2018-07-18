@@ -8,7 +8,7 @@ cp -r ./src ./build
 #writing all files without comments from ./src into ./build
 for i in $(find ./src | grep "\.js$" | grep -v "build"); do
 	j=./build/$(echo $i| cut -c 7-)
-	pcregrep -h -v -e "^[^\"]*//(.)*$" $i | pcregrep -h -v -M -e "^[^\"]*/\*(.|\n)*\*/$" > $j
+	pcregrep -h -v -e "^[^\"]*//(.)*$" $i | pcregrep -h -v -M -e "^[^\"]*/\*(.|\n)*\*/$" >
 done
 
 #create directory for final project file
