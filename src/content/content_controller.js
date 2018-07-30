@@ -12,6 +12,8 @@ const CUR_FILTER = new Array();
 //OTHER: 6
 function pageUrlChanged(context){
 	
+	
+	
 	//detaches all currently active Filter
 	for(actFilter of CUR_FILTER){
 		if(actFilter !== undefined){
@@ -51,8 +53,8 @@ function pageUrlChanged(context){
 	//WatchPage(https://www.youtube.com/watch?v=<ID>)
 	if(context === YTContext.VIDEO){
 		try{
-			let list = document.getElementsByTagName("ytd-app"); 
-			for(elem of list){ 
+			let list = document.getElementsByTagName("ytd-app");
+			for(elem of list){
 				CUR_FILTER.push(new VideoPageAppFilter(elem));
 			}
 		}catch(e){
@@ -72,7 +74,8 @@ async function getUrl(){
 	
 	let sending = await browser.runtime.sendMessage(msg);
 	
-	pageUrlChanged(sending);
+	//Wait for Document to be ready
+	$(document).ready(pageUrlChanged(sending));
 }
 
 //Process the Messages for the content_controller from beackgroundscripts
@@ -86,7 +89,8 @@ function processMessage(msg){
 		getUrl();
 	}else{
 		animationSpeed = 0;
-		pageUrlChanged(msg.event.context);
+		//Wait for Document to be ready
+		$(document).ready(pageUrlChanged(msg.event.context));
 	}
 }
 

@@ -8,7 +8,7 @@ VideoPageManagerFilter.prototype = Object.create(Filter.prototype);
 VideoPageManagerFilter.prototype.constructor = VideoPageManagerFilter;
 
 VideoPageManagerFilter.prototype.onFound = function(child){
-	for(let elem of child.getElementsByClassName("style-scope ytd-watch")){
+	for(let elem of child.getElementsByClassName("style-scope ytd-watch-flexy")){
 		if(elem.tagName === "YTD-WATCH-NEXT-SECONDARY-RESULTS-RENDERER"){
 			new VideoPageWatchFilter(elem, this);
 		}
