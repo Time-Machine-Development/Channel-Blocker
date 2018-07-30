@@ -6,7 +6,7 @@
 	    <meta charset="utf-8">
 
 		<link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet">
-		<link rel="stylesheet" href="style.css">
+		<link id="css" rel="stylesheet" href="style.css">
 
 		<script defer="defer" type="text/javascript" src="../shared/shared.js"></script>
 		<script defer="defer" type="text/javascript" src="js/user_interaction.js"></script>
@@ -39,6 +39,12 @@
 
 		<div class="outerDivExpNoBg">
 			<div class="innerDivExp">
+				<div class="elementExpNoBg">
+					<div id="checkboxSelectionContainer" class="selectionContainer">
+						<input class="darkThemeCheckbox" id="darkThemeCheckbox" name="darkTheme" value="conf" type="checkbox" style="cursor: pointer;">
+						<label for="darkThemeCheckbox" id="darkThemeCheckboxLable" class="lable">dark Theme</label>
+					</div>
+				</div>
 				<div class="elementExpNoBg">
 					<div id="checkboxSelectionContainer" class="selectionContainer">
 						<input class="configurationCheckbox" id="configurationCheckbox" name="configuration" value="conf" type="checkbox" style="cursor: pointer;">
