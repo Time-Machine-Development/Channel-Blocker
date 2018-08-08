@@ -11,6 +11,9 @@ for i in $(find ./src | grep "\.js$" | grep -v "build"); do
 	pcregrep -h -v -e "^[^\"]*//(.)*$" $i | pcregrep -h -v -M -e "^[^\"]*/\*(.|\n)*\*/$" > $j
 done
 
+#copy jquery (with comments) to build
+cp ./src/shared/jquery-3.3.1.min.js ./build/shared/jquery-3.3.1.min.js
+
 #create directory for final project file
 mkdir ./bin
 
