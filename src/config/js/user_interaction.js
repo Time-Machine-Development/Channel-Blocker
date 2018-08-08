@@ -17,6 +17,8 @@
 		}
 	}
 	
+	document.getElementById("darkThemeCheckbox").checked = true;
+	
 	//handle initial checkbox status
 	checkboxHandler();
 	darkThemeCheckboxHandler();
