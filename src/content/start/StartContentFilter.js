@@ -80,7 +80,7 @@ StartContentFilter.prototype.onFound = function(child, useCallbackFilter){
 					//insert button to block channel/user
 					for(let btnContainerElem of videoElem.getElementsByClassName("style-scope ytd-video-meta-block")){
 						if(btnContainerElem.id === "metadata" && linkInnerArr[2].textContent !== ""){
-							createBtnAtStart(btnContainerElem, createBtnNode(linkInnerArr[2].textContent));
+							createBtnAtStart(btnContainerElem, createBtnNode(linkInnerArr[2].textContent, true));
 						}
 					}
 				}

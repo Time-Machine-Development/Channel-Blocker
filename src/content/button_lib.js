@@ -1,10 +1,21 @@
+//Adds a EventListener to the button ad returns it
+function addListener(btn, userChannelName, checkBeforBlocking = false){
+	let func;
+	if(checkBeforBlocking){
+		func = function(){blockUserChannel(userChannelName, this);}
+	}else{
+		func = function(){blockUserChannel(userChannelName, null);}
+	}
+	btn.addEventListener("click", func); 
+	return btn;
+}
+
 //Creates a button and returns it
-function createBtnNode(userChannelName){
+function createBtnNode(userChannelName, checkBeforBlocking = false){
 	let btn = document.createElement("button");
 	btn.setAttribute("type", "button");
 	btn.setAttribute("title", "Block '" + userChannelName + "' (YouTube™ Cleaner)");
-	let func = function(){blockUserChannel(userChannelName);}
-	btn.addEventListener("click", func); 
+	btn = addListener(btn, userChannelName, checkBeforBlocking);
 	btn.setAttribute("style", "padding-left:0em; color:red; border:none; background-color:Transparent; cursor:pointer;");
 	
 	let svg = document.createElement("img");
@@ -17,12 +28,11 @@ function createBtnNode(userChannelName){
 }
 
 //Creates a button and returns it
-function createContainerBtnNode(userChannelName){
+function createContainerBtnNode(userChannelName, checkBeforBlocking = false){
 	let btn = document.createElement("button");
 	btn.setAttribute("type", "button");
 	btn.setAttribute("title", "block '" + userChannelName + "' (YouTube™ Cleaner)");
-	let func = function(){blockUserChannel(userChannelName);}
-	btn.addEventListener("click", func); 
+	btn = addListener(btn, userChannelName, checkBeforBlocking);
 	btn.setAttribute("style", "padding-right:0em; color:red; border: none; background-color: Transparent;");
 	
 	let svg = document.createElement("img");

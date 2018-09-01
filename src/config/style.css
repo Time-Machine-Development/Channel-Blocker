@@ -15,7 +15,7 @@
 }
 
 body {
-	background:#f1f1f1;
+	background:#d1d1d1;
 	font-family: 'Titillium Web', sans-serif;
 }
 
@@ -65,7 +65,7 @@ ul {
 .hr {
 	height:2px;
 	width:98%;
-	background: #000000;
+	background: #505050;
 	margin:1%;
 }
 
@@ -148,7 +148,7 @@ ul {
 	color:000000;
 	background:#ffffff;
 	border-color:#000000;
-	border: 1px solid #000000;
+	border: 1px solid #9f9f9f;
 }
 
 #hideable {
@@ -157,16 +157,17 @@ ul {
 
 .outerDivExp div{
 	display:block;
-	background:#d1d1d1;
+	background:#fafafa;
 	margin:0% 1% 1% 1%;
 	padding:0.5%;
-	border:12px,black;
+	border:1px solid #9f9f9f;
 }
 
 .outerDivExpNoBg div{
 	display:block;
 	margin:1%;
 	padding:0.5%;
+	border:none;
 }
 
 .innerDivExp div{
@@ -176,16 +177,17 @@ ul {
 	margin-left:0%;
 	margin-right:0%;
 	padding:0.5%;
+	border:none;
 }
 
 .innerDivExp .elementExp {
-	background:#c1c1c1;
+	background:#fafafa;
 	margin-top:0%;
 	margin-bottom:1em;
 }
 
 .innerDivExp .elementExp div{
-	background:#c1c1c1;
+	background:#fafafa;
 }
 
 .innerDivExp .selectionContainer {
@@ -225,7 +227,7 @@ ul {
 	height:15em;
 	color:#000000;
 	background:#f5f5f5;
-	border: 1px solid #000000;
+	border: 1px solid #9f9f9f;
 }
 
 .innerDivExp .selectionContainer select option {
@@ -240,9 +242,9 @@ ul {
 	width:7%;
 	height:15em;
 	color:#000000;
-	background:#bababa;
+	background:white;
 	border-style: solid;
-	border-color: #000000;
+	border-color: #9f9f9f;
     border-width: 1px 1px 1px 1px;
 	cursor: pointer;
 }
@@ -253,21 +255,21 @@ ul {
 }
 
 .innerDivExp  .spacer button:hover{
-	background:#a1a1a1;
+	background:#d1d1d1;
 }
 
 .innerDivExp aside button{
 	width:100%;
 	height:4em;
 	color:#000000;
-	background:#bababa;
-	border: 1px solid #000000;
+	background:white;
+	border: 1px solid #9f9f9f;
 	font-size: 0.8em;
 	cursor: pointer;
 }
 
 .innerDivExp aside button:hover{
-	background:#a1a1a1;
+	background:#d1d1d1;
 }
 
 .innerDivExp aside .info {

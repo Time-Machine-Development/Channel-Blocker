@@ -40,7 +40,7 @@ StartContainerFilter.prototype.onFound = function(child, useCallbackFilter){
 	for(let btnContainerElem of child.getElementsByClassName("style-scope ytd-grid-video-renderer")){
 		if(btnContainerElem.id === "byline-container"){
 			btnContainerElem.style["max-height"] = "5rem";
-			createBtnAtStart(btnContainerElem, createBtnNode(userChannelName));
+			createBtnAtStart(btnContainerElem, createBtnNode(userChannelName, true));
 		}
 	}
 };
