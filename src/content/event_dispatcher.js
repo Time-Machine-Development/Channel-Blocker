@@ -1,14 +1,5 @@
 //Sends a message to the Backgroundscripts_controller_storage, to block the 'userChannelName'
-function blockUserChannel (userChannelName, elem){
-	
-	if(elem !== null){
-		console.log("checking befor blocking...");
-		for(let item of elem.parentNode.getElementsByClassName("yt-simple-endpoint style-scope yt-formatted-string")){
-			console.log(item.textContent + " --- " + userChannelName);
-			userChannelName = item.textContent;
-		}
-	}
-	
+function blockUserChannel (userChannelName){
 	let msg = {
 		sender: "content_event_dispatcher",
 		receiver: "background_controller_storage",
@@ -19,4 +10,15 @@ function blockUserChannel (userChannelName, elem){
 		}
 	};
 	let sending = browser.runtime.sendMessage(msg);
+}
+
+
+//Checks if the 'userChannelName' is still correct and invokes 'blockUserChannel()'
+function blockUserChannelwithFallback (userChannelName, elem){
+	
+	for(let item of elem.parentNode.getElementsByClassName("yt-simple-endpoint style-scope yt-formatted-string")){
+		userChannelName = item.textContent;
+	}
+	
+	blockUserChannel (userChannelName);
 }

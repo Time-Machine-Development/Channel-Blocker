@@ -2,9 +2,9 @@
 function addListener(btn, userChannelName, checkBeforBlocking = false){
 	let func;
 	if(checkBeforBlocking){
-		func = function(){blockUserChannel(userChannelName, this);}
+		func = function(){blockUserChannelwithFallback(userChannelName, this);}
 	}else{
-		func = function(){blockUserChannel(userChannelName, null);}
+		func = function(){blockUserChannel(userChannelName);}
 	}
 	btn.addEventListener("click", func); 
 	return btn;
