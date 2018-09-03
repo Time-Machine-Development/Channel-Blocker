@@ -4,7 +4,8 @@ const ContainerId = Object.freeze({
 	TITLE_REGEXS: 1,
 	NAME_REGEXS: 2,
 	COMMENT_REGEXS: 3,
-	EXCLUDED_USERS: 4
+	EXCLUDED_USERS: 4,
+	CONFIG: 5
 });
 
 const YTContext = Object.freeze({

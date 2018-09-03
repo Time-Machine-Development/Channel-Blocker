@@ -76,6 +76,16 @@
 
 			return;
 		}
+		
+		//react to add or delete messages from config_user_interaction
+		if(msg.sender === "config_user_interaction"){
+			if(msg.event.type === "add")
+				onAddMsg(msg);
+			else if(msg.event.type === "delete")
+				onDelMsg(msg);
+
+			return;
+		}
 
 		//react on initial content_update_request of a newly created config tab
 		if(msg.sender === "config_content_updater"){

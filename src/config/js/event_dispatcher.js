@@ -45,16 +45,19 @@
 
 	//install onclick functions for all buttons of config.html
 	for(let containerId in ContainerId){
-		let containerIdStr = containerId.toLowerCase();
+		if(containerId !== "CONFIG"){
+			
+			let containerIdStr = containerId.toLowerCase();
 
-		let addBtnId = containerIdStr + "_add_btn";
-		let deleteBtnId = containerIdStr + "_delete_btn";
+			let addBtnId = containerIdStr + "_add_btn";
+			let deleteBtnId = containerIdStr + "_delete_btn";
 
-		document.getElementById(addBtnId).onclick = () => {
-			sendAddMessage(containerId)
-		};
-		document.getElementById(deleteBtnId).onclick = () => {
-			sendDeleteMessage(containerId)
-		};
+			document.getElementById(addBtnId).onclick = () => {
+				sendAddMessage(containerId)
+			};
+			document.getElementById(deleteBtnId).onclick = () => {
+				sendDeleteMessage(containerId)
+			};
+		}
 	}
 }

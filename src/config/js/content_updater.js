@@ -2,16 +2,28 @@
 	const SENDER = "config_content_updater";
 
 	function addOption(containerId, item){
-		let selection = document.getElementById(containerId + "_selection");
+		if(containerId === "config"){
+			if(item === "enable_dark_theme"){
+				document.getElementById("darkThemeCheckbox").checked = true;
+				darkThemeCheckboxHandler();
+			}else if(item === "enable_advanced_view"){
+				document.getElementById("configurationCheckbox").checked = true;
+				checkboxHandler();
+			}
+		}else{
+			console.log(containerId);
+			let selection = document.getElementById(containerId + "_selection");
 
-		let option = document.createElement("option");
-		selection.appendChild(option);
+			let option = document.createElement("option");
+			selection.appendChild(option);
 
-		option.setAttribute("value", item);
-		option.textContent = "\"" + item + "\"";
+			option.setAttribute("value", item);
+			option.textContent = "\"" + item + "\"";
+		}
 	}
 
 	function deleteOption(containerId, item){
+		if(containerId === "config")return;
 		let selection = document.getElementById(containerId + "_selection");
 
 		for(let child of selection.childNodes){
@@ -28,7 +40,7 @@
 			return;
 
 		let containerIdStr = (Object.keys(ContainerId)[msg.event.target]).toLowerCase();
-
+		
 		if(msg.event.type === "add"){
 			for(let item of msg.event.items){
 				addOption(containerIdStr, item);
