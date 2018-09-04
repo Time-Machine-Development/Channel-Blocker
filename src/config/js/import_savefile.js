@@ -53,16 +53,12 @@
 		console.log(event.target.error);
 	}
 
-	try {
-		browser.downloads.download({url: "https://example.org/image.png"})
-	} catch (ex) { alert(ex); }
-
 	//Check if the file-APIs are supported.
 	if (window.File && window.FileReader && window.FileList && window.Blob) {
 	  //The file-APIs are supported.
 		document.getElementById('fileLoaderBtn').addEventListener('change', startRead, false);
 	} else {
 		//The file-APIs are supported.
-		alert('The file-APIs are supported! You are not able to import!');
+		alert('The file-APIs are not supported! You are not able to import!');
 	}
 }
