@@ -286,6 +286,14 @@ ul {
 	padding:0%;
 }
 
+.saveFileDiv button{
+	margin-left:1%;
+}
+
+.saveFileDiv input{
+	margin-left:1%;
+}
+
 #checkboxSelectionContainer {
 	vertical-align: middle;
 }

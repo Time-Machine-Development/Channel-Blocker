@@ -73,5 +73,5 @@
 		}
 	}
 	
-	document.getElementById("exportBtn").onclick = () => {sendExportMessage();};
+	document.getElementById("exportBtn").onclick = () => {sendExportMessage(); alert("Exported a 'YoutubeCleaner.save'-file to your download-folder!");};
 }

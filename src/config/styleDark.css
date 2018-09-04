@@ -282,8 +282,13 @@ ul {
 	padding:0%;
 }
 
+.saveFileDiv button{
+	margin-left:1%;
+}
+
 .saveFileDiv input{
 	color:#ffffff;
+	margin-left:1%;
 }
 
 #checkboxSelectionContainer {
