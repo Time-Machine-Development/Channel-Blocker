@@ -14,6 +14,18 @@
 			}
 		);
 	}
+	
+	function sendExportMessage(){
+		browser.runtime.sendMessage(
+			{
+				sender: SENDER,
+				receiver: "background_controller_storage",
+				"event": {
+					type: 	"export"
+				}
+			}
+		);
+	}
 
 	function sendAddMessage(containerId){
 		let input = document.getElementById("input_textfield").value;
@@ -60,4 +72,6 @@
 			};
 		}
 	}
+	
+	document.getElementById("exportBtn").onclick = () => {sendExportMessage();};
 }

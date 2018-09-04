@@ -293,3 +293,119 @@ ul {
 #checkboxLable {
 	vertical-align: middle;
 }
+
+@media screen and (min-width:80em) {
+	.donationDiv .donationTextDiv {
+		width:40%;
+	}
+	
+	
+	.innerDivExp .selectionContainer {
+		width:36%;
+	}
+	
+	.innerDivExp .spacer {
+		width:31.5%;
+	}
+	
+	.innerDivExp  .spacer button {
+		width:7%;
+	}
+	
+	.innerDivExp  .spacer div {
+		width:89%;
+	}
+	
+	.innerDivExp aside {
+		width:31.5%;
+	}
+	
+}
+
+/*Small screen*/
+@media screen and (max-width:80em) {
+	.donationDiv .donationTextDiv {
+		width:50%;
+	}
+	
+	.innerDivExp .selectionContainer {
+		width:36%;
+	}
+	
+	.innerDivExp .spacer {
+		width:10%;
+	}
+	
+	.innerDivExp  .spacer button {
+		width:30%;
+	}
+	
+	.innerDivExp  .spacer div {
+		width:40%;
+	}
+	
+	.innerDivExp aside {
+		width:51.5%;
+	}
+}
+
+/*Smaller screen*/
+@media screen and (max-width:60em) {
+	.donationDiv .donationTextDiv {
+		width:60%;
+	}
+	
+	.innerDivExp .selectionContainer {
+		width:36%;
+	}
+	
+	.innerDivExp .spacer {
+		width:10%;
+	}
+	
+	.innerDivExp  .spacer button {
+		width:40%;
+	}
+	
+	.innerDivExp  .spacer div {
+		width:40%;
+	}
+	
+	.innerDivExp aside {
+		width:51.5%;
+	}
+}
+
+/*Smallest screen*/
+@media screen and (max-width:40em) {
+	.donationDiv .donationTextDiv {
+		width:100%;
+	}
+	
+	.donationDiv .donationBtnDiv {
+		float:left;
+	}
+	
+	.innerDivExp .selectionContainer {
+		width:100%;
+	}
+	
+	.innerDivExp .spacer {
+		width:100%;
+	}
+	
+	.innerDivExp  .spacer button {
+		width:100%;
+		height:3em;
+		margin-top:4px;
+	}
+	
+	.innerDivExp  .spacer div {
+		width:0%;
+	}
+	
+	.innerDivExp aside {
+		width:51.5%;
+	}
+}
+

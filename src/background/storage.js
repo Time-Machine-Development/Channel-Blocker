@@ -28,6 +28,7 @@
 	}
 
 	function onAddMsg(msg){
+		console.log("ADDMsg: " + msg.event.input);
 		//only continue if changes have been done
 		if(!storageManager.add(msg.event.origin, msg.event.input))
 			return;
@@ -41,10 +42,32 @@
 			browser.tabs.sendMessage(Number(tabId), createContentUpdaterAlertMsg());
 		}
 	}
+	
+	function onAddRangeMsg(msg){
+		let changed = [];
+		
+		//add all items
+		for(let item of msg.event.input){
+			if(storageManager.add(msg.event.origin, item)){
+				changed.push(item);
+			}
+		}
+		
+		//update the config page
+		if(configTabId !== null){
+			browser.tabs.sendMessage(configTabId, createContentUpdaterMsg("add", msg.event.origin, changed));
+		}
+		
+		//send alert message to content controller to update
+		for(let tabId of YT_TAB_IDS.keys()){
+			browser.tabs.sendMessage(Number(tabId), createContentUpdaterAlertMsg());
+		}
+	}
 
 	function onDelMsg(msg){
 		let changed = false;
 		for(let item of msg.event.input){
+			console.log("DELMsg: " + item);
 			changed = storageManager.remove(msg.event.origin, item) || changed;
 		}
 
@@ -62,23 +85,62 @@
 		}
 	}
 
+	//create a JSON-blob-file and download it
+	function exportSaveFile() {
+		try {
+			let jFile = {};
+			
+			for(let cId of Object.values(ContainerId)){
+				jFile[cId] = storageManager.getHashSet(cId).keys();
+			}
+			
+			console.log(jFile);
+			
+			let blob = new Blob([JSON.stringify(jFile, null, 2)], {type : 'application/json'});
+			
+			let objUrl = URL.createObjectURL(blob);
+			console.log(objUrl);
+			browser.downloads.download({
+				url: objUrl,
+				filename : 'YoutubeCleaner.save',
+				conflictAction : 'uniquify'
+				
+			})
+		}catch(ex){
+			console.log(ex);
+		}
+	}
+	
 	//install listener for storage related messages from content scripts and config scripts
 	browser.runtime.onMessage.addListener((msg, sender) => {
 		if(msg.receiver !== SENDER)
 			return;
 
-		//react to add or delete messages from config_event_dispatcher
+		//react to addRange from config_import_savefile
+		if(msg.sender === "config_import_savefile"){
+			if(msg.event.type === "addRange"){
+				onAddRangeMsg(msg);
+			}
+			return;
+		}
+		
+		//react to add, delete or export messages from config_event_dispatcher
 		if(msg.sender === "config_event_dispatcher"){
-			if(msg.event.type === "add")
+			if(msg.event.type === "add"){
 				onAddMsg(msg);
-			else if(msg.event.type === "delete")
+			}else if(msg.event.type === "delete"){
 				onDelMsg(msg);
+			}else if(msg.event.type === "export"){
+				console.log("export");
+				exportSaveFile();
+			}
 
 			return;
 		}
 		
 		//react to add or delete messages from config_user_interaction
 		if(msg.sender === "config_user_interaction"){
+			console.log("config_user_interaction: "+msg.event.type);
 			if(msg.event.type === "add")
 				onAddMsg(msg);
 			else if(msg.event.type === "delete")
