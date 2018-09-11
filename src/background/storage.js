@@ -103,7 +103,8 @@
 			browser.downloads.download({
 				url: objUrl,
 				filename : 'YoutubeCleaner.save',
-				conflictAction : 'uniquify'
+				conflictAction : 'uniquify',
+				saveAs : true
 				
 			})
 		}catch(ex){
