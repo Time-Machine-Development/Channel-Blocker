@@ -25,7 +25,7 @@ StartContentFilter.prototype.reloadFromChild = function(child){
 							ch.remove();
 						}
 					}
-					createBtnAfter(elem.parentNode.parentNode, createContainerBtnNode(elem.textContent));
+					createBtnAfter(elem.parentNode.parentNode.parentNode, createContainerBtnNode(elem.textContent));
 				}else{
 					createBtnAfter(elem.parentNode, createContainerBtnNode(elem.textContent));
 				}
@@ -47,7 +47,7 @@ StartContentFilter.prototype.onFound = function(child, useCallbackFilter){
 			//if the parentNode is a 'H2' tag the button must be insertet at another position
 			if(elem.textContent !== ""){
 				if(elem.parentNode.tagName !== "H2"){
-					createBtnAfter(elem.parentNode.parentNode, createContainerBtnNode(elem.textContent));
+					createBtnAfter(elem.parentNode.parentNode.parentNode, createContainerBtnNode(elem.textContent));
 				}else{
 					createBtnAfter(elem.parentNode, createContainerBtnNode(elem.textContent));
 				}
