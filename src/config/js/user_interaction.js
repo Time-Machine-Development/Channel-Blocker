@@ -38,12 +38,12 @@
 		let showDarkTheme = document.getElementById("darkThemeCheckbox").checked;
 		if(showDarkTheme === true){
 			document.getElementById("css").href = "styleDark.css";
-			sendMessage("add", ContainerId.CONFIG, "enable_dark_theme");
-		}else{
-			document.getElementById("css").href = "style.css";
 			let options = [];
 			options.push("enable_dark_theme");
 			sendMessage("delete", ContainerId.CONFIG, options);
+		}else{
+			document.getElementById("css").href = "style.css";
+			sendMessage("add", ContainerId.CONFIG, "enable_light_theme");
 		}
 	}
 

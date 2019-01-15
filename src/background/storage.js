@@ -102,7 +102,7 @@
 			console.log(objUrl);
 			browser.downloads.download({
 				url: objUrl,
-				filename : 'YoutubeCleaner.save',
+				filename : 'ChannelBlocker.save',
 				conflictAction : 'uniquify',
 				saveAs : true
 				

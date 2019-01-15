@@ -6,6 +6,9 @@
 			if(item === "enable_dark_theme"){
 				document.getElementById("darkThemeCheckbox").checked = true;
 				darkThemeCheckboxHandler();
+			}else if(item === "enable_light_theme"){
+				document.getElementById("darkThemeCheckbox").checked = false;
+				darkThemeCheckboxHandler();
 			}else if(item === "enable_advanced_view"){
 				document.getElementById("configurationCheckbox").checked = true;
 				checkboxHandler();
