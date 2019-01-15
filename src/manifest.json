@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
-	"name": "YouTube™ Cleaner",
-	"version": "1.0.8",
+	"name": "Channel Blocker",
+	"version": "1.0.9",
 
 	"description": "Allows you to block YouTube™ videos and comments by blacklisting users and/or by using regular expressions.",
 
