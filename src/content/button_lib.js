@@ -14,7 +14,7 @@ function addListener(btn, userChannelName, checkBeforBlocking = false){
 function createBtnNode(userChannelName, checkBeforBlocking = false){
 	let btn = document.createElement("button");
 	btn.setAttribute("type", "button");
-	btn.setAttribute("title", "Block '" + userChannelName + "' (YouTube™ Cleaner)");
+	btn.setAttribute("title", "Block '" + userChannelName + "' (Channel Blocker)");
 	btn = addListener(btn, userChannelName, checkBeforBlocking);
 	btn.setAttribute("style", "padding-left:0em; color:red; border:none; background-color:Transparent; cursor:pointer;");
 	
@@ -31,9 +31,9 @@ function createBtnNode(userChannelName, checkBeforBlocking = false){
 function createContainerBtnNode(userChannelName, checkBeforBlocking = false){
 	let btn = document.createElement("button");
 	btn.setAttribute("type", "button");
-	btn.setAttribute("title", "block '" + userChannelName + "' (YouTube™ Cleaner)");
+	btn.setAttribute("title", "block '" + userChannelName + "' (Channel Blocker)");
 	btn = addListener(btn, userChannelName, checkBeforBlocking);
-	btn.setAttribute("style", "padding-right:0em; color:red; border: none; background-color: Transparent;");
+	btn.setAttribute("style", "padding-right:0em; color:red; border: none; background-color: Transparent; cursor:pointer;");
 	
 	let svg = document.createElement("img");
 	svg.setAttribute("src", browser.extension.getURL("content/img/close.svg"));
