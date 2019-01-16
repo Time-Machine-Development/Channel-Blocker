@@ -2,7 +2,6 @@
 	const SENDER = "config_user_interaction";
 
 	function sendMessage(type, origin, input){
-		console.log("sendMessage");
 		browser.runtime.sendMessage(
 			{
 				sender: SENDER,
@@ -15,17 +14,13 @@
 			}
 		);
 	}
-	
+
 	function checkboxHandler() {
 		let showAdvancedView = document.getElementById("configurationCheckbox").checked;
-		console.log("configurationCheckbox");
+
 		if(showAdvancedView === true){
 			document.getElementById("hideable").style.display = "block";
-			try{
 			sendMessage("add", ContainerId.CONFIG, "enable_advanced_view");
-			}catch(e){
-				console.log(e);
-			}
 		}else{
 			document.getElementById("hideable").style.display = "none";
 			let options = [];
@@ -49,7 +44,7 @@
 
 	//define behavior for clicking the checkbox
 	document.getElementById("configurationCheckbox").onclick = checkboxHandler;
-	
+
 	//define behavior for clicking the checkbox
 	document.getElementById("darkThemeCheckbox").onclick = darkThemeCheckboxHandler;
 }

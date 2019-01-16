@@ -18,7 +18,7 @@ function createMsg(userName){
 //Edit the message and send it to the background_controller_storage
 function checkUserChannelName(userName, checkedNode){
 	let msg = createMsg(userName);
-				
+
 	notifyBackgroundPage(msg, checkedNode);
 	return false;
 }
@@ -30,7 +30,7 @@ function checkVideoTitle(userName, videoTitle, checkedNode){
 		type:RegExBlockType.TITLE,
 		content:videoTitle.trim()
 	};
-	
+
 	notifyBackgroundPage(msg, checkedNode);
 	return false;
 }
@@ -42,7 +42,7 @@ function checkCommentContent(userName, commentContent, checkedNode){
 		type:RegExBlockType.COMMENT,
 		content:commentContent.trim()
 	};
-	
+
 	notifyBackgroundPage(msg, checkedNode);
 	return false;
 }
@@ -50,9 +50,9 @@ function checkCommentContent(userName, commentContent, checkedNode){
 //send a message to background_controller_storage, to check a userName, title or comment
 //returns true when userName, title or comment is blocked
 async function notifyBackgroundPage(msg, checkedNode) {
-	
+
 	let sending = await browser.runtime.sendMessage(msg);
-	
+
 	try{
 		if(sending){
 			//Remove the node form webPage
@@ -66,6 +66,5 @@ async function notifyBackgroundPage(msg, checkedNode) {
 			}
 		}
 	}catch(e){
-		console.log(e);
 	}
 }

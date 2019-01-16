@@ -14,7 +14,6 @@
 				checkboxHandler();
 			}
 		}else{
-			console.log(containerId);
 			let selection = document.getElementById(containerId + "_selection");
 
 			let option = document.createElement("option");
@@ -43,7 +42,7 @@
 			return;
 
 		let containerIdStr = (Object.keys(ContainerId)[msg.event.target]).toLowerCase();
-		
+
 		if(msg.event.type === "add"){
 			for(let item of msg.event.items){
 				addOption(containerIdStr, item);
