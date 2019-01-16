@@ -21,9 +21,7 @@
 
 			fileReader.readAsText(file, "UTF-8");
 
-			fileReader.onprogress = onProgress;
 			fileReader.onload = onLoad;
-			fileReader.onerror = onError;
 		}
 	}
 
