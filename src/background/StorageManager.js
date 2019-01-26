@@ -3,7 +3,7 @@ function StorageManager(storage){
 	this.sets = {};
 
 	for(let cId of Object.values(ContainerId))
-	this.sets[cId] = new HashSet();
+		this.sets[cId] = new HashSet();
 }
 
 StorageManager.prototype.initSets = async function(){

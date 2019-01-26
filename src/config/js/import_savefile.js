@@ -1,8 +1,10 @@
 {
+	const SENDER = "config_import_savefile";
+
 	function sendMessage(type, origin, input){
 		browser.runtime.sendMessage(
 			{
-				sender: "config_import_savefile",
+				sender: SENDER,
 				receiver: "background_controller_storage",
 				"event": {
 					type: 	type,
