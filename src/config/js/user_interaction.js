@@ -34,7 +34,7 @@
 		if(showDarkTheme === true){
 			document.getElementById("css").href = "styleDark.css";
 			let options = [];
-			options.push("enable_dark_theme");
+			options.push("enable_light_theme");
 			sendMessage("delete", ContainerId.CONFIG, options);
 		}else{
 			document.getElementById("css").href = "style.css";

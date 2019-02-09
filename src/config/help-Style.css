@@ -1,0 +1,67 @@
+body {
+	background:#2d2d2d;
+	font-family: 'Titillium Web', sans-serif;
+}
+
+h1 {
+	color:white;
+	margin:1% 1% 0% 1%;
+	font-size: 2em;
+	font-weight: lighter;
+	padding-bottom: 0%;
+	text-align:center;
+}
+
+h2 {
+	color:white;
+	margin-left:19%;
+	padding-left:0.5%;
+	margin-right:19%;
+	margin-bottom:0%;
+	padding-bottom:0%;
+	font-size: 1.5em;
+	font-weight: lighter;
+	background:#373737;
+	border-radius: 10px;
+	cursor: pointer;
+}
+
+h3 {
+	color:white;
+	margin:1% 1% 0% 1%;
+	font-size: 1em;
+	font-weight: lighter;
+	padding-bottom: 0%;
+	text-align:center;
+}
+
+p {
+	color:white;
+	margin-left:20%;
+	margin-right:20%;
+	text-align:justify;
+	display:none;
+}
+
+strong {
+	color:white;
+	text-decoration: underline;
+}
+
+iframe {
+	padding-top: 7em;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 48em;
+	height: 27em;
+}
+
+
+
+
+
+
+
+
+

@@ -21,6 +21,11 @@ definitve changes:
 new feature ideas:
 - disappear/appear speed
 - hide/show remove-'x's
+- change function of 'x's
+	- insert more then one button
+	- open a dropdown menue when clicking the button
+	- block the video title
+	- block just for n days
 - case-insesitive regular expressions
 - FAQ page
 - number of blocked Videos/Names/Titles?, on and off switching via cui(config user interface)

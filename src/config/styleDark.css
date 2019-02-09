@@ -46,6 +46,7 @@ h4 {
 	margin:1% 1% 0% 1%;
 	padding:0%;
 	color:#ffffff;
+	font-weight: lighter;
 }
 
 p {
@@ -151,6 +152,10 @@ ul {
 	border:1px;
 }
 
+.textField::placeholder {
+	color:white;
+}
+
 #hideable {
 	display:none;
 }
@@ -251,7 +256,7 @@ ul {
 }
 
 .innerDivExp  .spacer button:hover{
-	background:#2d2d2d;
+	background:#235e6b;
 }
 
 .innerDivExp aside button{
@@ -265,7 +270,7 @@ ul {
 }
 
 .innerDivExp aside button:hover{
-	background:#2d2d2d;
+	background:#235e6b;
 }
 
 .innerDivExp aside .info {
