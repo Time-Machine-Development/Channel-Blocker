@@ -30,3 +30,4 @@ new feature ideas:
 - FAQ page
 - number of blocked Videos/Names/Titles?, on and off switching via cui(config user interface)
 - making configuraion page design future compatible (for new design that might be developed in the future)
+- mutiple block button designs the user can choose from
