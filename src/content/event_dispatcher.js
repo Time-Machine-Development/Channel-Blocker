@@ -1,24 +1,23 @@
-//Sends a message to the Backgroundscripts_controller_storage, to block the 'userChannelName'
-function blockUserChannel (userChannelName){
+//sends an "add_blocked_user"-message to the background_filter_storage which adds userChannelName to the set of blocked users
+function blockUserChannel(userChannelName){
 	let msg = {
 		sender: "content_event_dispatcher",
-		receiver: "background_controller_storage",
-		"event": {
-			type: "add",
-			origin: ContainerId.BLOCKED_USERS,
-			input: userChannelName
+		receiver: "background_filter_storage",
+		content: {
+			info: "add_blocked_user",
+			user_channel_name: userChannelName
 		}
 	};
-	let sending = browser.runtime.sendMessage(msg);
+
+	browser.runtime.sendMessage(msg);
 }
 
-
+//?: what means 'still correct', what is the loop doing
 //Checks if the 'userChannelName' is still correct and invokes 'blockUserChannel()'
-function blockUserChannelwithFallback (userChannelName, elem){
-	
+function blockUserChannelwithFallback(userChannelName, elem){
 	for(let item of elem.parentNode.getElementsByClassName("yt-simple-endpoint style-scope yt-formatted-string")){
 		userChannelName = item.textContent;
 	}
-	
-	blockUserChannel (userChannelName);
+
+	blockUserChannel(userChannelName);
 }

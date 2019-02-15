@@ -19,7 +19,18 @@ HashSet.prototype.contains = function(key){
 HashSet.prototype.matches = function(str){
 	//return true if str matches a property(interpreted as regex) of this object
 	for(let key of Object.keys(this)){
-		if((new RegExp(key)).test(str))
+		let regEx;
+
+		if(this[key] === RegExType.CASE_INSENSITIVE){
+			regEx = new RegExp(key, "i");
+		}else if(this[key] == RegExType.CASE_SENSITIVE){
+			/* note that '==' was used instead of '==='
+			which is necessary because of older versions of YTC which did not allow case-insensitive regular expressions
+			the value was always set to 'true' instead of RegExType.CASE_SENSITIVE */
+			regEx = new RegExp(key);
+		}
+
+		if(regEx.test(str))
 			return true;
 	}
 

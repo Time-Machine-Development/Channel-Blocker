@@ -1,8 +1,8 @@
 {
-	const SENDER = "background_controller_storage";
+	const SENDER = "background_filter_storage";
 	const STORAGE = browser.storage.local;
 
-	let storageManager = new StorageManager(STORAGE);
+	let storageManager = new FilterStorageManager(STORAGE);
 	storageManager.initSets();
 
 	function createContentUpdaterMsg(type, target, items){
@@ -21,9 +21,7 @@
 		return {
 			sender: SENDER,
 			receiver: "content_controller",
-			"event": {
-				type: "storage_modified"
-			}
+			content: "filter_storage_modified"
 		};
 	}
 
@@ -35,27 +33,6 @@
 		//send add message to config_content_updater on config tab (if it exists)
 		if(configTabId !== null)
 			browser.tabs.sendMessage(configTabId, createContentUpdaterMsg("add", msg.event.origin, [msg.event.input]));
-
-		//send alert message to content controller to update
-		for(let tabId of YT_TAB_IDS.keys()){
-			browser.tabs.sendMessage(Number(tabId), createContentUpdaterAlertMsg());
-		}
-	}
-
-	function onAddRangeMsg(msg){
-		let changed = [];
-
-		//add all items
-		for(let item of msg.event.input){
-			if(storageManager.add(msg.event.origin, item)){
-				changed.push(item);
-			}
-		}
-
-		//update the config page
-		if(configTabId !== null){
-			browser.tabs.sendMessage(configTabId, createContentUpdaterMsg("add", msg.event.origin, changed));
-		}
 
 		//send alert message to content controller to update
 		for(let tabId of YT_TAB_IDS.keys()){
@@ -83,39 +60,63 @@
 		}
 	}
 
-	//create a JSON-blob-file and download it
-	function exportSaveFile() {
-		let jFile = {};
+	/*
+	INSTALLING LISTENER FOR MESSAGES FROM content-scripts
+	*/
 
-		for(let cId of Object.values(ContainerId)){
-			jFile[cId] = storageManager.getHashSet(cId).keys();
-		}
-
-		let blob = new Blob([JSON.stringify(jFile, null, 2)], {type : 'application/json'});
-
-		let objUrl = URL.createObjectURL(blob);
-
-		browser.downloads.download({
-			url: objUrl,
-			filename : 'ChannelBlocker.save',
-			conflictAction : 'uniquify',
-			saveAs : true
-		});
-	}
-
-	//install listener for storage related messages from content scripts and config scripts
 	browser.runtime.onMessage.addListener((msg, sender) => {
 		if(msg.receiver !== SENDER)
 			return;
 
-		//react to addRange from config_import_savefile
-		if(msg.sender === "config_import_savefile"){
-			if(msg.event.type === "addRange"){
-				onAddRangeMsg(msg);
+		if(msg.sender === "content_checker_module"){
+			/* msg.content is of the form:
+			{
+				info: "is_blocked_request",
+				user_channel_name: <user/channel>,
+				[additional: {
+					type: <t>,
+					content: <content>
+				}]
+			 }
+			where <t> is ("comment"|"title")
+			*/
+
+			if(msg.content.info === "is_blocked_request"){
+				//send repsond-Promise containing a message which is either true or false
+				return new Promise((resolve) => {
+					resolve(storageManager.isBlocked(msg.content));
+				});
 			}
-			
+
 			return;
 		}
+
+		if(msg.sender === "content_event_dispatcher"){
+			/* msg.content is of the form:
+			{
+				info: "add_blocked_user",
+				content: <user/channel>
+			}
+			*/
+
+			if(msg.content.info === "add_blocked_user")
+				onAddMsg({
+					info: "add",
+					filter_type: FilterType.BLOCKED_USERS,
+					content: msg.content.content
+				});
+
+			return;
+		}
+	});
+
+	/*
+	INSTALLING LISTENER FOR MESSAGES FROM config-scripts
+	*/
+
+	browser.runtime.onMessage.addListener((msg, sender) => {
+		if(msg.receiver !== SENDER)
+			return;
 
 		//react to add, delete or export messages from config_event_dispatcher
 		if(msg.sender === "config_event_dispatcher"){
@@ -123,8 +124,6 @@
 				onAddMsg(msg);
 			}else if(msg.event.type === "delete"){
 				onDelMsg(msg);
-			}else if(msg.event.type === "export"){
-				exportSaveFile();
 			}
 
 			return;
@@ -143,31 +142,12 @@
 		//react on initial content_update_request of a newly created config tab
 		if(msg.sender === "config_content_updater"){
 			if(msg.event.type === "content_update_request"){
-				for(let cId of Object.values(ContainerId))
-					browser.tabs.sendMessage(Number(sender.tab.id), createContentUpdaterMsg("add", cId, storageManager.getHashSet(cId).keys()));
+				for(let bt of Object.values(FilterType))
+					browser.tabs.sendMessage(Number(sender.tab.id), createContentUpdaterMsg("add", bt, storageManager.getHashSet(cId).keys()));
 			}
 
 			return;
 		}
 
-		//react on add messages from content_event_dispatcher
-		if(msg.sender === "content_event_dispatcher"){
-			if(msg.event.type === "add")
-				onAddMsg(msg);
-
-			return;
-		}
-
-		//react on check_content messages from content_checker_module
-		if(msg.sender === "content_checker_module"){
-			if(msg.event.type === "check_content"){
-				//send repsond-Promise containing a message which is either true or false
-				return new Promise((resolve) => {
-						resolve(storageManager.isBlocked(msg.event.input));
-				});
-			}
-
-			return;
-		}
 	});
 }
