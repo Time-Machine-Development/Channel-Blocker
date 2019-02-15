@@ -1,5 +1,5 @@
 //init. animationSpeed (which is modified by content_controller)
-var animationSpeed = 0;
+let animationSpeed = 0;
 
 //helper to create the "simple" message for the background_filter_storage, to check if a user/channel-name, title or comment is blocked
 function createIsBlockedRequestMsg(userName){

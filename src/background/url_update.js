@@ -8,7 +8,7 @@
 const YT_TAB_IDS = new HashSet();
 
 {
-	const SENDER = "background_controller_url_update";
+	const SENDER = "background_url_update";
 
 	const YTRegEx = new RegExp("^https://www\\.youtube\\.com(.)*$");
 
@@ -25,6 +25,18 @@ const YT_TAB_IDS = new HashSet();
 		"^https://www\\.youtube\\.com/(\\?(.)*|)$": 						YTContext.HOME
 	});
 
+	//creates a "context_switch"-message for content_controller
+	function createContextSwitchMsg(context){
+		return {
+			sender: SENDER,
+			receiver: "content_controller",
+			content: {
+				info: "context_switch",
+				"context": context
+			}
+		};
+	}
+
 	//returns the context of an url, if the url is a YT-url, otherwise returns undefined
 	function urlToContext(url){
 		for(let regEx of Object.keys(RegExToContextMapping)){
@@ -37,13 +49,39 @@ const YT_TAB_IDS = new HashSet();
 			return YTContext.OTHER;
 	}
 
-	//listen and respond to messages from content script controller
+	//listen to url updates and send context switch message if url changed to a YTContext, otherwise remove tabId from YT_TAB_IDS
+	browser.tabs.onUpdated.addListener((tabId, cInfo, tab) => {
+		if(YT_TAB_IDS.contains(tabId) && cInfo.status === "complete"){
+			let context = urlToContext(tab.url);
+
+			if(context !== undefined){
+				//send context switch message
+				browser.tabs.sendMessage(tabId, createContextSwitchMsg(context));
+			}else{
+				//remove tabId from YT_TAB_IDS
+				YT_TAB_IDS.remove(tabId);
+			}
+		}
+	});
+
+	//listen to removed tabs and try to delete them from YT_TAB_IDS
+	browser.tabs.onRemoved.addListener((tabId) => {
+		YT_TAB_IDS.remove(tabId);
+	});
+
+	/*
+	INSTALLING LISTENER FOR MESSAGES FROM content-scripts
+	*/
+
 	browser.runtime.onMessage.addListener((msg, sender) => {
 		if(msg.receiver !== SENDER)
 			return;
 
 		if(msg.sender === "content_controller"){
-			if(msg.event.type === "context_request"){
+			/* msg.content is of the form:
+			"context_request"
+			*/
+			if(msg.content === "context_request"){
 				let context = urlToContext(sender.tab.url);
 
 				if(context !== undefined){
@@ -58,32 +96,4 @@ const YT_TAB_IDS = new HashSet();
 			}
 		}
 	});
-
-	//listen to removed tabs and try to delete them from YT_TAB_IDS
-	browser.tabs.onRemoved.addListener((tabId) => {
-		YT_TAB_IDS.remove(tabId);
-	});
-
-	//listen to url updates and send context switch message if url changed to a YTContext
-	function onUpdateHandler(tabId, cInfo, tab){
-		if(YT_TAB_IDS.contains(tabId) && cInfo.status === "complete"){
-			let context = urlToContext(tab.url);
-
-			if(context !== undefined){
-				//send context switch message
-				browser.tabs.sendMessage(tabId, {
-					sender: SENDER,
-					receiver: "content_controller",
-					"event": {
-						type: "context_switch",
-						context: context
-					}
-				});
-			}else{
-				//remove tabId from YT_TAB_IDS
-				YT_TAB_IDS.remove(tabId);
-			}
-		}
-	}
-	browser.tabs.onUpdated.addListener(onUpdateHandler);
 }
