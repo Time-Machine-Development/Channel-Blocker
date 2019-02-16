@@ -1,7 +1,10 @@
 //all filters currently active
 const CUR_FILTERS = new Array();
 
-//creates filters, based on the current yt-context
+//current context to make an update if a "filter_storage_modified"-message is received
+let curContext;
+
+//removes all old filters and creates new filters, based on the current yt-context
 function pageUrlChanged(context){
 	//detaches all currently active filters
 	for(actFilter of CUR_FILTERS){
@@ -11,7 +14,7 @@ function pageUrlChanged(context){
 	}
 
 	//Start/TrendsPage(https://www.youtube.com/ , https://www.youtube.com/feed/trending)
-	if(context === YTContext.HOME || context === YTContext.TRENDING){
+	if(curContext === YTContext.HOME || curContext === YTContext.TRENDING){
 		let selectList = document.getElementsByClassName("style-scope ytd-section-list-renderer");
 		for(elem of selectList){
 			if(elem.id === "contents"){
@@ -21,7 +24,7 @@ function pageUrlChanged(context){
 	}
 
 	//SearchPage(https://www.youtube.com/results?search_query=<INPUT>)
-	if(context === YTContext.SEARCH || context === YTContext.CHANNEL_VIDEOS || context === YTContext.CHANNEL_HOME){
+	if(curContext === YTContext.SEARCH || curContext === YTContext.CHANNEL_VIDEOS || curContext === YTContext.CHANNEL_HOME){
 		for(elem of document.getElementsByClassName("style-scope ytd-two-column-search-results-renderer")){
 			if(elem.tagName === "YTD-SECTION-LIST-RENDERER"){
 				CUR_FILTERS.push(new SearchPageStartFilter(elem));
@@ -30,7 +33,7 @@ function pageUrlChanged(context){
 	}
 
 	//WatchPage(https://www.youtube.com/watch?v=<ID>)
-	if(context === YTContext.VIDEO){
+	if(curContext === YTContext.VIDEO){
 		let list = document.getElementsByTagName("ytd-app");
 		for(elem of list){
 			CUR_FILTERS.push(new VideoPageAppFilter(elem));
@@ -46,10 +49,10 @@ async function getUrl(){
 		content: "context_request"
 	};
 
-	let context = await browser.runtime.sendMessage(msg);
+	curContext = await browser.runtime.sendMessage(msg);
 
 	//wait for document to be ready
-	$(document).ready(pageUrlChanged(context));
+	$(document).ready(pageUrlChanged());
 }
 
 /*
@@ -69,9 +72,8 @@ browser.runtime.onMessage.addListener((msg) => {
 			//note that animationSpeed is declared and init. in checker_module
 			animationSpeed = 1000;
 
-			//?: why do you call getUrl(), if the context changes background_url_update sends a "context_switch"-message
-			//?: besides, a "filter_storage_modified"-message DOES NOT imply a context switch
-			getUrl();
+			//wait for document to be ready
+			$(document).ready(pageUrlChanged());
 		}
 	}
 
@@ -88,8 +90,11 @@ browser.runtime.onMessage.addListener((msg) => {
 			//note that animationSpeed is declared and init. in checker_module
 			animationSpeed = 0;
 
+			//update current context
+			curContext = msg.content.context;
+
 			//wait for document to be ready
-			$(document).ready(pageUrlChanged(msg.content.context));
+			$(document).ready(pageUrlChanged());
 		}
 	}
 });
