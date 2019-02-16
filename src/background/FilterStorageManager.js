@@ -13,24 +13,24 @@ FilterStorageManager.prototype.initSets = async function(){
 	}
 }
 
-//returns false <=> this already contained str as key
-FilterStorageManager.prototype.add = function(filterType, str){
-	let ret = !this.sets[filterType].hasOwnProperty(str);
+//returns true <=> this not already contained str as key with value val <=> this changed
+FilterStorageManager.prototype.add = function(filterType, str, val){
+	let exists = this.sets[filterType].hasOwnProperty(str) && this.sets[filterType][str] === val;
 
-	this.sets[filterType].add(str, true);
+	this.sets[filterType].add(str, val);
 	this.updateStorage(filterType);
 
-	return ret;
+	return !exists;
 }
 
-//return false <=> this did not contained str as key
+//return true <=> this contained str as key
 FilterStorageManager.prototype.remove = function(filterType, str){
-	let ret = this.sets[filterType].hasOwnProperty(str);
+	let exists = this.sets[filterType].hasOwnProperty(str);
 
 	this.sets[filterType].remove(str);
 	this.updateStorage(filterType);
 
-	return ret;
+	return exists;
 }
 
 FilterStorageManager.prototype.getHashSet = function(filterType){
