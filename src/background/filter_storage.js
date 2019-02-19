@@ -132,7 +132,7 @@
 			/* msg.content is of the form:
 			{
 				info: "add_blocked_user",
-				content: <user/channel>
+				add_blocked_user: <user/channel>
 			}
 			*/
 
