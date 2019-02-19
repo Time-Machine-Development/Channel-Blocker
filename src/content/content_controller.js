@@ -5,7 +5,7 @@ const CUR_FILTERS = new Array();
 let curContext;
 
 //removes all old filters and creates new filters, based on the current yt-context
-function pageUrlChanged(context){
+function pageUrlChanged(){
 	//detaches all currently active filters
 	for(actFilter of CUR_FILTERS){
 		if(actFilter !== undefined){
@@ -83,7 +83,7 @@ browser.runtime.onMessage.addListener((msg) => {
 			info: "context_switch",
 			context: <context>
 		}
-		where <context> is a key of YTCONTEXT or undefined
+		where <context> is a value of YTCONTEXT or undefined
 		*/
 
 		if(msg.content.info === "context_switch"){
