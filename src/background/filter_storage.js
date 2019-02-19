@@ -1,6 +1,5 @@
 {
 	const SENDER = "background_filter_storage";
-	const STORAGE = browser.storage.local;
 
 	let storageManager = new FilterStorageManager(STORAGE);
 	storageManager.initSets();

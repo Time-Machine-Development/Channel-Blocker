@@ -1,3 +1,4 @@
+const STORAGE = browser.storage.local;
 
 const FilterType = Object.freeze({
 	BLOCKED_USERS: 0,
@@ -21,3 +22,13 @@ const YTContext = Object.freeze({
 	CHANNEL_VIDEOS: 5,
 	OTHER: 6
 });
+
+const ConfigId = Object.freeze({
+	CONFIG_PAGE_DESIGN: 0,
+	CONTENT_BLOCK_BTN_VISIBILITY: 1
+});
+
+const DEFAULT_CONFIG = {
+	ConfigId.CONFIG_PAGE_DESIGN: 0,
+	ConfigId.CONTENT_BLOCK_BTN_VISIBILITY: true
+};
