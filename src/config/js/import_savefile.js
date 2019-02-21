@@ -1,4 +1,4 @@
-//TODO: following code will be reworked in feature/config_rework (greatly depends on config.html)
+//TODO: following code will be reworked in feature/import_export (greatly depends on config.html)
 //
 // {
 // 	const SENDER = "config_import_savefile";

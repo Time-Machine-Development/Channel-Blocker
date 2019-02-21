@@ -1,5 +1,5 @@
 {
-	const SENDER = "config_event_dispatcher";
+	const SENDER = "config_filter_user_interaction";
 
 	/* creates an "add"-message for background_filter_storage
 	if regExType is undefined (e.g. not passed) userChannelNameOrRegEx is an user/channel-name,
@@ -37,36 +37,20 @@
 		};
 	}
 
+	//creates a "filter_values_request"-message for background_filter_storage
+	function createFilterValuesRequestMsg(filterType){
+		return {
+			sender: SENDER,
+			receiver: "background_filter_storage",
+			content: {
+				info: "filter_values_request",
+				filter_type: filterType
+			}
+
+		}
+	}
+
 	// TODO: following code will be reworked in feature/config_rework (greatly depends on config.html)
-	//
-	// function sendAddMessage(filterType){
-	// 	let input = document.getElementById("input_textfield").value;
-	// 	document.getElementById("input_textfield").value = "";
-	//
-	// 	//only accept inputs that contain at least one non-whitespace character
-	// 	input = input.trim();
-	// 	if(input !== "")
-	// 		sendMessage("add", FilterType[filterType], input);
-	// }
-	//
-	//
-	// function sendDeleteMessage(filterType){
-	// 	function getSelectedOptions(selectionId){
-	// 		let selection = document.getElementById(selectionId);
-	// 		let options = [];
-	//
-	// 		for(let opt of selection.selectedOptions){
-	// 			options.push(opt.getAttribute("value"));
-	// 		}
-	//
-	// 		return options;
-	// 	}
-	//
-	// 	let selectionId = filterType.toLowerCase() + "_selection";
-	// 	let input = getSelectedOptions(selectionId);
-	//
-	// 	sendMessage("delete", FilterType[filterType], input);
-	// }
 	//
 	// //install onclick functions for all buttons of config.html
 	// for(let filterType in FilterType){
@@ -82,4 +66,28 @@
 	// 		sendDeleteMessage(filterType)
 	// 	};
 	// }
+
+	/*
+	INSTALLING LISTENER FOR MESSAGES FROM background-scripts
+	*/
+
+     browser.runtime.onMessage.addListener((msg, sender) => {
+          if(msg.receiver !== SENDER)
+               return;
+
+		if(msg.sender === "background_filter_storage"){
+			if(msg.content.info === "filter_storage_modified"){
+				/* msg.content is of the form:
+     			{
+     				info: "filter_storage_modified",
+     				filter_type: <ft>
+     			}
+                    where <ft> is a value of FilterType
+                    */
+
+				//TODO: react on "filter_storage_modified"-message
+			}
+		}
+
+	});
 }

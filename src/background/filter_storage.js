@@ -4,24 +4,20 @@
 	let storageManager = new FilterStorageManager(STORAGE);
 	storageManager.initSets();
 
-	//TODO: feature/config_rework
-	//creates "???"-message for ???
-	//
-	// function createContentUpdaterMsg(type, target, items){
-	// 	return {
-	// 		sender: SENDER,
-	// 		receiver: "config_content_updater",
-	// 		"event": {
-	// 			type: type,
-	// 			target: target,
-	// 			items: items
-	// 		}
-	// 	};
-	// 	return;
-	// }
+	//creates "filter_storage_modified"-message for config_filter_user_interaction
+	function createConfigFilterStorageModifiedMsg(filterType){
+		return {
+			sender: SENDER,
+			receiver: "config_filter_user_interaction",
+			content: {
+				info: "filter_storage_modified",
+				filter_type: filterType
+			}
+		};
+	}
 
 	//creates "filter_storage_modified"-message for content_controller
-	function createFilterStorageModifiedMsg(){
+	function createContentFilterStorageModifiedMsg(){
 		return {
 			sender: SENDER,
 			receiver: "content_controller",
@@ -57,15 +53,13 @@
 
 		//only continue if storage changed
 		if(storageChanged){
-			//TODO: following code will be reworked in feature/config_rework (greatly depends on config.html), maybe redundant to onDelMsg
-			//
-			//send add message to config_content_updater on config tab (if it exists)
-			// if(configTabId !== null)
-			// 	browser.tabs.sendMessage(configTabId, createContentUpdaterMsg("add", msg.event.origin, [msg.event.input]));
+			//sends "filter_storage_modified"-message to config-tab
+			if(configTabId !== null)
+				browser.tabs.sendMessage(configTabId, createConfigFilterStorageModifiedMsg(msgContent.filter_type));
 
 			//sends "filter_storage_modified"-message to all known content_controller (e.g. all tabs in YT_TAB_IDS)
 			for(let tabId of YT_TAB_IDS.keys()){
-				browser.tabs.sendMessage(Number(tabId), createFilterStorageModifiedMsg());
+				browser.tabs.sendMessage(Number(tabId), createContentFilterStorageModifiedMsg());
 			}
 		}
 	}
@@ -83,15 +77,13 @@
 
 		//only continue if storage changed
 		if(storageChanged){
-			//TODO: following code will be reworked in feature/config_rework (greatly depends on config.html), maybe redundant to onAddMsg
-			//
-			//send add message to config_content_updater on config tab (if it exists)
-			// if(configTabId !== null)
-			// 	browser.tabs.sendMessage(configTabId, createContentUpdaterMsg("add", msg.event.origin, [msg.event.input]));
+			//sends "filter_storage_modified"-message to config-tab
+			if(configTabId !== null)
+				browser.tabs.sendMessage(configTabId, createConfigFilterStorageModifiedMsg(msgContent.filter_type));
 
 			//sends "filter_storage_modified"-message to all known content_controller (e.g. all tabs in YT_TAB_IDS)
 			for(let tabId of YT_TAB_IDS.keys()){
-				browser.tabs.sendMessage(Number(tabId), createFilterStorageModifiedMsg());
+				browser.tabs.sendMessage(Number(tabId), createContentFilterStorageModifiedMsg());
 			}
 
 		}
@@ -155,37 +147,30 @@
 		if(msg.receiver !== SENDER)
 			return;
 
-		//react to "add"/"delete"-message from config_event_dispatcher
-		if(msg.sender === "config_event_dispatcher"){
+		if(msg.sender === "config_filter_user_interaction"){
+			//react to "add"-message from config_filter_user_interaction
 			if(msg.content.info === "add"){
 				onAddMsg(msg.content);
+
+			//react to "delete"-message from config_filter_user_interaction
 			}else if(msg.content.info === "delete"){
 				onDelMsg(msg.content);
+
+			//react to "filter_values_request"-message from config_filter_user_interaction
+			}else if(msg.content.info === "filter_values_request"){
+				/* msg.content is of the form:
+     			{
+     				info: "filter_values_request",
+     				filter_type: <ft>
+     			}
+                    where <ft> is a value of FilterType
+                    */
+
+				//TODO: return the key/value pairs
+				return new Promise((resolve) => {
+					resolve(/*TODO*/);
+				});
 			}
-
-			return;
 		}
-
-		//TODO: following code will be reworked in feature/config_rework (greatly depends on config.html)
-		//
-		// //react to add or delete messages from config_user_interaction
-		// if(msg.sender === "config_user_interaction"){
-		// 	if(msg.event.type === "add")
-		// 		onAddMsg(msg);
-		// 	else if(msg.event.type === "delete")
-		// 		onDelMsg(msg);
-		//
-		// 	return;
-		// }
-
-		// //react on initial content_update_request of a newly created config tab
-		// if(msg.sender === "config_content_updater"){
-		// 	if(msg.event.type === "content_update_request"){
-		// 		for(let bt of Object.values(FilterType))
-		// 			browser.tabs.sendMessage(Number(sender.tab.id), createContentUpdaterMsg("add", bt, storageManager.getHashSet(cId).keys()));
-		// 	}
-		//
-		// 	return;
-		// }
 	});
 }

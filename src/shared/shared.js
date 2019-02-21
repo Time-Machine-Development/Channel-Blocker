@@ -25,10 +25,6 @@ const YTContext = Object.freeze({
 
 const ConfigId = Object.freeze({
 	CONFIG_PAGE_DESIGN: 0,
-	CONTENT_BLOCK_BTN_VISIBILITY: 1
+	CONFIG_ADVANCED_VIEW: 1,
+	CONTENT_BLOCK_BTN_VISIBILITY: 2
 });
-
-const DEFAULT_CONFIG = {
-	ConfigId.CONFIG_PAGE_DESIGN: 0,
-	ConfigId.CONTENT_BLOCK_BTN_VISIBILITY: true
-};
