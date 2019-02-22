@@ -63,7 +63,7 @@
      }
 
      /* sets config[configId] to val, if config[configId] was changed a "config_storage_modified"-message is sent to the config-tab
-     and if configId is ConfigId.CONTENT_BLOCK_BTN_VISIBILITY a "block_btn_visibility_modified"-message is also sent to all elements of YT_TAB_IDS
+     and if configId is ConfigId.CONTENT_BLOCK_BTN_VISIBILITY a "block_btn_visibility_modified"-message is also sent to all YT_TAB_IDS
      and the STORAGE is updated*/
      function setConfigVal(configId, val){
           if(config[configId] !== val){
