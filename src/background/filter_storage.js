@@ -166,9 +166,10 @@
                     where <ft> is a value of FilterType
                     */
 
-				//TODO: return the key/value pairs
+				/* return an object containing all user/channel-names or regular expressions as keys and their values,
+				depending on the requested FilterType */
 				return new Promise((resolve) => {
-					resolve(/*TODO*/);
+					resolve(Object.assign({}, storageManager.getHashSet(msg.content.filter_type)));
 				});
 			}
 		}

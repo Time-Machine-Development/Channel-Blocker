@@ -24,9 +24,21 @@
           };
      }
 
-     /* init. current config with the the config which is stored in STORAGE(defined in shared)
-     if these function is called for the first time after the installation of this webextension,
-     it is also necessary to set all configuration-keys to the default value(defined in DEFAULT_CONFIG in shared) */
+     //creates a "block_btn_visibility_modified"-message for content_controller
+     function createBlockBtnVisibilityModifiedMsg(){
+          return {
+               sender: SENDER,
+               receiver: "content_controller",
+               content: {
+                    info: "block_btn_visibility_modified",
+                    block_btn_visibility: config[ConfigId.CONTENT_BLOCK_BTN_VISIBILITY];
+               }
+          };
+     }
+
+     /* init. current config with the the config which is stored in STORAGE (defined in shared)
+     if this function is called for the first time after the installation of this webextension,
+     it is also necessary to set all configuration-values to the default values (defined in DEFAULT_CONFIG) */
      async function initConfig(){
           let storageContainer = await STORAGE.get("config");
 		config = storageContainer["config"];
@@ -35,10 +47,6 @@
           for(let cId of Object.values(ConfigId)){
                if(config[cId] === undefined){
                     config[cId] = DEFAULT_CONFIG[cId];
-
-                    if(configTabId !== null)
-                         browser.tabs.sendMessage(configTabId, createConfigStorageModifiedMsg(cId));
-
                     changed = true;
                }
           }
@@ -55,6 +63,7 @@
      }
 
      /* sets config[configId] to val, if config[configId] was changed a "config_storage_modified"-message is sent to the config-tab
+     and if configId is ConfigId.CONTENT_BLOCK_BTN_VISIBILITY a "block_btn_visibility_modified"-message is also sent to all elements of YT_TAB_IDS
      and the STORAGE is updated*/
      function setConfigVal(configId, val){
           if(config[configId] !== val){
@@ -62,6 +71,12 @@
 
                if(configTabId !== null)
                     browser.tabs.sendMessage(configTabId, createConfigStorageModifiedMsg(configId));
+
+               if(configId === ConfigId.CONTENT_BLOCK_BTN_VISIBILITY){
+                    for(let tabId of YT_TAB_IDS.keys()){
+                         browser.tabs.sendMessage(Number(tabId), createBlockBtnVisibilityModifiedMsg());
+                    }
+               }
 
                updateStorage();
           }
@@ -100,6 +115,27 @@
 				return new Promise((resolve) => {
 					resolve(config[msg.content.config_id]);
 				});
+               }
+          }
+     });
+
+     /*
+	INSTALLING LISTENER FOR MESSAGES FROM content-scripts
+	*/
+
+     browser.runtime.onMessage.addListener((msg, sender) => {
+          if(msg.receiver !== SENDER)
+               return;
+
+          if(msg.sender === "content_controller"){
+               /* msg.content is of the form:
+               "block_btn_visibility_request"
+               */
+
+               if(msg.content === "block_btn_visibility_request"){
+                    return new Promise((resolve) => {
+                         resolve(config[ConfigId.CONTENT_BLOCK_BTN_VISIBILITY]);
+                    });
                }
           }
      });
