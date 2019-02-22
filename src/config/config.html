@@ -42,12 +42,6 @@
 			<div class="innerDivExp">
 				<div class="elementExpNoBg">
 					<div id="checkboxSelectionContainer" class="selectionContainer">
-						<input class="darkThemeCheckbox" id="darkThemeCheckbox" name="darkTheme" value="conf" type="checkbox" style="cursor: pointer;" checked>
-						<label for="darkThemeCheckbox" id="darkThemeCheckboxLable" class="lable">dark theme</label>
-					</div>
-				</div>
-				<div class="elementExpNoBg">
-					<div id="checkboxSelectionContainer" class="selectionContainer">
 						<input class="configurationCheckbox" id="configurationCheckbox" name="configuration" value="conf" type="checkbox" style="cursor: pointer;">
 						<label for="configurationCheckbox" id="checkboxLable" class="lable">advanced view <span class="informationSubtitle">(requires basic knowledge of <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions#Writing_a_regular_expression_pattern">regular expressions</a>)</span></label>
 					</div>
@@ -56,15 +50,22 @@
 					</div>
 
 					<aside>
-						<input id="input_textfield" class="textField" name="textField" placeholder="user/channel name or regular expression" type="text">
-						<h3 class="inputText">Input:</h3>
+						
 					</aside>
 				</div>
 			</div>
 		</div>
 
-		<h1>Blocked users/channels</h1>
-		<div class="outerDivExp">
+		<h1 id="containerHeadline">Blocked users/channels</h1>
+		<select class="containerSelect" id="containerSelect">
+			<option value="0">Blocked users/channels</option>
+			<option value="1">Blocked videos by title</option>
+			<option value="2">Blocked users/channels by name</option>
+			<option value="3">Blocked comments by comment-content</option>
+			<option value="4">Excluded users/channels from regular expressions</option>
+		</select>
+		
+		<div class="outerDivExp" id="0">
 			<div class="innerDivExp">
 				<div class="elementExpNoBg">
 					<div class="selectionContainer">
@@ -73,13 +74,14 @@
 					</div>
 
 					<div class="spacer">
-						 <button id="blocked_users_delete_btn" type="button" title="delete marked users/channels from this list"><span class="deleteButtonText">⨯</span></button>
+						<button id="blocked_users_delete_btn" type="button" title="delete marked users/channels from this list"><span class="deleteButtonText">⨯</span></button>
 
 						 <div class="noBg"></div>
 					</div>
 
 					<aside>
-						<button id="blocked_users_add_btn" type="button">add input as blocked user/channel</button>
+						<input id="input_textfield" class="textField" name="textField" placeholder="user/channel name or regular expression" type="text">
+						<button id="blocked_users_add_btn" type="button">add</button>
 						<div class="info">
 							<div class="infoText">
 								<h3>Info:</h3>
@@ -97,124 +99,134 @@
 			</div>
 		</div>
 
-		<div id="hideable">
-
-			<h1>Blocked videos, users/channels and comments by regular expressions</h1>
-			<div class="outerDivExp">
-				<div class="innerDivExp">
-
-					<h2>Blocked videos by title</h2>
-					<div class="elementExp">
-						<div class="selectionContainer">
-							<select multiple="multiple" id="title_regexs_selection">
-							</select>
-						</div>
-
-						<div class="spacer">
-							 <button id="title_regexs_delete_btn" type="button" title="delete marked regular expressions from this list"><span class="deleteButtonText">⨯</span></button>
-							 <div></div>
-						</div>
-
-						<aside>
-							 <button id="title_regexs_add_btn" type="button">add input as regular expression for title of videos</button>
-							<div class="info">
-								<div class="infoText">
-									<h3>Info:</h3>Every video, whose title matches any of these regular expressions, will be blocked.
-								</div>
-							</div>
-						</aside>
+		<div class="outerDivExp" id="1">
+			<div class="innerDivExp">
+				<div class="elementExpNoBg">
+					<div class="selectionContainer">
+						<select multiple="multiple" id="title_regexs_selection">
+						</select>
 					</div>
 
-
-					<h2>Blocked users/channels by name</h2>
-					<div class="elementExp">
-						<div class="selectionContainer">
-							<select multiple="multiple" id="name_regexs_selection">
-							</select>
-						</div>
-
-						<div class="spacer">
-							 <button id="name_regexs_delete_btn" type="button" title="delete marked regular expressions from this list"><span class="deleteButtonText">⨯</span></button>
-							 <div></div>
-						</div>
-
-						<aside>
-							 <button id="name_regexs_add_btn" type="button">add input as regular expression for name of users/channels</button>
-							<div class="info">
-								<div class="infoText">
-									<h3>Info:</h3>
-									Any
-									<ul>
-										<li>video from a user/channel,</li>
-										<li>user/channel-container on startpage from a user/channel,</li>
-										<li>comment from a user/channel</li>
-									</ul>
-									will be blocked if the user/channel-name matches any of these regular expressions.
-								</div>
-							</div>
-						</aside>
+					<div class="spacer">
+						 <button id="title_regexs_delete_btn" type="button" title="delete marked regular expressions from this list"><span class="deleteButtonText">⨯</span></button>
+						 <div></div>
 					</div>
 
-					<h2>Blocked comments by comment-content</h2>
-					<div class="elementExp">
-						<div class="selectionContainer">
-							<select multiple="multiple" id="comment_regexs_selection">
-							</select>
-						</div>
-
-						<div class="spacer">
-							 <button id="comment_regexs_delete_btn" type="button" title="delete marked regular expressions from this list"><span class="deleteButtonText">⨯</span></button>
-							 <div></div>
-						</div>
-
-						<aside>
-							<button id="comment_regexs_add_btn" type="button">add input as regular expression for content of comments</button>
-							<div class="info">
-								<div class="infoText">
-									<h3>Info:</h3>
-									Every comment, whose content matches any of these regular expressions, will be blocked.
-								</div>
+					<aside>
+						<input id="input_textfield" class="textField" name="textField" placeholder="user/channel name or regular expression" type="text">
+						<button id="title_regexs_add_btn" type="button">add</button>
+						<input class="caseInsensitiveCheckbox" name="configuration" value="conf" type="checkbox">
+						<label for="caseInsensitiveCheckbox" class="lable">case insensitive</label>
+						<div class="info">
+							<div class="infoText">
+								<h3>Info:</h3>Every video, whose title matches any of these regular expressions, will be blocked.
 							</div>
-						</aside>
-					</div>
-
+						</div>
+					</aside>
 				</div>
 			</div>
-
-			<h1>Excluded users/channels from regular expressions</h1>
-			<div class="outerDivExp">
-				<div class="innerDivExp">
-					<div class="elementExpNoBg">
-						<div class="selectionContainer">
-							<select multiple="multiple" id="excluded_users_selection">
-							</select>
-						</div>
-
-						<div class="spacer">
-							 <button id="excluded_users_delete_btn" type="button" title="delete marked users/channels from this list"><span class="deleteButtonText">⨯</span></button>
-							 <div class="noBg"></div>
-						</div>
-
-						<aside>
-							<button id="excluded_users_add_btn" type="button">add input as excluded user/channel from regular expressions</button>
-							<div class="info">
-								<div class="infoText">
-									<h3>Info:</h3>
-									Any
-									<ul>
-										<li>video from a user/channel,</li>
-										<li>user/channel-container on startpage from a user/channel,</li>
-										<li>comment from a user/channel,</li>
-									</ul>
-									which exists in this list, will not be blocked even if matching any of the regular expressions.
-								</div>
-							</div>
-						</aside>
-					</div>
-				</div>
-			</div>
-
 		</div>
+		
+		<div class="outerDivExp" id="2">
+			<div class="innerDivExp">
+				<div class="elementExpNoBg">
+					<div class="selectionContainer">
+						<select multiple="multiple" id="name_regexs_selection">
+						</select>
+					</div>
+
+					<div class="spacer">
+						 <button id="name_regexs_delete_btn" type="button" title="delete marked regular expressions from this list"><span class="deleteButtonText">⨯</span></button>
+						 <div></div>
+					</div>
+
+					<aside>
+						<input id="input_textfield" class="textField" name="textField" placeholder="user/channel name or regular expression" type="text">
+						 <button id="name_regexs_add_btn" type="button">add</button>
+						<input class="caseInsensitiveCheckbox" name="configuration" value="conf" type="checkbox">
+						<label for="caseInsensitiveCheckbox" class="lable">case insensitive</label>
+						<div class="info">
+							<div class="infoText">
+								<h3>Info:</h3>
+								Any
+								<ul>
+									<li>video from a user/channel,</li>
+									<li>user/channel-container on startpage from a user/channel,</li>
+									<li>comment from a user/channel</li>
+								</ul>
+								will be blocked if the user/channel-name matches any of these regular expressions.
+							</div>
+						</div>
+					</aside>
+				</div>
+			</div>
+		</div>
+		
+		<div class="outerDivExp" id="3">
+			<div class="innerDivExp">
+				<div class="elementExpNoBg">
+					<div class="selectionContainer">
+						<select multiple="multiple" id="comment_regexs_selection">
+						</select>
+					</div>
+
+					<div class="spacer">
+						 <button id="comment_regexs_delete_btn" type="button" title="delete marked regular expressions from this list"><span class="deleteButtonText">⨯</span></button>
+						 <div></div>
+					</div>
+
+					<aside>
+						<input id="input_textfield" class="textField" name="textField" placeholder="user/channel name or regular expression" type="text">
+						<button id="comment_regexs_add_btn" type="button">add</button>
+						<input class="caseInsensitiveCheckbox" name="configuration" value="conf" type="checkbox">
+						<label for="caseInsensitiveCheckbox" class="lable">case insensitive</label>
+						<div class="info">
+							<div class="infoText">
+								<h3>Info:</h3>
+								Every comment, whose content matches any of these regular expressions, will be blocked.
+							</div>
+						</div>
+					</aside>
+				</div>
+			</div>
+		</div>
+
+		<div class="outerDivExp" id="4">
+			<div class="innerDivExp">
+				<div class="elementExpNoBg">
+					<div class="selectionContainer">
+						<select multiple="multiple" id="excluded_users_selection">
+						</select>
+					</div>
+
+					<div class="spacer">
+						 <button id="excluded_users_delete_btn" type="button" title="delete marked users/channels from this list"><span class="deleteButtonText">⨯</span></button>
+						 <div class="noBg"></div>
+					</div>
+
+					<aside>
+						<input id="input_textfield" class="textField" name="textField" placeholder="user/channel name or regular expression" type="text">
+						<button id="excluded_users_add_btn" type="button">add</button>
+						<div class="info">
+							<div class="infoText">
+								<h3>Info:</h3>
+								Any
+								<ul>
+									<li>video from a user/channel,</li>
+									<li>user/channel-container on startpage from a user/channel,</li>
+									<li>comment from a user/channel,</li>
+								</ul>
+								which exists in this list, will not be blocked even if matching any of the regular expressions.
+							</div>
+						</div>
+					</aside>
+				</div>
+			</div>
+		</div>
+
+		
+		
+		<div class="hr"></div>
 
 		<div class="saveFileDiv">
 			<h4>Export savefile:</h4>

@@ -26,9 +26,53 @@
 		};
 	}
 
-     //TODO: "bind" to config-HTML
+    //TODO: "bind" to config-HTML
+	 
+	//handle the event from the configurationCheckbox
+	//send a massage to the background to activate/deactivate the advanced view
+	function configAdvancedViewCheckboxHandler(e) {
+		//tell the user agent that if the event does not get explicitly handled
+		e.preventDefault();
+		
+		//check the current value of the configurationCheckbox and send a msg to the background_config_storage to activate/deactivate the advanced view
+		if(document.getElementById("configurationCheckbox").checked === true){
+			createConfigValueSetMsg(ConfigId.CONFIG_ADVANCED_VIEW, false);
+		}else{
+			createConfigValueSetMsg(ConfigId.CONFIG_ADVANCED_VIEW, false);
+		}
+	}
+	
+	//
+	function changeAdvancedView(configValue){
+		document.getElementById("configAdvancedViewCheckbox").value = configValue;
+		if(configValue){
+			document.getElementById("containerHeadline").style.display = "none";
+			document.getElementById("containerSelect").style.display = "block";
+			containerSelectHandler();
+		}else{
+			document.getElementById("containerHeadline").style.display = "block";
+			document.getElementById("containerSelect").style.display = "none";
+			
+			document.getElementById("0").style.display = "block";
+			document.getElementById("1").style.display = "none";
+			document.getElementById("2").style.display = "none";
+			document.getElementById("3").style.display = "none";
+			document.getElementById("4").style.display = "none";
+		}
+	}
+	
+	/*
+	INSTALLING LISTENER FOR EVENTS FROM userinteraction
+	*/
+	
+	//define behavior for clicking the configAdvancedViewCheckbox
+	document.getElementById("configAdvancedViewCheckbox").addEventListener('click',  function(event){configAdvancedViewCheckboxHandler(event);});
+	
+	//define behavior for change in containerSelect
+	document.getElementById("containerSelect").onchange = containerSelectHandler;
 
-     /*
+	
+    /*
 	INSTALLING LISTENER FOR MESSAGES FROM background-scripts
 	*/
 
@@ -42,12 +86,15 @@
      			{
      				info: "config_storage_modified",
      				config_id: <cid>,
-                         config_val: <cval>
+                    config_val: <cval>
      			}
                     where <cid> is a value of ConfigId
                     */
 
                     //TODO: react on config-storage modification
+					if(msg.content.config_id === ConfigId.CONFIG_ADVANCED_VIEW){
+						changeAdvancedView(msg.content.config_val);
+					}
                }
           }
      });
