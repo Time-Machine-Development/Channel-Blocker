@@ -1,6 +1,10 @@
 #!/bin/bash
 
-#has to be executed from inside folder ytc
+#print error and exit if not executed inside folder */ytc
+if [[ $(pwd | grep -v -E "ytc$") ]]; then
+	echo "ERROR: needs to be executed on */ytc"
+	exit
+fi
 
 #clean
 ./tools/clean.sh
