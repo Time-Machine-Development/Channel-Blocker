@@ -18,6 +18,20 @@ for i in $(find ./src | grep -v "jquery-3\.3\.1\.min\.js" | grep "\.js$" | grep 
 	#cat -s											-> reduce adjacent muliple empty lines to a single empty line
 	pcregrep -h -v -M -e "^\h*\/\*((.|\n)*?)\*\/\h*$" $i | pcregrep -h -v -e "^\h*//.*$" | cat -s > $j
 
+	#check for "console.log"s in ./build
+	if [[ $(grep -n -E "console\.log" $j) ]]; then
+    		echo "WARNING: used console.log in $j:"
+		grep -n -E "console\.log" $j
+		echo
+	fi
+
+	#check for try-and-catch-blocks (with empty catch-block) in ./build
+	if [[ $(pcregrep -M -n -e "\h*try(.|\n)*?catch([^\{\}])*?\{\s*?}\h*" $j) ]]; then
+		echo "WARNING: used try-catch with empty catch-block in $j:"
+		pcregrep -M -n -e "\h*try(.|\n)*?catch([^\{\}])*?\{\s*?}\h*" $j
+		echo
+	fi
+
 	#check for "=="/"!=" in ./build
 	if [[ $(grep -n -E "([^!=]==[^=]|!=[^=])" $j) ]]; then
     		echo "WARNING: used '!='/'==' in $j:"
