@@ -42,7 +42,7 @@
 			<div class="innerDivExp">
 				<div class="elementExpNoBg">
 					<div id="checkboxSelectionContainer" class="selectionContainer">
-						<input class="configurationCheckbox" id="configurationCheckbox" name="configuration" value="conf" type="checkbox" style="cursor: pointer;">
+						<input class="configurationCheckbox" id="configAdvancedViewCheckbox" name="configuration" value="conf" type="checkbox" style="cursor: pointer;">
 						<label for="configurationCheckbox" id="checkboxLable" class="lable">advanced view <span class="informationSubtitle">(requires basic knowledge of <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions#Writing_a_regular_expression_pattern">regular expressions</a>)</span></label>
 					</div>
 
@@ -228,17 +228,35 @@
 		
 		<div class="hr"></div>
 
+		<strong>more options</strong>
 		<div class="saveFileDiv">
-			<h4>Export savefile:</h4>
-			<button id="exportBtn" type="button" title="Export a 'ChannelBlocker.save'-file to your downloadfolder."><span>Export</span></button>
-			<h4>Import savefile:</h4>
-			<input type="file" id="fileLoaderBtn" name="fileLoaderBtn">
+			<h4>
+				Design:
+				<select id="DesignSelect">
+					<option value="0">Dark</option>
+					<option value="1">Light</option>
+				</select>
+			</h4>
+			<h4>
+				Show block-button on youtube
+				<input value="showBtn" type="checkbox">
+			</h4>
+			<h4>
+				Export savefile:
+				<button id="exportBtn" type="button" title="Export a 'ChannelBlocker.save'-file to your downloadfolder."><span>Export</span></button>
+			</h4>
+			<h4>
+				Import savefile:
+				<input type="file" id="fileLoaderBtn" name="fileLoaderBtn">
+			</h4>
 		</div>
 							
 		<div class="hr"></div>
 
 		<h4>Contact</h4>
 		<p>email: <a href="mailto:yt-cleaner@protonmail.com">yt-cleaner@protonmail.com</a></p>
+		<h4>Help</h4>
+		<p>FAQ: <a href="help.html">click here</a></p>
 		
 
 	</body>

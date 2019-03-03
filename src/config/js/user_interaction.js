@@ -86,9 +86,6 @@
 
 	//define behavior for clicking the checkbox
 	document.getElementById("configurationCheckbox").addEventListener('click',  function(event){checkboxHandler(event);});
-	
-	//define behavior for change in containerSelect
-	document.getElementById("containerSelect").onchange = containerSelectHandler;
 
 	//define behavior for clicking the checkbox
 	//document.getElementById("darkThemeCheckbox").onclick = darkThemeCheckboxHandler;

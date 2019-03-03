@@ -34,12 +34,8 @@
 		//tell the user agent that if the event does not get explicitly handled
 		e.preventDefault();
 		
-		//check the current value of the configurationCheckbox and send a msg to the background_config_storage to activate/deactivate the advanced view
-		if(document.getElementById("configurationCheckbox").checked === true){
-			createConfigValueSetMsg(ConfigId.CONFIG_ADVANCED_VIEW, false);
-		}else{
-			createConfigValueSetMsg(ConfigId.CONFIG_ADVANCED_VIEW, false);
-		}
+		//send a msg to the background_config_storage to activate/deactivate the advanced view
+			createConfigValueSetMsg(ConfigId.CONFIG_ADVANCED_VIEW, !document.getElementById("configurationCheckbox").checked);
 	}
 	
 	//
@@ -67,9 +63,6 @@
 	
 	//define behavior for clicking the configAdvancedViewCheckbox
 	document.getElementById("configAdvancedViewCheckbox").addEventListener('click',  function(event){configAdvancedViewCheckboxHandler(event);});
-	
-	//define behavior for change in containerSelect
-	document.getElementById("containerSelect").onchange = containerSelectHandler;
 
 	
     /*

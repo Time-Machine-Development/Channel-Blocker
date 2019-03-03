@@ -49,6 +49,14 @@ h4 {
 	font-weight: lighter;
 }
 
+strong {
+	font-size: 1.1em;
+	margin:1% 1% 0% 1%;
+	padding:0%;
+	color:#ffffff;
+	font-weight: lighter;
+}
+
 p {
 	font-size: 0.8em;
 	padding:0%;
@@ -145,7 +153,7 @@ ul {
 
 .textField {
 	width:calc(100% - 4em - 4px);
-	height:4em;
+	height:2.75em;
 	color:white;
 	background:#336e7b;
 	border:none;
@@ -277,8 +285,8 @@ ul {
 }
 
 .innerDivExp aside button{
-	width:4em;
-	height:4em;
+	width:3em;
+	height:3em;
 	color:#ffffff;
 	background:#336e7b;
 	border:none;
@@ -306,11 +314,19 @@ ul {
 
 .saveFileDiv button{
 	margin-left:1%;
+	cursor: pointer;
+}
+
+.saveFileDiv select{
+	margin-left:1%;
+	cursor: pointer;
 }
 
 .saveFileDiv input{
 	color:#ffffff;
+	vertical-align:middle;
 	margin-left:1%;
+	cursor: pointer;
 }
 
 #checkboxSelectionContainer {
