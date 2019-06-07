@@ -47,8 +47,7 @@
 				reg_exp_type: (RegExType.CASE_SENSITIVE | RegExType.CASE_INSENSITIVE)
 			}
 			*/
-
-			storageChanged = storageManager.add(msgContent.filterType, msgContent.reg_exp, reg_exp_type);
+			storageChanged = storageManager.add(msgContent.filter_type, msgContent.reg_exp, msgContent.reg_exp_type);
 		}
 
 		//only continue if storage changed

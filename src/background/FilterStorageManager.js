@@ -2,8 +2,9 @@ function FilterStorageManager(storage){
 	this.storage = storage;
 	this.sets = {};
 
-	for(let ft of Object.values(FilterType))
+	for(let ft of Object.values(FilterType)){
 		this.sets[ft] = new HashSet();
+	}
 }
 
 FilterStorageManager.prototype.initSets = async function(){

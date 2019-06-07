@@ -17,25 +17,25 @@
 		);
 	}
 
-		console.log(document.getElementById("configurationCheckbox").checked);
+		console.log(document.getElementById("configAdvancedViewCheckbox").checked);
 		
 		
 	function test(){
-		console.log(document.getElementById("configurationCheckbox").checked);
+		console.log(document.getElementById("configAdvancedViewCheckbox").checked);
 	}
 	
 	function checkboxHandler(e) {
 		e.preventDefault();
-		console.log(document.getElementById("configurationCheckbox").checked);
+		console.log(document.getElementById("configAdvancedViewCheckbox").checked);
 		test();
 	}
 		
 	function checkboxHandler1(e) {
 		e.preventDefault();
 		console.log(e.cancelable);
-		let showAdvancedView = document.getElementById("configurationCheckbox").checked;
-		//document.getElementById("configurationCheckbox").checked = true;
-		console.log(document.getElementById("configurationCheckbox").checked);
+		let showAdvancedView = document.getElementById("configAdvancedViewCheckbox").checked;
+		//document.getElementById("configAdvancedViewCheckbox").checked = true;
+		console.log(document.getElementById("configAdvancedViewCheckbox").checked);
 
 		if(showAdvancedView === true){
 			document.getElementById("containerHeadline").style.display = "none";
@@ -55,9 +55,9 @@
 			//options.push("enable_advanced_view");
 			//sendMessage("delete", ContainerId.CONFIG, options);
 		}
-		document.getElementById("configurationCheckbox").checked = false;
-		console.log(document.getElementById("configurationCheckbox").checked);
-		document.getElementById("configurationCheckbox").checked = true;
+		document.getElementById("configAdvancedViewCheckbox").checked = false;
+		console.log(document.getElementById("configAdvancedViewCheckbox").checked);
+		document.getElementById("configAdvancedViewCheckbox").checked = true;
 	}
 
 	function containerSelectHandler() {
@@ -85,7 +85,10 @@
 	}
 
 	//define behavior for clicking the checkbox
-	document.getElementById("configurationCheckbox").addEventListener('click',  function(event){checkboxHandler(event);});
+	document.getElementById("configAdvancedViewCheckbox").addEventListener('click',  function(event){checkboxHandler1(event);});
+	
+	//define behavior for changing the containerSelect
+	document.getElementById("containerSelect").onchange = containerSelectHandler;
 
 	//define behavior for clicking the checkbox
 	//document.getElementById("darkThemeCheckbox").onclick = darkThemeCheckboxHandler;

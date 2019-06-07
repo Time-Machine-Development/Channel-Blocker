@@ -42,10 +42,11 @@
 		"scripts": [
 			"shared/shared.js",
 			"background/HashSet.js",
-			"background/StorageManager.js",
+			"background/FilterStorageManager.js",
 			"background/browser_action.js",
 			"background/url_update.js",
-			"background/storage.js"
+			"background/config_storage.js",
+			"background/filter_storage.js"
 		]
 	},
 
