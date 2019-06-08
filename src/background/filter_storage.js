@@ -28,7 +28,7 @@
 	function onAddMsg(msgContent){
 		let storageChanged;
 
-		if(msgContent.filter_type === FilterType.BLOCKED_USERS || msgContent.filterType === FilterType.EXCLUDED_USERS){
+		if(msgContent.filter_type === FilterType.BLOCKED_USERS || msgContent.filter_type === FilterType.EXCLUDED_USERS){
 			/* msgContent is of the form:
 			{
 				info: "add",
@@ -36,7 +36,6 @@
 				user_channel_name: <user/channel>
 			}
 			*/
-
 			storageChanged = storageManager.add(msgContent.filter_type, msgContent.user_channel_name, 53);
 		}else{
 			/* msgContent is of the form:
@@ -72,7 +71,7 @@
 		}
 		*/
 
-		let storageChanged = storageManager.remove(msgContent.filterType, filter_val);
+		let storageChanged = storageManager.remove(msgContent.filter_type, msgContent.filter_val);
 
 		//only continue if storage changed
 		if(storageChanged){

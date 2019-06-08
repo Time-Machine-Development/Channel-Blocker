@@ -1,3 +1,38 @@
+{
+	 const SENDER = "config_import_savefile";
+
+     //creates a "config_value_set"-message for background_config_storage
+     function createConfigValueSetMsg(configId, configVal){
+          return {
+               sender: SENDER,
+               receiver: "background_config_storage",
+               content: {
+                    info: "config_value_set",
+                    config_id: configId,
+                    config_val: configVal
+               }
+          };
+     }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //TODO: following code will be reworked in feature/import_export (greatly depends on config.html)
 //
 // {

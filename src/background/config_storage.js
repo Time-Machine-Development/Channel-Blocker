@@ -69,10 +69,8 @@
 	and if configId is ConfigId.CONTENT_BLOCK_BTN_VISIBILITY a "block_btn_visibility_modified"-message is also sent to all YT_TAB_IDS
 	and the STORAGE is updated*/
 	function setConfigVal(configId, val) {
-		console.log("setConfigVal " + val + ", config[configId]:  " + config[configId]);
 		if (config[configId] !== val) {
 			config[configId] = val;
-			console.log("setConfigVal: " + val + ", config[configId]:  " + config[configId]);
 
 			if (configTabId !== null)
 				browser.tabs.sendMessage(configTabId, createConfigStorageModifiedMsg(configId));
@@ -82,7 +80,6 @@
 					browser.tabs.sendMessage(Number(tabId), createBlockBtnVisibilityModifiedMsg());
 				}
 			}
-			console.log("updateStorage");
 			updateStorage();
 		}
 	}
@@ -92,7 +89,6 @@
 	 */
 
 	browser.runtime.onMessage.addListener((msg, sender) => {
-		console.log(msg);
 		if (msg.receiver !== SENDER)
 			return;
 

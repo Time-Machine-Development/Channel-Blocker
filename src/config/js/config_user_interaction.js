@@ -70,12 +70,10 @@
 	
 	//change the css-style of the config page
 	function changePageDesign(configValue){
-		console.log("changePageDesign: " + configValue);
 		document.getElementById("DesignSelect").value = configValue;
 		if(configValue == 0){
 			document.getElementById("css").href = "styleDark.css";
 		}else if(configValue == 1){
-			console.log("changePageDesign to light");
 			document.getElementById("css").href = "style.css";
 		}
 	}
@@ -128,16 +126,13 @@
 	async function initRequests(){
 		let val = await browser.runtime.sendMessage(createConfigValueRequestMsg(ConfigId.CONFIG_PAGE_DESIGN));
 		changePageDesign(val);
-		console.log(val);
 		
 		//AdvancedView
 		val = await browser.runtime.sendMessage(createConfigValueRequestMsg(ConfigId.CONFIG_ADVANCED_VIEW));
 		changeAdvancedView(val);
-		console.log(val);
 		
 		val = await browser.runtime.sendMessage(createConfigValueRequestMsg(ConfigId.CONTENT_BLOCK_BTN_VISIBILITY));
 		changeBtnVisibility(val);
-		console.log(val);
 	}
 	
 	initRequests();
@@ -147,7 +142,6 @@
 	*/
 
      browser.runtime.onMessage.addListener((msg, sender) => {
-		console.log(msg);
           if(msg.receiver !== SENDER)
                return;
 
