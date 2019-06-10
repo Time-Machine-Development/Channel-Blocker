@@ -36,6 +36,7 @@
 
 		//Start/TrendsPage(https://www.youtube.com/ , https://www.youtube.com/feed/trending)
 		if(curContext === YTContext.HOME || curContext === YTContext.TRENDING){
+			console.log("HOME/TRENDING");
 			let selectList = document.getElementsByClassName("style-scope ytd-section-list-renderer");
 			for(elem of selectList){
 				if(elem.id === "contents"){
@@ -122,11 +123,14 @@
 
 	//requests initial context and the initial visibility of block-btn, afterwards update filters (for the first time on this tab-id)
 	async function init(){
+		
 		//request initial context (and register this tab as a yt-tab in background as a side-effect)
 		curContext = await browser.runtime.sendMessage(createContextRequestMsg());
-
-		//TODO: request initial visibility of block-btn
-		//??? = await browser.runtime.sendMessage(createBlockBtnVisibilityRequestMsg());
+		console.log(curContext);
+		
+		//request initial visibility of block-btn
+		//showBtns is used in button_lib
+		showBtns = await browser.runtime.sendMessage(createBlockBtnVisibilityRequestMsg());
 
 		//wait for document to be ready
 		$(document).ready(updateFilters());

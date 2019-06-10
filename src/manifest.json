@@ -76,12 +76,14 @@
 				"content/video_page/VideoPageCommentFilter.js",
 				"content/video_page/VideoPageCommentListFilter.js",
 				"content/video_page/VideoPageCommentContainerFilter.js",
+				"content/video_page/VideoPageMetaContentsFilter.js",
+				"content/video_page/VideoPageMetaFilter.js",
 				"content/video_page/VideoPageContentFilter.js",
 				"content/video_page/VideoPageWatchFilter.js",
 				"content/video_page/VideoPageManagerFilter.js",
 				"content/video_page/VideoPageAppFilter.js",
 
-				"content/content_controller.js"
+				"content/controller.js"
 			]
 		}
 	],

@@ -1,5 +1,6 @@
 //sends an "add_blocked_user"-message to the background_filter_storage which adds userChannelName to the set of blocked users
 function blockUserChannel(userChannelName){
+	console.log(userChannelName)
 	let msg = {
 		sender: "content_event_dispatcher",
 		receiver: "background_filter_storage",

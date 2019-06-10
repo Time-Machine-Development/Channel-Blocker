@@ -1,4 +1,4 @@
-//StartPage filter 2/2
+//StartPage filter 1/2
 function StartContentFilter(target, parent) {
 	Filter.call(this, target, parent);
 }

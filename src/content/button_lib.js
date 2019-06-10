@@ -1,3 +1,6 @@
+//this is changed in the controllers
+let showBtns = false;
+
 //Adds a EventListener to the button ad returns it
 function addListener(btn, userChannelName, checkBeforBlocking = false){
 	let func;
@@ -45,6 +48,7 @@ function createContainerBtnNode(userChannelName, checkBeforBlocking = false){
 
 //Creates a button and inserts it after the 'child'-node
 function createBtnAfter(child, btn){
+	if(!showBtns)return;
 	for(ch of child.parentNode.children){
 		if(ch.tagName === "BUTTON"){
 			ch.remove();
@@ -56,6 +60,7 @@ function createBtnAfter(child, btn){
 //Takes the button(btn) and inserts it befor the 'child'-node
 //If the 'child'-node isn't a child of the 'patent'-node anymore insert it as fist childNode
 function createBtnAtStart(parent, btn, child){
+	if(!showBtns)return;
 	for(ch of parent.children){
 		if(ch.tagName === "BUTTON"){
 			ch.remove();

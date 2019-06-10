@@ -117,8 +117,10 @@
 		if(input !== ""){
 			if(filterType === "BLOCKED_USERS" || filterType === "EXCLUDED_USERS"){
 				browser.runtime.sendMessage(createAddMsg(FilterType[filterType], input));
-			}else{
+			}else if(document.getElementById(filterType.toLowerCase() + "_caseInsensitive_checkbox").checked){
 				browser.runtime.sendMessage(createAddMsg(FilterType[filterType], input, RegExType.CASE_SENSITIVE));
+			}else{
+				browser.runtime.sendMessage(createAddMsg(FilterType[filterType], input, RegExType.CASE_INSENSITIVE));
 			}
 		}
 	}
@@ -139,12 +141,14 @@
 		let selectionId = filterType.toLowerCase() + "_selection";
 		let input = getSelectedOptions(selectionId);
 
-		browser.runtime.sendMessage(createDeleteMsg(FilterType[filterType], input));
+		for(var filter_val of input){
+			if(filterType !== "BLOCKED_USERS" && filterType !== "EXCLUDED_USERS"){
+				filter_val = filter_val.substring(0, filter_val.length - 4);
+			}
+			browser.runtime.sendMessage(createDeleteMsg(FilterType[filterType], filter_val));
+		}
 	}
 	
-	//TODO test
-	browser.runtime.sendMessage(createAddMsg(FilterType.TITLE_REGEXS, "Test1", RegExType.CASE_SENSITIVE));
-	browser.runtime.sendMessage(createAddMsg(FilterType.TITLE_REGEXS, "Test2", RegExType.CASE_INSENSITIVE));
 	
 	//get the filtervalues at startup
 	sendAndProcessFilterValuesRequestMsg();

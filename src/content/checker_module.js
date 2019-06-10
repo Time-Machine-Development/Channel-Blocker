@@ -22,7 +22,7 @@ function checkUserChannelName(userName, checkedNode){
 /*create an "advanced" "is_blocked_request"-message which checks for user/channel-name and a video-title
 and send it to background_filter_storage and process the result*/
 function checkVideoTitle(userName, videoTitle, checkedNode){
-	let msg = createMsg(userName);
+	let msg = createIsBlockedRequestMsg(userName);
 	msg.content.additional = {
 		type: "title",
 		content: videoTitle.trim()
@@ -34,7 +34,7 @@ function checkVideoTitle(userName, videoTitle, checkedNode){
 /*create an "advanced" "is_blocked_request"-message which checks for user/channel-name and a comment-content
 and send it to background_filter_storage and process the result*/
 function checkCommentContent(userName, commentContent, checkedNode){
-	let msg = createMsg(userName);
+	let msg = createIsBlockedRequestMsg(userName);
 	msg.event.input.additional = {
 		type: "comment",
 		content: commentContent.trim()

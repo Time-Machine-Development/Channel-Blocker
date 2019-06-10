@@ -19,9 +19,9 @@ SearchPageContentFilter.prototype.onFound = function(child, useCallbackFilter){
 		}
 	}
 
-	//Found a largeVideo
+	//Found a largeVideo or movie
 	//Check the videos and insert buttons
-	if(child.tagName === "YTD-VIDEO-RENDERER"){
+	if(child.tagName === "YTD-VIDEO-RENDERER" || child.tagName === "YTD-MOVIE-RENDERER"){
 		let linkInnerArr = child.getElementsByTagName("a");
 		if(linkInnerArr.length >= 3){
 			//Create callbackFilter to listen to changes
@@ -40,6 +40,77 @@ SearchPageContentFilter.prototype.onFound = function(child, useCallbackFilter){
 			}
 		}
 	}
+	
+	//Found a playlist ytd-playlist-renderer
+	//Check the videos and insert buttons
+	if(child.tagName === "YTD-PLAYLIST-RENDERER"){
+		let linkInnerArr = child.getElementsByTagName("a");
+		if(linkInnerArr.length >= 3){
+			//Create callbackFilter to listen to changes
+			if(useCallbackFilter === undefined){
+				new CallbackFilter(linkInnerArr[2], this, child);
+			}
+
+			//check the videoTitle and userName
+			checkVideoTitle(linkInnerArr[2].textContent, linkInnerArr[1].getElementsByClassName("style-scope ytd-playlist-renderer")[2].textContent, child);
+
+			//insert the buttons to block the user
+			for(let btnContainerElem of child.getElementsByClassName("style-scope ytd-video-meta-block")){
+				if(btnContainerElem.id === "metadata"){
+					createBtnAtStart(btnContainerElem, createBtnNode(linkInnerArr[2].textContent), btnContainerElem.firstChild);
+				}
+			}
+		}
+	}
+	
+	//Found a ytd-shelf-renderer
+	//Check the videos and insert buttons
+	if(child.tagName === "YTD-SHELF-RENDERER"){
+		try{
+		let linkInnerArr = child.getElementsByClassName("style-scope ytd-shelf-renderer");
+		
+		if(linkInnerArr.length >= 6){
+			//Create callbackFilter to listen to changes
+			if(useCallbackFilter === undefined){
+				new CallbackFilter(linkInnerArr[5], this, child);
+			}
+
+			//check the videoTitle and userName
+			checkUserChannelName(linkInnerArr[5].textContent, child);
+			
+			//insert the buttons to block the user
+			createBtnAfter(linkInnerArr[5], createContainerBtnNode(linkInnerArr[5].textContent), linkInnerArr[5]);
+				
+		}
+		}catch(e){
+			console.error(e,e.stack);
+		}
+	}
+	
+	//Found a channel
+	//Check the videos and insert buttons
+	if(child.tagName === "YTD-CHANNEL-RENDERER"){
+		try{
+		let linkInnerArr = child.getElementsByClassName("style-scope ytd-channel-renderer");
+		
+		if(linkInnerArr.length >= 6){
+			//Create callbackFilter to listen to changes
+			if(useCallbackFilter === undefined){
+				new CallbackFilter(linkInnerArr[5], this, child);
+			}
+
+			//check the videoTitle and userName
+			checkUserChannelName(linkInnerArr[5].textContent, child);
+			
+			//insert the buttons to block the user
+			createBtnAtStart(linkInnerArr[5], createBtnNode(linkInnerArr[5].textContent), linkInnerArr[5]);
+				
+		}
+		}catch(e){
+			console.error(e,e.stack);
+		}
+	}
+	
 };
 
 //If the callbackFilter register a change they invoke this function

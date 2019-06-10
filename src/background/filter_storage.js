@@ -130,7 +130,7 @@
 				onAddMsg({
 					info: "add",
 					filter_type: FilterType.BLOCKED_USERS,
-					user_channel_name: msg.content.content
+					user_channel_name: msg.content.user_channel_name
 				});
 
 			return;

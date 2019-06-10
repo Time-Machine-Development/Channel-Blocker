@@ -26,17 +26,11 @@ FilterStorageManager.prototype.add = function(filterType, str, val){
 
 //return true <=> this contained str as key
 FilterStorageManager.prototype.remove = function(filterType, str){
-	let exists = false;
-
-	for(var i = 0; i < str.length; i++){
-		if(this.sets[filterType].hasOwnProperty(str[i])){
-			exists = true;
-		}
-		this.sets[filterType].remove(str[i]);
-		this.updateStorage(filterType);
-	}
+	let exists = this.sets[filterType].hasOwnProperty(str);
 	
-
+	this.sets[filterType].remove(str);
+	this.updateStorage(filterType);
+	
 	return exists;
 }
 

@@ -25,16 +25,16 @@
 	}
 
 	//creates a "block_btn_visibility_modified"-message for content_controller
-	/*function createBlockBtnVisibilityModifiedMsg() {
+	function createBlockBtnVisibilityModifiedMsg() {
 		return {
 			sender: SENDER,
 			receiver: "content_controller",
 			content: {
 				info: "block_btn_visibility_modified",
-				block_btn_visibility: config[ConfigId.CONTENT_BLOCK_BTN_VISIBILITY];
+				block_btn_visibility: config[ConfigId.CONTENT_BLOCK_BTN_VISIBILITY]
 			}
 		};
-	}*/
+	}
 
 	/* init. current config with the the config which is stored in STORAGE (defined in shared)
 	if this function is called for the first time after the installation of this webextension,
