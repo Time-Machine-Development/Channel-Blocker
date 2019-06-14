@@ -18,7 +18,6 @@ VideoPageManagerFilter.prototype.onFound = function(child){
 		}
 		
 		if(elem.id === "meta"){
-			console.log(elem);
 			new VideoPageMetaFilter(elem.parentElement, this);
 		}
 	}

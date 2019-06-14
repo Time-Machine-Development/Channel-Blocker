@@ -16,12 +16,12 @@
 		};
 	}
 
-	//creates a "block_btn_visibility_request"-message for background_config_storage
-	function createBlockBtnVisibilityRequestMsg(){
+	//creates a request-message for background_config_storage
+	function createRequestMsg(request){
 		return {
 			sender: SENDER,
 			receiver: "background_config_storage",
-			content: "block_btn_visibility_request"
+			content: request
 		};
 	}
 
@@ -36,7 +36,6 @@
 
 		//Start/TrendsPage(https://www.youtube.com/ , https://www.youtube.com/feed/trending)
 		if(curContext === YTContext.HOME || curContext === YTContext.TRENDING){
-			console.log("HOME/TRENDING");
 			let selectList = document.getElementsByClassName("style-scope ytd-section-list-renderer");
 			for(elem of selectList){
 				if(elem.id === "contents"){
@@ -116,7 +115,14 @@
 			*/
 
 			if(msg.content === "block_btn_visibility_modified"){
-				//TODO: react to changes of the block_btn_visibility
+				//note that animationSpeed is declared and init. in checker_module
+				animationSpeed = 0;
+
+				//update current context
+				curContext = msg.content.context;
+
+				//wait for document to be ready
+				$(document).ready(updateFilters());
 			}
 		}
 	});
@@ -126,11 +132,18 @@
 		
 		//request initial context (and register this tab as a yt-tab in background as a side-effect)
 		curContext = await browser.runtime.sendMessage(createContextRequestMsg());
-		console.log(curContext);
-		
 		//request initial visibility of block-btn
 		//showBtns is used in button_lib
-		showBtns = await browser.runtime.sendMessage(createBlockBtnVisibilityRequestMsg());
+		showBtns = await browser.runtime.sendMessage(createRequestMsg("block_btn_visibility_request"));
+		//request initial color of block-btn
+		//btnColor is used in button_lib
+		btnColor = await browser.runtime.sendMessage(createRequestMsg("block_btn_color_request"));
+		//request initial size of block-btn
+		//btnSize is used in button_lib
+		btnSize = await browser.runtime.sendMessage(createRequestMsg("block_btn_size_request")) * 0.01;
+		//request initial blockVideosOnVideopage
+		//blockVideosOnVideopage is used in checker_module
+		blockVideosOnVideopage = await browser.runtime.sendMessage(createRequestMsg("block_videos_on_videopage_request"));
 
 		//wait for document to be ready
 		$(document).ready(updateFilters());

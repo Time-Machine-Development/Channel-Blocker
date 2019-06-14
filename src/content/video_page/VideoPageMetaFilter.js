@@ -9,12 +9,8 @@ VideoPageMetaFilter.prototype.constructor = VideoPageMetaFilter;
 
 VideoPageMetaFilter.prototype.onFound = function(child){
 	
-	console.log("VideoPageMetaFilter");
-	
-	
 	for(var elem of child.children){
 		if(elem.id === "meta-contents"){
-			console.log("meta");
 			new VideoPageMetaContentsFilter(elem, this);
 		}
 	}
@@ -25,10 +21,13 @@ VideoPageMetaFilter.prototype.onFound = function(child){
 	
 		
 	if(elements.length > 0){
-		console.log("elem");
-	
-		console.log(elements[0]);
-		
 		createBtnAtStart(elements[0], createBtnNode(elements[0].textContent), elements[0]);
+	}
+};
+
+//If the callbackFilter register a change they invoke this function
+VideoPageMetaFilter.prototype.reload = function(){
+	for(let childElement of this.target.children){
+		this.onFound(childElement);
 	}
 };

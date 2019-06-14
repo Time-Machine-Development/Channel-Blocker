@@ -5,6 +5,9 @@
 	DEFAULT_CONFIG[ConfigId.CONFIG_PAGE_DESIGN] = 0;
 	DEFAULT_CONFIG[ConfigId.CONFIG_ADVANCED_VIEW] = false;
 	DEFAULT_CONFIG[ConfigId.CONTENT_BLOCK_BTN_VISIBILITY] = true;
+	DEFAULT_CONFIG[ConfigId.CONTENT_BLOCK_VIDEOS_ON_VIDEOPAGE_VISIBILITY] = false;
+	DEFAULT_CONFIG[ConfigId.CONTENT_BLOCK_BTN_COLOR] = "#717171";
+	DEFAULT_CONFIG[ConfigId.CONTENT_BLOCK_BTN_SIZE] = 140;
 	Object.freeze(DEFAULT_CONFIG);
 
 	//represents the current configuration
@@ -92,7 +95,7 @@
 		if (msg.receiver !== SENDER)
 			return;
 
-		if (msg.sender === "config_config_user_interaction") {
+		if (msg.sender === "config_config_user_interaction" || msg.sender === "config_import_savefile") {
 			if (msg.content.info === "config_value_set") {
 				/* msg.content is of the form:{
 				info: "config_value_set",
@@ -128,13 +131,32 @@
 			return;
 
 		if (msg.sender === "content_controller") {
-			/* msg.content is of the form:
-			"block_btn_visibility_request"
-			 */
+			/* msg.content is of the form:{
+				content = <rqid>;
+			}
+			where <rqid> is a value of:
+				"block_btn_visibility_request",
+				"block_videos_on_videopage_request",
+				"block_btn_color_request",
+				"block_btn_size_request"
+				
+			*/
 
 			if (msg.content === "block_btn_visibility_request") {
 				return new Promise((resolve) => {
 					resolve(config[ConfigId.CONTENT_BLOCK_BTN_VISIBILITY]);
+				});
+			}else if (msg.content === "block_videos_on_videopage_request") {
+				return new Promise((resolve) => {
+					resolve(config[ConfigId.CONTENT_BLOCK_VIDEOS_ON_VIDEOPAGE_VISIBILITY]);
+				});
+			}else if (msg.content === "block_btn_color_request") {
+				return new Promise((resolve) => {
+					resolve(config[ConfigId.CONTENT_BLOCK_BTN_COLOR]);
+				});
+			}else if (msg.content === "block_btn_size_request") {
+				return new Promise((resolve) => {
+					resolve(config[ConfigId.CONTENT_BLOCK_BTN_SIZE]);
 				});
 			}
 		}

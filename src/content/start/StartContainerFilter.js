@@ -41,6 +41,8 @@ StartContainerFilter.prototype.onFound = function(child, useCallbackFilter){
 		if(btnContainerElem.id === "byline-container"){
 			btnContainerElem.style["max-height"] = "5rem";
 			createBtnAtStart(btnContainerElem, createBtnNode(userChannelName , true));
+		}else if(btnContainerElem.id === "byline"){
+			btnContainerElem.style["max-width"] = "71%";
 		}
 	}
 };

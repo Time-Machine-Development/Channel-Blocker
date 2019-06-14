@@ -95,6 +95,15 @@ StartContentFilter.prototype.onFound = function(child, useCallbackFilter){
 			new StartContainerFilter(elem, this, child);
 		}
 	}
+	
+	//Found a GridCommant
+	//Create new 'StartCommantFilter' on it
+	for(let elem of child.getElementsByClassName("style-scope yt-horizontal-list-renderer")){
+		if(elem.id === "items"){
+			new StartCommantFilter(elem, this, child);
+		}
+	}
+	
 };
 
 //If the callbackFilter register a change they invoke this function

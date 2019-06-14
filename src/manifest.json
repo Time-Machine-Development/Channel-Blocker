@@ -46,7 +46,8 @@
 			"background/browser_action.js",
 			"background/url_update.js",
 			"background/config_storage.js",
-			"background/filter_storage.js"
+			"background/filter_storage.js",
+			"background/savefile_export.js"
 		]
 	},
 
@@ -64,6 +65,7 @@
 
 				"content/CallbackFilter.js",
 
+				"content/start/StartCommantFilter.js",
 				"content/start/StartContainerFilter.js",
 				"content/start/StartContentFilter.js",
 
