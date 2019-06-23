@@ -33,6 +33,16 @@
 				actFilter.detach();
 			}
 		}
+		
+		try{
+			for(btn of document.getElementsByTagName("button")){
+				if(btn.id === "cb_button"){
+					btn.remove();
+				}
+			}
+		}catch(e){
+			console.error(e,e.stack);
+		}
 
 		//Start/TrendsPage(https://www.youtube.com/ , https://www.youtube.com/feed/trending)
 		if(curContext === YTContext.HOME || curContext === YTContext.TRENDING){
@@ -62,6 +72,28 @@
 		}
 	}
 
+	//requests initial context and the initial visibility of block-btn, afterwards update filters (for the first time on this tab-id)
+	async function init(){
+		
+		//request initial context (and register this tab as a yt-tab in background as a side-effect)
+		curContext = await browser.runtime.sendMessage(createContextRequestMsg());
+		//request initial visibility of block-btn
+		//showBtns is used in button_lib
+		showBtns = await browser.runtime.sendMessage(createRequestMsg("block_btn_visibility_request"));
+		//request initial color of block-btn
+		//btnColor is used in button_lib
+		btnColor = await browser.runtime.sendMessage(createRequestMsg("block_btn_color_request"));
+		//request initial size of block-btn
+		//btnSize is used in button_lib
+		btnSize = await browser.runtime.sendMessage(createRequestMsg("block_btn_size_request")) * 0.01;
+		//request initial blockVideosOnVideopage
+		//blockVideosOnVideopage is used in checker_module
+		blockVideosOnVideopage = await browser.runtime.sendMessage(createRequestMsg("block_videos_on_videopage_request"));
+
+		//wait for document to be ready
+		$(document).ready(updateFilters());
+	}
+	
 	/*
 	INSTALLING LISTENER FOR MESSAGES FROM background-scripts
 	*/
@@ -114,40 +146,12 @@
 			where <bbv> is boolean
 			*/
 
-			if(msg.content === "block_btn_visibility_modified"){
-				//note that animationSpeed is declared and init. in checker_module
-				animationSpeed = 0;
-
-				//update current context
-				curContext = msg.content.context;
-
-				//wait for document to be ready
-				$(document).ready(updateFilters());
+			if(msg.content.info === "block_btn_modified"){
+				//requests initial context and the initial visibility of block-btn, afterwards update filters (for the first time on this tab-id)
+				init();
 			}
 		}
 	});
-
-	//requests initial context and the initial visibility of block-btn, afterwards update filters (for the first time on this tab-id)
-	async function init(){
-		
-		//request initial context (and register this tab as a yt-tab in background as a side-effect)
-		curContext = await browser.runtime.sendMessage(createContextRequestMsg());
-		//request initial visibility of block-btn
-		//showBtns is used in button_lib
-		showBtns = await browser.runtime.sendMessage(createRequestMsg("block_btn_visibility_request"));
-		//request initial color of block-btn
-		//btnColor is used in button_lib
-		btnColor = await browser.runtime.sendMessage(createRequestMsg("block_btn_color_request"));
-		//request initial size of block-btn
-		//btnSize is used in button_lib
-		btnSize = await browser.runtime.sendMessage(createRequestMsg("block_btn_size_request")) * 0.01;
-		//request initial blockVideosOnVideopage
-		//blockVideosOnVideopage is used in checker_module
-		blockVideosOnVideopage = await browser.runtime.sendMessage(createRequestMsg("block_videos_on_videopage_request"));
-
-		//wait for document to be ready
-		$(document).ready(updateFilters());
-	}
 
 	init();
 }

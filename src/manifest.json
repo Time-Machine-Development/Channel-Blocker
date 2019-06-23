@@ -80,6 +80,7 @@
 				"content/video_page/VideoPageCommentContainerFilter.js",
 				"content/video_page/VideoPageMetaContentsFilter.js",
 				"content/video_page/VideoPageMetaFilter.js",
+				"content/video_page/VideoPageChatFrameFilter.js",
 				"content/video_page/VideoPageContentFilter.js",
 				"content/video_page/VideoPageWatchFilter.js",
 				"content/video_page/VideoPageManagerFilter.js",

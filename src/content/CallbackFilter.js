@@ -4,7 +4,8 @@ function CallbackFilter(target, parent, child) {
 	this.mutationObs = new MutationObserver(this.callbackFunc);
 	this.mutationObs.filterInst = this;
 	let mutationObsOptions = {
-		childList: true
+		childList: true,
+		subtree: true
 	};
 	this.mutationObs.observe(target, mutationObsOptions);
 	

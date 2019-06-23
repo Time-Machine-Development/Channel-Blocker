@@ -14,15 +14,6 @@ VideoPageMetaFilter.prototype.onFound = function(child){
 			new VideoPageMetaContentsFilter(elem, this);
 		}
 	}
-	
-	
-	
-	let elements = child.getElementsByClassName("yt-simple-endpoint style-scope yt-formatted-string");
-	
-		
-	if(elements.length > 0){
-		createBtnAtStart(elements[0], createBtnNode(elements[0].textContent), elements[0]);
-	}
 };
 
 //If the callbackFilter register a change they invoke this function

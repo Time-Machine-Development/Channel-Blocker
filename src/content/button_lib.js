@@ -35,6 +35,7 @@ function addListener(btn, userChannelName, checkBeforBlocking = false){
 //Creates a button and returns it
 function createBtnNode(userChannelName, checkBeforBlocking = false){
 	let btn = document.createElement("button");
+	btn.setAttribute("id", "cb_button");
 	btn.setAttribute("type", "button");
 	btn.setAttribute("title", "Block '" + userChannelName + "' (Channel Blocker)");
 	btn = addListener(btn, userChannelName, checkBeforBlocking);
@@ -52,6 +53,7 @@ function createBtnNode(userChannelName, checkBeforBlocking = false){
 //Creates a button and returns it
 function createContainerBtnNode(userChannelName, checkBeforBlocking = false){
 	let btn = document.createElement("button");
+	btn.setAttribute("id", "cb_button");
 	btn.setAttribute("type", "button");
 	btn.setAttribute("title", "block '" + userChannelName + "' (Channel Blocker)");
 	btn = addListener(btn, userChannelName, checkBeforBlocking);

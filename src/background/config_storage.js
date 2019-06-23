@@ -28,12 +28,12 @@
 	}
 
 	//creates a "block_btn_visibility_modified"-message for content_controller
-	function createBlockBtnVisibilityModifiedMsg() {
+	function createBlockBtnModifiedMsg() {
 		return {
 			sender: SENDER,
 			receiver: "content_controller",
 			content: {
-				info: "block_btn_visibility_modified",
+				info: "block_btn_modified",
 				block_btn_visibility: config[ConfigId.CONTENT_BLOCK_BTN_VISIBILITY]
 			}
 		};
@@ -78,9 +78,9 @@
 			if (configTabId !== null)
 				browser.tabs.sendMessage(configTabId, createConfigStorageModifiedMsg(configId));
 
-			if (configId === ConfigId.CONTENT_BLOCK_BTN_VISIBILITY) {
+			if (configId === ConfigId.CONTENT_BLOCK_BTN_VISIBILITY || configId === ConfigId.CONTENT_BLOCK_BTN_SIZE || configId === ConfigId.CONTENT_BLOCK_BTN_COLOR) {
 				for (let tabId of YT_TAB_IDS.keys()) {
-					browser.tabs.sendMessage(Number(tabId), createBlockBtnVisibilityModifiedMsg());
+					browser.tabs.sendMessage(Number(tabId), createBlockBtnModifiedMsg());
 				}
 			}
 			updateStorage();

@@ -20,5 +20,10 @@ VideoPageManagerFilter.prototype.onFound = function(child){
 		if(elem.id === "meta"){
 			new VideoPageMetaFilter(elem.parentElement, this);
 		}
+		
+		if(elem.id === "chat-template"){
+			console.log("chat-template")
+			new VideoPageChatFrameFilter(elem.parentElement, this);
+		}
 	}
 };
