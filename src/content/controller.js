@@ -140,7 +140,7 @@
 		if(msg.sender === "background_config_storage"){
 			/* msg.content is of the form:
 			{
-				info: "block_btn_visibility_modified",
+				info: "block_btn_modified",
 				block_btn_visibility: <bbv>
 			}
 			where <bbv> is boolean

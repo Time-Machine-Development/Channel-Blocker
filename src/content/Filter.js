@@ -26,6 +26,7 @@ Filter.prototype.onFound = function(child){
 
 //Register the changes of childNodes and invoke the 'onFound()'
 Filter.prototype.callbackFunc = function(mutationRecArr, observerInst){
+	console.log("callbackFunc");
 	for(let mutationRecItem of mutationRecArr){
 		for(let addedNode of mutationRecItem.addedNodes){
 			this.filterInst.onFound(addedNode);

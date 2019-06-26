@@ -46,7 +46,7 @@
 		let storageContainer = await STORAGE.get("config");
 		config = storageContainer["config"];
 		if(config === undefined){
-			config = DEFAULT_CONFIG;
+			config = {};
 		}
 
 		let changed = false;
@@ -131,7 +131,7 @@
 			return;
 
 		if (msg.sender === "content_controller") {
-			/* msg.content is of the form:{
+			/* msg is of the form:{
 				content = <rqid>;
 			}
 			where <rqid> is a value of:
@@ -139,7 +139,6 @@
 				"block_videos_on_videopage_request",
 				"block_btn_color_request",
 				"block_btn_size_request"
-				
 			*/
 
 			if (msg.content === "block_btn_visibility_request") {

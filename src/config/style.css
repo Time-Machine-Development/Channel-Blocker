@@ -1,3 +1,28 @@
+:root {
+  --main-size: 2.6em;
+  --main-size-2: 1.5em;
+  --main-size-3: 1.1em;
+  --main-size-4: 0.2em;
+  
+  --main-color:#f1f1f1;
+  
+  --btn-color-hover:#aaaaaa;
+  
+  --toggle-slider-color-false:#ff5959;
+  --toggle-slider-color-true:#336e7b;
+  --toggle-slider-color-handle:#ffffff;
+  
+  --line-color:#000000;
+  
+  --text-color-1:#000000;
+  
+  --background-color-1:#ffffff;
+  --background-color-2:#f1f1f1;
+  --background-color-3:#464646;
+  
+  --border-simple:1px solid black;
+}
+
 ::-webkit-input-placeholder {
    font-style: italic;
 }
@@ -15,12 +40,12 @@
 }
 
 body {
-	background:#ffffff;
+	background:var(--background-color-1);
 	font-family: 'Titillium Web', sans-serif;
 }
 
 h1 {
-	color:000000;
+	color:var(--text-color-1);
 	margin:1% 1% 0% 1%;
 	font-size: 1.2em;
 	font-weight: lighter;
@@ -28,7 +53,7 @@ h1 {
 }
 
 h2 {
-	color:000000;
+	color:var(--text-color-1);
 	margin-bottom:0%;
 	padding-bottom:0%;
 	font-size: 1.05em;
@@ -45,7 +70,15 @@ h4 {
 	font-size: 0.8em;
 	margin:1% 1% 0% 1%;
 	padding:0%;
-	color:#000000;
+	color:var(--text-color-1);
+	font-weight: lighter;
+}
+
+strong {
+	font-size: 1.1em;
+	margin:1% 1% 0% 1%;
+	padding:0%;
+	color:var(--text-color-1);
 	font-weight: lighter;
 }
 
@@ -53,20 +86,20 @@ p {
 	font-size: 0.8em;
 	padding:0%;
 	margin:0% 1% 0% 1%;
-	color:#000000;
+	color:var(--text-color-1);
 }
 
 a {
-	color:#000000;
+	color:var(--text-color-1);
 }
-	
+
 ul {
 	list-style-type: square;
 }
 .hr {
 	height:2px;
 	width:98%;
-	background: #505050;
+	background: var(--line-color);
 	margin:1%;
 }
 
@@ -100,7 +133,7 @@ ul {
 .donationDiv .donationTextDiv {
 	display:inline-block;
 	width:40%;
-	color:#000000;
+	color:var(--text-color-1);
 	border:none;
 }
 
@@ -115,7 +148,7 @@ ul {
 
 .donationDiv .donationBtnDiv .patreon {
 	border: 1px;
-	color: #ffffff;
+	color: var(--text-color-1);
 	background: #f96854;
 	padding-top: 4px;
 	padding-bottom: 4px;
@@ -140,16 +173,34 @@ ul {
 }
 
 .lable {
-	color:000000;
+	color:var(--text-color-1);
 }
 
 .textField {
-	width:100%;
-	height:2em;
-	color:000000;
-	background:#ffffff;
-	border-color:#000000;
-	border: 1px solid #9f9f9f;
+	width:calc(100% - 4em - 4px);
+	height:2.75em;
+	color:var(--text-color-1);
+	background:var(--main-color);
+	border:var(--border-simple);
+	
+}
+
+.textField::placeholder {
+	color:var(--text-color-1);
+}
+
+.containerSelect{
+	margin: 1% 1% 0% 1%;
+	background: var(--background-color-2);
+	color:var(--text-color-1);
+	border: 1px solid var(--text-color-1);
+	font-size: 1.2em;
+	font-weight: lighter;
+}
+
+.caseInsensitiveCheckbox{
+	cursor: pointer;
+	vertical-align: middle;
 }
 
 #hideable {
@@ -158,17 +209,15 @@ ul {
 
 .outerDivExp div{
 	display:block;
-	background:#fafafa;
+	background:var(--background-color-2);
 	margin:0% 1% 1% 1%;
 	padding:0.5%;
-	border:1px solid #9f9f9f;
 }
 
 .outerDivExpNoBg div{
 	display:block;
 	margin:1%;
 	padding:0.5%;
-	border:none;
 }
 
 .innerDivExp div{
@@ -178,17 +227,16 @@ ul {
 	margin-left:0%;
 	margin-right:0%;
 	padding:0.5%;
-	border:none;
 }
 
 .innerDivExp .elementExp {
-	background:#fafafa;
+	background:var(--background-color-4);
 	margin-top:0%;
 	margin-bottom:1em;
 }
 
 .innerDivExp .elementExp div{
-	background:#fafafa;
+	background:var(--background-color-4);
 }
 
 .innerDivExp .selectionContainer {
@@ -205,18 +253,19 @@ ul {
 	vertical-align:top;
 	margin:0%;
 	padding:0%;
-	color: 000000;
+	color: var(--text-color-1);
 }
 
 .inputText {
-	color:#000000;
+	color:var(--text-color-1);
+	background:var(--background-color-1);
 	position: absolute;
 	bottom: 2em;
 }
 
 .innerDivExp aside {
 	display:inline-block;
-	background:#000000;
+	background:var(--background-color-2);
 	width:31.5%;
 	margin:0%;
 	padding:0%;
@@ -226,9 +275,10 @@ ul {
 .innerDivExp .selectionContainer select {
 	width:100%;
 	height:15em;
-	color:#000000;
-	background:#f5f5f5;
-	border: 1px solid #9f9f9f;
+	color:var(--text-color-1);
+	background:var(--main-color);
+	border:none;
+	border:var(--border-simple);
 }
 
 .innerDivExp .selectionContainer select option {
@@ -242,12 +292,11 @@ ul {
 	display:inline-block;
 	width:7%;
 	height:15em;
-	color:#000000;
-	background:#d1d1d1;
-	border-style: solid;
-	border-color: #9f9f9f;
-    border-width: 1px 1px 1px 1px;
+	color:var(--text-color-1);
+	background:var(--main-color);
+	border:none;
 	cursor: pointer;
+	border:var(--border-simple);
 }
 
 .innerDivExp  .spacer div {
@@ -256,21 +305,25 @@ ul {
 }
 
 .innerDivExp  .spacer button:hover{
-	background:#bbbbbb;
+	background:var(--btn-color-hover);
 }
 
 .innerDivExp aside button{
-	width:100%;
-	height:4em;
-	color:#000000;
-	background:#d1d1d1;
-	border: 1px solid #9f9f9f;
+}
+
+.innerDivExp aside button{
+	width:3em;
+	height:3em;
+	color:var(--text-color-1);
+	background:var(--main-color);
+	border:none;
 	font-size: 0.8em;
 	cursor: pointer;
+	border:var(--border-simple);
 }
 
 .innerDivExp aside button:hover{
-	background:#bbbbbb;
+	background:var(--btn-color-hover);
 }
 
 .innerDivExp aside .info {
@@ -278,7 +331,7 @@ ul {
 }
 
 .innerDivExp aside .info  .infoText{
-	color: #000000;
+	color: var(--text-color-1);
 	word-wrap: break-word;
 	position: absolute;
 	bottom: 0em;
@@ -287,12 +340,51 @@ ul {
 	padding:0%;
 }
 
+.saveFileDiv{
+	display: flex;
+	flex-direction:row;
+}
+
+.moreOptionsOuterContainer{
+	margin:1em 1em 1em 1em;
+	flex: 1 1 0px;
+}
+
+.moreOptionsDiv{
+	padding-top:0.5em;
+	min-height:100px;
+	background: var(--background-color-2);
+	border: var(--border-simple);
+}
+
+.moreOptionsDiv h4{
+	display: flex;
+	flex-direction:row;
+}
+
+.moreOptionsTextDiv{
+	flex: 1 1 0px;
+}
+
+.moreOptionsInteractableDiv{
+	flex: 1 1 0px;
+}
+
 .saveFileDiv button{
 	margin-left:1%;
+	cursor: pointer;
+}
+
+.saveFileDiv select{
+	margin-left:1%;
+	cursor: pointer;
 }
 
 .saveFileDiv input{
+	color:var(--text-color-1);
+	vertical-align:middle;
 	margin-left:1%;
+	cursor: pointer;
 }
 
 #checkboxSelectionContainer {
@@ -302,6 +394,89 @@ ul {
 #checkboxLable {
 	vertical-align: middle;
 }
+
+.footer{
+	display: flex;
+	flex-direction:row;
+}
+
+.footerElement{
+	display: flex;
+	flex-direction:row;
+	flex: 1 1 0px;
+}
+
+.footerInnerElement{
+	text-align:center;
+	flex: 1 1 0px;
+}
+
+
+ /* TOGGLE-SWITCH */
+ /* The switch - the box around the slider */
+ 
+.switch {
+  position: relative;
+  display: inline-block;
+  width: var(--main-size);
+  height: var(--main-size-2);
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--toggle-slider-color-false);
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: var(--main-size-3);
+  width: var(--main-size-3);
+  left: var(--main-size-4);
+  bottom: var(--main-size-4);
+  background-color: var(--toggle-slider-color-handle);
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: var(--toggle-slider-color-true);
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(var(--main-size-3));
+  -ms-transform: translateX(var(--main-size-3));
+  transform: translateX(var(--main-size-3));
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: var(--main-size-2);
+}
+
+.slider.round:before {
+  border-radius: 50%;
+} 
+
 
 @media screen and (min-width:80em) {
 	.donationDiv .donationTextDiv {
@@ -417,4 +592,3 @@ ul {
 		width:51.5%;
 	}
 }
-

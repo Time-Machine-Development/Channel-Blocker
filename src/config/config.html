@@ -40,9 +40,16 @@
 		<div class="outerDivExpNoBg">
 			<div class="innerDivExp">
 				<div class="elementExpNoBg">
-					<div id="checkboxSelectionContainer" class="selectionContainer">
-						<input class="configurationCheckbox" id="configAdvancedViewCheckbox" name="configuration" value="conf" type="checkbox" style="cursor: pointer;">
-						<label for="configurationCheckbox" id="checkboxLable" class="lable">advanced view <span class="informationSubtitle">(requires basic knowledge of <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions#Writing_a_regular_expression_pattern">regular expressions</a>)</span></label>
+					<div id="checkboxSelectionContainer" class="selectionContainer" style="display: inline-flex;">
+						<h4>
+						<label class="switch">
+							<input class="configurationCheckbox" id="configAdvancedViewCheckbox" name="configuration" value="conf" type="checkbox" style="cursor: pointer;">
+							<span class="slider round"></span>
+						</label>
+						</h4>
+						<h4>
+							advanced view <span class="informationSubtitle">(requires basic knowledge of <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions#Writing_a_regular_expression_pattern">regular expressions</a>)</span>
+						</h4>
 					</div>
 
 					<div class="spacer">
@@ -229,51 +236,115 @@
 
 		<strong>more options</strong>
 		<div class="saveFileDiv">
-			<h4>
-				Design:
-				<select id="DesignSelect">
-					<option value="0">Dark</option>
-					<option value="1">Light</option>
-				</select>
-			</h4>
-			<h4>
-				Show block-button on youtube
-				<input value="showBtn" type="checkbox" id="configBtnVisibilityCheckbox">
-			</h4>
-			<h4>
-				Block videos on videopage
-				<input value="showBtn" type="checkbox" id="configBlockVideosOnVideopageCheckbox">
-			</h4>
-			<h4>
-				Color of blockbuttons
-				<input type="color" id="configBtnColor" name="btncolor" value="#717171">
-			</h4>
-			<h4>
-				Size of blockbuttons
-				<input type="range" min="120" max="200" value="140" class="slider" id="configBtnSizeSlider">
-				<button type="button" title="size of block-button" id="showSizeBtn" style="padding-left:0em; color:red; border:none; background-color:Transparent; cursor:pointer; width:2em;">
-					<svg viewBox="0 0 100 100">
-						<path d="M 15,15 L 85,85 M 85,15 L 15,85" id="showColorBtn" style="stroke: #c0c0c0;fill: transparent;stroke-linecap: round;stroke-width: 25;">
-						</path>
-					</svg>
-				</button>
-			</h4>
-			<h4>
-				Export savefile:
-				<button id="exportBtn" type="button" title="Export a 'ChannelBlocker.save'-file to your downloadfolder."><span>Export</span></button>
-			</h4>
-			<h4>
-				Import savefile:
-				<input type="file" id="fileLoaderBtn" name="fileLoaderBtn">
-			</h4>
+		
+			<div class="moreOptionsOuterContainer">
+				<strong>Design</strong>
+				<div class="moreOptionsDiv">
+					<h4>
+						<div class="moreOptionsTextDiv">
+							Design:
+						</div>
+						<div class="moreOptionsInteractableDiv">
+							<select id="DesignSelect">
+								<option value="0">Dark</option>
+								<option value="1">Light</option>
+							</select>
+						</div>
+					</h4>
+					<h4>
+						<div class="moreOptionsTextDiv">
+							Color of blockbuttons:
+						</div>
+						<div class="moreOptionsInteractableDiv">
+							<input type="color" id="configBtnColor" name="btncolor" value="#717171">
+						</div>
+					</h4>
+					<h4>
+						<div class="moreOptionsTextDiv">
+							Size of blockbuttons:
+						</div>
+						<div class="moreOptionsInteractableDiv">
+						<input type="range" min="120" max="200" value="140" class="sizeSlider" id="configBtnSizeSlider">
+							<button type="button" title="size of block-button" id="showSizeBtn" style="padding-left:0em; color:red; border:none; background-color:Transparent; cursor:pointer; width:2em;">
+								<svg viewBox="0 0 100 100">
+									<path d="M 15,15 L 85,85 M 85,15 L 15,85" id="showColorBtn" style="stroke: #c0c0c0;fill: transparent;stroke-linecap: round;stroke-width: 25;">
+									</path>
+								</svg>
+							</button>
+						</div>
+					</h4>
+				</div>
+			</div>
+			
+			<div class="moreOptionsOuterContainer">
+				<strong>Visibility</strong>
+				<div class="moreOptionsDiv">
+					<h4>
+						<div class="moreOptionsTextDiv">
+							Show block-button on youtube:
+						</div>
+						<div class="moreOptionsInteractableDiv">
+							<label class="switch">
+								<input value="showBtn" type="checkbox" id="configBtnVisibilityCheckbox">
+								<span class="slider round"></span>
+							</label>
+						</div>
+					</h4>
+					<h4>
+						<div class="moreOptionsTextDiv">
+							Block videos on videopage:
+						</div>
+						<div class="moreOptionsInteractableDiv">
+							<label class="switch">
+								<input value="showBtn" type="checkbox" id="configBlockVideosOnVideopageCheckbox">
+								<span class="slider round"></span>
+							</label>
+						</div>
+					</h4>
+				</div>
+			</div>
+			
+			<div class="moreOptionsOuterContainer">
+				<strong>Save you data</strong>
+				<div class="moreOptionsDiv">
+					<h4>
+						<div class="moreOptionsTextDiv">
+							Export savefile:
+						</div>
+						<div class="moreOptionsInteractableDiv">
+							<button id="exportBtn" type="button" title="Export a 'ChannelBlocker.save'-file to your downloadfolder."><span>Export</span></button>
+						</div>
+					</h4>
+					<h4>
+						<div class="moreOptionsTextDiv">
+							Import savefile:
+						</div>
+						<div class="moreOptionsInteractableDiv">
+							<input type="file" id="fileLoaderBtn" name="fileLoaderBtn">
+						</div>
+					</h4>
+				</div>
+			</div>
 		</div>
 							
 		<div class="hr"></div>
 
-		<h4>Contact</h4>
-		<p>email: <a href="mailto:yt-cleaner@protonmail.com">yt-cleaner@protonmail.com</a></p>
-		<h4>Help</h4>
-		<p>FAQ: <a href="help.html">click here</a></p>
+		<div class="footer">
+			<div class="footerElement">
+			</div>
+			<div class="footerElement">
+				<div class="footerInnerElement">
+					<h2>Contact</h2>
+					<p>email: <a href="mailto:yt-cleaner@protonmail.com">yt-cleaner@protonmail.com</a></p>
+				</div>
+				<div class="footerInnerElement">
+					<h2>Help</h2>
+					<p>FAQ: <a href="help.html">click here</a></p>
+				</div>
+			</div>
+			<div class="footerElement">
+			</div>
+		</div>
 		
 
 	</body>
