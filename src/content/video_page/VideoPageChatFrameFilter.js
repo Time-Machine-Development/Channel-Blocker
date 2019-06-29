@@ -16,15 +16,22 @@ function getIFrameContent(iframe) {
 VideoPageChatFrameFilter.prototype.onFound = function (child) {
 	try {
 		if (child.id === "chatframe") {
-			console.log("chatframe", getIFrameContent(child));
-			new VideoPageChatIFrameFilter(getIFrameContent(child), this);
+			console.log("chatframe", child);
+			child.addEventListener("load", function() {
+				console.log("load");
+				new VideoPageChatIFrameFilter(getIFrameContent(child), this);
+			});
 		}
 
-		for (let elem of child.children) {
-			console.log(elem);
-			if (elem.id === "chatframe") {
-				console.log("chatframe", getIFrameContent(elem));
-				new VideoPageChatIFrameFilter(getIFrameContent(elem), this);
+		if(child.hasChildNodes()){
+			for (let elem of child.children) {
+				if (elem.id === "chatframe") {
+					console.log("chatframe", elem);
+					elem.addEventListener("load", function() {
+						console.log("load");
+						new VideoPageChatIFrameFilter(getIFrameContent(elem), this);
+					});
+				}
 			}
 		}
 	} catch (e) {
@@ -34,7 +41,6 @@ VideoPageChatFrameFilter.prototype.onFound = function (child) {
 
 //If the callbackFilter register a change they invoke this function
 VideoPageChatFrameFilter.prototype.reload = function () {
-	console.log("reload");
 	for (let childElement of this.target.children) {
 		this.onFound(childElement);
 	}

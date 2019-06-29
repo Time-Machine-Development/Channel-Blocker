@@ -1,8 +1,8 @@
-function Filter(target, parent) {
+function Filter(target, parent, mutationObsOptions = {childList: true}) {
 	//Creates an observer to listen to changes of *target*
 	this.mutationObs = new MutationObserver(this.callbackFunc);
 	this.mutationObs.filterInst = this;
-	this.mutationObs.observe(target, {childList: true});
+	this.mutationObs.observe(target, mutationObsOptions);
 
 	this.target = target;
 	
@@ -26,7 +26,7 @@ Filter.prototype.onFound = function(child){
 
 //Register the changes of childNodes and invoke the 'onFound()'
 Filter.prototype.callbackFunc = function(mutationRecArr, observerInst){
-	console.log("callbackFunc");
+	console.log("callbackFunc", observerInst);
 	for(let mutationRecItem of mutationRecArr){
 		for(let addedNode of mutationRecItem.addedNodes){
 			this.filterInst.onFound(addedNode);
