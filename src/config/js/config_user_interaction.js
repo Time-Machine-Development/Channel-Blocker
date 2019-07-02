@@ -115,9 +115,9 @@
 	function changePageDesign(configValue) {
 		document.getElementById("DesignSelect").value = configValue;
 		if (configValue == 0) {
-			document.getElementById("css").href = "styleDark.css";
+			document.getElementById("css").href = "css/dark_root.css";
 		} else if (configValue == 1) {
-			document.getElementById("css").href = "style.css";
+			document.getElementById("css").href = "css/light_root.css";
 		}
 	}
 

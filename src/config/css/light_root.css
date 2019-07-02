@@ -1,0 +1,24 @@
+:root {
+  --main-size: 2.6em;
+  --main-size-2: 1.5em;
+  --main-size-3: 1.1em;
+  --main-size-4: 0.2em;
+  
+  --main-color:#f1f1f1;
+  
+  --btn-color-hover:#aaaaaa;
+  
+  --toggle-slider-color-false:#9c9c9c;
+  --toggle-slider-color-true:#336e7b;
+  --toggle-slider-color-handle:#ffffff;
+  
+  --line-color:#000000;
+  
+  --text-color-1:#000000;
+  
+  --background-color-1:#ffffff;
+  --background-color-2:#f1f1f1;
+  --background-color-3:#e3e3e3;
+  
+  --border-simple:1px solid black;
+}
