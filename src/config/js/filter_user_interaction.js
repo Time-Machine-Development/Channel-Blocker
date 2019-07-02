@@ -70,41 +70,42 @@
 		option.textContent = "\"" + item + "\"";
 	}
 	
-	
+	//TODO 
+	//get the filter Values, clear the selection and add the new values
 	async function sendAndProcessFilterValuesRequestMsg() {
 		//blocked_users_selection
 		let values = await browser.runtime.sendMessage(createFilterValuesRequestMsg(FilterType.BLOCKED_USERS));
 		clearSelection("blocked_users");
 		for(let val of Object.keys(values)){
-			addContentToFilterBox("blocked_users",val);
+			addContentToFilterBox("blocked_users", val);
 		}
 		
 		//title_regexs_selection
 		values = await browser.runtime.sendMessage(createFilterValuesRequestMsg(FilterType.TITLE_REGEXS));
 		clearSelection("title_regexs");
 		for(let val of Object.keys(values)){
-		addContentToFilterBox("title_regexs",val + " [" + values[val] + "]");
+			addContentToFilterBox("title_regexs", val);
 		}
 		
 		//name_regexs_selection
 		values = await browser.runtime.sendMessage(createFilterValuesRequestMsg(FilterType.NAME_REGEXS));
 		clearSelection("name_regexs");
 		for(let val of Object.keys(values)){
-			addContentToFilterBox("name_regexs",val + " [" + values[val] + "]");
+			addContentToFilterBox("name_regexs", val);
 		}
 		
 		//comment_regexs_selection
 		values = await browser.runtime.sendMessage(createFilterValuesRequestMsg(FilterType.COMMENT_REGEXS));
 		clearSelection("comment_regexs");
 		for(let val of Object.keys(values)){
-			addContentToFilterBox("comment_regexs",val + " [" + values[val] + "]");
+			addContentToFilterBox("comment_regexs", val);
 		}
 		
 		//excluded_users_selection
 		values = await browser.runtime.sendMessage(createFilterValuesRequestMsg(FilterType.EXCLUDED_USERS));
 		clearSelection("excluded_users");
 		for(let val of Object.keys(values)){
-			addContentToFilterBox("excluded_users",val);
+			addContentToFilterBox("excluded_users", val);
 		}
 	}
 	
@@ -143,7 +144,7 @@
 
 		for(var filter_val of input){
 			if(filterType !== "BLOCKED_USERS" && filterType !== "EXCLUDED_USERS"){
-				filter_val = filter_val.substring(0, filter_val.length - 4);
+				filter_val = filter_val.substring(0, filter_val.length - 2);
 			}
 			browser.runtime.sendMessage(createDeleteMsg(FilterType[filterType], filter_val));
 		}
