@@ -49,7 +49,7 @@
 
 		}
 	}
-	
+
 	//set all options of selectio to null
 	function clearSelection(containerId){
 		let selection = document.getElementById(containerId + "_selection");
@@ -58,57 +58,38 @@
 			selection.remove(i);
 		}
 	}
-	
-	
-	function addContentToFilterBox(containerId, item){
+
+	//add an user/channel-name or regular expression (case-sensitve or case-insensitive) to container with id containerId
+	function addUserChannelNameOrRegExToFilterBox(containerId, userChannelNameOrRegEx, regExType){
 		let selection = document.getElementById(containerId + "_selection");
 
 		let option = document.createElement("option");
 		selection.appendChild(option);
 
-		option.setAttribute("value", item);
-		option.textContent = "\"" + item + "\"";
+		option.setAttribute("value", userChannelNameOrRegEx);
+		option.textContent = "\"" + userChannelNameOrRegEx + "\"";
+
+		//regExType should only be not undefined if and only if containerId is in {TITLE_REGEXS, NAME_REGEXS, COMMENT_REGEXS}
+		if(regExType === RegExType.CASE_INSENSITIVE){
+			option.textContent += "*";
+		}
 	}
-	
-	//TODO 
-	//get the filter Values, clear the selection and add the new values
+
+	//get the filter values, clear the selection and add the new values
 	async function sendAndProcessFilterValuesRequestMsg() {
-		//blocked_users_selection
-		let values = await browser.runtime.sendMessage(createFilterValuesRequestMsg(FilterType.BLOCKED_USERS));
-		clearSelection("blocked_users");
-		for(let val of Object.keys(values)){
-			addContentToFilterBox("blocked_users", val);
-		}
-		
-		//title_regexs_selection
-		values = await browser.runtime.sendMessage(createFilterValuesRequestMsg(FilterType.TITLE_REGEXS));
-		clearSelection("title_regexs");
-		for(let val of Object.keys(values)){
-			addContentToFilterBox("title_regexs", val);
-		}
-		
-		//name_regexs_selection
-		values = await browser.runtime.sendMessage(createFilterValuesRequestMsg(FilterType.NAME_REGEXS));
-		clearSelection("name_regexs");
-		for(let val of Object.keys(values)){
-			addContentToFilterBox("name_regexs", val);
-		}
-		
-		//comment_regexs_selection
-		values = await browser.runtime.sendMessage(createFilterValuesRequestMsg(FilterType.COMMENT_REGEXS));
-		clearSelection("comment_regexs");
-		for(let val of Object.keys(values)){
-			addContentToFilterBox("comment_regexs", val);
-		}
-		
-		//excluded_users_selection
-		values = await browser.runtime.sendMessage(createFilterValuesRequestMsg(FilterType.EXCLUDED_USERS));
-		clearSelection("excluded_users");
-		for(let val of Object.keys(values)){
-			addContentToFilterBox("excluded_users", val);
+		for(let filterType in FilterType){
+			let filterTypeStr = filterType.toLowerCase();
+			let values = await browser.runtime.sendMessage(createFilterValuesRequestMsg(FilterType[filterType]));
+
+			clearSelection(filterTypeStr);
+
+			for(let val of Object.keys(values)){
+				console.log(val);
+				addUserChannelNameOrRegExToFilterBox(filterTypeStr, val, values[val]);
+			}
 		}
 	}
-	
+
 	//get the input_textfield value, create an addMsg and send it to the storage
 	function sendAddMessage(filterType){
 		let input = document.getElementById(filterType.toLowerCase() + "_input_textfield").value;
@@ -119,14 +100,14 @@
 			if(filterType === "BLOCKED_USERS" || filterType === "EXCLUDED_USERS"){
 				browser.runtime.sendMessage(createAddMsg(FilterType[filterType], input));
 			}else if(document.getElementById(filterType.toLowerCase() + "_caseInsensitive_checkbox").checked){
-				browser.runtime.sendMessage(createAddMsg(FilterType[filterType], input, RegExType.CASE_SENSITIVE));
-			}else{
 				browser.runtime.sendMessage(createAddMsg(FilterType[filterType], input, RegExType.CASE_INSENSITIVE));
+			}else{
+				browser.runtime.sendMessage(createAddMsg(FilterType[filterType], input, RegExType.CASE_SENSITIVE));
 			}
 		}
 	}
 
-	//get the options from the selection, create an deleteMsg and send it to the storage
+	//get the options from the selection, create a deleteMsg and send it to the background
 	function sendDeleteMessage(filterType){
 		function getSelectedOptions(selectionId){
 			let selection = document.getElementById(selectionId);
@@ -143,25 +124,22 @@
 		let input = getSelectedOptions(selectionId);
 
 		for(var filter_val of input){
-			if(filterType !== "BLOCKED_USERS" && filterType !== "EXCLUDED_USERS"){
-				filter_val = filter_val.substring(0, filter_val.length - 2);
-			}
 			browser.runtime.sendMessage(createDeleteMsg(FilterType[filterType], filter_val));
 		}
 	}
-	
-	
+
+
 	//get the filtervalues at startup
 	sendAndProcessFilterValuesRequestMsg();
-	
-	
+
+
 	//install onclick functions for all buttons of config.html
 	for(let filterType in FilterType){
 		let filterTypeStr = filterType.toLowerCase();
-	
+
 	 	let addBtnId = filterTypeStr + "_add_btn";
 	 	let deleteBtnId = filterTypeStr + "_delete_btn";
-	
+
 	 	document.getElementById(addBtnId).onclick = () => {
 	 		sendAddMessage(filterType);
 	 	};
@@ -174,9 +152,9 @@
 	INSTALLING LISTENER FOR MESSAGES FROM background-scripts
 	*/
 
-     browser.runtime.onMessage.addListener((msg, sender) => {
-          if(msg.receiver !== SENDER)
-               return;
+  browser.runtime.onMessage.addListener((msg, sender) => {
+  	if(msg.receiver !== SENDER)
+    	return;
 
 		if(msg.sender === "background_filter_storage"){
 			if(msg.content.info === "filter_storage_modified"){
