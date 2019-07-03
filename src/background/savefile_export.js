@@ -32,7 +32,9 @@
 		});
 	}
 
-	//INSTALLING LISTENER FOR MESSAGES FROM config-scripts
+	/*
+	INSTALLING LISTENER FOR MESSAGES FROM config-scripts
+	*/
 
 	browser.runtime.onMessage.addListener((msg, sender) => {
 		if (msg.receiver !== SENDER)
