@@ -153,11 +153,12 @@ ul {
 
 .textField {
 	width:calc(100% - 4em - 4px);
-	height:2.75em;
+	height:2em;
 	color:var(--text-color-1);
 	background:var(--main-color);
 	border:var(--border-simple);
-	
+	padding: 0em;
+	margin: 0em;
 }
 
 .textField::placeholder {
@@ -171,6 +172,7 @@ ul {
 	border: 1px solid var(--text-color-1);
 	font-size: 1.2em;
 	font-weight: lighter;
+	border: 1px solid var(--main-color);
 }
 
 .caseInsensitiveCheckbox{
@@ -284,17 +286,13 @@ ul {
 }
 
 .innerDivExp aside button{
-}
-
-.innerDivExp aside button{
 	width:3em;
-	height:3em;
+	height:2em;
 	color:var(--text-color-1);
 	background:var(--main-color);
-	border:none;
 	font-size: 0.8em;
 	cursor: pointer;
-	border:var(--border-simple);
+	border:var(--border-simple-2);
 }
 
 .innerDivExp aside button:hover{
@@ -390,7 +388,7 @@ ul {
 
  /* TOGGLE-SWITCH */
  /* The switch - the box around the slider */
- 
+
 .switch {
   position: relative;
   display: inline-block;
@@ -451,35 +449,35 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
-} 
+}
 
 
 @media screen and (min-width:80em) {
 	.donationDiv .donationTextDiv {
 		width:40%;
 	}
-	
-	
+
+
 	.innerDivExp .selectionContainer {
 		width:36%;
 	}
-	
+
 	.innerDivExp .spacer {
 		width:31.5%;
 	}
-	
+
 	.innerDivExp  .spacer button {
 		width:7%;
 	}
-	
+
 	.innerDivExp  .spacer div {
 		width:89%;
 	}
-	
+
 	.innerDivExp aside {
 		width:31.5%;
 	}
-	
+
 }
 
 /*Small screen*/
@@ -487,23 +485,23 @@ input:checked + .slider:before {
 	.donationDiv .donationTextDiv {
 		width:50%;
 	}
-	
+
 	.innerDivExp .selectionContainer {
 		width:36%;
 	}
-	
+
 	.innerDivExp .spacer {
 		width:10%;
 	}
-	
+
 	.innerDivExp  .spacer button {
 		width:30%;
 	}
-	
+
 	.innerDivExp  .spacer div {
 		width:40%;
 	}
-	
+
 	.innerDivExp aside {
 		width:51.5%;
 	}
@@ -514,23 +512,23 @@ input:checked + .slider:before {
 	.donationDiv .donationTextDiv {
 		width:60%;
 	}
-	
+
 	.innerDivExp .selectionContainer {
 		width:36%;
 	}
-	
+
 	.innerDivExp .spacer {
 		width:10%;
 	}
-	
+
 	.innerDivExp  .spacer button {
 		width:40%;
 	}
-	
+
 	.innerDivExp  .spacer div {
 		width:40%;
 	}
-	
+
 	.innerDivExp aside {
 		width:51.5%;
 	}
@@ -541,29 +539,29 @@ input:checked + .slider:before {
 	.donationDiv .donationTextDiv {
 		width:100%;
 	}
-	
+
 	.donationDiv .donationBtnDiv {
 		float:left;
 	}
-	
+
 	.innerDivExp .selectionContainer {
 		width:100%;
 	}
-	
+
 	.innerDivExp .spacer {
 		width:100%;
 	}
-	
+
 	.innerDivExp  .spacer button {
 		width:100%;
 		height:3em;
 		margin-top:4px;
 	}
-	
+
 	.innerDivExp  .spacer div {
 		width:0%;
 	}
-	
+
 	.innerDivExp aside {
 		width:51.5%;
 	}
