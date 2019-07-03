@@ -1,8 +1,8 @@
 #!/bin/bash
 
-#print error and exit if not executed inside folder */ytc
+#print error and exit, if not executed inside folder */ytc
 if [[ $(pwd | grep -v -E "ytc$") ]]; then
-	echo "ERROR: needs to be executed on */ytc"
+	echo "ERROR: needs to be executed in */ytc"
 	exit
 fi
 
@@ -83,7 +83,7 @@ fi
 #create directory for final project file
 mkdir ./bin
 
-#create zip from build inside bin folder
+#create .xpi(zip) from build inside bin folder
 cd ./build
 zip -r -q -FS ../bin/ytc.xpi *
 cd ..
