@@ -74,7 +74,7 @@
 					//config
 				}else {
 					for (let elem of jsonSaveFile[key]) {
-						browser.runtime.sendMessage(createAddMsg(key, elem, 0));
+						browser.runtime.sendMessage(createAddMsg(key, elem, 1));
 					}
 				}
 			}
