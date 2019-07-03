@@ -164,8 +164,6 @@
      			}
                     where <ft> is a value of FilterType
                     */
-
-				//TODO: react on "filter_storage_modified"-message
 				sendAndProcessFilterValuesRequestMsg();
 			}
 		}

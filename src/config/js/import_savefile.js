@@ -70,7 +70,6 @@
 		} else {
 			//Old savefile-format
 			for (let key in jsonSaveFile) {
-				//TODO
 				if (key === "5") {
 					//config
 				}else {

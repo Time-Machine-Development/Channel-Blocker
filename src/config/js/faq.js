@@ -1,5 +1,4 @@
-//TODO: move out of here
-
+//toggle the <p> 
 {
 	$(".btn").each(function( index ){
 		this.onclick = function() {
