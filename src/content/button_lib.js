@@ -6,17 +6,17 @@ let btnSize = 1.4;
 //create the svg blockBtn
 function createSVG(){
 	// create svg
-	var svgURI = 'http://www.w3.org/2000/svg';
-	var svg = document.createElementNS( svgURI, 'svg' );
-	
+	let svgURI = 'http://www.w3.org/2000/svg';
+	let svg = document.createElementNS( svgURI, 'svg' );
+
 	svg.setAttribute( "viewBox", "0 0 100 100" );
-	
-	var path = document.createElementNS( svgURI, 'path' );
+
+	let path = document.createElementNS( svgURI, 'path' );
 	path.setAttribute("d", "M 15,15 L 85,85 M 85,15 L 15,85");
 	path.setAttribute( "style", "stroke: " + btnColor + ";fill: transparent;stroke-linecap: round;stroke-width: 25;" );
-	
+
 	svg.appendChild( path );
-	
+
 	return svg;
 }
 
@@ -28,7 +28,7 @@ function addListener(btn, userChannelName, checkBeforBlocking = false){
 	}else{
 		func = function(){blockUserChannel(userChannelName);}
 	}
-	btn.addEventListener("click", func); 
+	btn.addEventListener("click", func);
 	return btn;
 }
 
@@ -40,13 +40,13 @@ function createBtnNode(userChannelName, checkBeforBlocking = false){
 	btn.setAttribute("title", "Block '" + userChannelName + "' (Channel Blocker)");
 	btn = addListener(btn, userChannelName, checkBeforBlocking);
 	btn.setAttribute("style", "padding-left:0em; color:red; border:none; background-color:Transparent; cursor:pointer; width:" + btnSize + "em");
-	
+
 	let svg = document.createElement("img");
 	svg.setAttribute("src", browser.extension.getURL("content/img/close.svg"));
 	svg.setAttribute("width", "11em");
-	
+
 	btn.appendChild(createSVG());
-	
+
 	return btn;
 }
 
@@ -58,12 +58,12 @@ function createContainerBtnNode(userChannelName, checkBeforBlocking = false){
 	btn.setAttribute("title", "block '" + userChannelName + "' (Channel Blocker)");
 	btn = addListener(btn, userChannelName, checkBeforBlocking);
 	btn.setAttribute("style", "padding-right:0em; color:red; border: none; background-color: Transparent; cursor:pointer; width:" + btnSize + "em");
-	
+
 	let svg = document.createElement("img");
 	svg.setAttribute("src", browser.extension.getURL("content/img/close.svg"));
 	svg.setAttribute("width", "11em");
 	btn.appendChild(createSVG());
-	
+
 	return btn;
 }
 
@@ -92,7 +92,7 @@ function createBtnAtStart(parent, btn, child){
 			parent.insertBefore(btn,child);
 		}catch(e){
 			parent.prepend(btn);
-			
+
 		}
 	}
 }
