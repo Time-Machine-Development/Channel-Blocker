@@ -5,7 +5,7 @@ function Filter(target, parent, mutationObsOptions = {childList: true}) {
 	this.mutationObs.observe(target, mutationObsOptions);
 
 	this.target = target;
-	
+
 	//All filter, created by this filter
 	this.childFilters = new Array();
 
