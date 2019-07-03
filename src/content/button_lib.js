@@ -6,7 +6,7 @@ let btnSize = 1.4;
 //create the svg blockBtn
 function createSVG(){
 	// create svg
-	let svgURI = 'http://www.w3.org/2000/svg';
+	let svgURI = "http://www.w3.org/2000/svg";
 	let svg = document.createElementNS( svgURI, 'svg' );
 
 	svg.setAttribute( "viewBox", "0 0 100 100" );
