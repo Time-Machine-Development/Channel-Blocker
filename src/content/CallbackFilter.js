@@ -8,11 +8,11 @@ function CallbackFilter(target, parent, child) {
 		subtree: true
 	};
 	this.mutationObs.observe(target, mutationObsOptions);
-	
+
 	this.parent = parent;
 	this.child = child;
 	this.target = target;
-	
+
 	//If this filter is a child of another filter, push it to its childList
 	if(parent !== undefined){
 		parent.childFilters.push(this);
