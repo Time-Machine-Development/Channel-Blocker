@@ -16,7 +16,6 @@ FilterStorageManager.prototype.initSets = async function(){
 
 //returns true <=> this not already contained str as key with value val <=> this changed
 FilterStorageManager.prototype.add = function(filterType, str, val){
-	console.log(filterType, str, val);
 	let exists = this.sets[filterType].hasOwnProperty(str) && this.sets[filterType][str] === val;
 
 	this.sets[filterType].add(str, val);
@@ -28,10 +27,10 @@ FilterStorageManager.prototype.add = function(filterType, str, val){
 //return true <=> this contained str as key
 FilterStorageManager.prototype.remove = function(filterType, str){
 	let exists = this.sets[filterType].hasOwnProperty(str);
-	
+
 	this.sets[filterType].remove(str);
 	this.updateStorage(filterType);
-	
+
 	return exists;
 }
 

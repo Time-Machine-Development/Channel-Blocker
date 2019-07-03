@@ -53,7 +53,7 @@
 	//set all options of selectio to null
 	function clearSelection(containerId){
 		let selection = document.getElementById(containerId + "_selection");
-		var i;
+		let i;
 		for(i = selection.options.length - 1 ; i >= 0 ; i--){
 			selection.remove(i);
 		}
@@ -84,7 +84,6 @@
 			clearSelection(filterTypeStr);
 
 			for(let val of Object.keys(values)){
-				console.log(val);
 				addUserChannelNameOrRegExToFilterBox(filterTypeStr, val, values[val]);
 			}
 		}
@@ -123,8 +122,8 @@
 		let selectionId = filterType.toLowerCase() + "_selection";
 		let input = getSelectedOptions(selectionId);
 
-		for(var filter_val of input){
-			browser.runtime.sendMessage(createDeleteMsg(FilterType[filterType], filter_val));
+		for(let filterVal of input){
+			browser.runtime.sendMessage(createDeleteMsg(FilterType[filterType], filterVal));
 		}
 	}
 

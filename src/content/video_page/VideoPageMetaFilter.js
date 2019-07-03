@@ -8,8 +8,8 @@ VideoPageMetaFilter.prototype = Object.create(Filter.prototype);
 VideoPageMetaFilter.prototype.constructor = VideoPageMetaFilter;
 
 VideoPageMetaFilter.prototype.onFound = function(child){
-	
-	for(var elem of child.children){
+
+	for(let elem of child.children){
 		if(elem.id === "meta-contents"){
 			new VideoPageMetaContentsFilter(elem, this);
 		}

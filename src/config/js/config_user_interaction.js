@@ -114,9 +114,9 @@
 	//change the css-style of the config page
 	function changePageDesign(configValue) {
 		document.getElementById("DesignSelect").value = configValue;
-		if (configValue == 0) {
+		if (configValue === "0") {
 			document.getElementById("css").href = "css/dark_root.css";
-		} else if (configValue == 1) {
+		} else if (configValue === "1") {
 			document.getElementById("css").href = "css/light_root.css";
 		}
 	}
@@ -244,17 +244,17 @@
 				 */
 
 				//react on config-storage modification
-				if (msg.content.config_id == ConfigId.CONFIG_PAGE_DESIGN) {
+				if (msg.content.config_id === ConfigId.CONFIG_PAGE_DESIGN) {
 					changePageDesign(msg.content.config_val);
-				} else if (msg.content.config_id == ConfigId.CONFIG_ADVANCED_VIEW) {
+				} else if (msg.content.config_id === ConfigId.CONFIG_ADVANCED_VIEW) {
 					changeAdvancedView(msg.content.config_val);
-				} else if (msg.content.config_id == ConfigId.CONTENT_BLOCK_BTN_VISIBILITY) {
+				} else if (msg.content.config_id === ConfigId.CONTENT_BLOCK_BTN_VISIBILITY) {
 					changeBtnVisibility(msg.content.config_val);
-				} else if (msg.content.config_id == ConfigId.CONTENT_BLOCK_VIDEOS_ON_VIDEOPAGE_VISIBILITY) {
+				} else if (msg.content.config_id === ConfigId.CONTENT_BLOCK_VIDEOS_ON_VIDEOPAGE_VISIBILITY) {
 					changeBlockVideosOnVideopage(msg.content.config_val);
-				} else if (msg.content.config_id == ConfigId.CONTENT_BLOCK_BTN_COLOR) {
+				} else if (msg.content.config_id === ConfigId.CONTENT_BLOCK_BTN_COLOR) {
 					changeBtnColor(msg.content.config_val);
-				} else if (msg.content.config_id == ConfigId.CONTENT_BLOCK_BTN_SIZE) {
+				} else if (msg.content.config_id === ConfigId.CONTENT_BLOCK_BTN_SIZE) {
 					changeBtnSize(msg.content.config_val);
 				}
 			}
