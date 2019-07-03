@@ -14,8 +14,8 @@ for i in $(find ./src | grep -v "jquery-3\.3\.1\.min\.js" | grep "\.js$" | grep 
 	j=./build/$(echo $i| cut -c 7-)
 
 	#pcregrep -h -v -M -e "^\h*\/\*((.|\n)*?)\*\/\h*$" $i 		-> remove multi-line comments
-	#pcregrep -h -v -e "^\h*//.*$"						-> remove single-line comments
-	#cat -s											-> reduce adjacent muliple empty lines to a single empty line
+	#pcregrep -h -v -e "^\h*//.*$"														-> remove single-line comments
+	#cat -s																										-> reduce adjacent muliple empty lines to a single empty line
 	pcregrep -h -v -M -e "^\h*\/\*((.|\n)*?)\*\/\h*$" $i | pcregrep -h -v -e "^\h*//.*$" | cat -s > $j
 
 	#check for "console.log"s in ./build
@@ -46,6 +46,12 @@ for i in $(find ./src | grep -v "jquery-3\.3\.1\.min\.js" | grep "\.js$" | grep 
 		echo
 	fi
 
+	#check for 'var' declarations in ./build
+	if [[ $(grep -n -E "var" $j) ]]; then
+		echo "WARNING: used 'var' instead of 'let' in $j:"
+		grep -n -E "var" $j
+		echo
+	fi
 
 done
 
