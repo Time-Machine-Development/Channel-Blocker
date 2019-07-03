@@ -37,7 +37,7 @@ function checkVideoTitle(userName, videoTitle, checkedNode){
 /*create an "advanced" "is_blocked_request"-message which checks for user/channel-name and a comment-content
 and send it to background_filter_storage and process the result*/
 function checkCommentContent(userName, commentContent, checkedNode){
-	let msg = createIsBlockedRequestMsg(userName);
+	let msg = createIsBlockedRequestMsg(userName.trim());
 	msg.content.additional = {
 		type: "comment",
 		content: commentContent.trim()
@@ -50,7 +50,7 @@ function checkCommentContent(userName, commentContent, checkedNode){
 depending on the result of the request*/
 async function sendAndProcessIsBlockedRequestMsg(msg, checkedNode, isVideo = false) {
 	let isBlocked = await browser.runtime.sendMessage(msg);
-	
+
 	if(isBlocked){
 		if(!blockVideosOnVideopage && isVideo){
 			return;
@@ -68,13 +68,13 @@ async function sendAndProcessIsBlockedRequestMsg(msg, checkedNode, isVideo = fal
 			let div = document.createElement("div");
 			let h1 = document.createElement("h1");
 			let textNode = document.createTextNode("This video is block by 'channel blocker'!");
-			
+
 			div.setAttribute("id", "videoIsBlockedDiv");
 			div.setAttribute("style", "color: red;");
-			
+
 			h1.appendChild(textNode);
 			div.appendChild(h1);
-			
+
 			checkedNode.parentNode.insertBefore(div, checkedNode);
 		}
 	}else{
