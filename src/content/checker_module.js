@@ -38,7 +38,7 @@ function checkVideoTitle(userName, videoTitle, checkedNode){
 and send it to background_filter_storage and process the result*/
 function checkCommentContent(userName, commentContent, checkedNode){
 	let msg = createIsBlockedRequestMsg(userName);
-	msg.event.input.additional = {
+	msg.content.additional = {
 		type: "comment",
 		content: commentContent.trim()
 	};

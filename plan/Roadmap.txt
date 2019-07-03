@@ -1,0 +1,7 @@
+- Inputfield-placeholder je nach context ändern
+- Faq bearbeiten
+- ImportButton overflow
+- Console.logs
+- Capitalletter
+- Icon
+- TODO

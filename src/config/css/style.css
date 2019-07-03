@@ -1,28 +1,3 @@
-:root {
-  --main-size: 2.6em;
-  --main-size-2: 1.5em;
-  --main-size-3: 1.1em;
-  --main-size-4: 0.2em;
-  
-  --main-color:#336e7b;
-  
-  --btn-color-hover:#235e6b;
-  
-  --toggle-slider-color-false:#464646;
-  --toggle-slider-color-true:#336e7b;
-  --toggle-slider-color-handle:#ffffff;
-  
-  --line-color:#336e7b;
-  
-  --text-color-1:#ffffff;
-  
-  --background-color-1:#2d2d2d;
-  --background-color-2:#373737;
-  --background-color-3:#464646;
-  
-  --border-simple:none;
-}
-
 ::-webkit-input-placeholder {
    font-style: italic;
 }
@@ -368,6 +343,7 @@ ul {
 
 .moreOptionsInteractableDiv{
 	flex: 1 1 0px;
+	overflow: hidden;
 }
 
 .saveFileDiv button{
