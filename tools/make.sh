@@ -14,46 +14,71 @@ for i in $(find ./src | grep -v "jquery-3\.3\.1\.min\.js" | grep "\.js$" | grep 
 	j=./build/$(echo $i| cut -c 7-)
 
 	#pcregrep -h -v -M -e "^\h*\/\*((.|\n)*?)\*\/\h*$" $i 		-> remove multi-line comments
-	#pcregrep -h -v -e "^\h*//.*$"														-> remove single-line comments
-	#cat -s																										-> reduce adjacent muliple empty lines to a single empty line
+	#pcregrep -h -v -e "^\h*//.*$"						-> remove single-line comments
+	#cat -s											-> reduce adjacent muliple empty lines to a single empty line
 	pcregrep -h -v -M -e "^\h*\/\*((.|\n)*?)\*\/\h*$" $i | pcregrep -h -v -e "^\h*//.*$" | cat -s > $j
 
-	#check for "console.log"s in ./build
-	if [[ $(grep -n -E "console\.log" $j) ]]; then
-    		echo "WARNING: used console.log in $j:"
-		grep -n -E "console\.log" $j
-		echo
+	#check for "console.log"s in ./src
+	if [[ $(grep -n -E "console\.log" $i) ]]; then
+		log="$log◼ $i\\n\e[38;5;248m$(grep -n -E "console\.log" $i)\e[0m\\n\\n"
 	fi
 
 	#check for try-and-catch-blocks (with empty catch-block) in ./build
 	if [[ $(pcregrep -M -n -e "\h*try(.|\n)*?catch([^\{\}])*?\{\s*?}\h*" $j) ]]; then
-		echo "WARNING: used try-catch with empty catch-block in $j:"
-		pcregrep -M -n -e "\h*try(.|\n)*?catch([^\{\}])*?\{\s*?}\h*" $j
-		echo
+		try_catch="$try_catch◼ $j\\n\e[38;5;248m$(pcregrep -M -n -e "\h*try(.|\n)*?catch([^\{\}])*?\{\s*?}\h*" $j)\e[0m\\n\\n"
 	fi
 
-	#check for "=="/"!=" in ./build
-	if [[ $(grep -n -E "([^!=]==[^=]|!=[^=])" $j) ]]; then
-    		echo "WARNING: used '!='/'==' in $j:"
-		grep -n -E "([^!=]==[^=]|!=[^=])" $j
-		echo
+	#check for "=="/"!=" in ./src
+	if [[ $(grep -n -E "([^!=]==[^=]|!=[^=])" $i) ]]; then
+		equal="$equal◼ $i\\n\e[38;5;248m$(grep -n -E "([^!=]==[^=]|!=[^=])" $i)\e[0m\\n\\n"
 	fi
 
 	#check for possible comments in ./build
 	if [[ $(grep -n -E "^[^\"]*(//|/\*)" $j) ]]; then
-    		echo "WARNING: possible comments in $j:"
-		grep -n -E "^[^\"]*(//|/\*)" $j
-		echo
+		comment="$comment◼ $j\\n\e[38;5;248m$(grep -n -E "^[^\"]*(//|/\*)" $j)\e[0m\\n\\n"
 	fi
 
-	#check for 'var' declarations in ./build
-	if [[ $(grep -n -E "var" $j) ]]; then
-		echo "WARNING: used 'var' instead of 'let' in $j:"
-		grep -n -E "var" $j
-		echo
+	#check for 'var' declarations in ./src
+	if [[ $(grep -n -E "var" $i) ]]; then
+		var="$var◼ $i\\n\e[38;5;248m$(grep -n -E "var" $i)\e[0m\\n\\n"
 	fi
 
 done
+
+#print console.log warnings, if at least one warning exists
+if [[ $log ]]; then
+	echo -e "\e[38;5;37mWARNING: used console.log(·) in\e[0m"
+	printf "$log"
+	echo
+fi
+
+#print try-and-catch-blocks warnings, if at least one warning exists
+if [[ $try_catch ]]; then
+	echo -e "\e[38;5;37mWARNING: try-and-catch-block with empty catch-block in\e[0m"
+	printf "$try_catch"
+	echo
+fi
+
+#print '!='/'==' warnings, if at least one warning exists
+if [[ $equal ]]; then
+	echo -e "\e[38;5;37mWARNING: used '!='/'==' in\e[0m"
+	printf "$equal"
+	echo
+fi
+
+#print comment warnings, if at least one warning exists
+if [[ $comment ]]; then
+	echo -e "\e[38;5;37mWARNING: possible comment(s) in\e[0m"
+	printf "$comment"
+	echo
+fi
+
+#print 'var' warnings, if at least one warning exists
+if [[ $var ]]; then
+	echo -e "\e[38;5;37mWARNING: used 'var' instead of 'let' in\e[0m"
+	printf "$var"
+	echo
+fi
 
 #create directory for final project file
 mkdir ./bin
@@ -63,4 +88,4 @@ cd ./build
 zip -r -q -FS ../bin/ytc.xpi *
 cd ..
 
-echo "MAKE DONE - 110101"
+echo -e "\e[1mMAKE DONE - 110101"
