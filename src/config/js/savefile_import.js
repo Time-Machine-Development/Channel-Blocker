@@ -90,4 +90,8 @@
 		//The file-APIs are supported.
 		alert('The file-APIs are not supported. You are not able to import.');
 	}
+
+	document.getElementById('visibleFileLoaderBtn').addEventListener('click', () => {
+			document.getElementById('fileLoaderBtn').click();
+	});
 }

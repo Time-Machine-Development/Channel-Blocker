@@ -156,6 +156,7 @@
 	//change the configBtnColor
 	function changeBtnColor(configValue) {
 		document.getElementById("configBtnColor").value = configValue;
+			document.getElementById("cpBtn").style.background = configValue;
 		document.getElementById("showColorBtn").style.stroke = configValue;
 	}
 

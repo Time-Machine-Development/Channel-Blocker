@@ -87,7 +87,7 @@
 					</div>
 
 					<aside>
-						<input id="blocked_users_input_textfield" class="textField" name="textField" placeholder=" user/channel name" type="text">
+						<input id="blocked_users_input_textfield" class="textField" name="textField" placeholder="user/channel name" type="text">
 						<button id="blocked_users_add_btn" type="button">Add</button>
 						<div class="info">
 							<div class="infoText">
@@ -120,7 +120,7 @@
 					</div>
 
 					<aside>
-						<input id="title_regexs_input_textfield" class="textField" name="textField" placeholder=" regular expression" type="text">
+						<input id="title_regexs_input_textfield" class="textField" name="textField" placeholder="regular expression" type="text">
 						<button id="title_regexs_add_btn" type="button">Add</button>
 						<input id="title_regexs_caseInsensitive_checkbox" class="caseInsensitiveCheckbox" name="configuration" value="conf" type="checkbox">
 						<label for="caseInsensitiveCheckbox" class="lable">case-insensitive</label>
@@ -148,7 +148,7 @@
 					</div>
 
 					<aside>
-						<input id="name_regexs_input_textfield" class="textField" name="textField" placeholder=" regular expression" type="text">
+						<input id="name_regexs_input_textfield" class="textField" name="textField" placeholder="regular expression" type="text">
 						 <button id="name_regexs_add_btn" type="button">Add</button>
 						<input id="name_regexs_caseInsensitive_checkbox" class="caseInsensitiveCheckbox" name="configuration" value="conf" type="checkbox">
 						<label for="caseInsensitiveCheckbox" class="lable">case insensitive</label>
@@ -183,7 +183,7 @@
 					</div>
 
 					<aside>
-						<input id="comment_regexs_input_textfield" class="textField" name="textField" placeholder=" regular expression" type="text">
+						<input id="comment_regexs_input_textfield" class="textField" name="textField" placeholder="regular expression" type="text">
 						<button id="comment_regexs_add_btn" type="button">Add</button>
 						<input id="comment_regexs_caseInsensitive_checkbox" class="caseInsensitiveCheckbox" name="configuration" value="conf" type="checkbox">
 						<label for="caseInsensitiveCheckbox" class="lable">case insensitive</label>
@@ -212,7 +212,7 @@
 					</div>
 
 					<aside>
-						<input id="excluded_users_input_textfield" class="textField" name="textField" placeholder=" user/channel name" type="text">
+						<input id="excluded_users_input_textfield" class="textField" name="textField" placeholder="user/channel name" type="text">
 						<button id="excluded_users_add_btn" type="button">Add</button>
 						<div class="info">
 							<div class="infoText">
@@ -257,7 +257,10 @@
 							Color of block-buttons:
 						</div>
 						<div class="moreOptionsInteractableDiv">
-							<input type="color" id="configBtnColor" name="btncolor" value="#717171">
+							<label class="colorpicker">
+								<input type="color" id="configBtnColor" name="btncolor" value="#717171">
+								<span class="cpBtn" id="cpBtn"></span>
+							</label>
 						</div>
 					</h4>
 					<h4>
@@ -274,6 +277,7 @@
 							</button>
 						</div>
 					</h4>
+					<button id="resetBtn">reset</button>
 				</div>
 			</div>
 
@@ -321,7 +325,12 @@
 							Import savefile:
 						</div>
 						<div class="moreOptionsInteractableDiv">
-							<input type="file" id="fileLoaderBtn" name="fileLoaderBtn">
+							<div class="input-container">
+								<input type="file" id="fileLoaderBtn" name="fileLoaderBtn">
+								<button id="visibleFileLoaderBtn">
+									Import
+								</button>
+							</div>
 						</div>
 					</h4>
 				</div>
@@ -340,7 +349,8 @@
 				</div>
 				<div class="footerInnerElement">
 					<h2>Help</h2>
-					<p>FAQ: <a href="faq.html">click here</a></p>
+					<p><a href="faq.html">FAQ</a></p>
+					<p><a href="faq.html">Discord</a></p>
 				</div>
 			</div>
 			<div class="footerElement">

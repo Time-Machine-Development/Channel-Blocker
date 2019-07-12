@@ -159,6 +159,8 @@ ul {
 	border:var(--border-simple);
 	padding: 0em;
 	margin: 0em;
+	box-sizing: border-box;
+	padding-left: 0.6em;
 }
 
 .textField::placeholder {
@@ -292,7 +294,7 @@ ul {
 	background:var(--main-color);
 	font-size: 0.8em;
 	cursor: pointer;
-	border:var(--border-simple-2);
+	border:var(--border-simple);
 }
 
 .innerDivExp aside button:hover{
@@ -385,61 +387,92 @@ ul {
 	flex: 1 1 0px;
 }
 
+ /* COLORPICKER */
+ /* custom colorpicker-button*/
+.colorpicker{
+	position: relative;
+	display: inline-block;
+	width: var(--main-size-2);
+	height: var(--main-size-2);
+}
 
+.colorpicker input {
+	opacity: 0;
+	width: 0;
+	height: 0;
+}
+
+.cpBtn{
+	position: absolute;
+	cursor: pointer;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	border-radius: var(--main-size-2);
+	border:1px solid black;
+	margin-left:1%;
+}
+
+/* FILECHOOSER */
+/* custom filechooser-button*/
+input[type='file'] {
+  display: none;
+}
  /* TOGGLE-SWITCH */
  /* The switch - the box around the slider */
 
 .switch {
-  position: relative;
-  display: inline-block;
-  width: var(--main-size);
-  height: var(--main-size-2);
+	position: relative;
+	display: inline-block;
+	width: var(--main-size);
+	height: var(--main-size-2);
 }
 
 /* Hide default HTML checkbox */
 .switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
+	opacity: 0;
+	width: 0;
+	height: 0;
 }
 
 /* The slider */
 .slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: var(--toggle-slider-color-false);
-  -webkit-transition: .4s;
-  transition: .4s;
+	position: absolute;
+	cursor: pointer;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: var(--toggle-slider-color-false);
+	-webkit-transition: .4s;
+	transition: .4s;
 }
 
 .slider:before {
-  position: absolute;
-  content: "";
-  height: var(--main-size-3);
-  width: var(--main-size-3);
-  left: var(--main-size-4);
-  bottom: var(--main-size-4);
-  background-color: var(--toggle-slider-color-handle);
-  -webkit-transition: .4s;
-  transition: .4s;
+	position: absolute;
+	content: "";
+	height: var(--main-size-3);
+	width: var(--main-size-3);
+	left: var(--main-size-4);
+	bottom: var(--main-size-4);
+	background-color: var(--toggle-slider-color-handle);
+	-webkit-transition: .4s;
+	transition: .4s;
 }
 
 input:checked + .slider {
-  background-color: var(--toggle-slider-color-true);
+	background-color: var(--toggle-slider-color-true);
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
+	box-shadow: 0 0 1px #2196F3;
 }
 
 input:checked + .slider:before {
-  -webkit-transform: translateX(var(--main-size-3));
-  -ms-transform: translateX(var(--main-size-3));
-  transform: translateX(var(--main-size-3));
+	-webkit-transform: translateX(var(--main-size-3));
+	-ms-transform: translateX(var(--main-size-3));
+	transform: translateX(var(--main-size-3));
 }
 
 /* Rounded sliders */
