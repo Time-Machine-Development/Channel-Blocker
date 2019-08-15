@@ -14,6 +14,17 @@
 		};
 	}
 
+	//creates a "config_value_reset"-message for background_config_storage
+	function createConfigValueResetMsg() {
+		return {
+			sender: SENDER,
+			receiver: "background_config_storage",
+			content: {
+				info: "config_value_reset"
+			}
+		};
+	}
+
 	//creates a "config_value_request"-message for background_config_storage
 	function createConfigValueRequestMsg(configId) {
 		return {
@@ -97,6 +108,12 @@
 	//send a massage to the background to export a savefile
 	function exportBtnHandler() {
 		browser.runtime.sendMessage(createSavefileExportRequestMsg());
+	}
+
+	//handle the event from the resetBtn
+	//reset
+	function resetBtnHandler() {
+		browser.runtime.sendMessage(createConfigValueResetMsg());
 	}
 
 	//set all configboxes unviable and set the selected configboxe viable
@@ -201,6 +218,9 @@
 
 	//define behavior for exportBtn
 	document.getElementById("exportBtn").addEventListener('click', exportBtnHandler);
+
+	//define behavior for exportBtn
+	document.getElementById("resetBtn").addEventListener('click', resetBtnHandler);
 
 	//send a config_value_request
 	async function initRequests() {

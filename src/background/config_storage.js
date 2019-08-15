@@ -106,7 +106,15 @@
 				 */
 
 				setConfigVal(msg.content.config_id, msg.content.config_val);
-			} else if (msg.content.info === "config_value_request") {
+			} else if (msg.content.info === "config_value_reset") {
+				/* msg.content is of the form:{
+				info: "config_value_reset",
+				}
+				 */
+
+				setConfigVal(ConfigId.CONTENT_BLOCK_BTN_COLOR, "#717171");
+				setConfigVal(ConfigId.CONTENT_BLOCK_BTN_SIZE, 140);
+			}else if (msg.content.info === "config_value_request") {
 				/* msg.content is of the form:{
 				info: "config_value_request",
 				config_id: <cid>

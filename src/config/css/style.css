@@ -337,6 +337,16 @@ ul {
 	flex-direction:row;
 }
 
+.moreOptionsDiv #resetBtn{
+	background-color: Transparent;
+	background-repeat: no-repeat;
+	border: none;
+	cursor: pointer;
+	overflow: hidden;
+	color: var(--text-color-2);
+	float: right;
+}
+
 .moreOptionsTextDiv{
 	flex: 1 1 0px;
 }
