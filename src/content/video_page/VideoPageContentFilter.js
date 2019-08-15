@@ -24,10 +24,11 @@ VideoPageContentFilter.prototype.onFound = function(child, useCallbackFilter){
 				//insert button to block channel/user..
 				if(isPlaylist){
 					//.. on playlist gridVideo
-					createBtnAfter(elem.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode, createBtnNode(userName));
+					createBtnAfterWithOneCheck(elem.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode, createBtnNode(userName));
 				}else{
 					//.. on video gridVideo
-					createBtnAfter(elem.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode, createBtnNode(userName));
+					createBtnAfterWithOneCheck(elem.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode, createBtnNode(userName));
+					elem.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.style.width = "95%";
 				}
 			}
 

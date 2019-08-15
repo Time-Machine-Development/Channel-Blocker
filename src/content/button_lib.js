@@ -39,7 +39,7 @@ function createBtnNode(userChannelName, checkBeforBlocking = false){
 	btn.setAttribute("type", "button");
 	btn.setAttribute("title", "Block '" + userChannelName + "' (Channel Blocker)");
 	btn = addListener(btn, userChannelName, checkBeforBlocking);
-	btn.setAttribute("style", "padding-left:0em; color:red; border:none; background-color:Transparent; cursor:pointer; width:" + btnSize + "em");
+	btn.setAttribute("style", "padding-left:0em; border:none; background-color:Transparent; cursor:pointer; width:" + btnSize + "em");
 
 	let svg = document.createElement("img");
 	svg.setAttribute("src", browser.extension.getURL("content/img/close.svg"));
@@ -70,8 +70,19 @@ function createContainerBtnNode(userChannelName, checkBeforBlocking = false){
 //Creates a button and inserts it after the 'child'-node
 function createBtnAfter(child, btn){
 	if(!showBtns)return;
-	for(ch of child.parentNode.children){
-		if(ch.tagName === "BUTTON"){
+	for(ch of child.parentNode.parentNode.getElementsByTagName("button")){
+		if(ch.id === "cb_button"){
+			ch.remove();
+		}
+	}
+	child.after(btn);
+}
+
+//Creates a button and inserts it after the 'child'-node
+function createBtnAfterWithOneCheck(child, btn){
+	if(!showBtns)return;
+	for(ch of child.parentNode.getElementsByTagName("button")){
+		if(ch.id === "cb_button"){
 			ch.remove();
 		}
 	}
@@ -82,8 +93,10 @@ function createBtnAfter(child, btn){
 //If the 'child'-node isn't a child of the 'patent'-node anymore insert it as fist childNode
 function createBtnAtStart(parent, btn, child){
 	if(!showBtns)return;
-	for(ch of parent.getElementsByTagName("button")){
-		ch.remove();
+	for(ch of parent.parentNode.parentNode.getElementsByTagName("button")){
+		if(ch.id === "cb_button"){
+			ch.remove();
+		}
 	}
 	if(child === undefined){
 		parent.insertBefore(btn, parent.firstChild);
