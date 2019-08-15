@@ -8,20 +8,32 @@ VideoPageMetaContentsFilter.prototype = Object.create(Filter.prototype);
 VideoPageMetaContentsFilter.prototype.constructor = VideoPageMetaContentsFilter;
 
 VideoPageMetaContentsFilter.prototype.onFound = function (child) {
-	
+	//Check if the child is the searched node
+	if(child.className === "yt-simple-endpoint style-scope yt-formatted-string"){
+		//Get the videoplayer
+		let vPlayer = document.getElementsByClassName("style-scope ytd-watch-flexy")[9];
+
+		checkUserChannelName(child.textContent, vPlayer, true);
+		createBtnAtStart(child.parentNode, createBtnNode(child.textContent), child);
+
+		return;
+	}
+
+	//Seach for the a-tag node (dosen't work for first visit)
 	let elements = child.getElementsByClassName("yt-simple-endpoint style-scope yt-formatted-string");
 
 	if (elements.length > 0) {
 		new CallbackFilter(elements[0], this, child);
-		
+
+		//Get the videoplayer
 		let vPlayer = document.getElementsByClassName("style-scope ytd-watch-flexy")[9];
-		try{
-			checkUserChannelName(elements[0].textContent, vPlayer, true);
-			
-			createBtnAtStart(elements[0].parentNode, createBtnNode(elements[0].textContent), child);
-		}catch(e){
-			console.error(e,e.stack);
-		}
+
+		checkUserChannelName(elements[0].textContent, vPlayer, true);
+		createBtnAtStart(elements[0].parentNode, createBtnNode(elements[0].textContent), child);
+	}else{
+		//At the first visit of the Videopage this fallback will be used!
+		elements = child.getElementsByClassName("style-scope ytd-video-owner-renderer");
+		new VideoPageMetaContentsFilter(elements[4], this);
 	}
 };
 

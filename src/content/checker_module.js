@@ -66,6 +66,10 @@ async function sendAndProcessIsBlockedRequestMsg(msg, checkedNode, isVideo = fal
 			}
 			checkedNode.getElementsByClassName("video-stream html5-main-video")[0].volume = 0;
 			let div = document.createElement("div");
+
+			let img = document.createElement("img");
+			img.src = browser.runtime.getURL("content/img/blockedVideo.svg");
+			img.alt = "This video is block by 'channel blocker'!";
 			let h1 = document.createElement("h1");
 			let textNode = document.createTextNode("This video is block by 'channel blocker'!");
 
@@ -73,7 +77,7 @@ async function sendAndProcessIsBlockedRequestMsg(msg, checkedNode, isVideo = fal
 			div.setAttribute("style", "color: red;");
 
 			h1.appendChild(textNode);
-			div.appendChild(h1);
+			div.appendChild(img);
 
 			checkedNode.parentNode.insertBefore(div, checkedNode);
 		}
