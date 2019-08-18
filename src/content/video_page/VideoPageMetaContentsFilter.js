@@ -14,7 +14,9 @@ VideoPageMetaContentsFilter.prototype.onFound = function (child) {
 		let vPlayer = document.getElementsByClassName("style-scope ytd-watch-flexy")[9];
 		//Filter the endscreen
 		let endscreenNode = vPlayer.getElementsByClassName("ytp-endscreen-content")[0];
-		new EndscreenContentFilter(endscreenNode, this);
+		if(endscreenNode !== undefined){
+			new EndscreenContentFilter(endscreenNode, this);
+		}
 
 		checkUserChannelName(child.textContent, vPlayer, true);
 		createBtnAtStart(child.parentNode, createBtnNode(child.textContent), child);
@@ -32,7 +34,9 @@ VideoPageMetaContentsFilter.prototype.onFound = function (child) {
 		let vPlayer = document.getElementsByClassName("style-scope ytd-watch-flexy")[9];
 		//Filter the endscreen
 		let endscreenNode = vPlayer.getElementsByClassName("ytp-endscreen-content")[0];
-		new EndscreenContentFilter(endscreenNode, this);
+		if(endscreenNode !== undefined){
+			new EndscreenContentFilter(endscreenNode, this);
+		}
 
 		checkUserChannelName(elements[0].textContent, vPlayer, true);
 		createBtnAtStart(elements[0].parentNode, createBtnNode(elements[0].textContent), child);
