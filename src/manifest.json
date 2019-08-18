@@ -78,6 +78,7 @@
 				"content/video_page/VideoPageCommentFilter.js",
 				"content/video_page/VideoPageCommentListFilter.js",
 				"content/video_page/VideoPageCommentContainerFilter.js",
+				"content/video_page/EndscreenContentFilter.js",
 				"content/video_page/VideoPageMetaContentsFilter.js",
 				"content/video_page/VideoPageMetaFilter.js",
 				"content/video_page/VideoPageContentFilter.js",

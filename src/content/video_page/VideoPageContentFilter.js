@@ -8,6 +8,7 @@ VideoPageContentFilter.prototype = Object.create(Filter.prototype);
 VideoPageContentFilter.prototype.constructor = VideoPageContentFilter;
 
 VideoPageContentFilter.prototype.onFound = function(child, useCallbackFilter){
+	console.log("Found", child);
 	let userName = undefined;
 	let isPlaylist = child.tagName === "YTD-COMPACT-PLAYLIST-RENDERER";
 

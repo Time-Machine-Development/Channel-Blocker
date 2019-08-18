@@ -72,9 +72,9 @@
 		/*regExType should only be interpreted if and only if containerId is (FilterType.TITLE_REGEXS | FilterType.NAME_REGEXS | FilterType.COMMENT_REGEXS)
 		because in older versions no concept of a regular expression type existed, nevertheless the part of the storage
 		which is now interpreted as the regular expression was filled with certain values e.g. 53, true and potentially other*/
-		if(containerId === FilterType.TITLE_REGEXS || containerId === FilterType.NAME_REGEXS || containerId === FilterType.COMMENT_REGEXS){
+		if(containerId.toUpperCase() === "TITLE_REGEXS" || containerId.toUpperCase() === "NAME_REGEXS" || containerId.toUpperCase() === "COMMENT_REGEXS"){
 			if(regExType === RegExType.CASE_INSENSITIVE){
-				option.textContent += "*";
+				option.textContent += " *";
 			}
 		}
 	}

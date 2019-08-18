@@ -87,6 +87,7 @@ function createBtnAfterWithOneCheck(child, btn){
 		}
 	}
 	child.after(btn);
+	console.log(btn);
 }
 
 //Takes the button(btn) and inserts it befor the 'child'-node

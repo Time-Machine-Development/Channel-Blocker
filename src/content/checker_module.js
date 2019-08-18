@@ -70,6 +70,8 @@ async function sendAndProcessIsBlockedRequestMsg(msg, checkedNode, isVideo = fal
 			let img = document.createElement("img");
 			img.src = browser.runtime.getURL("content/img/blockedVideo.svg");
 			img.alt = "This video is block by 'channel blocker'!";
+			//img.width = "80%";
+			img.setAttribute("width", "100%");
 			let h1 = document.createElement("h1");
 			let textNode = document.createTextNode("This video is block by 'channel blocker'!");
 
