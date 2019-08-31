@@ -68,6 +68,8 @@
 				"content/start/StartCommantFilter.js",
 				"content/start/StartContainerFilter.js",
 				"content/start/StartContentFilter.js",
+				"content/start/PrimaryFilter.js",
+				"content/start/PersistentAppFilter.js",
 
 				"content/search_page/SearchPageContentFilter.js",
 				"content/search_page/SearchPageSectionFilter.js",

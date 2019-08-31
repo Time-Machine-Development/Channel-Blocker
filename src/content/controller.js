@@ -33,7 +33,7 @@
 				actFilter.detach();
 			}
 		}
-		
+
 		try{
 			for(btn of document.getElementsByTagName("button")){
 				if(btn.id === "cb_button"){
@@ -44,12 +44,26 @@
 			console.error(e,e.stack);
 		}
 
-		//Start/TrendsPage(https://www.youtube.com/ , https://www.youtube.com/feed/trending)
-		if(curContext === YTContext.HOME || curContext === YTContext.TRENDING){
+		//Start(https://www.youtube.com/)
+		if(curContext === YTContext.HOME){
 			let selectList = document.getElementsByClassName("style-scope ytd-section-list-renderer");
 			for(elem of selectList){
 				if(elem.id === "contents"){
+					console.log("element",elem);
 					CUR_FILTERS.push(new StartContentFilter(elem));
+				}
+			}
+		}
+
+		//TrendsPage(https://www.youtube.com/feed/trending)
+		if(curContext === YTContext.TRENDING){
+			console.log("--YTContext.TRENDING--");
+			let selectList = document.getElementsByClassName("style-scope ytd-app");
+			console.log("style-scope ytd-app",selectList);
+			for(elem of selectList){
+				if(elem.id === "page-manager"){
+					console.log("TRENDING",elem);
+					CUR_FILTERS.push(new PersistentAppFilter(elem));
 				}
 			}
 		}
@@ -74,7 +88,7 @@
 
 	//requests initial context and the initial visibility of block-btn, afterwards update filters (for the first time on this tab-id)
 	async function init(){
-		
+
 		//request initial context (and register this tab as a yt-tab in background as a side-effect)
 		curContext = await browser.runtime.sendMessage(createContextRequestMsg());
 		//request initial visibility of block-btn
@@ -93,7 +107,7 @@
 		//wait for document to be ready
 		$(document).ready(updateFilters());
 	}
-	
+
 	/*
 	INSTALLING LISTENER FOR MESSAGES FROM background-scripts
 	*/
