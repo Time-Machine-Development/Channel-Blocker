@@ -123,10 +123,11 @@
 						<input id="title_regexs_input_textfield" class="textField" name="textField" placeholder="regular expression" type="text">
 						<button id="title_regexs_add_btn" type="button">Add</button>
 						<input id="title_regexs_caseInsensitive_checkbox" class="caseInsensitiveCheckbox" name="configuration" value="conf" type="checkbox">
-						<label for="caseInsensitiveCheckbox" class="lable">*case insensitive</label>
+						<label for="caseInsensitiveCheckbox" class="lable">case-insensitive</label>
 						<div class="info">
 							<div class="infoText">
-								<h3>Info:</h3>Every video, whose title matches any of these regular expressions, will be blocked.
+								<h3>Info:</h3>Every video, whose title matches any of these regular expressions, will be blocked.<br/>
+								'*' marks regular expressions which are case-insensitive.
 							</div>
 						</div>
 					</aside>
@@ -151,7 +152,7 @@
 						<input id="name_regexs_input_textfield" class="textField" name="textField" placeholder="regular expression" type="text">
 						 <button id="name_regexs_add_btn" type="button">Add</button>
 						<input id="name_regexs_caseInsensitive_checkbox" class="caseInsensitiveCheckbox" name="configuration" value="conf" type="checkbox">
-						<label for="caseInsensitiveCheckbox" class="lable">*case insensitive</label>
+						<label for="caseInsensitiveCheckbox" class="lable">case-insensitive</label>
 						<div class="info">
 							<div class="infoText">
 								<h3>Info:</h3>
@@ -161,7 +162,8 @@
 									<li>user/channel-container on startpage from a user/channel,</li>
 									<li>comment from a user/channel</li>
 								</ul>
-								will be blocked if the user/channel-name matches any of these regular expressions.
+								will be blocked if the user/channel-name matches any of these regular expressions.<br/>
+								'*' marks regular expressions which are case-insensitive.
 							</div>
 						</div>
 					</aside>
@@ -186,11 +188,12 @@
 						<input id="comment_regexs_input_textfield" class="textField" name="textField" placeholder="regular expression" type="text">
 						<button id="comment_regexs_add_btn" type="button">Add</button>
 						<input id="comment_regexs_caseInsensitive_checkbox" class="caseInsensitiveCheckbox" name="configuration" value="conf" type="checkbox">
-						<label for="caseInsensitiveCheckbox" class="lable">*case insensitive</label>
+						<label for="caseInsensitiveCheckbox" class="lable">case-insensitive</label>
 						<div class="info">
 							<div class="infoText">
 								<h3>Info:</h3>
-								Every comment, whose content matches any of these regular expressions, will be blocked.
+								Every comment, whose content matches any of these regular expressions, will be blocked.<br/>
+								'*' marks regular expressions which are case-insensitive.
 							</div>
 						</div>
 					</aside>
@@ -243,7 +246,7 @@
 				<div class="moreOptionsDiv">
 					<h4>
 						<div class="moreOptionsTextDiv">
-							Design:
+							Configuration page design:
 						</div>
 						<div class="moreOptionsInteractableDiv">
 							<select id="DesignSelect">
@@ -265,7 +268,7 @@
 					</h4>
 					<h4>
 						<div class="moreOptionsTextDiv">
-							Size of block-buttons:
+							Size&nbsp; of block-buttons:
 						</div>
 						<div class="moreOptionsInteractableDiv">
 						<input type="range" min="100" max="200" value="140" class="sizeSlider" id="configBtnSizeSlider">
@@ -277,7 +280,7 @@
 							</button>
 						</div>
 					</h4>
-					<button id="resetBtn">reset</button>
+					<button id="resetBtn" title="reset color and size of block-buttons">reset</button>
 				</div>
 			</div>
 
@@ -310,25 +313,21 @@
 			</div>
 
 			<div class="moreOptionsOuterContainer">
-				<strong>Save your data</strong>
+				<strong>Export/Import your configuration</strong>
 				<div class="moreOptionsDiv">
 					<h4>
-						<div class="moreOptionsTextDiv">
-							Export savefile:
-						</div>
 						<div class="moreOptionsInteractableDiv">
-							<button id="exportBtn" type="button" title="Export a 'ChannelBlocker.save'-file to your downloadfolder."><span>Export</span></button>
+							<button class="importExportBtn" id="exportBtn" type="button">
+								Export configuration
+							</button>
 						</div>
 					</h4>
 					<h4>
-						<div class="moreOptionsTextDiv">
-							Import savefile:
-						</div>
 						<div class="moreOptionsInteractableDiv">
 							<div class="input-container">
 								<input type="file" id="fileLoaderBtn" name="fileLoaderBtn">
-								<button id="visibleFileLoaderBtn">
-									Import
+								<button class="importExportBtn" id="visibleFileLoaderBtn">
+									Import configuration
 								</button>
 							</div>
 						</div>
@@ -350,7 +349,6 @@
 				<div class="footerInnerElement">
 					<h2>Help</h2>
 					<p><a href="faq.html">FAQ</a></p>
-					<p><a href="faq.html">Discord</a></p>
 				</div>
 			</div>
 			<div class="footerElement">

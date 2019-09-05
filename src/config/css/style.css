@@ -485,6 +485,15 @@ input:checked + .slider:before {
 	transform: translateX(var(--main-size-3));
 }
 
+/* import/export-buttons */
+.importExportBtn {
+	background-color: var(--main-color);
+  	border: none;
+  	color: white;
+	font-family: monospace;
+	padding: 8px 18px;
+}
+
 /* Rounded sliders */
 .slider.round {
   border-radius: var(--main-size-2);
