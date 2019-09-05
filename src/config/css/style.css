@@ -152,13 +152,15 @@ ul {
 }
 
 .textField {
-	width:calc(100% - 4em - 4px);
+	vertical-align: top;
+	width:calc(100% - 3em - 4px);
 	height:2em;
 	color:var(--text-color-1);
 	background:var(--main-color);
 	border:var(--border-simple);
 	padding: 0em;
 	margin: 0em;
+	margin-top: 5px;
 	box-sizing: border-box;
 	padding-left: 0.6em;
 }
@@ -288,11 +290,11 @@ ul {
 }
 
 .innerDivExp aside button{
-	width:3em;
-	height:2em;
+	margin-top: 5px;
+	font-size: 1.2em;
+	height:1.4em;
 	color:var(--text-color-1);
 	background:var(--main-color);
-	font-size: 0.8em;
 	cursor: pointer;
 	border:var(--border-simple);
 }
@@ -327,7 +329,7 @@ ul {
 
 .moreOptionsDiv{
 	padding-top:0.5em;
-	min-height:100px;
+	min-height:105px;
 	background: var(--background-color-2);
 	border: var(--border-simple);
 }
