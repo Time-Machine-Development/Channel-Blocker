@@ -494,6 +494,10 @@ input:checked + .slider:before {
 	padding: 8px 18px;
 }
 
+.importExportBtn:hover {
+	background-color: var(--btn-color-hover);
+}
+
 /* Rounded sliders */
 .slider.round {
   border-radius: var(--main-size-2);
