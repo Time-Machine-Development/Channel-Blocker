@@ -49,7 +49,6 @@
 			let selectList = document.getElementsByClassName("style-scope ytd-section-list-renderer");
 			for(elem of selectList){
 				if(elem.id === "contents"){
-					console.log("element",elem);
 					CUR_FILTERS.push(new StartContentFilter(elem));
 				}
 			}
@@ -57,12 +56,9 @@
 
 		//TrendsPage(https://www.youtube.com/feed/trending)
 		if(curContext === YTContext.TRENDING){
-			console.log("--YTContext.TRENDING--");
 			let selectList = document.getElementsByClassName("style-scope ytd-app");
-			console.log("style-scope ytd-app",selectList);
 			for(elem of selectList){
 				if(elem.id === "page-manager"){
-					console.log("TRENDING",elem);
 					CUR_FILTERS.push(new PersistentAppFilter(elem));
 				}
 			}
