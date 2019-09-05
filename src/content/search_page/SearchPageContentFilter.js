@@ -40,7 +40,7 @@ SearchPageContentFilter.prototype.onFound = function(child, useCallbackFilter){
 			}
 		}
 	}
-	
+
 	//Found a playlist ytd-playlist-renderer
 	//Check the videos and insert buttons
 	if(child.tagName === "YTD-PLAYLIST-RENDERER"){
@@ -62,13 +62,12 @@ SearchPageContentFilter.prototype.onFound = function(child, useCallbackFilter){
 			}
 		}
 	}
-	
+
 	//Found a ytd-shelf-renderer
 	//Check the videos and insert buttons
 	if(child.tagName === "YTD-SHELF-RENDERER"){
-		try{
 		let linkInnerArr = child.getElementsByClassName("style-scope ytd-shelf-renderer");
-		
+
 		if(linkInnerArr.length >= 6){
 			//Create callbackFilter to listen to changes
 			if(useCallbackFilter === undefined){
@@ -77,22 +76,18 @@ SearchPageContentFilter.prototype.onFound = function(child, useCallbackFilter){
 
 			//check the videoTitle and userName
 			checkUserChannelName(linkInnerArr[5].textContent, child);
-			
+
 			//insert the buttons to block the user
 			createBtnAfter(linkInnerArr[5], createContainerBtnNode(linkInnerArr[5].textContent), linkInnerArr[5]);
-				
-		}
-		}catch(e){
-			console.error(e,e.stack);
+
 		}
 	}
-	
+
 	//Found a channel
 	//Check the videos and insert buttons
 	if(child.tagName === "YTD-CHANNEL-RENDERER"){
-		try{
 		let linkInnerArr = child.getElementsByClassName("style-scope ytd-channel-renderer");
-		
+
 		if(linkInnerArr.length >= 6){
 			//Create callbackFilter to listen to changes
 			if(useCallbackFilter === undefined){
@@ -101,16 +96,13 @@ SearchPageContentFilter.prototype.onFound = function(child, useCallbackFilter){
 
 			//check the videoTitle and userName
 			checkUserChannelName(linkInnerArr[5].textContent, child);
-			
+
 			//insert the buttons to block the user
 			createBtnAtStart(linkInnerArr[5], createBtnNode(linkInnerArr[5].textContent), linkInnerArr[5]);
-				
-		}
-		}catch(e){
-			console.error(e,e.stack);
+
 		}
 	}
-	
+
 };
 
 //If the callbackFilter register a change they invoke this function

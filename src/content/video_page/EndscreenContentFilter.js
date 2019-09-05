@@ -8,7 +8,6 @@ EndscreenContentFilter.prototype = Object.create(Filter.prototype);
 EndscreenContentFilter.prototype.constructor = EndscreenContentFilter;
 
 EndscreenContentFilter.prototype.onFound = function (child) {
-	console.log(child);
 	let videoTitle = child.getElementsByClassName("ytp-videowall-still-info-title")[0].textContent;
 	let userName = child.getElementsByClassName("ytp-videowall-still-info-author")[0].textContent.split(" •")[0];
 
