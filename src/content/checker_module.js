@@ -65,6 +65,7 @@ async function sendAndProcessIsBlockedRequestMsg(msg, checkedNode, isVideo = fal
 				}
 			}
 			checkedNode.getElementsByClassName("video-stream html5-main-video")[0].volume = 0;
+			checkedNode.getElementsByClassName("video-stream html5-main-video")[0].pause();
 			let div = document.createElement("div");
 
 			let img = document.createElement("img");

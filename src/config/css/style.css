@@ -168,6 +168,14 @@ ul {
 	color:var(--text-color-1);
 }
 
+#addSVG {
+	fill: var(--text-color-1);
+}
+
+#addSVG:hover {
+	fill: var(--text-color-1);
+}
+
 .containerSelect{
 	margin: 1% 1% 0% 1%;
 	background: var(--background-color-2);
@@ -496,9 +504,10 @@ input:checked + .slider:before {
 .importExportBtn {
 	background-color: var(--main-color);
   	border: none;
-  	color: white;
+  	color: var(--text-color-1);
 	width: 13em;
 	padding: 8px 18px;
+	border:var(--border-simple);
 }
 
 .importExportBtn:hover {
