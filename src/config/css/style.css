@@ -160,7 +160,6 @@ ul {
 	border:var(--border-simple);
 	padding: 0em;
 	margin: 0em;
-	margin-top: 5px;
 	box-sizing: border-box;
 	padding-left: 0.6em;
 }
@@ -290,7 +289,6 @@ ul {
 }
 
 .innerDivExp aside button{
-	margin-top: 5px;
 	height:2em;
 	color:var(--text-color-1);
 	background:var(--main-color);
@@ -517,7 +515,7 @@ input:checked + .slider:before {
 }
 
 
-@media screen and (min-width:80em) {
+@media screen and (min-width:95em) {
 	.donationDiv .donationTextDiv {
 		width:40%;
 	}
@@ -540,13 +538,13 @@ input:checked + .slider:before {
 	}
 
 	.innerDivExp aside {
-		width:31.5%;
+		width:32%;
 	}
 
 }
 
 /*Small screen*/
-@media screen and (max-width:80em) {
+@media screen and (max-width:95em) {
 	.donationDiv .donationTextDiv {
 		width:50%;
 	}
@@ -568,7 +566,7 @@ input:checked + .slider:before {
 	}
 
 	.innerDivExp aside {
-		width:51.5%;
+		width:52%;
 	}
 }
 
@@ -596,6 +594,10 @@ input:checked + .slider:before {
 
 	.innerDivExp aside {
 		width:51.5%;
+	}
+
+	.moreOptionsDiv{
+		min-height:135px;
 	}
 }
 
