@@ -291,8 +291,7 @@ ul {
 
 .innerDivExp aside button{
 	margin-top: 5px;
-	font-size: 1.2em;
-	height:1.4em;
+	height:2em;
 	color:var(--text-color-1);
 	background:var(--main-color);
 	cursor: pointer;
