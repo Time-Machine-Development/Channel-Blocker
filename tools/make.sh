@@ -99,4 +99,4 @@ cd ./build
 zip -r -q -FS ../bin/ytc.xpi *
 cd ..
 
-echo -e "\e[1mMAKE DONE - 110101"
+echo -e "\e[1mMAKE DONE - 110101\e[0m"
