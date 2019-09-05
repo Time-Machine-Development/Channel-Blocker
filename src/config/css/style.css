@@ -485,12 +485,20 @@ input:checked + .slider:before {
 	transform: translateX(var(--main-size-3));
 }
 
+#questionmarkSVGPath{
+		fill: var(--main-color);
+}
+
+#questionmarkSVGPath:hover{
+		fill: var(--btn-color-hover);
+}
+
 /* import/export-buttons */
 .importExportBtn {
 	background-color: var(--main-color);
   	border: none;
   	color: white;
-	font-family: monospace;
+	width: 13em;
 	padding: 8px 18px;
 }
 
