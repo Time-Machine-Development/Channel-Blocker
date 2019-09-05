@@ -23,6 +23,11 @@ for i in $(find ./src | grep -v "jquery-3\.3\.1\.min\.js" | grep "\.js$" | grep 
 		log="$log◼ $i\\n\e[38;5;248m$(grep -n -E "console\.log" $i)\e[0m\\n\\n"
 	fi
 
+	#check for "console.err"s in ./src
+	if [[ $(grep -n -E "console\.error" $i) ]]; then
+		err="$err◼ $i\\n\e[38;5;248m$(grep -n -E "console\.err" $i)\e[0m\\n\\n"
+	fi
+
 	#check for try-and-catch-blocks (with empty catch-block) in ./build
 	if [[ $(pcregrep -M -n -e "\h*try(.|\n)*?catch([^\{\}])*?\{\s*?}\h*" $j) ]]; then
 		try_catch="$try_catch◼ $j\\n\e[38;5;248m$(pcregrep -M -n -e "\h*try(.|\n)*?catch([^\{\}])*?\{\s*?}\h*" $j)\e[0m\\n\\n"
@@ -42,13 +47,19 @@ for i in $(find ./src | grep -v "jquery-3\.3\.1\.min\.js" | grep "\.js$" | grep 
 	if [[ $(grep -n -E "var" $i) ]]; then
 		var="$var◼ $i\\n\e[38;5;248m$(grep -n -E "var" $i)\e[0m\\n\\n"
 	fi
-
 done
 
 #print console.log warnings, if at least one warning exists
 if [[ $log ]]; then
 	echo -e "\e[38;5;37mWARNING: used console.log(·) in\e[0m"
 	printf "$log"
+	echo
+fi
+
+#print console.error warnings, if at least one warning exists
+if [[ $err ]]; then
+	echo -e "\e[38;5;37mWARNING: used console.error(·) in\e[0m"
+	printf "$err"
 	echo
 fi
 
