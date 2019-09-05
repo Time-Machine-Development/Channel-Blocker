@@ -34,14 +34,11 @@
 			}
 		}
 
-		try{
-			for(btn of document.getElementsByTagName("button")){
-				if(btn.id === "cb_button"){
-					btn.remove();
-				}
+		//remove all cbbuttons
+		for(btn of document.getElementsByTagName("button")){
+			if(btn.id === "cb_button"){
+				btn.remove();
 			}
-		}catch(e){
-			console.error(e,e.stack);
 		}
 
 		//Start(https://www.youtube.com/)
