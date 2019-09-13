@@ -87,8 +87,22 @@ SearchPageContentFilter.prototype.onFound = function(child, useCallbackFilter){
 	//Check the videos and insert buttons
 	if(child.tagName === "YTD-CHANNEL-RENDERER"){
 		let linkInnerArr = child.getElementsByClassName("style-scope ytd-channel-renderer");
+		for(let elem of child.getElementsByClassName("style-scope ytd-channel-name")){
+			if(elem.id === "text"){
+				//Create callbackFilter to listen to changes
+				if(useCallbackFilter === undefined){
+					new CallbackFilter(elem, this, child);
+				}
 
-		if(linkInnerArr.length >= 6){
+				//check the videoTitle and userName
+				checkUserChannelName(elem.textContent, child);
+
+				//insert the buttons to block the user
+				createBtnAfterWithOneCheck(elem.parentNode.parentNode.parentNode.parentNode.parentNode, createBtnNode(elem.textContent), elem);
+			}
+		}
+
+		if(false && linkInnerArr.length >= 6){
 			//Create callbackFilter to listen to changes
 			if(useCallbackFilter === undefined){
 				new CallbackFilter(linkInnerArr[5], this, child);

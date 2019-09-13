@@ -5,13 +5,6 @@
 
 	"description": "Allows you to block YouTube™ videos and comments by blacklisting users and/or by using regular expressions.",
 
-	"applications": {
-		"gecko": {
-			"id": "{8263766c-d28e-4460-a2a7-7e7ada52a2d3}",
-	    	"strict_min_version": "56.0"
-	  	}
-	},
-
 	"icons": {
 		"48": "/images/Ytc_icon_48.png",
 		"96": "/images/Ytc_icon_96.png"
@@ -33,13 +26,11 @@
 		}
 	},
 
-	"options_ui": {
-		"page": "config/config.html",
-		"open_in_tab": true
-	},
+	"options_page": "config/config.html",
 
 	"background": {
 		"scripts": [
+			"polyfill/browser-polyfill.min.js",
 			"shared/shared.js",
 			"background/HashSet.js",
 			"background/FilterStorageManager.js",
@@ -55,6 +46,8 @@
 		{
 			"matches": ["*://www.youtube.com/*"],
 			"js": [
+				"polyfill/browser-polyfill.min.js",
+
 				"shared/jquery-3.3.1.min.js",
 				"shared/shared.js",
 				"content/checker_module.js",

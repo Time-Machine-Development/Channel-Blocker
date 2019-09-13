@@ -17,6 +17,7 @@
 body {
 	background:var(--background-color-1);
 	font-family: 'Titillium Web', sans-serif;
+	font-size: 1.0em;
 }
 
 h1 {
