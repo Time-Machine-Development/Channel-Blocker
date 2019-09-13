@@ -13,7 +13,7 @@ StartContainerFilter.prototype.onFound = function(child, useCallbackFilter){
 
 	let userChannelName;
 	let linkInnerArr = child.getElementsByTagName("a");
-	
+
 	//Found a GridVideo-Container
 	//Check the title and insert buttons
 	if(linkInnerArr.length >= 3){
@@ -40,9 +40,15 @@ StartContainerFilter.prototype.onFound = function(child, useCallbackFilter){
 	for(let btnContainerElem of child.getElementsByClassName("style-scope ytd-grid-video-renderer")){
 		if(btnContainerElem.id === "byline-container"){
 			btnContainerElem.style["max-height"] = "5rem";
+		}else if(btnContainerElem.id === "channel-name"){
+			btnContainerElem.style["width"] = "100%";
 			createBtnAtStart(btnContainerElem, createBtnNode(userChannelName , true));
-		}else if(btnContainerElem.id === "byline"){
-			btnContainerElem.style["max-width"] = "71%";
+		}
+	}
+
+	for(let btnContainerElem of child.getElementsByClassName("style-scope ytd-channel-name")){
+		if(btnContainerElem.id === "container"){
+			btnContainerElem.style["max-width"] = "74%";
 		}
 	}
 };
@@ -51,5 +57,5 @@ StartContainerFilter.prototype.onFound = function(child, useCallbackFilter){
 //Invokes the 'reloadFromChild()'-function of 'parent'
 StartContainerFilter.prototype.reload = function(child){
 	this.onFound(child, true);
-	this.parent.reloadFromChild(this.containerParent);
+	//this.parent.reloadFromChild(this.containerParent);
 };

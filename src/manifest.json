@@ -65,8 +65,13 @@
 
 				"content/CallbackFilter.js",
 
+
 				"content/start/StartCommantFilter.js",
 				"content/start/StartContainerFilter.js",
+				"content/start/HomeTopicContainerSubFilter.js",
+				"content/start/HomeTopicContainerFilter.js",
+				"content/start/HomeTopicTitleFilter.js",
+				"content/start/HomeTopicSpanTitleFilter.js",
 				"content/start/StartContentFilter.js",
 				"content/start/PrimaryFilter.js",
 				"content/start/PersistentAppFilter.js",

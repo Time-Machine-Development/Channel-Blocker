@@ -20,7 +20,7 @@ StartContentFilter.prototype.reloadFromChild = function(child){
 			//if the parentNode is a 'H2' tag the button must be insertet at another position
 			if(elem.textContent !== ""){
 				if(elem.parentNode.tagName !== "H2"){
-					for(ch of elem.parentNode.parentNode.parentNode.parentNode.children){
+					for(let ch of elem.parentNode.parentNode.parentNode.parentNode.children){
 						if(ch.tagName === "BUTTON"){
 							ch.remove();
 						}
@@ -32,9 +32,17 @@ StartContentFilter.prototype.reloadFromChild = function(child){
 			}
 		}
 	}
-}
+
+	for(let elem of child.getElementsByClassName("style-scope yt-horizontal-list-renderer")){
+		if(elem.id === "items"){
+			new StartContainerFilter(elem, this, child);
+		}
+	}
+};
 
 StartContentFilter.prototype.onFound = function(child, useCallbackFilter){
+
+	//console.log("child",child);
 
 	//Found a OuterVideo-container
 	//Check the name and insert buttons
@@ -42,24 +50,41 @@ StartContentFilter.prototype.onFound = function(child, useCallbackFilter){
 		if(elem.id === "title"){
 			//check the userName
 			checkUserChannelName(elem.textContent, child);
+			//console.log("elem.textContent", elem.textContent);
 
 			//insert button to block channel/user
 			//if the parentNode is a 'H2' tag the button must be insertet at another position
 			if(elem.textContent !== ""){
 				if(elem.parentNode.tagName !== "H2"){
 					createBtnAfter(elem.parentNode.parentNode.parentNode, createContainerBtnNode(elem.textContent));
+
+					new HomeTopicTitleFilter(elem.parentNode.parentNode.parentNode.parentNode, this, child);
 				}else{
 					createBtnAfter(elem.parentNode, createContainerBtnNode(elem.textContent));
+
+					new HomeTopicSpanTitleFilter(elem.parentNode, this, child);
 				}
+
 			}
 		}
 	}
 
 	//Found a Recommended-container
 	//Create new 'StartContainerFilter' on it
+	let useHomeTopicContainerFilter = true;
 	for(let elem of child.getElementsByClassName("style-scope yt-horizontal-list-renderer")){
 		if(elem.id === "items"){
 			new StartContainerFilter(elem, this, child);
+			useHomeTopicContainerFilter = false;
+		}
+	}
+
+	//firstTimeVisit
+	if(useHomeTopicContainerFilter){
+		for(let elem of child.getElementsByClassName("style-scope ytd-shelf-renderer")){
+			if(elem.id === "contents"){
+				new HomeTopicContainerFilter(elem.children[0], this, child);
+			}
 		}
 	}
 
@@ -95,7 +120,7 @@ StartContentFilter.prototype.onFound = function(child, useCallbackFilter){
 			new StartContainerFilter(elem, this, child);
 		}
 	}
-	
+
 	//Found a GridCommant
 	//Create new 'StartCommantFilter' on it
 	for(let elem of child.getElementsByClassName("style-scope yt-horizontal-list-renderer")){
@@ -103,7 +128,7 @@ StartContentFilter.prototype.onFound = function(child, useCallbackFilter){
 			new StartCommantFilter(elem, this, child);
 		}
 	}
-	
+
 };
 
 //If the callbackFilter register a change they invoke this function
