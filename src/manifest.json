@@ -48,7 +48,7 @@
 			"js": [
 				"polyfill/browser-polyfill.min.js",
 
-				"shared/jquery-3.3.1.min.js",
+				"shared/jquery-3.4.1.min.js",
 				"shared/shared.js",
 				"content/checker_module.js",
 				"content/event_dispatcher.js",

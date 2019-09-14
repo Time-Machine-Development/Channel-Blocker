@@ -10,7 +10,7 @@ fi
 cp -r ./src ./build
 
 #writing all *.js files without comments from ./src into ./build (exclude jquery-3.3.1.min.js)
-for i in $(find ./src | grep -v "jquery-3\.3\.1\.min\.js" | grep "\.js$" | grep -v "build"); do
+for i in $(find ./src  | grep -v "browser-polyfill\.min\.js" | grep -v "jquery-3\.4\.1\.min\.js" | grep "\.js$" | grep -v "build"); do
 	j=./build/$(echo $i| cut -c 7-)
 
 	#pcregrep -h -v -M -e "^\h*\/\*((.|\n)*?)\*\/\h*$" $i 		-> remove multi-line comments
@@ -97,6 +97,7 @@ mkdir ./bin
 #create .xpi(zip) from build inside bin folder
 cd ./build
 zip -r -q -FS ../bin/ytc.xpi *
+zip -r -q -FS ../bin/ytc.zip *
 cd ..
 
 echo -e "\e[1mMAKE DONE - 110101\e[0m"
