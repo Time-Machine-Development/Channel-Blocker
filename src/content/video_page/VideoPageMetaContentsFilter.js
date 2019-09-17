@@ -8,6 +8,9 @@ VideoPageMetaContentsFilter.prototype = Object.create(Filter.prototype);
 VideoPageMetaContentsFilter.prototype.constructor = VideoPageMetaContentsFilter;
 
 VideoPageMetaContentsFilter.prototype.onFound = function (child) {
+	if(child.id === undefined){
+		child = child.parentNode.parentNode;
+	}
 	//Check if the child is the searched node
 	if(child.className === "yt-simple-endpoint style-scope yt-formatted-string"){
 		//Get the videoplayer
