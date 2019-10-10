@@ -17,19 +17,7 @@
 		}
 		jFile["config"] = jFile["config"].config;
 
-		let blob = new Blob([JSON.stringify(jFile, null, 2)], {
-				type: 'application/json'
-			});
-
-		let objUrl = URL.createObjectURL(blob);
-
-		browser.downloads.download({
-			url: objUrl,
-			filename: "ChannelBlocker " + d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate() + ".save",
-			conflictAction: 'uniquify',
-			saveAs: true
-
-		});
+		return [JSON.stringify(jFile, null, 2)];
 	}
 
 	/*
@@ -47,7 +35,9 @@
 			 */
 
 			if (msg.content.info === "savefile_export_request") {
-				exportSaveFile();
+				return new Promise((resolve) => {
+					resolve(exportSaveFile());
+				});
 			}
 		}
 	});

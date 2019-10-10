@@ -14,7 +14,6 @@
 		"storage",
 		"unlimitedStorage",
 		"tabs",
-		"downloads",
 		"*://www.youtube.com/*"
 	],
 
