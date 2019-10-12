@@ -13,7 +13,7 @@ StartContainerFilter.prototype.onFound = function(child, useCallbackFilter){
 
 	let userChannelName;
 	let linkInnerArr = child.getElementsByTagName("a");
-	
+
 	//Found a GridVideo-Container
 	//Check the title and insert buttons
 	if(linkInnerArr.length >= 3){
@@ -43,6 +43,8 @@ StartContainerFilter.prototype.onFound = function(child, useCallbackFilter){
 			createBtnAtStart(btnContainerElem, createBtnNode(userChannelName , true));
 		}else if(btnContainerElem.id === "byline"){
 			btnContainerElem.style["max-width"] = "71%";
+		}else if(btnContainerElem.id === "channel-name"){
+			btnContainerElem.style["max-width"] = "89%";
 		}
 	}
 };
