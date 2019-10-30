@@ -142,12 +142,18 @@
 
 	 	let addBtnId = filterTypeStr + "_add_btn";
 	 	let deleteBtnId = filterTypeStr + "_delete_btn";
+	 	let inputTextfieldId = filterTypeStr + "_input_textfield";
 
 	 	document.getElementById(addBtnId).onclick = () => {
 	 		sendAddMessage(filterType);
 	 	};
 	 	document.getElementById(deleteBtnId).onclick = () => {
 			sendDeleteMessage(filterType);
+	 	};
+		document.getElementById(inputTextfieldId).onkeypress = (e) => {
+			if(e.keyCode==13){
+	 			sendAddMessage(filterType);
+			}
 	 	};
 	}
 
