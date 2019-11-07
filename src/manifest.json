@@ -25,7 +25,10 @@
 		}
 	},
 
-	"options_page": "config/config.html",
+	"options_ui": {
+	  "page": "config/config.html",
+	  "open_in_tab": true
+  },
 
 	"background": {
 		"scripts": [
