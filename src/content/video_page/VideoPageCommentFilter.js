@@ -12,7 +12,7 @@ VideoPageCommentFilter.prototype.onFound = function(child, useCallbackFilter){
 	let userName = undefined;
 
 	//UserChannelName of author
-	for(let elem of child.getElementsByClassName("yt-simple-endpoint style-scope ytd-comment-renderer")){
+	for(let elem of child.children[0].getElementsByClassName("yt-simple-endpoint style-scope ytd-comment-renderer")){
 		if(elem.id === "author-text"){
 			//Create callbackFilter to listen to changes
 			if(useCallbackFilter === undefined){
@@ -25,7 +25,7 @@ VideoPageCommentFilter.prototype.onFound = function(child, useCallbackFilter){
 	}
 
 	//CommentContent
-	for(let elem of child.getElementsByClassName("style-scope ytd-comment-renderer")){
+	for(let elem of child.children[0].getElementsByClassName("style-scope ytd-comment-renderer")){
 		if(elem.id === "content-text"){
 			checkCommentContent(userName, elem.textContent, child);
 		}

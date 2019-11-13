@@ -43,6 +43,10 @@
 
 		//Start(https://www.youtube.com/)
 		if(curContext === YTContext.HOME){
+			//new designed Startpage
+			let newElem = document.getElementById("contents");
+			CUR_FILTERS.push(new StartContentsFilter(newElem));
+
 			let selectList = document.getElementsByClassName("style-scope ytd-section-list-renderer");
 			for(elem of selectList){
 				if(elem.id === "contents"){
