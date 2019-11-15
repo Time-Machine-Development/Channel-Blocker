@@ -1,9 +1,9 @@
-function ThumbChangeFiler(target, parent, reloadTarget) {
+function HiddenChangeFilter(target, parent, reloadTarget) {
 	//Creates an observer to listen to changes of *target*
 	this.mutationObs = new MutationObserver(this.callbackFunc);
 	this.mutationObs.filterInst = this;
 	this.mutationObs.observe(target, {
-	  attributeFilter: [ "href" ],
+	  attributeFilter: [ "hidden" ],
 	  attributes: true
 	});
 
@@ -19,11 +19,11 @@ function ThumbChangeFiler(target, parent, reloadTarget) {
 }
 
 //Register the changes of the attributes and invoke the 'reload()'
-ThumbChangeFiler.prototype.callbackFunc = function(mutationRecArr, observerInst){
+HiddenChangeFilter.prototype.callbackFunc = function(mutationRecArr, observerInst){
 	this.filterInst.parent.reload(this.filterInst.reloadTarget);
 };
 
 //Detach the mutationObserver and invoke detach on all childFilter
-ThumbChangeFiler.prototype.detach = function(){
+HiddenChangeFilter.prototype.detach = function(){
 	this.mutationObs.disconnect();
 };

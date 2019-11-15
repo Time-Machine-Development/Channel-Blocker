@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "Channel Blocker",
-	"version": "2.0.5",
+	"version": "2.0.6",
 
 	"description": "Allows you to block YouTube™ videos and comments by blacklisting users and/or by using regular expressions.",
 
@@ -60,6 +60,7 @@
 
 				"content/CallbackFilter.js",
 
+				"content/start/HiddenChangeFilter.js",
 				"content/start/ThumbChangeFiler.js",
 				"content/start/StartContentsFilter.js",
 
