@@ -31,7 +31,8 @@ VideoPageContentFilter.prototype.onFound = function(child, useCallbackFilter){
 					let btn = createBtnNode(userName);
 					btn.style.position = "absolute";
 					btn.style.top = "50%";
-					createBtnAfterWithOneCheck(elem.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode, btn);
+					btn.style.right = "0%";
+					createBtnAfterWithOneCheck(elem.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode, btn);
 					elem.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.style.width = "90%";
 					elem.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.style.display = "block";
 					elem.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.style.paddingRight = "0px";

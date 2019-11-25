@@ -8,6 +8,7 @@
 	DEFAULT_CONFIG[ConfigId.CONTENT_BLOCK_VIDEOS_ON_VIDEOPAGE_VISIBILITY] = false;
 	DEFAULT_CONFIG[ConfigId.CONTENT_BLOCK_BTN_COLOR] = "#717171";
 	DEFAULT_CONFIG[ConfigId.CONTENT_BLOCK_BTN_SIZE] = 140;
+	DEFAULT_CONFIG[ConfigId.CONTENT_ANIMATION_SPEED] = 1000;
 	Object.freeze(DEFAULT_CONFIG);
 
 	//represents the current configuration
@@ -35,6 +36,18 @@
 			content: {
 				info: "block_btn_modified",
 				block_btn_visibility: config[ConfigId.CONTENT_BLOCK_BTN_VISIBILITY]
+			}
+		};
+	}
+
+	//creates a "animation_speed_modified"-message for content_controller
+	function createAnimationSpeedModifiedMsg() {
+		return {
+			sender: SENDER,
+			receiver: "content_controller",
+			content: {
+				info: "animation_speed_modified",
+				animation_speed: config[ConfigId.CONTENT_ANIMATION_SPEED]
 			}
 		};
 	}
@@ -81,6 +94,12 @@
 			if (configId === ConfigId.CONTENT_BLOCK_BTN_VISIBILITY || configId === ConfigId.CONTENT_BLOCK_BTN_SIZE || configId === ConfigId.CONTENT_BLOCK_BTN_COLOR) {
 				for (let tabId of YT_TAB_IDS.keys()) {
 					browser.tabs.sendMessage(Number(tabId), createBlockBtnModifiedMsg());
+				}
+			}
+
+			if (configId === ConfigId.CONTENT_ANIMATION_SPEED) {
+				for (let tabId of YT_TAB_IDS.keys()) {
+					browser.tabs.sendMessage(Number(tabId), createAnimationSpeedModifiedMsg());
 				}
 			}
 			updateStorage();
@@ -164,6 +183,10 @@
 			}else if (msg.content === "block_btn_size_request") {
 				return new Promise((resolve) => {
 					resolve(config[ConfigId.CONTENT_BLOCK_BTN_SIZE]);
+				});
+			}else if (msg.content === "animation_speed_request") {
+				return new Promise((resolve) => {
+					resolve(config[ConfigId.CONTENT_ANIMATION_SPEED]);
 				});
 			}
 		}

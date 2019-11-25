@@ -6,6 +6,7 @@
 
 	//current context to make an update if a "filter_storage_modified"-message is received
 	let curContext;
+	let curAnimationSpeed = 1000;
 
 	//creates a "context_request"-message for background_url_update
 	function createContextRequestMsg(){
@@ -44,14 +45,18 @@
 		//Start(https://www.youtube.com/)
 		if(curContext === YTContext.HOME){
 			//new designed Startpage
-			let newElem = document.getElementById("contents");
-			CUR_FILTERS.push(new StartContentsFilter(newElem));
-
-			let selectList = document.getElementsByClassName("style-scope ytd-section-list-renderer");
-			for(elem of selectList){
-				if(elem.id === "contents"){
-					CUR_FILTERS.push(new StartContentFilter(elem));
+			for(let newElem of document.getElementsByClassName("style-scope ytd-two-column-browse-results-renderer")){
+				if(newElem.id !== "primary")continue;
+				console.log("newElem:",newElem);
+				CUR_FILTERS.push(new StartPrimaryFilter(newElem));
+				/*
+				let selectList = document.getElementsByClassName("style-scope ytd-section-list-renderer");
+				for(elem of selectList){
+					if(elem.id === "contents"){
+						CUR_FILTERS.push(new StartContentFilter(elem));
+					}
 				}
+				*/
 			}
 		}
 
@@ -100,6 +105,9 @@
 		//request initial blockVideosOnVideopage
 		//blockVideosOnVideopage is used in checker_module
 		blockVideosOnVideopage = await browser.runtime.sendMessage(createRequestMsg("block_videos_on_videopage_request"));
+		//request initial animationSpeed
+		//blockVideosOnVideopage is used in checker_module
+		curAnimationSpeed = parseInt(await browser.runtime.sendMessage(createRequestMsg("animation_speed_request")));
 
 		//wait for document to be ready
 		$(document).ready(updateFilters());
@@ -120,7 +128,7 @@
 
 			if(msg.content === "filter_storage_modified"){
 				//note that animationSpeed is declared and init. in checker_module
-				animationSpeed = 1000;
+				animationSpeed = curAnimationSpeed;
 
 				//wait for document to be ready
 				$(document).ready(updateFilters());
@@ -160,6 +168,8 @@
 			if(msg.content.info === "block_btn_modified"){
 				//requests initial context and the initial visibility of block-btn, afterwards update filters (for the first time on this tab-id)
 				init();
+			}else if(msg.content.info === "animation_speed_modified"){
+				curAnimationSpeed = parseInt(msg.content.animation_speed);
 			}
 		}
 	});

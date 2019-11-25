@@ -95,7 +95,16 @@
 		browser.runtime.sendMessage(createConfigValueSetMsg(ConfigId.CONTENT_BLOCK_BTN_COLOR, document.getElementById("configBtnColor").value));
 	}
 
-	//handle the event from the configBtnSizeSlider
+	//handle the event from the configAnimationSpeedSlider
+	//send a massage to the background to change the size of the block btns
+	function configAnimationSpeedSliderHandler(e) {
+		//tell the user agent that if the event does not get explicitly handled
+		e.preventDefault();
+		//send a msg to the background_config_storage to change the size of the block btns
+		browser.runtime.sendMessage(createConfigValueSetMsg(ConfigId.CONTENT_ANIMATION_SPEED, document.getElementById("configAnimationSpeedSlider").value));
+	}
+
+	//handle the event from the configBtnSizeSliderHandler
 	//send a massage to the background to change the size of the block btns
 	function configBtnSizeSliderHandler(e) {
 		//tell the user agent that if the event does not get explicitly handled
@@ -198,6 +207,11 @@
 		document.getElementById("showColorBtn").style.stroke = configValue;
 	}
 
+	//change the animationSpeed
+	function changeAnimationSpeed(configValue) {
+		document.getElementById("configAnimationSpeedSlider").value = configValue;
+	}
+
 	//change the configBtnSizeSlider
 	function changeBtnSize(configValue) {
 		document.getElementById("configBtnSizeSlider").value = configValue;
@@ -231,8 +245,11 @@
 	//define behavior for changing the color
 	document.getElementById("configBtnColor").onchange = configBtnColorHandler;
 
-	//define behavior for changing the Slider
+	//define behavior for changing the configBtnSizeSlider
 	document.getElementById("configBtnSizeSlider").onchange = configBtnSizeSliderHandler;
+
+	//define behavior for changing the configAnimationSpeedSlider
+	document.getElementById("configAnimationSpeedSlider").onchange = configAnimationSpeedSliderHandler;
 
 	//define behavior for changing the containerSelect
 	document.getElementById("containerSelect").onchange = containerSelectHandler;
@@ -263,6 +280,10 @@
 
 		val = await browser.runtime.sendMessage(createConfigValueRequestMsg(ConfigId.CONTENT_BLOCK_BTN_SIZE));
 		changeBtnSize(val);
+
+
+		val = await browser.runtime.sendMessage(createConfigValueRequestMsg(ConfigId.CONTENT_ANIMATION_SPEED));
+		changeAnimationSpeed(val);
 	}
 
 	initRequests();
@@ -298,6 +319,8 @@
 					changeBtnColor(msg.content.config_val);
 				} else if (msg.content.config_id === ConfigId.CONTENT_BLOCK_BTN_SIZE) {
 					changeBtnSize(msg.content.config_val);
+				} else if (msg.content.config_id === ConfigId.CONTENT_BLOCK_BTN_SIZE) {
+					changeAnimationSpeed(msg.content.config_val);
 				}
 			}
 		}
