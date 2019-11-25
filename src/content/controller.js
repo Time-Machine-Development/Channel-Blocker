@@ -47,16 +47,7 @@
 			//new designed Startpage
 			for(let newElem of document.getElementsByClassName("style-scope ytd-two-column-browse-results-renderer")){
 				if(newElem.id !== "primary")continue;
-				console.log("newElem:",newElem);
 				CUR_FILTERS.push(new StartPrimaryFilter(newElem));
-				/*
-				let selectList = document.getElementsByClassName("style-scope ytd-section-list-renderer");
-				for(elem of selectList){
-					if(elem.id === "contents"){
-						CUR_FILTERS.push(new StartContentFilter(elem));
-					}
-				}
-				*/
 			}
 		}
 
