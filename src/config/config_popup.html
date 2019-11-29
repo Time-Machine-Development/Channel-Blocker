@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	    <meta charset="utf-8">
+
+		<link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet">
+		<link id="css" rel="stylesheet" href="css/dark_root.css">
+		<link rel="stylesheet" href="css/style.css">
+
+		<script defer="defer" type="text/javascript" src="../polyfill/browser-polyfill.min.js"></script>
+		<script defer="defer" type="text/javascript" src="../shared/shared.js"></script>
+		<script defer="defer" type="text/javascript" src="js/popup_config_user_interaction.js"></script>
+
+		<link rel="icon" type="image/x-icon" href="favicon.ico">
+
+	</head>
+
+	<body>
+		<div class="donationDiv">
+			<div class="donationBtnDiv">
+				<form action="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=NN8JLJGX832LN" method="post" target="_blank" style="width: 100%; margin-bottom:1px">
+					<input value="Donate" style="background: #ffab2d;border: none;padding-top: 4px;padding-bottom: 4px;width: 100%;font-weight: bold; color:#000000; cursor: pointer;" type="submit"/>
+				</form>
+				<form action="https://www.patreon.com/time_machine_development" target="_blank">
+					<input class="patreon" type="submit" value="Become a patron"/>
+				</form>
+			</div>
+			<div class="donationTextDiv">
+				We hope you enjoy a clean YouTube™.
+				A subscription at patreon would help us a lot developing this add-on and future projects.
+				Or you can just leave a donation, if you like this add-on. :)
+			</div>
+		</div>
+
+		<div class="hr"></div>
+
+		<h1 id="containerHeadline">Blocked users/channels</h1>
+
+		<div class="popupSelectDiv">
+				<select multiple="multiple" id="popupSelection">
+				</select>
+				<button id="popupDelBtn" type="button" title="delete marked users/channels from this list"><span class="deleteButtonText">⨯</span></button>
+		</div>
+
+		<input id="popupTextField" name="textField" placeholder="user/channel name" type="text">
+
+		<button id="popupAddBtn" type="button">
+			<svg width="16" height="16" viewBox="0 0 93 92" fill="none" xmlns="http://www.w3.org/2000/svg" style="padding-top: 4px;">
+					<path id="addSVG" d="M90.457 52.6V39H52.657V-3.8147e-06H38.657V39H0.457032V52.6H38.657V92H52.657V52.6H90.457Z" fill="#336E7B"/>
+				</svg>
+		</button>
+
+
+		<button id="popupOptions" type="button">
+			Goto config page ->
+		</button>
+	</body>
+
+</html>

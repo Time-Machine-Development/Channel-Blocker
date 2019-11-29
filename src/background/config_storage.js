@@ -9,6 +9,7 @@
 	DEFAULT_CONFIG[ConfigId.CONTENT_BLOCK_BTN_COLOR] = "#717171";
 	DEFAULT_CONFIG[ConfigId.CONTENT_BLOCK_BTN_SIZE] = 140;
 	DEFAULT_CONFIG[ConfigId.CONTENT_ANIMATION_SPEED] = 1000;
+	DEFAULT_CONFIG[ConfigId.USE_POPUP] = false;
 	Object.freeze(DEFAULT_CONFIG);
 
 	//represents the current configuration
@@ -60,6 +61,8 @@
 		config = storageContainer["config"];
 		if(config === undefined){
 			config = {};
+		}else{
+			usePopup = config[ConfigId.USE_POPUP];
 		}
 
 		let changed = false;
@@ -101,6 +104,11 @@
 				for (let tabId of YT_TAB_IDS.keys()) {
 					browser.tabs.sendMessage(Number(tabId), createAnimationSpeedModifiedMsg());
 				}
+			}
+
+			if (configId === ConfigId.USE_POPUP) {
+				browser.browserAction.setPopup({popup: ""});
+				usePopup = val;
 			}
 			updateStorage();
 		}

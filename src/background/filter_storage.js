@@ -145,6 +145,17 @@
 		if(msg.receiver !== SENDER)
 			return;
 
+		if(msg.sender === "popup_config_user_interaction"){
+			if(msg.content.info === "add"){
+				onAddMsg(msg.content);
+			}else if(msg.content.info === "delete"){
+				onDelMsg(msg.content);
+			}
+			return new Promise((resolve) => {
+				resolve(Object.assign({}, storageManager.getHashSet(msg.content.filter_type)));
+			});
+		}
+
 		if(msg.sender === "config_filter_user_interaction" || msg.sender === "config_import_savefile"){
 			//react to "add"-message from config_filter_user_interaction
 			if(msg.content.info === "add"){

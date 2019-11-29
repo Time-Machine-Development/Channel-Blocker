@@ -68,6 +68,15 @@
 		browser.runtime.sendMessage(createConfigValueSetMsg(ConfigId.CONFIG_ADVANCED_VIEW, document.getElementById("configAdvancedViewCheckbox").checked));
 	}
 
+	//handle the event from the configPopupCheckbox
+	//send a massage to the background to activate/deactivate the Popup
+	function configPopupCheckboxHandler(e) {
+		//tell the user agent that if the event does not get explicitly handled
+		e.preventDefault();
+		//send a msg to the background_config_storage to activate/deactivate the BtnVisibility
+		browser.runtime.sendMessage(createConfigValueSetMsg(ConfigId.USE_POPUP, document.getElementById("configPopupCheckbox").checked));
+	}
+
 	//handle the event from the configBtnVisibilityCheckbox
 	//send a massage to the background to activate/deactivate the BtnVisibility
 	function configBtnVisibilityCheckboxHandler(e) {
@@ -188,6 +197,13 @@
 		document.getElementById("configAdvancedViewCheckbox").checked = configValue;
 	}
 
+
+	//change the configPopupCheckbox
+	function changePopup(configValue) {
+		document.getElementById("configPopupCheckbox").value = configValue;
+		document.getElementById("configPopupCheckbox").checked = configValue;
+	}
+
 	//change the configBtnVisibilityCheckbox
 	function changeBtnVisibility(configValue) {
 		document.getElementById("configBtnVisibilityCheckbox").value = configValue;
@@ -232,6 +248,11 @@
 		configAdvancedViewCheckboxHandler(event);
 	});
 
+	//define behavior for clicking the configPopupCheckbox
+	document.getElementById("configPopupCheckbox").addEventListener('click', function (event) {
+		configPopupCheckboxHandler(event);
+	});
+
 	//define behavior for clicking the configBtnVisibilityCheckbox
 	document.getElementById("configBtnVisibilityCheckbox").addEventListener('click', function (event) {
 		configBtnVisibilityCheckboxHandler(event);
@@ -268,6 +289,10 @@
 		//AdvancedView
 		val = await browser.runtime.sendMessage(createConfigValueRequestMsg(ConfigId.CONFIG_ADVANCED_VIEW));
 		changeAdvancedView(val);
+
+
+		val = await browser.runtime.sendMessage(createConfigValueRequestMsg(ConfigId.USE_POPUP));
+		changePopup(val);
 
 		val = await browser.runtime.sendMessage(createConfigValueRequestMsg(ConfigId.CONTENT_BLOCK_BTN_VISIBILITY));
 		changeBtnVisibility(val);
@@ -311,6 +336,8 @@
 					changePageDesign(msg.content.config_val);
 				} else if (msg.content.config_id === ConfigId.CONFIG_ADVANCED_VIEW) {
 					changeAdvancedView(msg.content.config_val);
+				} else if (msg.content.config_id === ConfigId.USE_POPUP) {
+					changePopup(msg.content.config_val);
 				} else if (msg.content.config_id === ConfigId.CONTENT_BLOCK_BTN_VISIBILITY) {
 					changeBtnVisibility(msg.content.config_val);
 				} else if (msg.content.config_id === ConfigId.CONTENT_BLOCK_VIDEOS_ON_VIDEOPAGE_VISIBILITY) {
