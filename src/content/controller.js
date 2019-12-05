@@ -61,6 +61,16 @@
 			}
 		}
 
+		//TrendsPage(https://www.youtube.com/feed/recommended)
+		if(curContext === YTContext.RECOMMANDED){
+			let selectList = document.getElementsByClassName("style-scope ytd-app");
+			for(elem of selectList){
+				if(elem.id === "page-manager"){
+					CUR_FILTERS.push(new PersistentAppFilter(elem));
+				}
+			}
+		}
+
 		//SearchPage(https://www.youtube.com/results?search_query=<INPUT>)
 		if(curContext === YTContext.SEARCH || curContext === YTContext.CHANNEL_VIDEOS || curContext === YTContext.CHANNEL_HOME){
 			for(elem of document.getElementsByClassName("style-scope ytd-two-column-search-results-renderer")){

@@ -98,7 +98,7 @@ SearchPageContentFilter.prototype.onFound = function(child, useCallbackFilter){
 				checkUserChannelName(elem.textContent, child);
 
 				//insert the buttons to block the user
-				createBtnAfterWithOneCheck(elem.parentNode.parentNode.parentNode.parentNode.parentNode, createBtnNode(elem.textContent), elem);
+				createBtnAfterWithOneCheck(elem.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode, createBtnNode(elem.textContent), elem);
 			}
 		}
 

@@ -63,6 +63,9 @@
 			config = {};
 		}else{
 			usePopup = config[ConfigId.USE_POPUP];
+			if(usePopup){
+				browser.browserAction.setPopup({popup: "/config/config_popup.html"});
+			}
 		}
 
 		let changed = false;
@@ -109,6 +112,9 @@
 			if (configId === ConfigId.USE_POPUP) {
 				browser.browserAction.setPopup({popup: ""});
 				usePopup = val;
+				if(usePopup){
+					browser.browserAction.setPopup({popup: "/config/config_popup.html"});
+				}
 			}
 			updateStorage();
 		}
