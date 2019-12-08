@@ -57,7 +57,8 @@ SearchPageContentFilter.prototype.onFound = function(child, useCallbackFilter){
 			//insert the buttons to block the user
 			for(let btnContainerElem of child.getElementsByClassName("style-scope ytd-video-meta-block")){
 				if(btnContainerElem.id === "metadata"){
-					createBtnAtStart(btnContainerElem, createBtnNode(linkInnerArr[2].textContent), btnContainerElem.firstChild);
+					createBtnAtStartWithOneCheck(btnContainerElem.parentNode.parentNode.parentNode, createBtnNode(linkInnerArr[2].textContent), btnContainerElem.firstChild);
+					btnContainerElem.parentNode.parentNode.style.maxWidth = "90%";
 				}
 			}
 		}

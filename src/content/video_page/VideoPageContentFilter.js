@@ -23,15 +23,16 @@ VideoPageContentFilter.prototype.onFound = function(child, useCallbackFilter){
 
 			if(userName !== ""){
 				//insert button to block channel/user..
+				let btn = createBtnNode(userName);
+				btn.style.position = "absolute";
+				btn.style.top = "50%";
+				btn.style.right = "0%";
+
 				if(isPlaylist){
 					//.. on playlist gridVideo
-					createBtnAfterWithOneCheck(elem.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode, createBtnNode(userName));
+					createBtnAfterWithOneCheck(elem.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode, btn);
 				}else{
 					//.. on video gridVideo
-					let btn = createBtnNode(userName);
-					btn.style.position = "absolute";
-					btn.style.top = "50%";
-					btn.style.right = "0%";
 					createBtnAfterWithOneCheck(elem.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode, btn);
 					elem.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.style.width = "90%";
 					elem.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.style.display = "block";

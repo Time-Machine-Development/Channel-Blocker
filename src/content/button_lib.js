@@ -109,3 +109,25 @@ function createBtnAtStart(parent, btn, child){
 		}
 	}
 }
+
+
+//Takes the button(btn) and inserts it befor the 'child'-node
+//If the 'child'-node isn't a child of the 'patent'-node anymore insert it as fist childNode
+function createBtnAtStartWithOneCheck(parent, btn, child){
+	if(!showBtns)return;
+	for(ch of parent.parentNode.getElementsByTagName("button")){
+		if(ch.id === "cb_button"){
+			ch.remove();
+		}
+	}
+	if(child === undefined){
+		parent.insertBefore(btn, parent.firstChild);
+	}else{
+		try{
+			parent.insertBefore(btn,child);
+		}catch(e){
+			parent.prepend(btn);
+
+		}
+	}
+}
