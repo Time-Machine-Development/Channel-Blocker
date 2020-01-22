@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "Channel Blocker",
-	"version": "2.0.12",
+	"version": "2.0.13",
 
 	"description": "Allows you to block YouTube™ videos and comments by blacklisting users and/or by using regular expressions.",
 
@@ -18,7 +18,7 @@
 	],
 
 	"browser_action": {
-		"default_title": "Configuration",
+		"default_title": "Channel Blocker (Configuration)",
 		"default_icon": {
 			"16": "/images/Ytc_icon_16.png",
 			"32": "/images/Ytc_icon_32.png"
