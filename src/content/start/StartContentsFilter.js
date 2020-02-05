@@ -1,4 +1,4 @@
-//New StartPage filter 1/2
+//New StartPage filter 2/2
 function StartContentsFilter(target, parent, containerParent) {
 	this.parent = parent;
 	this.containerParent = containerParent;
@@ -38,6 +38,13 @@ StartContentsFilter.prototype.onFound = function(child, useCallbackFilter){
 		createBtnAtStart(channelATags[0].parentNode, createBtnNode(channelATags[0].textContent , true));
 
 		checkVideoTitle(channelATags[0].textContent, videoTitle, child);
+
+		//set an eventlistenner to the menubar
+		for (let elem of child.getElementsByClassName("style-scope ytd-rich-grid-video-renderer")) {
+			if (elem.id == "menu") {
+				new MenuFilter(elem, this, channelATags[0].textContent);
+			}
+		}
 
 		if(child.hidden){
 			new HiddenChangeFilter(child, this, child);

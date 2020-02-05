@@ -60,8 +60,11 @@
 
 				"content/CallbackFilter.js",
 
+				"content/start/PopupFilter.js",
+
 				"content/start/HiddenChangeFilter.js",
 				"content/start/ThumbChangeFiler.js",
+				"content/start/MenuFilter.js",
 				"content/start/StartContentsFilter.js",
 				"content/start/StartYtdRichGridRendererFilter.js",
 				"content/start/StartPrimaryFilter.js",
