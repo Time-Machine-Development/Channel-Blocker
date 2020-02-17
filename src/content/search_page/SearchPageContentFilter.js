@@ -32,6 +32,13 @@ SearchPageContentFilter.prototype.onFound = function(child, useCallbackFilter){
 			//check the videoTitle and userName
 			checkVideoTitle(linkInnerArr[2].textContent, linkInnerArr[1].textContent, child);
 
+			//set an eventlistenner to the menubar
+			for (let elem of child.getElementsByClassName("style-scope ytd-video-renderer")) {
+				if (elem.id === "menu") {
+					new MenuFilter(elem, this, linkInnerArr[2].textContent);
+				}
+			}
+
 			//insert the buttons to block the user
 			for(let btnContainerElem of child.getElementsByClassName("style-scope ytd-video-meta-block")){
 				if(btnContainerElem.id === "metadata"){

@@ -10,7 +10,6 @@ StartContainerFilter.prototype = Object.create(Filter.prototype);
 StartContainerFilter.prototype.constructor = StartContainerFilter;
 
 StartContainerFilter.prototype.onFound = function(child, useCallbackFilter){
-
 	let userChannelName;
 	let linkInnerArr = child.getElementsByTagName("a");
 
@@ -45,6 +44,12 @@ StartContainerFilter.prototype.onFound = function(child, useCallbackFilter){
 			btnContainerElem.style["max-width"] = "71%";
 		}else if(btnContainerElem.id === "channel-name"){
 			btnContainerElem.style["max-width"] = "89%";
+		}
+	}
+	//set an eventlistenner to the menubar
+	for (let elem of child.getElementsByClassName("style-scope ytd-grid-video-renderer")) {
+		if (elem.id === "menu") {
+			new MenuFilter(elem, this, userChannelName);
 		}
 	}
 };

@@ -61,6 +61,12 @@ VideoPageContentFilter.prototype.onFound = function(child, useCallbackFilter){
 			}
 		}
 	}
+	//set an eventlistenner to the menubar
+	for (let elem of child.getElementsByClassName("style-scope ytd-compact-video-renderer")) {
+		if (elem.id === "menu") {
+			new MenuFilter(elem, this, userName);
+		}
+	}
 };
 
 //If the callbackFilter register a change they invoke this function

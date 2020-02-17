@@ -24,6 +24,13 @@ VideoPageMetaContentsFilter.prototype.onFound = function (child) {
 		checkUserChannelName(child.textContent, vPlayer, true);
 		createBtnAtStart(child.parentNode, createBtnNode(child.textContent), child);
 
+		//set an eventlistenner to the menubar
+		for (let elem of child.parentNode.parentNode.parentNode.getElementsByClassName("style-scope ytd-video-primary-info-renderer")) {
+			if (elem.id === "menu") {
+				new MenuFilter(elem, this, child.textContent);
+			}
+		}
+
 		return;
 	}
 
@@ -43,6 +50,13 @@ VideoPageMetaContentsFilter.prototype.onFound = function (child) {
 
 		checkUserChannelName(elements[0].textContent, vPlayer, true);
 		createBtnAtStart(elements[0].parentNode, createBtnNode(elements[0].textContent), child);
+
+		//set an eventlistenner to the menubar
+		for (let elem of child.parentNode.parentNode.parentNode.getElementsByClassName("style-scope ytd-video-primary-info-renderer")) {
+			if (elem.id === "menu") {
+				new MenuFilter(elem, this, elements[0].textContent);
+			}
+		}
 	}else{
 		//At the first visit of the Videopage this fallback will be used!
 		elements = child.getElementsByClassName("style-scope ytd-video-owner-renderer");

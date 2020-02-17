@@ -14,7 +14,6 @@ MenuFilter.prototype.constructor = MenuFilter;
 this.menuClickHandler = function(){
   //public var for the menu in controller.js
   curChanelName = this.channelName;
-    console.log("curChanelName" , curChanelName);
 }
 
 MenuFilter.prototype.onFound = function(child){

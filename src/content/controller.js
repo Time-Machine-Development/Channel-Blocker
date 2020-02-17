@@ -1,5 +1,5 @@
 //public var for the menu. curChanelName is the name of the channel where the user last opend the menu
-var curChanelName = "";
+var curChanelName = undefined;
 
 {
 	const SENDER = "content_controller";
@@ -29,6 +29,41 @@ var curChanelName = "";
 		};
 	}
 
+	function updateMenuBtn(){
+		//CSS for menuBtn
+		let css = '\
+		#cb_menuButtonDiv{\
+			 min-width: 200px;\
+		}\
+		\
+		#cb_menuButton:hover{\
+			 background: var(--yt-menu-hover-backgound-color);\
+		}\
+		\
+		#cb_menuButton{\
+			width: 100%;\
+			color: var(--yt-spec-text-primary);\
+			height: 36px;\
+			background: var(--paper-listbox-background-color, var(--primary-background-color));\
+			border: none;\
+			font-size: 1.4rem;\
+			font-weight: 400;\
+			line-height: 2.1rem;\
+			font-family: var(--paper-font-subhead_-_font-family);\
+			cursor: pointer;\
+		}';
+	  	let style = document.createElement('style');
+
+	  	if (style.styleSheet) {
+			style.styleSheet.cssText = css;
+	  } else {
+			style.appendChild(document.createTextNode(css));
+	  }
+	  document.getElementsByTagName('head')[0].appendChild(style);
+	  console.log("mmm", document.getElementsByTagName("YTD-POPUP-CONTAINER")[0]);
+	  CUR_FILTERS.push(new PopupFilter(document.getElementsByTagName("YTD-POPUP-CONTAINER")[0]));
+	}
+
 	//removes all old filters and creates new filters, based on the current yt-context
 	function updateFilters(){
 		//detaches all currently active filters
@@ -45,25 +80,16 @@ var curChanelName = "";
 			}
 		}
 
+		//Setup the menuBtnFilter
+		updateMenuBtn();
+
 		//Start(https://www.youtube.com/)
 		if(curContext === YTContext.HOME){
 			//new designed Startpage
 			for(let newElem of document.getElementsByClassName("style-scope ytd-two-column-browse-results-renderer")){
 				if(newElem.id !== "primary")continue;
-				console.log("-----", newElem);
 				CUR_FILTERS.push(new StartPrimaryFilter(newElem));
 			}
-			//CSS for menuBtn
-			let css = '#cb_menuButton:hover{ background: var(--yt-icon-disabled-color); } #cb_menuButton{ width: 100%;color: var(--yt-spec-text-primary);height: 36px;background: var(--paper-listbox-background-color, var(--primary-background-color));;border: none;font-size: 1.4rem;font-weight: 400;line-height: 2.1rem;font-family: var(--paper-font-subhead_-_font-family);cursor: pointer; }';
-		  let style = document.createElement('style');
-
-		  if (style.styleSheet) {
-		      style.styleSheet.cssText = css;
-		  } else {
-		      style.appendChild(document.createTextNode(css));
-		  }
-		  document.getElementsByTagName('head')[0].appendChild(style);
-			new PopupFilter(document.getElementsByTagName("YTD-POPUP-CONTAINER")[0]);
 		}
 
 		//TrendsPage(https://www.youtube.com/feed/trending)
@@ -76,7 +102,7 @@ var curChanelName = "";
 			}
 		}
 
-		//TrendsPage(https://www.youtube.com/feed/recommended)
+		//RecommendedPage(https://www.youtube.com/feed/recommended)
 		if(curContext === YTContext.RECOMMANDED){
 			let selectList = document.getElementsByClassName("style-scope ytd-app");
 			for(elem of selectList){

@@ -77,6 +77,13 @@ StartContentFilter.prototype.onFound = function(child, useCallbackFilter){
 					//check the userName and title
 					checkVideoTitle(linkInnerArr[2].textContent, linkInnerArr[1].textContent, videoElem);
 
+					//set an eventlistenner to the menubar
+					for (let menuElem of videoElem.getElementsByClassName("style-scope ytd-video-renderer")) {
+						if (menuElem.id === "menu") {
+							new MenuFilter(menuElem, this, linkInnerArr[2].textContent);
+						}
+					}
+
 					//insert button to block channel/user
 					for(let btnContainerElem of videoElem.getElementsByClassName("style-scope ytd-video-meta-block")){
 						if(btnContainerElem.id === "metadata" && linkInnerArr[2].textContent !== ""){
@@ -95,7 +102,7 @@ StartContentFilter.prototype.onFound = function(child, useCallbackFilter){
 			new StartContainerFilter(elem, this, child);
 		}
 	}
-	
+
 	//Found a GridCommant
 	//Create new 'StartCommantFilter' on it
 	for(let elem of child.getElementsByClassName("style-scope yt-horizontal-list-renderer")){
@@ -103,7 +110,7 @@ StartContentFilter.prototype.onFound = function(child, useCallbackFilter){
 			new StartCommantFilter(elem, this, child);
 		}
 	}
-	
+
 };
 
 //If the callbackFilter register a change they invoke this function
