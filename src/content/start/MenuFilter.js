@@ -12,7 +12,7 @@ MenuFilter.prototype.constructor = MenuFilter;
 
 //clickHandler for the menu-btn
 this.menuClickHandler = function(){
-  //public var for the menu in controller.js
+  //public variable for the menu in controller.js
   curChanelName = this.channelName;
 }
 

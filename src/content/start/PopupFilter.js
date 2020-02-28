@@ -8,7 +8,6 @@ PopupFilter.prototype = Object.create(Filter.prototype);
 PopupFilter.prototype.constructor = PopupFilter;
 
 PopupFilter.prototype.onFound = function(child){
-	console.log("Popup", child);
 	let div = document.createElement("div");
 	div.setAttribute("id", "cb_menuButtonDiv");
 
@@ -29,6 +28,9 @@ PopupFilter.prototype.onFound = function(child){
 	btn.addEventListener("click", func);
 
 	let items = child.getElementsByClassName("style-scope ytd-menu-popup-renderer")[0];
+	if(items === undefined){
+		return;
+	}
 	if(items.parentNode.firstElementChild.id === "cb_menuButtonDiv"){
 		items.parentNode.firstElementChild.remove();
 	}

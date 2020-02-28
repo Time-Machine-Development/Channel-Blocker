@@ -44,7 +44,7 @@ for i in $(find ./src  | grep -v "browser-polyfill\.min\.js" | grep -v "jquery-3
 	fi
 
 	#check for 'var' declarations in ./src
-	if [[ $(grep -n -E "var" $i) ]]; then
+	if [[ $(grep -n -E "var " $i) ]]; then
 		var="$var◼ $i\\n\e[38;5;248m$(grep -n -E "var" $i)\e[0m\\n\\n"
 	fi
 done

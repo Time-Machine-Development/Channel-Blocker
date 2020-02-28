@@ -1,5 +1,5 @@
-//public var for the menu. curChanelName is the name of the channel where the user last opend the menu
-var curChanelName = undefined;
+//public variable for the menu. curChanelName is the name of the channel where the user last opend the menu
+let curChanelName = undefined;
 
 {
 	const SENDER = "content_controller";
@@ -60,7 +60,6 @@ var curChanelName = undefined;
 			style.appendChild(document.createTextNode(css));
 	  }
 	  document.getElementsByTagName('head')[0].appendChild(style);
-	  console.log("mmm", document.getElementsByTagName("YTD-POPUP-CONTAINER")[0]);
 	  CUR_FILTERS.push(new PopupFilter(document.getElementsByTagName("YTD-POPUP-CONTAINER")[0]));
 	}
 
