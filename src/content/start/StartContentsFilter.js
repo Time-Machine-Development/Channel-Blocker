@@ -27,7 +27,7 @@ StartContentsFilter.prototype.onFound = function(child, useCallbackFilter){
 		let channelATags = child.getElementsByClassName("yt-simple-endpoint style-scope yt-formatted-string");
 		let videoTitle = "";
 		for(let elem of child.getElementsByTagName("A")){
-			if(elem.id === "video-title"){
+			if(elem.id === "video-title-link"){
 				videoTitle = elem.textContent;
 			}
 			if(elem.id === "thumbnail"){
@@ -36,7 +36,7 @@ StartContentsFilter.prototype.onFound = function(child, useCallbackFilter){
 		}
 
 		createBtnAtStart(channelATags[0].parentNode, createBtnNode(channelATags[0].textContent , true));
-
+		
 		checkVideoTitle(channelATags[0].textContent, videoTitle, child);
 
 		//set an eventlistenner to the menubar
