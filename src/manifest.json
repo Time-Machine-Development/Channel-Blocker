@@ -14,7 +14,8 @@
 		"storage",
 		"unlimitedStorage",
 		"tabs",
-		"*://www.youtube.com/*"
+		"*://www.youtube.com/*",
+		"contextMenus"
 	],
 
 	"browser_action": {
@@ -40,7 +41,8 @@
 			"background/url_update.js",
 			"background/config_storage.js",
 			"background/filter_storage.js",
-			"background/savefile_export.js"
+			"background/savefile_export.js",
+			"background/contextmenu_action.js"
 		]
 	},
 

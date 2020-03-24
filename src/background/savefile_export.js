@@ -17,6 +17,8 @@
 		}
 		jFile["config"] = jFile["config"].config;
 
+		console.log("jFile", jFile);
+
 		return [JSON.stringify(jFile, null, 2)];
 	}
 

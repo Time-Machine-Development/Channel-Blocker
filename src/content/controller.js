@@ -213,6 +213,16 @@ let curChanelName = undefined;
 				curAnimationSpeed = parseInt(msg.content.animation_speed);
 			}
 		}
+		/* msg.content is of the form:
+		"background_contextmenu_action"
+		*/
+		if(msg.sender === "background_contextmenu_action"){
+			if(msg.content === "get_html"){
+				return new Promise((resolve) => {
+					resolve(document.querySelector("html").innerHTML);
+				});
+			}
+		}
 	});
 
 	init();
