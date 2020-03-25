@@ -1,7 +1,0 @@
-storage rework + case insensitive RE    <-- ms
-
-FAQ                                     <-- mb
-
-config-design choices + hide/show blockbtn + config page rework(including placeholder for import export btn)
-
-import-export rework
