@@ -43,6 +43,7 @@
 
         let name = document.getElementById("nameInput").value;
         let email = document.getElementById("emailInput").value;
+        let bugDescribtion = document.getElementById("bugDescribtionInput").value;
         download(`
         <!--
         date: ${date}
@@ -51,6 +52,7 @@
         CB version: ${addOnVersion}
         name: ${name}
         email: ${email}
+        bugDescribtion: ${bugDescribtion}
         -->
        
 ${html}`, "CBreport.html" ,".html");

@@ -17,13 +17,24 @@
 		<script defer="defer" type="text/javascript" src="js/bugreportDownloader.js"></script>
     </head>
     <body>
-        <h1>Bug Report</h1>
-        <h2>Name (optional)</h2>
-        <input id="nameInput" type="text">
-        <h2>Email (optional)</h2>
-        <input id="emailInput" type="text">
-    </br>
-    </br>
-    <button id="sendReportBtn">Send Bug Report</button>
-    </body>
+        <div style="display: flex; justify-content: center;">
+            <div>
+                <h1>Bug Report</h1>
+                <h2>Name (optional)</h2>
+                <input id="nameInput" type="text">
+                <h2>Email (optional)</h2>
+                <input id="emailInput" type="email">
+                <h2>Describe the bug</h2>
+                <textarea id="bugDescribtionInput" type="text"></textarea>
+                </br>
+                </br>
+                <button id="sendReportBtn">Download Bug Report</button>
+                </br>
+                </br>
+            </div>
+        </div>
+        <div style="display: flex; justify-content: center;">
+            <p>This file contais information about your browser and the YouTube-page you reported. Send it to <a href="mailto:yt-cleaner@protonmail.com">yt-cleaner@protonmail.com</a>, so we can try to fix the bug.</p>
+        </div>
+        </body>
 </html>
