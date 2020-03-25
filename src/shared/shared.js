@@ -20,7 +20,7 @@ const YTContext = Object.freeze({
 	TRENDING: 3,
 	CHANNEL_HOME: 4,
 	CHANNEL_VIDEOS: 5,
-	RECOMMANDED: 6,
+	RECOMMENDED: 6,
 	OTHER: 7
 });
 

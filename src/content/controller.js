@@ -102,7 +102,7 @@ let curChanelName = undefined;
 		}
 
 		//RecommendedPage(https://www.youtube.com/feed/recommended)
-		if(curContext === YTContext.RECOMMANDED){
+		if(curContext === YTContext.RECOMMENDED){
 			let selectList = document.getElementsByClassName("style-scope ytd-app");
 			for(elem of selectList){
 				if(elem.id === "page-manager"){
