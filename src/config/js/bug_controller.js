@@ -3,9 +3,6 @@
 
     let htmlData;
 
-    //the tab id of the Youtube tab that issued a bug which is received from backgound_bug_report
-    let yt_tab_id;
-
     //creates a "get_html"-message for content_controller
     function createGetHTMLMsg() {
         return {
