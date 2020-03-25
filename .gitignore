@@ -2,4 +2,5 @@
 build
 bin
 builds
-tools/AddonConverter.log
+tools/web-ext-config.js
+tools/web-ext.bat
