@@ -26,7 +26,7 @@
         if(info.menuItemId === "cb_bug_report") {
             //creates a new bug report tab
             let bugReportTab = await browser.tabs.create({
-                url:"config/bugreport.html"
+                url:"/ui/bug/html/bugreport.html"
             });
 
             //wait for the bug report tab to be completely loaded and then send the tab id of the Youtube tab the bug report was issued on

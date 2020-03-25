@@ -18,7 +18,7 @@ let usePopup = false;
 		if(configTabId === null){
 			let tab = await browser.tabs.create({
 				active: true,
-				url: "/config/config.html"
+				url: "/ui/config/html/config.html"
 			});
 
 			configTabId = tab.id;
@@ -42,7 +42,7 @@ let usePopup = false;
 	//if an open config page exists make config tab active, otherwise create new config tab and make it active
 	browser.browserAction.onClicked.addListener(async function(){
 		if(usePopup){
-			browser.browserAction.setPopup({popup: "/config/config_popup.html"});
+			browser.browserAction.setPopup({popup: "/ui/config/html/config.html"});
 			browser.browserAction.openPopup();
 			return;
 		}
@@ -59,7 +59,7 @@ let usePopup = false;
 	//remove or add tabId from configTabIds if the tab with id tabId has changed it's url from or to valid URL
 	browser.tabs.onUpdated.addListener((tabId, ci) => {
 		if(ci.url){
-			let configURL = browser.runtime.getURL("config/config.html");
+			let configURL = browser.runtime.getURL("/ui/config/html/config.html");
 
 			if(tabId === configTabId){
 				if(ci.url !== configURL)

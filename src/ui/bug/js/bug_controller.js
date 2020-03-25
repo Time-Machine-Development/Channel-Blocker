@@ -72,7 +72,7 @@ ${htmlData}`, "CBreport " + d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d
     INSTALLING LISTENER FOR MESSAGES FROM background-scripts
     */
 
-    browser.runtime.onMessage.addListener(async function(msg, sender) => {
+    browser.runtime.onMessage.addListener(async function(msg, sender) {
         if(msg.receiver !== SENDER)
             return;
 

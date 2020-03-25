@@ -1,0 +1,72 @@
+body {
+	background:var(--background-color-1);
+	font-family: 'Titillium Web', sans-serif;
+	font-size: 1.0em;
+	color:var(--text-color-1);
+}
+
+h1 {
+	margin:1% 1% 0% 1%;
+	font-size: 1.2em;
+	font-weight: lighter;
+	padding-bottom: 0%;
+}
+
+h2 {
+	margin-bottom:0%;
+	padding-bottom:0%;
+	font-size: 1.05em;
+	font-weight: lighter;
+}
+
+p {
+	font-size: 0.8em;
+	padding:0%;
+	margin:0% 1% 0% 1%;
+}
+
+a {
+	color:var(--text-color-1);
+}
+
+.flexCenter {
+    display: flex; 
+    justify-content: center;
+}
+
+input {
+	height:2em;
+	color:var(--text-color-1);
+	background:var(--main-color);
+	border:var(--border-simple);
+	box-sizing: border-box;
+    min-width: 20em;
+}
+
+textarea {
+	color:var(--text-color-1);
+	background:var(--main-color);
+	border:var(--border-simple);
+	box-sizing: border-box;
+    min-height: 6em;
+    min-width: 40em;
+}
+
+button{
+    height: 2em;
+	color:var(--text-color-1);
+	background:var(--main-color);
+	cursor: pointer;
+	border:var(--border-simple);
+    min-width: 20em;
+}
+
+button:hover{
+	background:var(--btn-color-hover);
+}
+
+button:disabled{
+	background:var(--btn-color-hover);
+    color:var(--text-color-2);
+    cursor: wait;
+}

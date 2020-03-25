@@ -27,7 +27,7 @@
 	},
 
 	"options_ui": {
-	  "page": "config/config.html",
+	  "page": "/ui/config/html/config.html",
 	  "open_in_tab": true
   },
 
@@ -42,7 +42,7 @@
 			"background/config_storage.js",
 			"background/filter_storage.js",
 			"background/savefile_export.js",
-			"background/contextmenu_action.js"
+			"background/bug_report.js"
 		]
 	},
 
