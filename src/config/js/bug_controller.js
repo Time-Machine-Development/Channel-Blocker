@@ -42,7 +42,7 @@
         };
     }
 
-    document.getElementById("sendReportBtn").addEventListener('click', async function (event) {
+    document.getElementById("downloadReportBtn").addEventListener('click', async function (event) {
         let useragent = navigator.userAgent;
         let language = navigator.language;
         let languages = navigator.languages;
@@ -56,7 +56,6 @@
         let name = document.getElementById("nameInput").value;
         let email = document.getElementById("emailInput").value;
         let bugDescription = document.getElementById("bugDescriptionInput").value;
-        //TODO: bugDescribtionInput -> bugDescriptionInput
 
         download(`<!--
 date: "${date}",
@@ -91,8 +90,7 @@ ${htmlData}`, "CBreport " + d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d
                 //gets the HTML data from the given Youtube tab which issued a bug which created this bug tab
                 htmlData = await browser.tabs.sendMessage(msg.content.bug_tab_id, createGetHTMLDataMsg());
 
-                //TODO: make button available
-
+                document.getElementById("downloadReportBtn").disabled = false;
             }
         }
     });
