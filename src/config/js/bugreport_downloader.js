@@ -28,12 +28,13 @@
         };
     }
 
-    document.getElementById("sendReportBtn").addEventListener('click',async function (event) {
+    document.getElementById("sendReportBtn").addEventListener('click', async function (event) {
         
         let html = await browser.runtime.sendMessage(createGetBugReportMsg());
 
         let useragent = navigator.userAgent;
         let language = navigator.language;
+        let languages = navigator.languages;
 
         let manifest = browser.runtime.getManifest();
         let addOnVersion = manifest.version;
@@ -44,19 +45,18 @@
         let name = document.getElementById("nameInput").value;
         let email = document.getElementById("emailInput").value;
         let bugDescribtion = document.getElementById("bugDescribtionInput").value;
-        download(`
-        <!--
-        date: ${date}
-        browser; ${useragent}
-        language: ${language}
-        CB version: ${addOnVersion}
-        name: ${name}
-        email: ${email}
-        bugDescribtion: ${bugDescribtion}
-        -->
-       
-${html}`, "CBreport.html" ,".html");
+
+        download(`<!--
+date: "${date}",
+browser: "${useragent}",
+language: "${language}",
+languages: "${languages}",
+CB version: "${addOnVersion}",
+name: "${name}",
+email: "${email}",
+bugDescribtion: "${bugDescribtion}",
+-->
+
+${html}`, "CBreport " + d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate() + ".html" ,".html");
     });
-    
-    console.log("bugreportDownloder installed");
 }
