@@ -14,8 +14,8 @@
 		"storage",
 		"unlimitedStorage",
 		"tabs",
-		"*://www.youtube.com/*",
-		"contextMenus"
+        "menus",
+        "*://www.youtube.com/*"
 	],
 
 	"browser_action": {
