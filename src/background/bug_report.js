@@ -60,8 +60,8 @@
                         //gets the HTML data of the Youtube tab
                         let htmlData = await browser.tabs.sendMessage(contentTab.id, createGetHTMLDataMsg());
 
-                        //executes and waits for the bug_controller.js script to be completed on the new bug report tab
-                        await browser.tabs.executeScript(bugReportTab.id, {file: "ui/bug/js/bug_controller.js"});
+                        //executes and waits for the ui/bug/js/controller.js script to be completed on the new bug report tab
+                        await browser.tabs.executeScript(bugReportTab.id, {file: "ui/bug/js/controller.js"});
 
                         //sends the URL of the Youtube tab the bug report was issued on to the associated bug report tab
                         await browser.tabs.sendMessage(bugReportTab.id, createURLMsg(contentTab.url));
