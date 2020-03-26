@@ -3,6 +3,17 @@ let htmlData;
 let url;
 
 document.getElementById("downloadReportBtn").addEventListener('click', async function (event) {
+
+    let name = document.getElementById("nameInput").value;
+    let email = document.getElementById("emailInput").value;
+    let bugDescription = document.getElementById("bugDescriptionInput").value;
+
+    if(bugDescription.length < 5){
+        document.getElementById("bugDescriptionErrText").style.display = "block";
+        document.getElementById("bugDescriptionInput").style.border = "2px solid red";
+        return;
+    }
+
     let useragent = navigator.userAgent;
     let language = navigator.language;
     let languages = navigator.languages;
@@ -12,10 +23,6 @@ document.getElementById("downloadReportBtn").addEventListener('click', async fun
 
     let d = new Date();
     let date = d.getDate() + "_" + (d.getMonth() + 1) + "_" + d.getFullYear() + "_" + d.getHours() + "_" + d.getMinutes() + "_" + d.getSeconds();
-
-    let name = document.getElementById("nameInput").value;
-    let email = document.getElementById("emailInput").value;
-    let bugDescription = document.getElementById("bugDescriptionInput").value;
 
     download(`<!--
 date: "${date}",

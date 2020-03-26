@@ -56,7 +56,7 @@
             browser.tabs.onUpdated.addListener(
                 async function(tabId, changeInfo, tab){
                     if(changeInfo.status === "complete"){
-
+                        console.log("STATUS");
                         //gets the HTML data of the Youtube tab
                         let htmlData = await browser.tabs.sendMessage(contentTab.id, createGetHTMLDataMsg());
 

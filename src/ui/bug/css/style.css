@@ -19,6 +19,15 @@ h2 {
 	font-weight: lighter;
 }
 
+h3 {
+	margin:0%;
+	padding:0%;
+	font-size: 0.8em;
+	font-weight: lighter;
+	color: red;
+	text-shadow: 1px 1px black;
+}
+
 p {
 	font-size: 0.8em;
 	padding:0%;
