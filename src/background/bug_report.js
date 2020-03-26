@@ -37,7 +37,7 @@
     //adds a bug report contextmenu-item on Youtube
     browser.menus.create({
         id: "cb_bug_report",
-        title: "report a bug on this page",
+        title: "Report a bug on this page",
         contexts: ["all"],
         documentUrlPatterns: ["*://www.youtube.com/*"]
     });
