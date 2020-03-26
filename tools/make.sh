@@ -9,13 +9,13 @@ fi
 #copy src to build
 cp -r ./src ./build
 
-#writing all *.js files without comments from ./src into ./build (exclude jquery-3.3.1.min.js)
+#writing all *.js files without comments from ./src into ./build (exclude jquery-3.3.1.min.js, browser-polyfill\.min\.js)
 for i in $(find ./src  | grep -v "browser-polyfill\.min\.js" | grep -v "jquery-3\.4\.1\.min\.js" | grep "\.js$" | grep -v "build"); do
 	j=./build/$(echo $i| cut -c 7-)
 
-	#pcregrep -h -v -M -e "^\h*\/\*((.|\n)*?)\*\/\h*$" $i 		-> remove multi-line comments
-	#pcregrep -h -v -e "^\h*//.*$"						-> remove single-line comments
-	#cat -s											-> reduce adjacent muliple empty lines to a single empty line
+	#pcregrep -h -v -M -e "^\h*\/\*((.|\n)*?)\*\/\h*$" $i	-> remove multi-line comments
+	#pcregrep -h -v -e "^\h*//.*$"							-> remove single-line comments
+	#cat -s													-> reduce adjacent muliple empty lines to a single empty line
 	pcregrep -h -v -M -e "^\h*\/\*((.|\n)*?)\*\/\h*$" $i | pcregrep -h -v -e "^\h*//.*$" | cat -s > $j
 
 	#check for "console.log"s in ./src

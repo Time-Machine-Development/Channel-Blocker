@@ -17,8 +17,6 @@
 		}
 		jFile["config"] = jFile["config"].config;
 
-		console.log("jFile", jFile);
-
 		return [JSON.stringify(jFile, null, 2)];
 	}
 
@@ -34,7 +32,7 @@
 			/* msg is of the form:{
 			content = "savefile_export_request";
 			}
-			 */
+			*/
 
 			if (msg.content.info === "savefile_export_request") {
 				return new Promise((resolve) => {
