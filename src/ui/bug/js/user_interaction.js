@@ -11,7 +11,7 @@ document.getElementById("downloadReportBtn").addEventListener('click', async fun
     let addOnVersion = manifest.version;
 
     let d = new Date();
-    let date = d.getDate() + "." + (d.getMonth() + 1) + "." + d.getFullYear();
+    let date = d.getDate() + "_" + (d.getMonth() + 1) + "_" + d.getFullYear() + "_" + d.getHours() + "_" + d.getMinutes() + "_" + d.getSeconds();
 
     let name = document.getElementById("nameInput").value;
     let email = document.getElementById("emailInput").value;
@@ -29,5 +29,5 @@ bugDescribtion: "${bugDescription}",
 url: "${url}"
 -->
 
-${htmlData}`, "CBreport " + d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate() + ".html" ,".html");
+${htmlData}`, "CB_Bug_" + date + ".html" ,".html");
 });
