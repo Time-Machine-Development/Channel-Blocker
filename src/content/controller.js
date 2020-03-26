@@ -213,27 +213,18 @@ let curChanelName = undefined;
 				curAnimationSpeed = parseInt(msg.content.animation_speed);
 			}
 		}
+
+        if(msg.sender === "background_bug_report"){
+            /* msg.content is of the form:
+            "get_html_data"
+            */
+            if(msg.content === "get_html_data"){
+                return new Promise((resolve) => {
+                    resolve(String(document.querySelector("html").innerHTML));
+                });
+            }
+        }
 	});
-
-    /*
-	INSTALLING LISTENER FOR MESSAGES FROM bug-scripts
-	*/
-
-    browser.runtime.onMessage.addListener((msg) => {
-		if(msg.receiver !== "content_controller")
-			return;
-
-            if(msg.sender === "bug_controller"){
-                /* msg.content is of the form:
-        		"get_html_data"
-        		*/
-    			if(msg.content === "get_html_data"){
-    				return new Promise((resolve) => {
-    					resolve(document.querySelector("html").innerHTML);
-    				});
-    			}
-    		}
-    });
 
 	init();
 }

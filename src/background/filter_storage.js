@@ -172,8 +172,8 @@
      				info: "filter_values_request",
      				filter_type: <ft>
      			}
-                    where <ft> is a value of FilterType
-                    */
+                where <ft> is a value of FilterType
+                */
 
 				/* return an object containing all user/channel-names or regular expressions as keys and their values,
 				depending on the requested FilterType */
