@@ -4,4 +4,3 @@ bin
 builds
 tools/web-ext-config.js
 tools/web-ext.bat
-tools/node_modules
