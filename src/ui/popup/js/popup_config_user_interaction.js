@@ -96,7 +96,7 @@
 	//handle the event from the addBtnHandler
 	async function addBtnHandler() {
 		if(document.getElementById("popupTextField").value === ""){
-		return;
+			return;
 		}
 
 		let values = await browser.runtime.sendMessage(createAddMsg(document.getElementById("popupTextField").value));

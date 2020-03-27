@@ -64,7 +64,7 @@
 		}else{
 			usePopup = config[ConfigId.USE_POPUP];
 			if(usePopup){
-				browser.browserAction.setPopup({popup: "/config/config_popup.html"});
+				browser.browserAction.setPopup({popup: "ui/popup/html/popup.html"});
 			}
 		}
 
@@ -113,7 +113,7 @@
 				browser.browserAction.setPopup({popup: ""});
 				usePopup = val;
 				if(usePopup){
-					browser.browserAction.setPopup({popup: "/config/config_popup.html"});
+					browser.browserAction.setPopup({popup: "ui/popup/html/popup.html"});
 				}
 			}
 			updateStorage();

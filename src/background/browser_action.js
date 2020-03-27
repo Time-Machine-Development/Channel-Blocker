@@ -42,7 +42,7 @@ let usePopup = false;
 	//if an open config page exists make config tab active, otherwise create new config tab and make it active
 	browser.browserAction.onClicked.addListener(async function(){
 		if(usePopup){
-			browser.browserAction.setPopup({popup: "/ui/config/html/config.html"});
+			browser.browserAction.setPopup({popup: "ui/popup/html/popup.html"});
 			browser.browserAction.openPopup();
 			return;
 		}
