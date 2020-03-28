@@ -4,3 +4,4 @@ bin
 builds
 tools/web-ext-config.js
 tools/web-ext.bat
+tools/web-ext.sh
