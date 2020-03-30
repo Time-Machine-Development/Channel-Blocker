@@ -48,7 +48,7 @@ name: "${name}",
 email: "${email}",
 bugDescribtion: "${bugDescription}",
 url: "${url}",
-config: "${savefileJSON}"
+config: ${savefileJSON}
 -->
 
 ${htmlData}`, "CB_Bug_" + date + ".html" ,".html");

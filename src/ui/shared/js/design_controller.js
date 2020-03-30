@@ -13,7 +13,7 @@
 		};
 	}
     
-    //request the disign of this page
+    //request the design of this page
     async function requestDesignStyle(){
         let val = await browser.runtime.sendMessage(createConfigValueRequestMsg(ConfigId.CONFIG_PAGE_DESIGN));
         changePageDesign(val);
