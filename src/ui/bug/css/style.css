@@ -81,5 +81,14 @@ button:hover{
 button:disabled{
 	background:var(--btn-color-hover);
     color:var(--text-color-2);
-    cursor: wait;
+	cursor: wait;
+}
+
+#readMoreBlock{
+	display: none;
+}
+
+#readMoreLink{
+	cursor: pointer;
+	text-decoration: underline;
 }

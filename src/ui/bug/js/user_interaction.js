@@ -13,6 +13,10 @@ function createSavefileExportRequestMsg() {
     };
 }
 
+document.getElementById("readMoreLink").addEventListener("click", function(){
+    $("#readMoreBlock").slideToggle("slow");
+});
+
 document.getElementById("downloadReportBtn").addEventListener('click', async function (event) {
 
     let name = document.getElementById("nameInput").value;
