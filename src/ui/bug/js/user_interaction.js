@@ -36,6 +36,7 @@ document.getElementById("downloadReportBtn").addEventListener('click', async fun
 
     let d = new Date();
     let date = d.getDate() + "." + (d.getMonth() + 1) + "." + d.getFullYear() + " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
+    let filename = "CB_Bug_" + d.getDate() + "_" + (d.getMonth() + 1) + "_" + d.getFullYear() + "_" + d.getHours() + "_" + d.getMinutes() + "_" + d.getSeconds() + ".html";
 
     download(`<!--
 date: "${date}",
@@ -50,5 +51,5 @@ url: "${url}",
 config: ${savefileJSON}
 -->
 
-${htmlData}`, "CB_Bug_" + date + ".html" ,".html");
+${htmlData}`, filename,".html");
 });
