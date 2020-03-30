@@ -54,7 +54,7 @@
             /*Waits for the bug report tab DOM to be completely loaded.
             Then passes the HTML data and the URL of of the Youtube tab which issued a bug report to the newly created bug report tab.*/
             browser.tabs.onUpdated.addListener(
-                async function(tabId, changeInfo, tab){
+                async function onTabCompleted(tabId, changeInfo, tab){
                     if(changeInfo.status === "complete"){
                         //gets the HTML data of the Youtube tab
                         let htmlData = await browser.tabs.sendMessage(contentTab.id, createGetHTMLDataMsg());
@@ -68,6 +68,8 @@
 
                         //sends the HTML data of the Youtube tab the bug report was issued on to the associated bug report tab
                         browser.tabs.sendMessage(bugReportTab.id, createHTMLDataMsg(htmlData));
+
+						browser.tabs.onUpdated.removeListener(onTabCompleted);
                     }
                 },
                 {
