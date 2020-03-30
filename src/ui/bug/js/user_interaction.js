@@ -46,7 +46,7 @@ languages: "${languages}",
 CB version: "${addOnVersion}",
 name: "${name}",
 email: "${email}",
-bugDescribtion: "${bugDescription}",
+bugDescription: "${bugDescription}",
 url: "${url}",
 config: ${savefileJSON}
 -->
