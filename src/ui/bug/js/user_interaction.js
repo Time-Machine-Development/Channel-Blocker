@@ -36,7 +36,7 @@ document.getElementById("downloadReportBtn").addEventListener('click', async fun
     let addOnVersion = manifest.version;
 
     let d = new Date();
-    let date = d.getDate() + "_" + (d.getMonth() + 1) + "_" + d.getFullYear() + "_" + d.getHours() + "_" + d.getMinutes() + "_" + d.getSeconds();
+    let date = d.getDate() + "." + (d.getMonth() + 1) + "." + d.getFullYear() + " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
 
     download(`<!--
 date: "${date}",
