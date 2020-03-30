@@ -2,7 +2,7 @@
 let htmlData;
 let url;
 
-const SENDER = "ui_bug_user_interaction";
+const SENDER = "bug_user_interaction";
 
 //creates a "savefile_export_request"-message for savefile_export
 function createSavefileExportRequestMsg() {

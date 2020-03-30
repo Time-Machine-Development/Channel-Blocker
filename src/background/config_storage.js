@@ -128,7 +128,7 @@
 		if (msg.receiver !== SENDER)
 			return;
 
-		if (msg.sender === "config_config_user_interaction" || msg.sender === "config_import_savefile" || msg.sender === "ui_shared_design_controller") {
+		if (msg.sender === "config_config_user_interaction" || msg.sender === "config_import_savefile" || msg.sender === "shared_design_controller") {
 			if (msg.content.info === "config_value_set") {
 				/* msg.content is of the form:{
 				info: "config_value_set",

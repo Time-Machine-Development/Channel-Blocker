@@ -1,5 +1,5 @@
 {
-    const SENDER = "ui_shared_design_controller";
+    const SENDER = "shared_design_controller";
 
 	//creates a "config_value_request"-message for background_config_storage
 	function createConfigValueRequestMsg(configId) {
