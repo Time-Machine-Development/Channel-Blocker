@@ -25,11 +25,10 @@
 	*/
 
 	browser.runtime.onMessage.addListener((msg, sender) => {
-		console.log("msg", msg);
 		if (msg.receiver !== SENDER)
 			return;
 
-		if (msg.sender === "config_config_user_interaction" || msg.sender === "ui_bug_user_interaction") {
+		if (msg.sender === "config_config_user_interaction" || msg.sender === "bug_user_interaction") {
 			/* msg is of the form:
 			content = "savefile_export_request";
 			*/

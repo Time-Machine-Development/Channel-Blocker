@@ -2,7 +2,7 @@
 let htmlData;
 let url;
 
-const SENDER = "ui_bug_user_interaction";
+const SENDER = "bug_user_interaction";
 
 //creates a "savefile_export_request"-message for savefile_export
 function createSavefileExportRequestMsg() {
@@ -35,7 +35,7 @@ document.getElementById("downloadReportBtn").addEventListener('click', async fun
     let addOnVersion = manifest.version;
 
     let d = new Date();
-    let date = d.getDate() + "_" + (d.getMonth() + 1) + "_" + d.getFullYear() + "_" + d.getHours() + "_" + d.getMinutes() + "_" + d.getSeconds();
+    let date = d.getDate() + "." + (d.getMonth() + 1) + "." + d.getFullYear() + " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
 
     download(`<!--
 date: "${date}",
@@ -45,9 +45,9 @@ languages: "${languages}",
 CB version: "${addOnVersion}",
 name: "${name}",
 email: "${email}",
-bugDescribtion: "${bugDescription}",
+bugDescription: "${bugDescription}",
 url: "${url}",
-config: "${savefileJSON}"
+config: ${savefileJSON}
 -->
 
 ${htmlData}`, "CB_Bug_" + date + ".html" ,".html");

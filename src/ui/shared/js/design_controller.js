@@ -1,5 +1,5 @@
 {
-    const SENDER = "ui_shared_design_controller";
+    const SENDER = "shared_design_controller";
 
 	//creates a "config_value_request"-message for background_config_storage
 	function createConfigValueRequestMsg(configId) {
@@ -13,7 +13,7 @@
 		};
 	}
     
-    //request the disign of this page
+    //request the design of this page
     async function requestDesignStyle(){
         let val = await browser.runtime.sendMessage(createConfigValueRequestMsg(ConfigId.CONFIG_PAGE_DESIGN));
         changePageDesign(val);
