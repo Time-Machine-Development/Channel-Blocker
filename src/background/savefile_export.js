@@ -1,5 +1,5 @@
 {
-	const SENDER = "backgrond_savefile_export";
+	const SENDER = "background_savefile_export";
 
 	async function exportSaveFile() {
 		let d = new Date();
