@@ -2,6 +2,17 @@
 let htmlData;
 let url;
 
+const SENDER = "ui_bug_user_interaction";
+
+//creates a "savefile_export_request"-message for savefile_export
+function createSavefileExportRequestMsg() {
+    return {
+        sender: SENDER,
+        receiver: "background_savefile_export",
+        content: "savefile_export_request"
+    };
+}
+
 document.getElementById("downloadReportBtn").addEventListener('click', async function (event) {
 
     let name = document.getElementById("nameInput").value;
@@ -13,6 +24,9 @@ document.getElementById("downloadReportBtn").addEventListener('click', async fun
         document.getElementById("bugDescriptionInput").setCustomValidity("Please describe the bug in (at least) a few words.");
         return;
     }
+
+    
+	let savefileJSON = await browser.runtime.sendMessage(createSavefileExportRequestMsg());
 
     let useragent = navigator.userAgent;
     let language = navigator.language;
@@ -33,7 +47,8 @@ CB version: "${addOnVersion}",
 name: "${name}",
 email: "${email}",
 bugDescribtion: "${bugDescription}",
-url: "${url}"
+url: "${url}",
+config: "${savefileJSON}"
 -->
 
 ${htmlData}`, "CB_Bug_" + date + ".html" ,".html");
