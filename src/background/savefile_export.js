@@ -1,5 +1,5 @@
 {
-	const SENDER = "savefile_export";
+	const SENDER = "backgrond_savefile_export";
 
 	async function exportSaveFile() {
 		let d = new Date();
@@ -29,12 +29,11 @@
 			return;
 
 		if (msg.sender === "config_config_user_interaction") {
-			/* msg is of the form:{
+			/* msg is of the form:
 			content = "savefile_export_request";
-			}
 			*/
 
-			if (msg.content.info === "savefile_export_request") {
+			if (msg.content === "savefile_export_request") {
 				return new Promise((resolve) => {
 					resolve(exportSaveFile());
 				});

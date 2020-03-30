@@ -41,10 +41,8 @@
 	function createSavefileExportRequestMsg() {
 		return {
 			sender: SENDER,
-			receiver: "savefile_export",
-			content: {
-				info: "savefile_export_request"
-			}
+			receiver: "background_savefile_export",
+			content: "savefile_export_request"
 		};
 	}
 
