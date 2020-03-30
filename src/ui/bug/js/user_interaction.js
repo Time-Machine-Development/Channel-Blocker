@@ -10,7 +10,7 @@ document.getElementById("downloadReportBtn").addEventListener('click', async fun
 
     if(bugDescription.length < 5){
         document.getElementById("bugDescriptionErrText").style.display = "block";
-        document.getElementById("bugDescriptionInput").style.border = "2px solid red";
+        document.getElementById("bugDescriptionInput").setCustomValidity("Please describe the bug in (at least) a few words.");
         return;
     }
 
