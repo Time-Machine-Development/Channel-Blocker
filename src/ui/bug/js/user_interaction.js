@@ -25,7 +25,6 @@ document.getElementById("downloadReportBtn").addEventListener('click', async fun
         return;
     }
 
-    
 	let savefileJSON = await browser.runtime.sendMessage(createSavefileExportRequestMsg());
 
     let useragent = navigator.userAgent;
