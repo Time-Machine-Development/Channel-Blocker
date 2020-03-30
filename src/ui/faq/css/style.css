@@ -1,10 +1,10 @@
 body {
-	background:#2d2d2d;
+	background:var(--background-color-1);
 	font-family: 'Titillium Web', sans-serif;
+	color:var(--text-color-1);
 }
 
 h1 {
-	color:white;
 	margin:1% 1% 0% 1%;
 	font-size: 2em;
 	font-weight: lighter;
@@ -13,7 +13,6 @@ h1 {
 }
 
 h2 {
-	color:white;
 	margin-left:19%;
 	padding-left:0.5%;
 	margin-right:19%;
@@ -21,13 +20,12 @@ h2 {
 	padding-bottom:0%;
 	font-size: 1.5em;
 	font-weight: lighter;
-	background:#373737;
+	background:var(--background-color-2);
 	border-radius: 10px;
 	cursor: pointer;
 }
 
 h3 {
-	color:white;
 	margin:1% 1% 0% 1%;
 	font-size: 1em;
 	font-weight: lighter;
@@ -36,7 +34,6 @@ h3 {
 }
 
 p {
-	color:white;
 	margin-left:20%;
 	margin-right:20%;
 	text-align:justify;
@@ -44,7 +41,6 @@ p {
 }
 
 strong {
-	color:white;
 	text-decoration: underline;
 }
 
@@ -58,7 +54,7 @@ iframe {
 }
 
 a {
-	color:white;
+	color:var(--text-color-1);
 }
 
 
