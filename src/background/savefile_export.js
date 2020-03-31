@@ -2,39 +2,30 @@
 	const SENDER = "background_savefile_export";
 
 	async function exportSaveFile() {
-		let d = new Date();
-		let jFile = {};
+		let jFile = await STORAGE.get();
 
-		jFile[0] = await STORAGE.get("0");
-		jFile[1] = await STORAGE.get("1");
-		jFile[2] = await STORAGE.get("2");
-		jFile[3] = await STORAGE.get("3");
-		jFile[4] = await STORAGE.get("4");
-		jFile["config"] = await STORAGE.get("config");
-
-		for (let i = 0; i < 5; i++) {
-			jFile[i] = jFile[i][i];
-		}
-		jFile["config"] = jFile["config"].config;
-
-		return [JSON.stringify(jFile, null, 2)];
+		return JSON.stringify(jFile, null, 2);
 	}
 
 	/*
 	INSTALLING LISTENER FOR MESSAGES FROM config-scripts
 	*/
 
-	browser.runtime.onMessage.addListener((msg, sender) => {
+	browser.runtime.onMessage.addListener(async function(msg, sender){
 		if (msg.receiver !== SENDER)
 			return;
 
-		if (msg.sender === "config_config_user_interaction" || msg.sender === "bug_user_interaction") {
+		if (msg.sender === "config_config_user_interaction" || msg.sender === "bug_controller") {
 			/* msg is of the form:
 			content = "savefile_export_request";
 			*/
 			if (msg.content === "savefile_export_request") {
-				return new Promise((resolve) => {
-					resolve(exportSaveFile());
+				let saveFile = await exportSaveFile();
+
+				return new Promise(async function(resolve){
+					console.log(saveFile);
+
+					resolve(await exportSaveFile());
 				});
 			}
 		}

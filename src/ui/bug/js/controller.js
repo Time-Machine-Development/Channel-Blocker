@@ -1,37 +1,30 @@
 {
 	const SENDER = "bug_controller";
 
-    /*
-    INSTALLING LISTENER FOR MESSAGES FROM background-scripts
-    */
+	//creates "url_request"-message for background_bug_report
+	function createURLRequestMsg() {
+		return {
+			sender: SENDER,
+			receiver: "background_bug_report",
+			content: "url_request"
+		};
+	}
 
-    browser.runtime.onMessage.addListener(async function(msg, sender) {
-        if(msg.receiver !== SENDER)
-            return;
+	//creates "html_data_request"-message for background_bug_report
+	function createHTMLDataRequestMsg() {
+		return {
+			sender: SENDER,
+			receiver: "background_bug_report",
+			content: "html_data_request"
+		};
+	}
 
-        if(msg.sender === "background_bug_report"){
-            if(msg.content.info === "url"){
-                /* msg.content is of the form:
-                {
-                    info: "url",
-                    url: <URL>
-                }
-                */
-
-                url = msg.content.url;
-
-            }else if(msg.content.info === "html_data"){
-                /* msg.content is of the form:
-                {
-                    info: "html_data",
-                    html_data: <HTML Data>
-                }
-                */
-
-                htmlData = msg.content.html_data;
-
-                document.getElementById("downloadReportBtn").disabled = false;
-            }
-        }
-    });
+	//creates a "savefile_export_request"-message for background_savefile_export
+	function createSavefileExportRequestMsg() {
+	    return {
+	        sender: SENDER,
+	        receiver: "background_savefile_export",
+	        content: "savefile_export_request"
+	    };
+	}
 }

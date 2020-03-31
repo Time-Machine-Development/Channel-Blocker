@@ -1,30 +1,6 @@
 {
     const SENDER = "background_bug_report";
 
-    //creates a "html"-message for bug_controller
-    function createHTMLDataMsg(htmlData) {
-        return {
-            sender: SENDER,
-            receiver: "bug_controller",
-            content: {
-                info: "html_data",
-                html_data: htmlData
-            }
-        }
-    }
-
-    //creates a "url"-message for bug_controller
-    function createURLMsg(url){
-        return {
-            sender: SENDER,
-            receiver: "bug_controller",
-            content: {
-                info: "url",
-                url: url
-            }
-        }
-    }
-
     //creates a "get_html"-message for content_controller
     function createGetHTMLDataMsg() {
         return {
@@ -42,6 +18,10 @@
         documentUrlPatterns: ["*://www.youtube.com/*"]
     });
 
+	/*Active bug report tab ids and their corresponding Youtube tabs
+	which are used to answer with HTML data and URL of a Youtube tab to a report tab once its controller request them.*/
+	let bugToYtMap = {};
+
     //creates a bug report tab and sends the tab id of the Youtube tab that issued a bug report via a click on the contextmenu-item
     browser.contextMenus.onClicked.addListener(async function (info, contentTab){
         if(info.menuItemId === "cb_bug_report") {
@@ -51,28 +31,49 @@
                 url:"/ui/bug/html/bugreport.html"
             });
 
-            /*Waits for the bug report tab DOM to be completely loaded.
-            Then passes the HTML data and the URL of of the Youtube tab which issued a bug report to the newly created bug report tab.*/
-            browser.tabs.onUpdated.addListener(
-                async function onTabCompleted(tabId, changeInfo, tab){
-                    if(tab.id === bugReportTab.id && changeInfo.status === "complete"){
-                        //gets the HTML data of the Youtube tab
-                        let htmlData = await browser.tabs.sendMessage(contentTab.id, createGetHTMLDataMsg());
-
-                        //executes and waits for the ui/bug/js/user_interaction.js and ui/bug/js/controller.js script to be completed on the new bug report tab
-						await browser.tabs.executeScript(bugReportTab.id, {file: "ui/bug/js/user_interaction.js"});
-						await browser.tabs.executeScript(bugReportTab.id, {file: "ui/bug/js/controller.js"});
-
-                        //sends the URL of the Youtube tab the bug report was issued on to the associated bug report tab
-                        await browser.tabs.sendMessage(bugReportTab.id, createURLMsg(contentTab.url));
-
-                        //sends the HTML data of the Youtube tab the bug report was issued on to the associated bug report tab
-                        browser.tabs.sendMessage(bugReportTab.id, createHTMLDataMsg(htmlData));
-
-						browser.tabs.onUpdated.removeListener(onTabCompleted);
-                    }
-                }
-            );
+			//add new created bug tab id and its corresponding Youtube tab to the bug-tab-id-to-youtube-tab-id-mapping
+			bugToYtMap[bugReportTab.id] = contentTab;
         }
     });
+
+	//removes entries of bug report tab ids in the bug-tab-id-to-youtube-tab-id-mapping when the bug report tab is closed
+	browser.tabs.onRemoved.addListener((tabId) => {
+		delete bugToYtMap[tabId];
+	});
+
+	/*
+	INSTALLING LISTENER FOR MESSAGES FROM bug-scripts
+	*/
+
+	browser.runtime.onMessage.addListener(async function(msg, sender){
+		if(msg.receiver !== SENDER)
+			return;
+
+		if(msg.sender === "bug_controller"){
+			if(msg.content === "url_request"){
+				/* msg.content is of the form:
+     			"url_request"
+                */
+
+				//returns the URL of the Youtube tab the bug report was issued on to the associated bug report tab
+				return new Promise((resolve) => {
+					console.log(bugToYtMap[sender.tab.id].url);
+					resolve(bugToYtMap[sender.tab.id].url);
+				});
+			}
+
+			if(msg.content === "html_data_request"){
+				/* msg.content is of the form:
+     			"html_data_request"
+                */
+
+				let htmlData = await browser.tabs.sendMessage(bugToYtMap[sender.tab.id].id, createGetHTMLDataMsg());
+
+				//return the HTML data of the Youtube tab the bug report was issued on to the associated bug report tab
+				return new Promise((resolve) => {
+					resolve(htmlData);
+				});
+			}
+		}
+	});
 }

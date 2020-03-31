@@ -1,18 +1,3 @@
-//htmlData and url are defined by bug/js/controller.js which is attached by and receives their values by background/bug_report.js after a bug was issued
-let htmlData;
-let url;
-
-const SENDER = "bug_user_interaction";
-
-//creates a "savefile_export_request"-message for savefile_export
-function createSavefileExportRequestMsg() {
-    return {
-        sender: SENDER,
-        receiver: "background_savefile_export",
-        content: "savefile_export_request"
-    };
-}
-
 document.getElementById("readMoreLink").addEventListener("click", function(){
     $("#readMoreBlock").slideToggle(200);
 });
@@ -29,7 +14,12 @@ document.getElementById("downloadReportBtn").addEventListener('click', async fun
         return;
     }
 
+	let url = await browser.runtime.sendMessage(createURLRequestMsg());
+	let htmlData = await browser.runtime.sendMessage(createHTMLDataRequestMsg());
 	let savefileJSON = await browser.runtime.sendMessage(createSavefileExportRequestMsg());
+
+	console.log(url);
+	console.log(htmlData);
 
     let useragent = navigator.userAgent;
     let language = navigator.language;
@@ -55,5 +45,5 @@ url: "${url}",
 config: ${savefileJSON}
 -->
 
-${htmlData}`, filename,".html");
+${htmlData}`, filename, ".html");
 });
