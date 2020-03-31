@@ -126,7 +126,6 @@
 		//export the savefile;
 		let d = new Date();
 		let savefileJSON = await browser.runtime.sendMessage(createSavefileExportRequestMsg());
-		console.log(savefileJSON);
 		download(savefileJSON, "ChannelBlocker " + d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate() + ".save" ,".save");
 	}
 
