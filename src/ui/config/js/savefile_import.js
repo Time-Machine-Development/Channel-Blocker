@@ -57,7 +57,7 @@
 		//add all filter the savefile contains (e.g. user/channel names and regular expressions)
 		for(let filterType of Object.values(FilterType)){
 			for(let userChannelNameOrRegEx in jsonSaveFile[filterType]){
-				if(filterType === FilterType.BLOCKED_USERS || filterType === FilterType.BLOCKED_USERS){
+				if(filterType === FilterType.BLOCKED_USERS || filterType === FilterType.EXCLUDED_USERS){
 					//userChannelNameOrRegEx is a user/channel name
 
 					browser.runtime.sendMessage(createAddMsg(filterType, userChannelNameOrRegEx));
@@ -71,8 +71,8 @@
 
 		if(jsonSaveFile["config"] !== undefined){
 			//New savefile-format
-			for(let config in jsonSaveFile["config"]){
-				browser.runtime.sendMessage(createConfigValueSetMsg(config, jsonSaveFile["config"][config]));
+			for(let configId of Object.values(ConfigId)){
+				browser.runtime.sendMessage(createConfigValueSetMsg(configId, jsonSaveFile["config"][configId]));
 			}
 		}
 	}
