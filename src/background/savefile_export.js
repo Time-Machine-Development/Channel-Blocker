@@ -11,21 +11,17 @@
 	INSTALLING LISTENER FOR MESSAGES FROM config-scripts
 	*/
 
-	browser.runtime.onMessage.addListener(async function(msg, sender){
+	browser.runtime.onMessage.addListener((msg, sender) => {
 		if (msg.receiver !== SENDER)
 			return;
 
-		if (msg.sender === "config_config_user_interaction" || msg.sender === "bug_controller") {
+		if (msg.sender === "config_config_user_interaction" || msg.sender === "bug_user_interaction") {
 			/* msg is of the form:
 			content = "savefile_export_request";
 			*/
 			if (msg.content === "savefile_export_request") {
-				let saveFile = await exportSaveFile();
-
-				return new Promise(async function(resolve){
-					console.log(saveFile);
-
-					resolve(await exportSaveFile());
+				return new Promise((resolve) => {
+					resolve(exportSaveFile());
 				});
 			}
 		}
