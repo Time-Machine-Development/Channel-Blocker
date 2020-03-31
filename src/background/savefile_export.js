@@ -8,7 +8,7 @@
 	}
 
 	/*
-	INSTALLING LISTENER FOR MESSAGES FROM config-scripts
+	INSTALLING LISTENER FOR MESSAGES FROM config- and bug-scripts
 	*/
 
 	browser.runtime.onMessage.addListener((msg, sender) => {
@@ -20,9 +20,7 @@
 			content = "savefile_export_request";
 			*/
 			if (msg.content === "savefile_export_request") {
-				return new Promise((resolve) => {
-					resolve(exportSaveFile());
-				});
+				return exportSaveFile();
 			}
 		}
 	});

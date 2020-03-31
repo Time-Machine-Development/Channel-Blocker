@@ -179,7 +179,8 @@
 				"block_btn_visibility_request",
 				"block_videos_on_videopage_request",
 				"block_btn_color_request",
-				"block_btn_size_request"
+				"block_btn_size_request",
+				"animation_speed_request"
 			*/
 
 			if (msg.content === "block_btn_visibility_request") {
