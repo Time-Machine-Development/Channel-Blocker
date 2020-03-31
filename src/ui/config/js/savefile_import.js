@@ -4,7 +4,7 @@
 	/* creates an "add"-message for background_filter_storage
 	if regExType is undefined (e.g. not passed) userChannelNameOrRegEx is an user/channel-name,
 	otherwise it is a regular expression with type regExType */
-	function createAddMsg(filterType, userChannelNameOrRegEx, regExType) {
+	function createAddMsg(filterType, userChannelNameOrRegEx, regExType){
 		let msg = {
 			sender: SENDER,
 			receiver: "background_filter_storage",
@@ -14,9 +14,9 @@
 			}
 		};
 
-		if (regExType === undefined) {
+		if(regExType === undefined){
 			msg.content.user_channel_name = userChannelNameOrRegEx;
-		} else {
+		}else{
 			msg.content.reg_exp = userChannelNameOrRegEx;
 			msg.content.reg_exp_type = regExType;
 		}
@@ -54,32 +54,27 @@
 		let fileString = event.target.result;
 		let jsonSaveFile = JSON.parse(fileString);
 
-		if (Object.keys(jsonSaveFile).includes('config')) {
-			//New savefile-format
-			for (let key in jsonSaveFile) {
-				if (key === "config") {
-					for (let elem of Object.keys(jsonSaveFile[key])) {
-						browser.runtime.sendMessage(createConfigValueSetMsg(elem, jsonSaveFile[key][elem]));
-					}
-				} else {
-					for (let elem of Object.keys(jsonSaveFile[key])) {
-						browser.runtime.sendMessage(createAddMsg(key, elem, jsonSaveFile[key][elem]));
-					}
-				}
-			}
-		} else {
-			//Old savefile-format
-			for (let key in jsonSaveFile) {
-				if (key === "5") {
-					//config
-				}else {
-					for (let elem of jsonSaveFile[key]) {
-						browser.runtime.sendMessage(createAddMsg(key, elem, 1));
-					}
+		//add all filter the savefile contains (e.g. user/channel names and regular expressions)
+		for(let filterType of Object.values(FilterType)){
+			for(let userChannelNameOrRegEx in jsonSaveFile[filterType]){
+				if(filterType === FilterType.BLOCKED_USERS || filterType === FilterType.BLOCKED_USERS){
+					//userChannelNameOrRegEx is a user/channel name
+
+					browser.runtime.sendMessage(createAddMsg(filterType, userChannelNameOrRegEx));
+				}else{
+					//userChannelNameOrRegEx is a regular expression
+
+					browser.runtime.sendMessage(createAddMsg(filterType, userChannelNameOrRegEx, jsonSaveFile[filterType][userChannelNameOrRegEx]));
 				}
 			}
 		}
 
+		if(jsonSaveFile["config"] !== undefined){
+			//New savefile-format
+			for(let config in jsonSaveFile["config"]){
+				browser.runtime.sendMessage(createConfigValueSetMsg(config, jsonSaveFile["config"][config]));
+			}
+		}
 	}
 
 	//Check if the file-APIs are supported.
