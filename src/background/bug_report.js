@@ -35,7 +35,7 @@
     }
 
     //adds a bug report contextmenu-item on Youtube
-    browser.menus.create({
+    browser.contextMenus.create({
         id: "cb_bug_report",
         title: "Report a bug on this page",
         contexts: ["all"],
@@ -43,7 +43,7 @@
     });
 
     //creates a bug report tab and sends the tab id of the Youtube tab that issued a bug report via a click on the contextmenu-item
-    browser.menus.onClicked.addListener(async function (info, contentTab){
+    browser.contextMenus.onClicked.addListener(async function (info, contentTab){
         if(info.menuItemId === "cb_bug_report") {
 
             //creates a new bug report tab

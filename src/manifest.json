@@ -14,7 +14,7 @@
 		"storage",
 		"unlimitedStorage",
 		"tabs",
-        "menus",
+        "contextMenus",
         "*://www.youtube.com/*"
 	],
 
