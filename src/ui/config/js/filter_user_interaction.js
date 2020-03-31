@@ -2,8 +2,10 @@
 	const SENDER = "config_filter_user_interaction";
 
 	/* creates an "add"-message for background_filter_storage
-	if regExType is undefined (e.g. not passed) userChannelNameOrRegEx is an user/channel-name,
-	otherwise it is a regular expression with type regExType */
+	If an user/channel name is added regExType must be undefined (e.g. not passed) and userChannelNameOrRegEx has to be the user/channel name.
+	If a regular expression is added regExType has to be either RegExType.CASE_SENSITIVE or RegExType.CASE_INSENSITIVE
+	and userChannelNameOrRegEx has to be a regular expression.
+	FilterType has to be in Object.values(FilterType) which is a subset of Numbers.*/
 	function createAddMsg(filterType, userChannelNameOrRegEx, regExType){
 		let msg = {
 			sender: SENDER,
