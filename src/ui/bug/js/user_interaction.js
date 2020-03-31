@@ -14,7 +14,7 @@ function createSavefileExportRequestMsg() {
 }
 
 document.getElementById("readMoreLink").addEventListener("click", function(){
-    $("#readMoreBlock").slideToggle("slow");
+    $("#readMoreBlock").slideToggle(200);
 });
 
 document.getElementById("downloadReportBtn").addEventListener('click', async function (event) {
