@@ -20,12 +20,15 @@ let curChanelName = undefined;
 		};
 	}
 
-	//creates a request-message for background_config_storage
-	function createRequestMsg(request){
+	//creates a "config_value_request"-message for background_config_storage
+	function createConfigValueRequestMsg(configId){
 		return {
 			sender: SENDER,
 			receiver: "background_config_storage",
-			content: request
+			content: {
+				info: "config_value_request",
+				config_id: configId
+			}
 		};
 	}
 
@@ -136,19 +139,19 @@ let curChanelName = undefined;
 		curContext = await browser.runtime.sendMessage(createContextRequestMsg());
 		//request initial visibility of block-btn
 		//showBtns is used in button_lib
-		showBtns = await browser.runtime.sendMessage(createRequestMsg("block_btn_visibility_request"));
+		showBtns = await browser.runtime.sendMessage(createConfigValueRequestMsg(ConfigId.CONTENT_BLOCK_BTN_VISIBILITY));
 		//request initial color of block-btn
 		//btnColor is used in button_lib
-		btnColor = await browser.runtime.sendMessage(createRequestMsg("block_btn_color_request"));
+		btnColor = await browser.runtime.sendMessage(createConfigValueRequestMsg(ConfigId.CONTENT_BLOCK_BTN_COLOR));
 		//request initial size of block-btn
 		//btnSize is used in button_lib
-		btnSize = await browser.runtime.sendMessage(createRequestMsg("block_btn_size_request")) * 0.01;
+		btnSize = await browser.runtime.sendMessage(createConfigValueRequestMsg(ConfigId.CONTENT_BLOCK_BTN_SIZE)) * 0.01;
 		//request initial blockVideosOnVideopage
 		//blockVideosOnVideopage is used in checker_module
-		blockVideosOnVideopage = await browser.runtime.sendMessage(createRequestMsg("block_videos_on_videopage_request"));
+		blockVideosOnVideopage = await browser.runtime.sendMessage(createConfigValueRequestMsg(ConfigId.CONTENT_BLOCK_VIDEOS_ON_VIDEOPAGE_VISIBILITY));
 		//request initial animationSpeed
 		//blockVideosOnVideopage is used in checker_module
-		curAnimationSpeed = parseInt(await browser.runtime.sendMessage(createRequestMsg("animation_speed_request")));
+		curAnimationSpeed = parseInt(await browser.runtime.sendMessage(createConfigValueRequestMsg(ConfigId.CONTENT_ANIMATION_SPEED)));
 
 		//wait for document to be ready
 		$(document).ready(updateFilters());

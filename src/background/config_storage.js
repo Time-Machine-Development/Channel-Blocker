@@ -131,14 +131,14 @@ config_storage.js also and solely enables and disables the Popup.*/
 	}
 
 	/*
-	INSTALLING LISTENER FOR MESSAGES FROM config-scripts
+	INSTALLING LISTENER FOR MESSAGES FROM config- and content-scripts
 	 */
 
 	browser.runtime.onMessage.addListener((msg, sender) => {
 		if (msg.receiver !== SENDER)
 			return;
 
-		if (msg.sender === "config_config_user_interaction" || msg.sender === "config_import_savefile" || msg.sender === "shared_design_controller") {
+		if (msg.sender === "config_config_user_interaction" || msg.sender === "config_import_savefile" || msg.sender === "shared_design_controller" || msg.sender === "content_controller") {
 			if (msg.content.info === "config_value_set") {
 				/* msg.content is of the form:{
 				info: "config_value_set",
@@ -149,7 +149,9 @@ config_storage.js also and solely enables and disables the Popup.*/
 				 */
 
 				setConfigVal(msg.content.config_id, msg.content.config_val);
-			} else if (msg.content.info === "config_value_reset") {
+			}
+
+			if (msg.content.info === "config_value_reset") {
 				/* msg.content is of the form:{
 				info: "config_value_reset",
 				}
@@ -157,7 +159,9 @@ config_storage.js also and solely enables and disables the Popup.*/
 
 				setConfigVal(ConfigId.CONTENT_BLOCK_BTN_COLOR, "#717171");
 				setConfigVal(ConfigId.CONTENT_BLOCK_BTN_SIZE, 140);
-			}else if (msg.content.info === "config_value_request") {
+			}
+
+			if (msg.content.info === "config_value_request") {
 				/* msg.content is of the form:{
 				info: "config_value_request",
 				config_id: <cid>
@@ -168,50 +172,6 @@ config_storage.js also and solely enables and disables the Popup.*/
 				//answer message with config[<cid>]
 				return new Promise((resolve) => {
 					resolve(config[msg.content.config_id]);
-				});
-			}
-		}
-	});
-
-	/*
-	INSTALLING LISTENER FOR MESSAGES FROM content-scripts
-	 */
-
-	browser.runtime.onMessage.addListener((msg, sender) => {
-		if (msg.receiver !== SENDER)
-			return;
-
-		if (msg.sender === "content_controller") {
-			/* msg is of the form:{
-				content = <rqid>;
-			}
-			where <rqid> is a value of:
-				"block_btn_visibility_request",
-				"block_videos_on_videopage_request",
-				"block_btn_color_request",
-				"block_btn_size_request",
-				"animation_speed_request"
-			*/
-
-			if (msg.content === "block_btn_visibility_request") {
-				return new Promise((resolve) => {
-					resolve(config[ConfigId.CONTENT_BLOCK_BTN_VISIBILITY]);
-				});
-			}else if (msg.content === "block_videos_on_videopage_request") {
-				return new Promise((resolve) => {
-					resolve(config[ConfigId.CONTENT_BLOCK_VIDEOS_ON_VIDEOPAGE_VISIBILITY]);
-				});
-			}else if (msg.content === "block_btn_color_request") {
-				return new Promise((resolve) => {
-					resolve(config[ConfigId.CONTENT_BLOCK_BTN_COLOR]);
-				});
-			}else if (msg.content === "block_btn_size_request") {
-				return new Promise((resolve) => {
-					resolve(config[ConfigId.CONTENT_BLOCK_BTN_SIZE]);
-				});
-			}else if (msg.content === "animation_speed_request") {
-				return new Promise((resolve) => {
-					resolve(config[ConfigId.CONTENT_ANIMATION_SPEED]);
 				});
 			}
 		}
