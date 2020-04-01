@@ -1,5 +1,4 @@
 let configTabId = null;
-let usePopup = false;
 
 {
 	const SENDER = "background_browser_action";
@@ -10,11 +9,11 @@ let usePopup = false;
 			sender: SENDER,
 			receiver: "background_config_storage",
 			content: "use_popup_request"
-
 		}
 	}
 
-	async function openOptions(){
+	//if an open config page exists makes config tab active, otherwise creates new config tab and make it active
+	async function openConfig(){
 		if(configTabId === null){
 			let tab = await browser.tabs.create({
 				active: true,
@@ -39,16 +38,8 @@ let usePopup = false;
 		}
 	}
 
-	//if an open config page exists make config tab active, otherwise create new config tab and make it active
-	browser.browserAction.onClicked.addListener(async function(){
-		if(usePopup){
-			browser.browserAction.setPopup({popup: "ui/popup/html/popup.html"});
-			browser.browserAction.openPopup();
-			return;
-		}
-
-		openOptions();
-	});
+	//open config page as default behavior of clicking the browserAction-button
+	browser.browserAction.onClicked.addListener(openConfig);
 
 	//if config tab was closed set configTabId to null
 	browser.tabs.onRemoved.addListener((tabId) => {
@@ -76,8 +67,12 @@ let usePopup = false;
 			return;
 
 		if(msg.sender === "popup_config_user_interaction"){
-			if(msg.content.info === "openOptions"){
-				openOptions();
+			if(msg.content === "open_config"){
+				/* msg.content is of the form:
+				"open_config"
+				*/
+
+				openConfig();
 			}
 		}
 	});

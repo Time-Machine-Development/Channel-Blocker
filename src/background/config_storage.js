@@ -1,3 +1,7 @@
+/*Manages the part of the storage which is not affilliated to filter settings made by the user.
+Due to the fact that it is not possible to completly outsource the Popup feature into browser_action.js,
+config_storage.js also and solely enables and disables the Popup.*/
+
 {
 	const SENDER = "background_config_storage";
 
@@ -13,7 +17,7 @@
 	Object.freeze(DEFAULT_CONFIG);
 
 	//represents the current configuration
-	let config;
+	let config = {};
 	initConfig();
 
 	//creates a "config_storage_modified"-message for config_config_user_interaction
@@ -53,31 +57,39 @@
 		};
 	}
 
+	//If the setting for ConfigId.USE_POPUP is true, overwrite browserAction-button functionality s.t. Popup will open instead of the Configuration-page or vice versa.
+	function changeBrowserActionFunc(){
+		if(config[ConfigId.USE_POPUP]){
+			browser.browserAction.setPopup({popup: "ui/popup/html/popup.html"});
+		}else{
+			browser.browserAction.setPopup({popup: ""});
+		}
+	}
+
 	/* init. current config with the the config which is stored in STORAGE (defined in shared)
 	if this function is called for the first time after the installation of this webextension,
 	it is also necessary to set all configuration-values to the default values (defined in DEFAULT_CONFIG) */
 	async function initConfig() {
 		let storageContainer = await STORAGE.get("config");
-		config = storageContainer["config"];
-		if(config === undefined){
-			config = {};
+
+		if(storageContainer["config"] !== undefined){
+			//configuation was found in STORAGE
+
+			//load configuration from STORAGE
+			config = storageContainer["config"];
 		}else{
-			usePopup = config[ConfigId.USE_POPUP];
-			if(usePopup){
-				browser.browserAction.setPopup({popup: "ui/popup/html/popup.html"});
-			}
-		}
+			//no configuration was found in STORAGE
 
-		let changed = false;
-		for (let cId of Object.values(ConfigId)) {
-			if (config[cId] === undefined) {
+			//set all configuration-values to their default and updateStorage s.t. the new configuration is eventually written to STORAGE
+			for(let cId of Object.values(ConfigId)){
 				config[cId] = DEFAULT_CONFIG[cId];
-				changed = true;
 			}
+
+			updateStorage();
 		}
 
-		if (changed)
-			updateStorage();
+		//apply the setting for ConfigId.USE_POPUP
+		changeBrowserActionFunc();
 	}
 
 	//synchronize STORAGE with current storage
@@ -110,12 +122,10 @@
 			}
 
 			if (configId === ConfigId.USE_POPUP) {
-				browser.browserAction.setPopup({popup: ""});
-				usePopup = val;
-				if(usePopup){
-					browser.browserAction.setPopup({popup: "ui/popup/html/popup.html"});
-				}
+				//apply the setting for ConfigId.USE_POPUP
+				changeBrowserActionFunc();
 			}
+
 			updateStorage();
 		}
 	}
