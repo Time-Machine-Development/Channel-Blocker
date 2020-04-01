@@ -52,11 +52,11 @@
 		}
 	}
 
-	//set all options of selectio to null
+	//set all options of selection to null
 	function clearSelection(containerId){
 		let selection = document.getElementById(containerId + "_selection");
-		let i;
-		for(i = selection.options.length - 1 ; i >= 0 ; i--){
+
+		for(let i = selection.options.length - 1 ; i >= 0 ; i--){
 			selection.remove(i);
 		}
 	}
@@ -174,8 +174,8 @@
      				info: "filter_storage_modified",
      				filter_type: <ft>
      			}
-                    where <ft> is a value of FilterType
-                    */
+                where <ft> is a value of FilterType
+                */
 				sendAndProcessFilterValuesRequestMsg();
 			}
 		}

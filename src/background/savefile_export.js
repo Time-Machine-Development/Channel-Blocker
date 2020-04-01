@@ -16,8 +16,8 @@
 			return;
 
 		if (msg.sender === "config_config_user_interaction" || msg.sender === "bug_user_interaction") {
-			/* msg is of the form:
-			content = "savefile_export_request";
+			/* msg.content is of the form:
+			"savefile_export_request"
 			*/
 			if (msg.content === "savefile_export_request") {
 				return exportSaveFile();
