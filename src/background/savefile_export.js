@@ -12,14 +12,15 @@
 	*/
 
 	browser.runtime.onMessage.addListener((msg, sender) => {
-		if (msg.receiver !== SENDER)
+		if(msg.receiver !== SENDER)
 			return;
 
-		if (msg.sender === "config_config_user_interaction" || msg.sender === "bug_user_interaction") {
+		if(msg.info === "savefile_export_request"){
 			/* msg.content is of the form:
-			"savefile_export_request"
+			undefined
 			*/
-			if (msg.content === "savefile_export_request") {
+
+			if(msg.sender === "config_config_user_interaction" || msg.sender === "bug_user_interaction"){
 				return exportSaveFile();
 			}
 		}

@@ -32,12 +32,11 @@
 		};
 	}
 
-	//creates a "savefile_export_request"-message for savefile_export
 	function createSavefileExportRequestMsg() {
 		return {
 			sender: SENDER,
 			receiver: "background_savefile_export",
-			content: "savefile_export_request"
+			info: "savefile_export_request"
 		};
 	}
 
