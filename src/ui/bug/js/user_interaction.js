@@ -1,20 +1,18 @@
 const SENDER = "bug_user_interaction";
 
-//creates "url_request"-message for background_bug_report
 function createURLRequestMsg() {
 	return {
 		sender: SENDER,
 		receiver: "background_bug_report",
-		content: "url_request"
+		info: "url_request"
 	};
 }
 
-//creates "html_data_request"-message for background_bug_report
 function createHTMLDataRequestMsg() {
 	return {
 		sender: SENDER,
 		receiver: "background_bug_report",
-		content: "html_data_request"
+		info: "html_data_request"
 	};
 }
 

@@ -52,24 +52,26 @@
 		if(msg.receiver !== SENDER)
 			return;
 
-		if(msg.sender === "bug_user_interaction"){
-			if(msg.content === "url_request"){
-				/* msg.content is of the form:
-     			"url_request"
-                */
+		if(msg.info === "url_request"){
+			/* msg.content is of the form:
+			undefined
+			*/
 
+			if(msg.sender === "bug_user_interaction"){
 				//returns the URL of the Youtube tab the bug report was issued on to the associated bug report tab
 				return new Promise((resolve) => {
 					resolve(bugToYtMap[sender.tab.id].url);
 				});
 			}
+		}
 
-			if(msg.content === "html_data_request"){
-				/* msg.content is of the form:
-     			"html_data_request"
-                */
+		if(msg.info === "html_data_request"){
+			/* msg.content is of the form:
+			undefined
+			*/
 
-				//return the HTML data of the Youtube tab the bug report was issued on to the associated bug report tab
+			if(msg.sender === "bug_user_interaction"){
+				//returns the HTML data of the Youtube tab the bug report was issued on to the associated bug report tab
 				return new Promise((resolve) => {
 					resolve(bugToYtMap[sender.tab.id].htmlData);
 				});
