@@ -20,13 +20,12 @@ let curChanelName = undefined;
 		};
 	}
 
-	//creates a "config_value_request"-message for background_config_storage
 	function createConfigValueRequestMsg(configId){
 		return {
 			sender: SENDER,
 			receiver: "background_config_storage",
+			info: "config_value_request",
 			content: {
-				info: "config_value_request",
 				config_id: configId
 			}
 		};

@@ -131,45 +131,48 @@ config_storage.js also and solely enables and disables the Popup.*/
 	}
 
 	/*
-	INSTALLING LISTENER FOR MESSAGES FROM config- and content-scripts
+	INSTALLING LISTENER FOR MESSAGES FROM config-, content- and shared-scripts
 	 */
 
 	browser.runtime.onMessage.addListener((msg, sender) => {
-		if (msg.receiver !== SENDER)
+		if(msg.receiver !== SENDER)
 			return;
 
-		if (msg.sender === "config_config_user_interaction" || msg.sender === "config_import_savefile" || msg.sender === "shared_design_controller" || msg.sender === "content_controller") {
-			if (msg.content.info === "config_value_set") {
-				/* msg.content is of the form:{
-				info: "config_value_set",
-				config_id: <cid>,
-				config_val: <cval>
-				}
-				where <cid> is a value of ConfigId
-				 */
+		if(msg.info === "config_value_set"){
+			/* msg.content is of the form:
+			{
+				config_id: <Config ID>,
+				config_val: <Config Value>
+			}
+			where <Config ID> is of Object.values(ConfigId).
+			 */
 
+			if(msg.sender === "config_import_savefile" || msg.sender === "config_config_user_interaction"){
 				setConfigVal(msg.content.config_id, msg.content.config_val);
 			}
+		}
 
-			if (msg.content.info === "config_value_reset") {
-				/* msg.content is of the form:{
-				info: "config_value_reset",
-				}
-				 */
+		if(msg.info === "config_value_reset"){
+			/* msg.content is of the form:
+			undefined
+			*/
 
-				setConfigVal(ConfigId.CONTENT_BLOCK_BTN_COLOR, "#717171");
-				setConfigVal(ConfigId.CONTENT_BLOCK_BTN_SIZE, 140);
+			if(msg.sender === "config_config_user_interaction"){
+				setConfigVal(ConfigId.CONTENT_BLOCK_BTN_COLOR, DEFAULT_CONFIG[ConfigId.CONTENT_BLOCK_BTN_COLOR]);
+				setConfigVal(ConfigId.CONTENT_BLOCK_BTN_SIZE, DEFAULT_CONFIG[ConfigId.CONTENT_BLOCK_BTN_SIZE]);
 			}
+		}
 
-			if (msg.content.info === "config_value_request") {
-				/* msg.content is of the form:{
-				info: "config_value_request",
-				config_id: <cid>
-				}
-				where <cid> is a value of ConfigId
-				 */
+		if(msg.info === "config_value_request"){
+			/* msg.content is of the form:
+			{
+				config_id: <Config ID>
+			}
+			where <Config ID> is of Object.values(ConfigId).
+			*/
 
-				//answer message with config[<cid>]
+			if(msg.sender === "shared_design_controller" || msg.sender === "config_config_user_interaction" || msg.sender === "content_controller"){
+				//answer message with config[<Config ID>]
 				return new Promise((resolve) => {
 					resolve(config[msg.content.config_id]);
 				});

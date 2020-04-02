@@ -1,37 +1,32 @@
 {
 	const SENDER = "config_config_user_interaction";
 
-	//creates a "config_value_set"-message for background_config_storage
 	function createConfigValueSetMsg(configId, configVal) {
 		return {
 			sender: SENDER,
 			receiver: "background_config_storage",
+			info: "config_value_set",
 			content: {
-				info: "config_value_set",
 				config_id: configId,
 				config_val: configVal
 			}
 		};
 	}
 
-	//creates a "config_value_reset"-message for background_config_storage
 	function createConfigValueResetMsg() {
 		return {
 			sender: SENDER,
 			receiver: "background_config_storage",
-			content: {
-				info: "config_value_reset"
-			}
+			info: "config_value_reset"
 		};
 	}
 
-	//creates a "config_value_request"-message for background_config_storage
 	function createConfigValueRequestMsg(configId) {
 		return {
 			sender: SENDER,
 			receiver: "background_config_storage",
+			info: "config_value_request",
 			content: {
-				info: "config_value_request",
 				config_id: configId
 			}
 		};

@@ -26,13 +26,12 @@
 		return msg;
 	}
 
-	//creates a "config_value_set"-message for background_config_storage
 	function createConfigValueSetMsg(configId, configVal) {
 		return {
 			sender: SENDER,
 			receiver: "background_config_storage",
+			info: "config_value_set",
 			content: {
-				info: "config_value_set",
 				config_id: configId,
 				config_val: configVal
 			}
