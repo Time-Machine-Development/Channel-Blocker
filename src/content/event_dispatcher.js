@@ -9,6 +9,10 @@ function createAddBlockedUserMsg(userChannelName){
 	};
 }
 
+function blockUserChannel(userChannelName){
+	browser.runtime.sendMessage(createAddBlockedUserMsg(userChannelName));
+}
+
 //?: what means 'still correct', what is the loop doing
 //Checks if the 'userChannelName' is still correct and invokes 'blockUserChannel()'
 function blockUserChannelwithFallback(userChannelName, elem){
@@ -17,5 +21,5 @@ function blockUserChannelwithFallback(userChannelName, elem){
 	}
 
 	//sends an "add_blocked_user"-message to the background_filter_storage which adds userChannelName to the set of blocked users
-	browser.runtime.sendMessage(createAddBlockedUserMsg(userChannelName));
+	blockUserChannel(userChannelName);
 }

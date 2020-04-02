@@ -16,7 +16,7 @@
 			}
 		};
 
-		if(regExType === undefined){
+		if(regExpType === undefined){
 			msg.content.user_channel_name = userChannelNameOrRegExp;
 		}else{
 			msg.content.reg_exp = userChannelNameOrRegExp;
