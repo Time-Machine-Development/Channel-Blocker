@@ -4,14 +4,14 @@ let blockVideosOnVideopage = false;
 //init. animationSpeed (which is modified by content_controller)
 let animationSpeed = 0;
 
-//helper to create the "simple" message for the background_filter_storage, to check if a user/channel-name, title or comment is blocked
-function createIsBlockedRequestMsg(userName){
+//helper to create a "simple" message for the background_filter_storage, to check if a user/channel-name, title or comment is blocked
+function createIsBlockedRequestMsg(userChannelName){
 	return {
 		sender: "content_checker_module",
 		receiver: "background_filter_storage",
+		info: "is_blocked_request",
 		content: {
-			info: "is_blocked_request",
-			user_channel_name: userName
+			user_channel_name: userChannelName
 		}
 	};
 }

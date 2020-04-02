@@ -1,48 +1,39 @@
 {
 	const SENDER = "popup_config_user_interaction";
 
-	/* creates an "add"-message for background_filter_storage
-	if regExType is undefined (e.g. not passed) userChannelNameOrRegEx is an user/channel-name,
-	otherwise it is a regular expression with type regExType */
-	function createAddMsg(userChannelNameOrRegEx){
-		let msg = {
-			sender: SENDER,
-			receiver: "background_filter_storage",
-			content: {
-				info: "add",
-				filter_type: FilterType.BLOCKED_USERS
-			}
-		};
-		msg.content.user_channel_name = userChannelNameOrRegEx;
-
-		return msg;
-	}
-
-
-	//creates a "delete"-message for background_filter_storage
-	function createDeleteMsg(userChannelNameOrRegEx){
+	function createAddMsg(userChannelName){
 		return {
 			sender: SENDER,
 			receiver: "background_filter_storage",
+			info: "add",
 			content: {
-				info: "delete",
 				filter_type: FilterType.BLOCKED_USERS,
-				filter_val: userChannelNameOrRegEx
+				user_channel_name: userChannelName
 			}
 		};
 	}
 
-	//creates a "filter_values_request"-message for background_filter_storage
+	function createDeleteMsg(filterVal){
+		return {
+			sender: SENDER,
+			receiver: "background_filter_storage",
+			info: "delete",
+			content: {
+				filter_type: FilterType.BLOCKED_USERS,
+				filter_val: filterVal
+			}
+		};
+	}
+
 	function createFilterValuesRequestMsg(){
 		return {
 			sender: SENDER,
 			receiver: "background_filter_storage",
+			info: "filter_values_request",
 			content: {
-				info: "filter_values_request",
 				filter_type: FilterType.BLOCKED_USERS
 			}
-
-		}
+		};
 	}
 
 	function createOpenConfigMsg(){
@@ -50,7 +41,7 @@
 			sender: SENDER,
 			receiver: "background_browser_action",
 			info: "open_config"
-		}
+		};
 	}
 
 	//set all options of popup-selection to null

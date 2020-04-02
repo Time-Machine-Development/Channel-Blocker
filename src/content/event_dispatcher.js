@@ -1,15 +1,12 @@
-//sends an "add_blocked_user"-message to the background_filter_storage which adds userChannelName to the set of blocked users
-function blockUserChannel(userChannelName){
-	let msg = {
+function createAddBlockedUserMsg(userChannelName){
+	return {
 		sender: "content_event_dispatcher",
 		receiver: "background_filter_storage",
+		info: "add_blocked_user",
 		content: {
-			info: "add_blocked_user",
 			user_channel_name: userChannelName
 		}
 	};
-
-	browser.runtime.sendMessage(msg);
 }
 
 //?: what means 'still correct', what is the loop doing
@@ -19,5 +16,6 @@ function blockUserChannelwithFallback(userChannelName, elem){
 		userChannelName = item.textContent;
 	}
 
-	blockUserChannel(userChannelName);
+	//sends an "add_blocked_user"-message to the background_filter_storage which adds userChannelName to the set of blocked users
+	browser.runtime.sendMessage(createAddBlockedUserMsg(userChannelName));
 }

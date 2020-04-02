@@ -6,21 +6,21 @@
 	If a regular expression is added regExType has to be either RegExType.CASE_SENSITIVE or RegExType.CASE_INSENSITIVE
 	and userChannelNameOrRegEx has to be a regular expression.
 	FilterType has to be in Object.values(FilterType) which is a subset of Numbers.*/
-	function createAddMsg(filterType, userChannelNameOrRegEx, regExType){
+	function createAddMsg(filterType, userChannelNameOrRegExp, regExpType){
 		let msg = {
 			sender: SENDER,
 			receiver: "background_filter_storage",
+			info: "add",
 			content: {
-				info: "add",
 				filter_type: filterType
 			}
 		};
 
 		if(regExType === undefined){
-			msg.content.user_channel_name = userChannelNameOrRegEx;
+			msg.content.user_channel_name = userChannelNameOrRegExp;
 		}else{
-			msg.content.reg_exp = userChannelNameOrRegEx;
-			msg.content.reg_exp_type = regExType;
+			msg.content.reg_exp = userChannelNameOrRegExp;
+			msg.content.reg_exp_type = regExpType;
 		}
 
 		return msg;

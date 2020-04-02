@@ -83,87 +83,102 @@
 			for(let tabId of YT_TAB_IDS.keys()){
 				browser.tabs.sendMessage(Number(tabId), createContentFilterStorageModifiedMsg());
 			}
-
 		}
 	}
 
 	/*
-	INSTALLING LISTENER FOR MESSAGES FROM content-scripts
+	INSTALLING LISTENER FOR MESSAGES FROM content-, config- and popup-scripts
 	*/
 
 	browser.runtime.onMessage.addListener((msg, sender) => {
 		if(msg.receiver !== SENDER)
 			return;
 
-		if(msg.sender === "content_checker_module"){
+		if(msg.info === "is_blocked_request"){
 			/* msg.content is of the form:
 			{
-				info: "is_blocked_request",
-				user_channel_name: <user/channel>,
+				user_channel_name: <User/Channel Name>,
 				[additional: {
-					type: <t>,
-					content: <content>
+					type: <Type>,
+					content: <Content>
 				}]
-			 }
-			where <t> is ("comment"|"title")
+			}
+			where <Type> is ("comment"|"title").
 			*/
 
-			if(msg.content.info === "is_blocked_request"){
+			if(msg.sender === "content_checker_module"){
 				//send repsond-Promise containing a message which is either true or false
 				return new Promise((resolve) => {
 					resolve(storageManager.isBlocked(msg.content));
 				});
 			}
-
-			return;
 		}
 
-		if(msg.sender === "content_event_dispatcher"){
+		if(msg.info === "add_blocked_user"){
 			/* msg.content is of the form:
 			{
-				info: "add_blocked_user",
-				user_channel_name: <user/channel>
+				user_channel_name: <User/Channel Name>
 			}
 			*/
 
-			if(msg.content.info === "add_blocked_user")
+			if(msg.sender === "content_event_dispatcher"){
 				onAddMsg({
 					info: "add",
 					filter_type: FilterType.BLOCKED_USERS,
 					user_channel_name: msg.content.user_channel_name
 				});
-
-			return;
+			}
 		}
-	});
 
-	/*
-	INSTALLING LISTENER FOR MESSAGES FROM config- and popup-scripts
-	*/
+		if(msg.info === "add"){
+			/* msg.content is of the form:
+			{
+				filter_type: <Filter Type>,
+				user_channel_name: <User/Channel Name>
+			}
+			where <Filter Type> is of Object.values(FilterType).
 
-	browser.runtime.onMessage.addListener((msg, sender) => {
-		if(msg.receiver !== SENDER)
-			return;
+			or
 
-		if(msg.sender === "config_filter_user_interaction" || msg.sender === "config_import_savefile" || msg.sender === "popup_config_user_interaction"){
-			//react to "add"-message from config_filter_user_interaction
-			if(msg.content.info === "add"){
+			{
+				filter_type: <Filter Type>,
+				reg_exp: <Regular Expression>,
+				reg_exp_type: <Regular Expression Type>
+			}
+			where <Filter Type> is of Object.values(FilterType),
+			<Regular Expression> is of type String
+			and <Regular Expression Type> is of Object.values(RegExType).
+			*/
+
+			if(msg.sender === "config_filter_user_interaction" || msg.sender === "config_import_savefile" || msg.sender === "popup_config_user_interaction"){
 				onAddMsg(msg.content);
+			}
+		}
 
-			//react to "delete"-message from config_filter_user_interaction
-			}else if(msg.content.info === "delete"){
+		if(msg.info === "delete"){
+			/* msg.content is of the form:
+			{
+				filter_type: <Filter Type>,
+				filter_val: <User/Channel Name or Regular Expression>
+			}
+			where <Filter Type> is of Object.values(FilterType)
+			and <User/Channel Name or Regular Expression> is of type String.
+			*/
+
+			if(msg.sender === "config_filter_user_interaction" || msg.sender === "popup_config_user_interaction"){
 				onDelMsg(msg.content);
+			}
+		}
 
-			//react to "filter_values_request"-message from config_filter_user_interaction
-			}else if(msg.content.info === "filter_values_request"){
-				/* msg.content is of the form:
-     			{
-     				info: "filter_values_request",
-     				filter_type: <ft>
-     			}
-                where <ft> is a value of FilterType
-                */
+		if(msg.info === "filter_values_request"){
+			/* msg.content is of the form:
+			{
+				filter_type: <Filter Type>
+			}
+			where <Filter Type> is of Object.values(FilterType).
+			*/
 
+			if(msg.sender === "config_filter_user_interaction" || msg.sender === "popup_config_user_interaction"){
 				/* return an object containing all user/channel-names or regular expressions as keys and their values,
 				depending on the requested FilterType */
 				return new Promise((resolve) => {
