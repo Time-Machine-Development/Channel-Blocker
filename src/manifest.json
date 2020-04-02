@@ -33,7 +33,7 @@
 
 	"background": {
 		"scripts": [
-			"polyfill/browser-polyfill.min.js",
+			"shared/browser-polyfill.min.js",
 			"shared/shared.js",
 			"background/HashSet.js",
 			"background/FilterStorageManager.js",
@@ -50,7 +50,7 @@
 		{
 			"matches": ["*://www.youtube.com/*"],
 			"js": [
-				"polyfill/browser-polyfill.min.js",
+				"shared/browser-polyfill.min.js",
 
 				"shared/jquery-3.4.1.min.js",
 				"shared/shared.js",
