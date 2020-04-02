@@ -16,12 +16,11 @@
 		};
 	}
 
-	//creates "filter_storage_modified"-message for content_controller
 	function createContentFilterStorageModifiedMsg(){
 		return {
 			sender: SENDER,
 			receiver: "content_controller",
-			content: "filter_storage_modified"
+			info: "filter_storage_modified"
 		};
 	}
 

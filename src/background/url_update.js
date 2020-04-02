@@ -13,27 +13,26 @@ const YT_TAB_IDS = new HashSet();
 	const YTRegEx = new RegExp("^https://www\\.youtube\\.com(.)*$");
 
 	const RegExToContextMapping = Object.freeze({
-		"^https://www\\.youtube\\.com/watch\\?(.)*$": 								YTContext.VIDEO,
-		"^https://www\\.youtube\\.com/results\\?search_query=(.)*$": 			YTContext.SEARCH,
-		"^https://www\\.youtube\\.com/user/[^/]*(\\?(.)*|)$": 					YTContext.CHANNEL_HOME,
-		"^https://www\\.youtube\\.com/channel/[^/]*(\\?(.)*|)$": 				YTContext.CHANNEL_HOME,
-		"^https://www\\.youtube\\.com/user/[^/]+/featured(\\?(.)*|)$": 		YTContext.CHANNEL_HOME,
-		"^https://www\\.youtube\\.com/channel/[^/]+/featured(\\?(.)*|)$": 	YTContext.CHANNEL_HOME,
-		"^https://www\\.youtube\\.com/user/[^/]+/videos(\\?(.)*|)$": 			YTContext.CHANNEL_VIDEOS,
-		"^https://www\\.youtube\\.com/channel/[^/]+/videos(\\?(.)*|)$": 		YTContext.CHANNEL_VIDEOS,
-		"^https://www\\.youtube\\.com/feed/trending(\\?(.)*|)$": 				YTContext.TRENDING,
-		"^https://www\\.youtube\\.com/feed/recommended(\\?(.)*|)$": 			YTContext.RECOMMENDED,
-		"^https://www\\.youtube\\.com/(\\?(.)*|)$": 									YTContext.HOME
+		"^https://www\\.youtube\\.com/watch\\?(.)*$":							YTContext.VIDEO,
+		"^https://www\\.youtube\\.com/results\\?search_query=(.)*$":			YTContext.SEARCH,
+		"^https://www\\.youtube\\.com/user/[^/]*(\\?(.)*|)$":					YTContext.CHANNEL_HOME,
+		"^https://www\\.youtube\\.com/channel/[^/]*(\\?(.)*|)$":				YTContext.CHANNEL_HOME,
+		"^https://www\\.youtube\\.com/user/[^/]+/featured(\\?(.)*|)$":			YTContext.CHANNEL_HOME,
+		"^https://www\\.youtube\\.com/channel/[^/]+/featured(\\?(.)*|)$":		YTContext.CHANNEL_HOME,
+		"^https://www\\.youtube\\.com/user/[^/]+/videos(\\?(.)*|)$":			YTContext.CHANNEL_VIDEOS,
+		"^https://www\\.youtube\\.com/channel/[^/]+/videos(\\?(.)*|)$":			YTContext.CHANNEL_VIDEOS,
+		"^https://www\\.youtube\\.com/feed/trending(\\?(.)*|)$":				YTContext.TRENDING,
+		"^https://www\\.youtube\\.com/feed/recommended(\\?(.)*|)$":				YTContext.RECOMMENDED,
+		"^https://www\\.youtube\\.com/(\\?(.)*|)$":								YTContext.HOME
 	});
 
-	//creates a "context_switch"-message for content_controller
 	function createContextSwitchMsg(context){
 		return {
 			sender: SENDER,
 			receiver: "content_controller",
+			info: "context_switch",
 			content: {
-				info: "context_switch",
-				"context": context
+				context: context
 			}
 		};
 	}

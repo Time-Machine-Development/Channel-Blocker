@@ -160,15 +160,15 @@ let curChanelName = undefined;
 	*/
 
 	browser.runtime.onMessage.addListener((msg) => {
-		if(msg.receiver !== "content_controller")
+		if(msg.receiver !== SENDER)
 			return;
 
-		if(msg.sender === "background_filter_storage"){
+		if(msg.info === "filter_storage_modified"){
 			/* msg.content is of the form:
-			"filter_storage_modified"
+			undefined
 			*/
 
-			if(msg.content === "filter_storage_modified"){
+			if(msg.sender === "background_filter_storage"){
 				//note that animationSpeed is declared and init. in checker_module
 				animationSpeed = curAnimationSpeed;
 
@@ -177,16 +177,15 @@ let curChanelName = undefined;
 			}
 		}
 
-		if(msg.sender === "background_url_update"){
+		if(msg.info === "context_switch"){
 			/* msg.content is of the form:
 			{
-				info: "context_switch",
-				context: <context>
+				context: <Context>
 			}
-			where <context> is a value of YTCONTEXT or undefined
+			where <Context> is of Object.values(YTContext) or undefined.
 			*/
 
-			if(msg.content.info === "context_switch"){
+			if(msg.sender === "background_url_update"){
 				//note that animationSpeed is declared and init. in checker_module
 				animationSpeed = 0;
 
@@ -198,33 +197,44 @@ let curChanelName = undefined;
 			}
 		}
 
-		if(msg.sender === "background_config_storage"){
+		if(msg.info === "block_btn_modified"){
 			/* msg.content is of the form:
 			{
-				info: "block_btn_modified",
-				block_btn_visibility: <bbv>
+				block_btn_visibility: <Block Button visibility>
 			}
-			where <bbv> is boolean
+			where <Block Button visibility> is of type Boolean.
 			*/
 
-			if(msg.content.info === "block_btn_modified"){
+			if(msg.sender === "background_config_storage"){
 				//requests initial context and the initial visibility of block-btn, afterwards update filters (for the first time on this tab-id)
 				init();
-			}else if(msg.content.info === "animation_speed_modified"){
-				curAnimationSpeed = parseInt(msg.content.animation_speed);
 			}
 		}
 
-        if(msg.sender === "background_bug_report"){
-            /* msg.content is of the form:
-            "get_html_data"
+		if(msg.info === "animation_speed_modified"){
+			/* msg.content is of the form:
+			{
+				animation_speed: <Animation Speed>
+			}
+			where <Animation Speed> is of type Number.
+			*/
+
+			if(msg.sender === "background_config_storage"){
+				curAnimationSpeed = msg.content.animation_speed;
+			}
+		}
+
+		if(msg.info === "html_data_request"){
+			/* msg.content is of the form:
+            undefined
             */
-            if(msg.content === "get_html_data"){
-                return new Promise((resolve) => {
+
+			if(msg.sender === "background_bug_report"){
+				return new Promise((resolve) => {
                     resolve(String(document.querySelector("html").innerHTML));
                 });
-            }
-        }
+			}
+		}
 	});
 
 	init();

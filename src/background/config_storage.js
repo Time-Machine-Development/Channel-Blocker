@@ -33,13 +33,12 @@ config_storage.js also and solely enables and disables the Popup.*/
 		};
 	}
 
-	//creates a "block_btn_visibility_modified"-message for content_controller
 	function createBlockBtnModifiedMsg() {
 		return {
 			sender: SENDER,
 			receiver: "content_controller",
+			info: "block_btn_modified",
 			content: {
-				info: "block_btn_modified",
 				block_btn_visibility: config[ConfigId.CONTENT_BLOCK_BTN_VISIBILITY]
 			}
 		};
@@ -50,9 +49,9 @@ config_storage.js also and solely enables and disables the Popup.*/
 		return {
 			sender: SENDER,
 			receiver: "content_controller",
+			info: "animation_speed_modified",
 			content: {
-				info: "animation_speed_modified",
-				animation_speed: config[ConfigId.CONTENT_ANIMATION_SPEED]
+				animation_speed: parseInt(config[ConfigId.CONTENT_ANIMATION_SPEED])
 			}
 		};
 	}

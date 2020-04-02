@@ -1,12 +1,11 @@
 {
     const SENDER = "background_bug_report";
 
-    //creates a "get_html"-message for content_controller
-    function createGetHTMLDataMsg() {
+    function createHTMLDataRequestMsg(){
         return {
             sender: SENDER,
             receiver: "content_controller",
-            content: "get_html_data"
+            info: "html_data_request"
         };
     }
 
@@ -33,7 +32,7 @@
 
 			//add new created bug tab id and its corresponding Youtube HTML data and URL
 			bugToYtMap[bugReportTab.id] = {
-				htmlData: await browser.tabs.sendMessage(contentTab.id, createGetHTMLDataMsg()),
+				htmlData: await browser.tabs.sendMessage(contentTab.id, createHTMLDataRequestMsg()),
 				url: contentTab.url
 			};
         }
