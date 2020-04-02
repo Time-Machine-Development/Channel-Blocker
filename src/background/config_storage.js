@@ -20,13 +20,12 @@ config_storage.js also and solely enables and disables the Popup.*/
 	let config = {};
 	initConfig();
 
-	//creates a "config_storage_modified"-message for config_config_user_interaction
 	function createConfigStorageModifiedMsg(configId) {
 		return {
 			sender: SENDER,
 			receiver: "config_config_user_interaction",
+			info: "config_storage_modified",
 			content: {
-				info: "config_storage_modified",
 				config_id: configId,
 				config_val: config[configId]
 			}

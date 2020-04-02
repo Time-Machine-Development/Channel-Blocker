@@ -292,19 +292,19 @@
 	 */
 
 	browser.runtime.onMessage.addListener((msg, sender) => {
-		if (msg.receiver !== SENDER)
+		if(msg.receiver !== SENDER)
 			return;
 
-		if (msg.sender === "background_config_storage") {
-			if (msg.content.info === "config_storage_modified") {
-				/* msg.content is of the form:{
-				info: "config_storage_modified",
-				config_id: <cid>,
-				config_val: <cval>
-				}
-				where <cid> is a value of ConfigId
-				 */
+		if(msg.info === "config_storage_modified"){
+			/* msg.content is of the form:
+			{
+				config_id: <Config ID>,
+				config_val: <Config Value>
+			}
+			where <Config ID> is of Object.values(ConfigId).
+			*/
 
+			if(msg.sender === "background_config_storage"){
 				//react on config-storage modification
 				if (msg.content.config_id === ConfigId.CONFIG_PAGE_DESIGN) {
 					changePageDesign(msg.content.config_val);
