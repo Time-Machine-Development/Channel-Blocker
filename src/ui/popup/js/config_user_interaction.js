@@ -45,12 +45,11 @@
 		}
 	}
 
-	//creates a "createOpenOptionsMsg"-message for background_browser_action
 	function createOpenConfigMsg(){
 		return {
 			sender: SENDER,
 			receiver: "background_browser_action",
-			content: "open_config"
+			info: "open_config"
 		}
 	}
 

@@ -3,15 +3,6 @@ let configTabId = null;
 {
 	const SENDER = "background_browser_action";
 
-	//creates a "createOpenOptionsMsg"-message for background_browser_action
-	function createUsePopupRequestMsg(){
-		return {
-			sender: SENDER,
-			receiver: "background_config_storage",
-			content: "use_popup_request"
-		}
-	}
-
 	//if an open config page exists makes config tab active, otherwise creates new config tab and make it active
 	async function openConfig(){
 		if(configTabId === null){
@@ -47,7 +38,7 @@ let configTabId = null;
 			configTabId = null;
 	});
 
-	//remove or add tabId from configTabIds if the tab with id tabId has changed it's url from or to valid URL
+	//remove or add tabId from configTabIds if the tab with id tabId has changed its url from or to valid URL
 	browser.tabs.onUpdated.addListener((tabId, ci) => {
 		if(ci.url){
 			let configURL = browser.runtime.getURL("/ui/config/html/config.html");
@@ -62,16 +53,21 @@ let configTabId = null;
 		}
 	});
 
+
+	/*
+	INSTALLING LISTENER FOR MESSAGES FROM popup-scripts
+	*/
+
 	browser.runtime.onMessage.addListener((msg, sender) => {
-		if (msg.receiver !== SENDER)
+		if(msg.receiver !== SENDER)
 			return;
 
-		if(msg.sender === "popup_config_user_interaction"){
-			if(msg.content === "open_config"){
-				/* msg.content is of the form:
-				"open_config"
-				*/
+		if(msg.info === "open_config"){
+			/* msg.content is of the form:
+			undefined
+			*/
 
+			if(msg.sender === "popup_config_user_interaction"){
 				openConfig();
 			}
 		}
