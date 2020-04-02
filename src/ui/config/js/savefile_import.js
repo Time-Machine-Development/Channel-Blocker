@@ -1,5 +1,5 @@
 {
-	const SENDER = "config_import_savefile";
+	const SENDER = "config_savefile_import";
 
 	/* creates an "add"-message for background_filter_storage
 	If an user/channel name is added regExType must be undefined (e.g. not passed) and userChannelNameOrRegEx has to be the user/channel name.

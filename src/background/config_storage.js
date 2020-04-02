@@ -144,7 +144,7 @@ config_storage.js also and solely enables and disables the Popup.*/
 			where <Config ID> is of Object.values(ConfigId).
 			 */
 
-			if(msg.sender === "config_import_savefile" || msg.sender === "config_config_user_interaction"){
+			if(msg.sender === "config_savefile_import" || msg.sender === "config_config_user_interaction"){
 				setConfigVal(msg.content.config_id, msg.content.config_val);
 			}
 		}

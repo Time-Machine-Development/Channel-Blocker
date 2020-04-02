@@ -148,7 +148,7 @@
 			and <Regular Expression Type> is of Object.values(RegExType).
 			*/
 
-			if(msg.sender === "config_filter_user_interaction" || msg.sender === "config_import_savefile" || msg.sender === "popup_config_user_interaction"){
+			if(msg.sender === "config_filter_user_interaction" || msg.sender === "config_savefile_import" || msg.sender === "popup_config_user_interaction"){
 				onAddMsg(msg.content);
 			}
 		}
