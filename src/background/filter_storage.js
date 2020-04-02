@@ -4,13 +4,12 @@
 	let storageManager = new FilterStorageManager(STORAGE);
 	storageManager.initSets();
 
-	//creates "filter_storage_modified"-message for config_filter_user_interaction
 	function createConfigFilterStorageModifiedMsg(filterType){
 		return {
 			sender: SENDER,
 			receiver: "config_filter_user_interaction",
+			info: "filter_storage_modified",
 			content: {
-				info: "filter_storage_modified",
 				filter_type: filterType
 			}
 		};

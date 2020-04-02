@@ -160,22 +160,21 @@
 	INSTALLING LISTENER FOR MESSAGES FROM background-scripts
 	*/
 
-  browser.runtime.onMessage.addListener((msg, sender) => {
-  	if(msg.receiver !== SENDER)
-    	return;
+	browser.runtime.onMessage.addListener((msg, sender) => {
+  		if(msg.receiver !== SENDER)
+    		return;
 
-		if(msg.sender === "background_filter_storage"){
-			if(msg.content.info === "filter_storage_modified"){
-				/* msg.content is of the form:
-     			{
-     				info: "filter_storage_modified",
-     				filter_type: <ft>
-     			}
-                where <ft> is a value of FilterType
-                */
+		if(msg.info === "filter_storage_modified"){
+			/* msg.content is of the form:
+			{
+				filter_type: <Filter Type>
+			}
+			where <Filter Type> is of Object.values(FilterType).
+			*/
+
+			if(msg.sender === "background_filter_storage"){
 				sendAndProcessFilterValuesRequestMsg();
 			}
 		}
-
 	});
 }
