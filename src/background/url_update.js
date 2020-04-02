@@ -78,11 +78,12 @@ const YT_TAB_IDS = new HashSet();
 		if(msg.receiver !== SENDER)
 			return;
 
-		if(msg.sender === "content_controller"){
+		if(msg.info === "context_request"){
 			/* msg.content is of the form:
-			"context_request"
+			undefined
 			*/
-			if(msg.content === "context_request"){
+
+			if(msg.sender === "content_controller"){
 				let context = urlToContext(sender.tab.url);
 
 				if(context !== undefined){

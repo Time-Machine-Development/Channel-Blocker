@@ -11,12 +11,11 @@ let curChanelName = undefined;
 	let curContext;
 	let curAnimationSpeed = 1000;
 
-	//creates a "context_request"-message for background_url_update
 	function createContextRequestMsg(){
 		return {
 			sender: SENDER,
 			receiver: "background_url_update",
-			content: "context_request"
+			info: "context_request"
 		};
 	}
 
