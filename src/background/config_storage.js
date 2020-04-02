@@ -43,7 +43,6 @@ config_storage.js also and solely enables and disables the Popup.*/
 		};
 	}
 
-	//creates a "animation_speed_modified"-message for content_controller
 	function createAnimationSpeedModifiedMsg() {
 		return {
 			sender: SENDER,
