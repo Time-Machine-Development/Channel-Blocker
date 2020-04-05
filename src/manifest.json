@@ -56,45 +56,12 @@
 				"shared/shared.js",
 				"content/checker_module.js",
 				"content/event_dispatcher.js",
-				"content/button_lib.js",
 
-				"content/Filter.js",
-
-				"content/CallbackFilter.js",
-
-				"content/start/PopupFilter.js",
-				"content/start/MenuFilter.js",
-
-				"content/start/HiddenChangeFilter.js",
-				"content/start/ThumbChangeFiler.js",
-				"content/start/StartContentsFilter.js",
-				"content/start/StartYtdRichGridRendererFilter.js",
-				"content/start/StartPrimaryFilter.js",
-
-				"content/start/StartCommantFilter.js",
-				"content/start/StartContainerFilter.js",
-				"content/start/StartContentFilter.js",
-				"content/start/PrimaryFilter.js",
-				"content/start/PersistentAppFilter.js",
-
-				"content/search_page/SearchPageContentFilter.js",
-				"content/search_page/SearchPageSectionFilter.js",
-				"content/search_page/SearchPageItemSectionFilter.js",
-				"content/search_page/SearchPageStartFilter.js",
-
-				"content/video_page/VideoPageCommentRepliesFilter.js",
-				"content/video_page/VideoPageCommentFilter.js",
-				"content/video_page/VideoPageCommentListFilter.js",
-				"content/video_page/VideoPageCommentContainerFilter.js",
-				"content/video_page/EndscreenContentFilter.js",
-				"content/video_page/VideoPageMetaContentsFilter.js",
-				"content/video_page/VideoPageMetaFilter.js",
-				"content/video_page/VideoPageContentFilter.js",
-				"content/video_page/VideoPageWatchFilter.js",
-				"content/video_page/VideoPageManagerFilter.js",
-				"content/video_page/VideoPageAppFilter.js",
-
-				"content/controller.js"
+				"content/mutation-summary.js",
+				"content/Observer.js",
+				"content/new_button_lib.js",
+				"content/new_controller.js",
+				"content/video_page.js"
 			]
 		}
 	],

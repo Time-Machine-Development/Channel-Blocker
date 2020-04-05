@@ -9,8 +9,10 @@ function createAddBlockedUserMsg(userChannelName){
 	};
 }
 
-function blockUserChannel(userChannelName){
-	browser.runtime.sendMessage(createAddBlockedUserMsg(userChannelName));
+function createBlockUserChannelFunction(userChannelName){
+	return () => {
+		browser.runtime.sendMessage(createAddBlockedUserMsg(userChannelName));
+	};
 }
 
 //?: what means 'still correct', what is the loop doing

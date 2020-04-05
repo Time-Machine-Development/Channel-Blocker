@@ -1,9 +1,3 @@
-//this is changed in the controller
-let blockVideosOnVideopage = false;
-
-//init. animationSpeed (which is modified by content_controller)
-let animationSpeed = 0;
-
 //helper to create a "simple" message for the background_filter_storage, to check if a user/channel-name, title or comment is blocked
 function createIsBlockedRequestMsg(userChannelName){
 	return {
@@ -24,33 +18,31 @@ function checkUserChannelName(userName, checkedNode, isVideo = false){
 
 /*create an "advanced" "is_blocked_request"-message which checks for user/channel-name and a video-title
 and send it to background_filter_storage and process the result*/
-function checkVideoTitle(userName, videoTitle, checkedNode){
+function checkVideoTitle(userName, videoTitle){
 	let msg = createIsBlockedRequestMsg(userName);
 	msg.content.additional = {
 		type: "title",
 		content: videoTitle.trim()
 	};
 
-	sendAndProcessIsBlockedRequestMsg(msg, checkedNode);
+	return browser.runtime.sendMessage(msg);
 }
 
 /*create an "advanced" "is_blocked_request"-message which checks for user/channel-name and a comment-content
 and send it to background_filter_storage and process the result*/
-function checkCommentContent(userName, commentContent, checkedNode){
+function checkCommentContent(userName, commentContent){
 	let msg = createIsBlockedRequestMsg(userName.trim());
 	msg.content.additional = {
 		type: "comment",
 		content: commentContent.trim()
 	};
 
-	sendAndProcessIsBlockedRequestMsg(msg, checkedNode);
+	return browser.runtime.sendMessage(msg);
 }
 
 /*sends an "is_blocked_request"-message to background_filter_storage and processes the result by making checkedNode visible/invisible
 depending on the result of the request*/
 async function sendAndProcessIsBlockedRequestMsg(msg, checkedNode, isVideo = false) {
-	let isBlocked = await browser.runtime.sendMessage(msg);
-
 	if(isBlocked){
 		if(!blockVideosOnVideopage && isVideo){
 			return;
