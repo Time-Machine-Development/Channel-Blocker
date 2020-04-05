@@ -19,13 +19,46 @@ function insertAfter(element, blockBtn){
 /* Comment */
 
 const COMMENT_CONFIG = Object.freeze({
-	anchorSelector: "ytd-comment-renderer",
+	anchorSelector: ["ytd-comment-thread-renderer"],
 	characterDataSelectors: {
 		commentContent: ["yt-formatted-string#content-text"]
 	}
 });
 
+const REPLY_COMMENT_CONFIG = Object.freeze({
+	anchorSelector: ["ytd-comment-renderer[is-reply]"],
+	characterDataSelectors: {
+		userChannelName: ["a#author-text", "span"],
+		commentContent: ["yt-formatted-string#content-text"]
+	}
+});
+
 async function onCommentObserved(comment, characterDatas){
+	let authorText = $(comment).find("a#author-text")[0];
+	let userChannelName;
+
+	if(authorText.hidden){
+		/* ASSUMPTION: The user/channel-name of this comment is inside "ytd-author-comment-badge-renderer"-Element,
+		because "a#author-text" is hidden.
+		This seems to be the case, if the user/channel-name is inside a visual badge.*/
+
+		userChannelName = $(comment).find("yt-formatted-string[class='style-scope ytd-channel-name']")[0].innerHTML.trim();
+	}else{
+		userChannelName = $(authorText).find("span")[0].innerHTML.trim();
+	}
+
+	insertBefore(authorText, createBtnNode(userChannelName));
+
+	toggleVisibilty(comment, await checkCommentContent(userChannelName, characterDatas.commentContent));
+}
+
+async function onReplyCommentObserved(replyComment, characterDatas){
+	insertBefore($(replyComment).find("a#author-text")[0], createBtnNode(characterDatas.userChannelName));
+
+	toggleVisibilty(replyComment, await checkCommentContent(characterDatas.userChannelName, characterDatas.commentContent));
+}
+
+async function onCommentdadadaObserved(comment, characterDatas){
 	let userChannelName;
 	let afterBlockBtn;
 	let hideElement;
@@ -74,25 +107,25 @@ const NEXT_CHARACTER_DATA_SELECTORS = Object.freeze({
 });
 
 const NEXT_AUTOPLAY_CONFIG = Object.freeze({
-	anchorSelector: "ytd-compact-autoplay-renderer[class='style-scope ytd-watch-next-secondary-results-renderer']",
+	anchorSelector: ["ytd-compact-autoplay-renderer[class='style-scope ytd-watch-next-secondary-results-renderer']"],
 	characterDataSelectors: NEXT_CHARACTER_DATA_SELECTORS
 });
 
 const NEXT_VIDEO_CONFIG = Object.freeze({
-	anchorSelector: "ytd-compact-video-renderer[class='style-scope ytd-watch-next-secondary-results-renderer']",
+	anchorSelector: ["ytd-compact-video-renderer[class='style-scope ytd-watch-next-secondary-results-renderer']"],
 	characterDataSelectors: NEXT_CHARACTER_DATA_SELECTORS
 });
 
 const NEXT_PLAYLIST_CONFIG = Object.freeze({
-	anchorSelector: "ytd-compact-playlist-renderer[class='style-scope ytd-watch-next-secondary-results-renderer']",
+	anchorSelector: ["ytd-compact-playlist-renderer[class='style-scope ytd-watch-next-secondary-results-renderer']"],
 	characterDataSelectors: NEXT_CHARACTER_DATA_SELECTORS
 });
 
-async function onNextObserved(next, characterDatas){
+async function onNextObserved(next, characterDatas, config){
 	let beforeBlockBtn;
-	if($(next).is(NEXT_AUTOPLAY_CONFIG.anchorSelector) || $(next).is(NEXT_VIDEO_CONFIG.anchorSelector)){
+	if(config === NEXT_AUTOPLAY_CONFIG || config === NEXT_VIDEO_CONFIG){
 		beforeBlockBtn = $(next).find("a[class='yt-simple-endpoint style-scope ytd-compact-video-renderer']")[0];
-	}else if($(next).is(NEXT_PLAYLIST_CONFIG.anchorSelector)){
+	}else if(config === NEXT_PLAYLIST_CONFIG){
 		beforeBlockBtn = $(next).find("a[class='yt-simple-endpoint style-scope ytd-compact-playlist-renderer']")[0];
 	}
 
@@ -162,6 +195,7 @@ function createVideoPageObservers(){
 	let obs = [];
 
 	obs.push(new Observer(COMMENT_CONFIG, onCommentObserved));
+	obs.push(new Observer(REPLY_COMMENT_CONFIG, onReplyCommentObserved));
 
 	//obs.push(new Observer(NEXT_AUTOPLAY_CONFIG, onNextObserved));
 	//obs.push(new Observer(NEXT_VIDEO_CONFIG, onNextObserved));

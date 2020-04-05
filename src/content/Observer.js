@@ -100,7 +100,7 @@ function allCharaterDatasFound(characterDatasFound){
 	return true;
 }
 
-function createCharacterDataObserver(config, onObserved, anchor, characterDatasFound, characterDatasKey){
+function createCharacterDataObserver(config, _config, onObserved, anchor, characterDatasFound, characterDatasKey){
 	let characterDataParent = anchor;
 	for(let selector of config.characterDataSelectors[characterDatasKey]){
 		characterDataParent = $(characterDataParent).find(selector)[0];
@@ -123,7 +123,7 @@ function createCharacterDataObserver(config, onObserved, anchor, characterDatasF
 						characterDatasFound[characterDatasKey]++;
 
 						if(allCharaterDatasFound(characterDatasFound)){
-							onObserved(anchor, createCharacterDatas(config, anchor));
+							onObserved(anchor, createCharacterDatas(config, anchor), _config);
 
 							//reset characterDatasFound
 							initCharacterDatasFound(config, characterDatasFound);
@@ -136,7 +136,7 @@ function createCharacterDataObserver(config, onObserved, anchor, characterDatasF
 						characterDatas[characterDatasKey] = summary.added[0].data.trim();
 
 						//call onObserved with
-						onObserved(anchor, characterDatas);
+						onObserved(anchor, characterDatas, _config);
 					}
 				}
 			}
@@ -146,43 +146,67 @@ function createCharacterDataObserver(config, onObserved, anchor, characterDatasF
 	});
 }
 
-function onAnchorFound(characterDataObservers, config, onObserved, anchor){
+function onAnchorFound(observers, config, _config, onObserved, anchor){
 	let characterDatasFound = {};
 	initCharacterDatasFound(config, characterDatasFound);
 
 	if(config.observeOnAnchor){
-		onObserved(anchor, createCharacterDatas(config, anchor));
+		onObserved(anchor, createCharacterDatas(config, anchor), _config);
 	}
 
 	for(let key in config.characterDataSelectors){
-		characterDataObservers.push(createCharacterDataObserver(config, onObserved, anchor, characterDatasFound, key));
+		observers.push(createCharacterDataObserver(config, _config, onObserved, anchor, characterDatasFound, key));
+	}
+}
+
+function createaAnchorObserverRec(anchorSelectorIndex, subAnchor, observers, config, _config, onObserved){
+	if(anchorSelectorIndex < config.anchorSelector.length-1){
+		//find current Elements of $($($(document).find(config.anchorSelector[0])).find(config.anchorSelector[1])...).find(config.anchorSelector[anchorSelectorIndex])
+		for(let subSubAnchor of $(subAnchor).find(config.anchorSelector[anchorSelectorIndex])){
+			createaAnchorObserverRec(anchorSelectorIndex+1, subSubAnchor, observers, config, _config, onObserved);
+		}
+
+		//create new MutationSummary to find future Elements of $($($(document).find(config.anchorSelector[0])).find(config.anchorSelector[1])...).find(config.anchorSelector[anchorSelectorIndex])
+		observers.push(new MutationSummary({
+			callback: (summaries) => {
+				for(let summary of summaries){
+					for(let subSubAnchor of summary.added){
+						createaAnchorObserverRec(anchorSelectorIndex+1, subSubAnchor, observers, config, _config, onObserved);
+					}
+				}
+			},
+			rootNode: subAnchor,
+			queries: [{element: config.anchorSelector[anchorSelectorIndex]}]
+		}));
+	}else{
+		//find current Elements of $($($(document).find(config.anchorSelector[0])).find(config.anchorSelector[1])...).find(config.anchorSelector[config.anchorSelector.length-1])
+		for(let anchor of $(subAnchor).find(config.anchorSelector[anchorSelectorIndex])){
+			onAnchorFound(observers, config, _config, onObserved, anchor);
+		}
+
+		//create new MutationSummary to observe future Elements of $($($(document).find(config.anchorSelector[0])).find(config.anchorSelector[1])...).find(config.anchorSelector[config.anchorSelector.length-1])
+		observers.push(new MutationSummary({
+			callback: (summaries) => {
+				for(let summary of summaries){
+					for(let anchor of summary.added){
+						onAnchorFound(observers, config, _config, onObserved, anchor);
+					}
+				}
+			},
+			rootNode: subAnchor,
+			queries: [{element: config.anchorSelector[anchorSelectorIndex]}]
+		}));
 	}
 }
 
 function Observer(_config, onObserved){
-	this.mainObserver = undefined;
-	this.characterDataObservers = [];
-	let config = Object.assign({}, _config);
+	this.observers = [];
 
+	let config = Object.assign({}, _config);
 	completeConfig(config);
 
 	try{
-		//find current Elements of $(document).find(selector))
-		for(let anchor of $(document).find(config.anchorSelector)){
-			onAnchorFound(this.characterDataObservers, config, onObserved, anchor);
-		}
-
-		//create new MutationSummary to observe future Elements of $(document).find(selector))
-		this.mainObserver = new MutationSummary({
-			callback: (summaries) => {
-				for(let summary of summaries){
-					for(let anchor of summary.added){
-						onAnchorFound(this.characterDataObservers, config, onObserved, anchor);
-					}
-				}
-			},
-			queries: [{element: config.anchorSelector}]
-		});
+		createaAnchorObserverRec(0, document, this.observers, config, _config, onObserved);
 	}catch(exception){
 		//print exception to console s.t. not properly working selectors (due to changes in Youtube-HTML or mistakes by a developer) can be found easily
 		console.debug(exception);
@@ -190,11 +214,9 @@ function Observer(_config, onObserved){
 }
 
 function disconnect(){
-	while(this.characterDataObservers.length > 0){
-		this.characterDataObservers.pop().disconnect();
+	while(this.observers.length > 0){
+		this.observers.pop().disconnect();
 	}
-
-	this.mainObserver.disconnect();
 }
 
 Observer.prototype.constructor = Observer;
