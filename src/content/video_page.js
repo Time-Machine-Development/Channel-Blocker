@@ -1,6 +1,8 @@
 function toggleVisibilty(element, isBlocked){
-	if(isBlocked !== $(element).is(":hidden")){
-		$(element).toggle("fast");
+	if(isBlocked){
+		$(element).hide("fast");
+	}else{
+		$(element).show("fast");
 	}
 }
 
@@ -58,46 +60,6 @@ async function onReplyCommentObserved(replyComment, characterDatas){
 	toggleVisibilty(replyComment, await checkCommentContent(characterDatas.userChannelName, characterDatas.commentContent));
 }
 
-async function onCommentdadadaObserved(comment, characterDatas){
-	let userChannelName;
-	let afterBlockBtn;
-	let hideElement;
-
-	let authorText = $(comment).find("a#author-text")[0];
-
-	if(authorText.hidden){
-		//this comment does not display the name of the writer inside a#author-text
-		//assume this comment is pinned by the channel of the main video
-
-		//userChannelName = $(comment).find("yt-formatted-string[class='style-scope ytd-channel-name']")[0].innerHTML.trim();
-		//afterBlockBtn;
-
-		return;
-	}else{
-		/* this comment displays the name of the writer inside a#author-text
-		therefore it is a normal comment or a reply-comment */
-
-		let isReplyComment = ($(comment).parent("div#loaded-replies").length > 0) ? true : false;
-
-		if(isReplyComment){
-			hideElement = comment;
-		}else{
-			hideElement = $(comment).parent("ytd-comment-thread-renderer")[0];
-		}
-
-		userChannelName = $(authorText).find("span")[0].innerHTML.trim();
-		afterBlockBtn = authorText;
-	}
-
-	let blockBtn = createBtnNode(userChannelName);
-
-	insertBefore(afterBlockBtn, blockBtn);
-
-	console.log(hideElement);
-
-	toggleVisibilty(hideElement, await checkCommentContent(userChannelName, characterDatas.commentContent));
-}
-
 
 /* Next Autoplay, Video or Playlist */
 
@@ -140,28 +102,30 @@ async function onNextObserved(next, characterDatas, config){
 }
 
 
-/* Endscreen Next Video */
+/* Videowall Video */
 
-const ENDSCREEN_NEXT_VIDEO_ANCHOR = Object.freeze({
-	tagName: "a",
-	classValue: "ytp-videowall-still ytp-suggestion-set"
+const VIDEOWALL_VIDEO_CONFIG = Object.freeze({
+	anchorSelector: ["a[class='ytp-videowall-still ytp-suggestion-set']"],
+	characterDataSelectors: {
+		videoTitle: ["span.ytp-videowall-still-info-title"],
+		userChannelName: ["span.ytp-videowall-still-info-author"]
+	}
 });
 
-function onEndscreenNextVideoObserved(nextVideo){
-	$(nextVideo).find("span.ytp-videowall-still-info-title")[0].innerHTML = "VIDEO TITLE";
-	$(nextVideo).find("span.ytp-videowall-still-info-author")[0].innerHTML = "CHANNEL NAME";
-}
+async function onVideowallVideoObserved(videowallVideo, characterDatas){
+	if(characterDatas.userChannelName === ""){
+		//this videowall-video is a Mix, therefore ignore it
+		return;
+	}
 
+	//extract the user/channel-name by removing the Views-part from characterDatas.userChannelName
+	const USER_CHANNEL_NAME_VIEW_SEPERATOR = "•";
+	let userChannelNameArray = characterDatas.userChannelName.split(USER_CHANNEL_NAME_VIEW_SEPERATOR);
+	userChannelNameArray.pop();
 
-/* Iron Dropdown */
+	let userChannelName = userChannelNameArray.join("").trim();
 
-const IRON_DROPDOWN_ANCHOR = Object.freeze({
-	tagName: "iron-dropdown",
-	classValue: "style-scope ytd-popup-container"
-});
-
-function onIronDropdownObserved(ironDropdown){
-	$(ironDropdown).find("yt-formatted-string[class='style-scope ytd-menu-service-item-renderer']")[0].innerHTML = "IRON DROPDOWN";
+	toggleVisibilty(videowallVideo, await checkVideoTitle(userChannelName, characterDatas.videoTitle));
 }
 
 
@@ -190,6 +154,18 @@ function onSecondaryInfoObserved(secondaryInfo){
 }
 
 
+/* Iron Dropdown */
+
+const IRON_DROPDOWN_ANCHOR = Object.freeze({
+	tagName: "iron-dropdown",
+	classValue: "style-scope ytd-popup-container"
+});
+
+function onIronDropdownObserved(ironDropdown){
+	$(ironDropdown).find("yt-formatted-string[class='style-scope ytd-menu-service-item-renderer']")[0].innerHTML = "IRON DROPDOWN";
+}
+
+
 
 function createVideoPageObservers(){
 	let obs = [];
@@ -197,9 +173,11 @@ function createVideoPageObservers(){
 	obs.push(new Observer(COMMENT_CONFIG, onCommentObserved));
 	obs.push(new Observer(REPLY_COMMENT_CONFIG, onReplyCommentObserved));
 
-	//obs.push(new Observer(NEXT_AUTOPLAY_CONFIG, onNextObserved));
-	//obs.push(new Observer(NEXT_VIDEO_CONFIG, onNextObserved));
-	//obs.push(new Observer(NEXT_PLAYLIST_CONFIG, onNextObserved));
+	obs.push(new Observer(NEXT_AUTOPLAY_CONFIG, onNextObserved));
+	obs.push(new Observer(NEXT_VIDEO_CONFIG, onNextObserved));
+	obs.push(new Observer(NEXT_PLAYLIST_CONFIG, onNextObserved));
+
+	obs.push(new Observer(VIDEOWALL_VIDEO_CONFIG, onVideowallVideoObserved));
 
 	return obs;
 }
