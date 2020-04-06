@@ -83,7 +83,7 @@ const NEXT_PLAYLIST_CONFIG = Object.freeze({
 	characterDataSelectors: NEXT_CHARACTER_DATA_SELECTORS
 });
 
-async function onNextObserved(next, characterDatas, config){
+async function onNextObserved(next, characterDatas, characterDataParents, config){
 	let beforeBlockBtn;
 	if(config === NEXT_AUTOPLAY_CONFIG || config === NEXT_VIDEO_CONFIG){
 		beforeBlockBtn = $(next).find("a[class='yt-simple-endpoint style-scope ytd-compact-video-renderer']")[0];
@@ -129,28 +129,32 @@ async function onVideowallVideoObserved(videowallVideo, characterDatas){
 }
 
 
-/* PRIMARY INFO */
+/* Main Video */
 
-const PRIMARY_INFO_ANCHOR = Object.freeze({
-	tagName: "ytd-video-primary-info-renderer",
-	classValue: "style-scope ytd-watch-flexy"
+const MAIN_VIDEO_CONFIG = Object.freeze({
+	anchorSelector: ["div#primary-inner"],
+	characterDataSelectors: {
+		videoTitle: ["yt-formatted-string[class='style-scope ytd-video-primary-info-renderer']"],
+		userChannelName: [
+			"div#top-row[class='style-scope ytd-video-secondary-info-renderer']",
+			"a[class='yt-simple-endpoint style-scope yt-formatted-string']"
+		]
+	}
 });
 
-function onPrimaryInfoObserved(primaryInfo){
-	$(primaryInfo).find("yt-formatted-string[class='style-scope ytd-video-primary-info-renderer']")[0].innerHTML = "MAIN VIDEO TITLE";
-}
+async function onMainVideoObserved(mainVideo, characterDatas, characterDataParents){
+	//add block-btn
+	insertBefore(characterDataParents.userChannelName, createBtnNode(characterDatas.userChannelName));
 
+	//(hide and pause) or show player
+	let player = $(mainVideo).find("ytd-player")[0];
+	if(await checkVideoTitle(characterDatas.userChannelName, characterDatas.videoTitle)){
+		$(player).fadeOut("fast");
 
-/* SECONDARY INFO */
-
-
-const SECONDARY_INFO_ANCHOR = Object.freeze({
-	tagName: "ytd-video-secondary-info-renderer",
-	classValue: "style-scope ytd-watch-flexy"
-});
-
-function onSecondaryInfoObserved(secondaryInfo){
-	$(secondaryInfo).find("a[class='yt-simple-endpoint style-scope yt-formatted-string']")[0].innerHTML = "MAIN CHANNEL NAME";
+		$(player).find("video")[0].pause();
+	}else{
+		$(player).fadeIn("fast");
+	}
 }
 
 
@@ -178,6 +182,8 @@ function createVideoPageObservers(){
 	obs.push(new Observer(NEXT_PLAYLIST_CONFIG, onNextObserved));
 
 	obs.push(new Observer(VIDEOWALL_VIDEO_CONFIG, onVideowallVideoObserved));
+
+	obs.push(new Observer(MAIN_VIDEO_CONFIG, onMainVideoObserved));
 
 	return obs;
 }

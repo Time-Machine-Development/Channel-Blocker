@@ -10,7 +10,6 @@ was found for any or for all Elements described by config.characterDataSelectors
 Parameters:
 config: {
 	anchorSelector: <String>,
-	[observeOnAnchor: <Boolean>,] 			//default: true
 	[characterDataSelectors: <Object>,]		//default: {}
 	[observeOnCharacterData: ("any"|"all")]	//default: "all"
 }
@@ -54,10 +53,6 @@ for a given Array of selector-Strings [selector_0, selector_1, ..., selector_n] 
 
 //completes the passed config by adding missing default values
 function completeConfig(config){
-	if(config.observeOnAnchor === undefined){
-		config.observeOnAnchor = true;
-	}
-
 	if(config.characterDataSelectors === undefined){
 		config.characterDataSelectors = {};
 	}
@@ -67,95 +62,89 @@ function completeConfig(config){
 	}
 }
 
-//creates characterDatas-parameter for onObserved
-function createCharacterDatas(config, anchor){
-	let characterDatas = {};
+function onCharacterDataObserved(characterDataParent, config, _config, onObserved, anchor, characterDatas, characterDataParents, characterDatasKey){
+	let characterData = characterDataParent.innerHTML.trim();
 
-	for(let key in config.characterDataSelectors){
-		let characterDataParent = anchor;
-		for(let selector of config.characterDataSelectors[key]){
-			characterDataParent = $(characterDataParent).find(selector)[0];
+	if(config.observeOnCharacterData === "all"){
+		//update characterDatas
+		characterDatas[characterDatasKey] = characterData;
+
+		//check if all characterDatas were found
+		if(Object.keys(characterDatas).length === Object.keys(config.characterDataSelectors).length){
+			onObserved(anchor, Object.assign({}, characterDatas), characterDataParents, _config);
+
+			//reset characterDatas
+			for(let prop in characterDatas){
+				delete characterDatas[prop];
+			}
 		}
+	}else if(config.observeOnCharacterData === "any"){
+		//only include the newly found characterData in characterDatas-paramter of onObserved
 
-		characterDatas[key] = characterDataParent.innerHTML.trim();
-	}
-
-	return characterDatas;
-}
-
-function initCharacterDatasFound(config, characterDatasFound){
-	for(let key in config.characterDataSelectors){
-		characterDatasFound[key] = 0;
+		onObserved(anchor, {[characterDatasKey]: characterData}, characterDataParents, _config);
 	}
 }
 
-//returns true if and only if every characterData was found at least ones
-function allCharaterDatasFound(characterDatasFound){
-	for(let timesFound of Object.values(characterDatasFound)){
-		if(timesFound === 0){
-			return false;
-		}
-	}
+//builds a MutationSummary-chain which always only follow the first found Element
+function createCharacterDataObserverRec(characterDataSelectorIndex, subCharacterData, observers, config, _config, onObserved, anchor, characterDatas, characterDataParents, characterDatasKey){
+	let characterDataSelector = config.characterDataSelectors[characterDatasKey];
 
-	return true;
-}
+	if(characterDataSelectorIndex < characterDataSelector.length){
+		//find current Elements of $($($(anchor).find(characterDataSelector[0])).find(characterDataSelector[1])...).find(characterDataSelector[characterDataSelectorIndex])
+		let subSubCharacterDatas = $(subCharacterData).find(characterDataSelector[characterDataSelectorIndex]);
 
-function createCharacterDataObserver(config, _config, onObserved, anchor, characterDatasFound, characterDatasKey){
-	let characterDataParent = anchor;
-	for(let selector of config.characterDataSelectors[characterDatasKey]){
-		characterDataParent = $(characterDataParent).find(selector)[0];
-	}
+		if(subSubCharacterDatas.length > 0){
+			createCharacterDataObserverRec(characterDataSelectorIndex+1, subSubCharacterDatas[0], observers, config, _config, onObserved, anchor, characterDatas, characterDataParents, characterDatasKey);
+		}else{
+			let firstTime = true;
 
-	return new MutationSummary({
-		callback: (summaries) => {
-			for(let summary of summaries){
+			//create new MutationSummary to find the next future Element of $($($(anchor).find(characterDataSelector[0])).find(characterDataSelector[1])...).find(characterDataSelector[characterDataSelectorIndex])
+			observers.push(new MutationSummary({
+				callback: (summaries) => {
+					if(firstTime && summaries.length > 0){
+						if(summaries[0].added.length > 0){
+							//only the first found Element is observed
+							firstTime = false;
 
-				let newCharacterData;
-				if(summary.added.length === 1 && summary.removed.length === 1){
-					newCharacterData = summary.added[0].data.trim();
-				}else if(summary.valueChanged.length === 1){
-					newCharacterData = summary.valueChanged[0].data.trim();
-				}
-
-				if(newCharacterData !== undefined){
-					if(config.observeOnCharacterData === "all"){
-						//update characterDatasFound
-						characterDatasFound[characterDatasKey]++;
-
-						if(allCharaterDatasFound(characterDatasFound)){
-							onObserved(anchor, createCharacterDatas(config, anchor), _config);
-
-							//reset characterDatasFound
-							initCharacterDatasFound(config, characterDatasFound);
+							createCharacterDataObserverRec(characterDataSelectorIndex+1, summaries[0].added[0], observers, config, _config, onObserved, anchor, characterDatas, characterDataParents, characterDatasKey);
 						}
-					}else if(config.observeOnCharacterData === "any"){
-						//ignore characterDatasFound because any new characterData was found (namely characterData for characterDatasKey)
+					}
+				},
+				rootNode: subCharacterData,
+				queries: [{element: characterDataSelector[characterDataSelectorIndex]}]
+			}));
+		}
+	}else{
+		//update characterDataParents
+		characterDataParents[characterDatasKey] = subCharacterData;
 
-						//build characterDatas-parameter for onObserved
-						let characterDatas = {};
-						characterDatas[characterDatasKey] = summary.added[0].data.trim();
+		//observe current characterData
+		onCharacterDataObserved(subCharacterData, config, _config, onObserved, anchor, characterDatas, characterDataParents, characterDatasKey);
 
-						//call onObserved with
-						onObserved(anchor, characterDatas, _config);
+		observers.push(new MutationSummary({
+			callback: (summaries) => {
+				for(let summary of summaries){
+					if(summary.added.length === 1 && summary.removed.length === 1 || summary.valueChanged.length === 1){
+						onCharacterDataObserved(subCharacterData, config, _config, onObserved, anchor, characterDatas, characterDataParents, characterDatasKey);
 					}
 				}
-			}
-		},
-		rootNode: characterDataParent,
-		queries: [{characterData: true}]
-	});
+			},
+			rootNode: subCharacterData,
+			queries: [{characterData: true}]
+		}));
+	}
+}
+
+function createCharacterDataObserver(observers, config, _config, onObserved, anchor, characterDatasFound, characterDataParents, characterDatasKey){
+	createCharacterDataObserverRec(0, anchor, observers, config, _config, onObserved, anchor, characterDatasFound, characterDataParents, characterDatasKey);
 }
 
 function onAnchorFound(observers, config, _config, onObserved, anchor){
-	let characterDatasFound = {};
-	initCharacterDatasFound(config, characterDatasFound);
-
-	if(config.observeOnAnchor){
-		onObserved(anchor, createCharacterDatas(config, anchor), _config);
-	}
+	let characterDatas = {};
+	let characterDataParents = {};
 
 	for(let key in config.characterDataSelectors){
-		observers.push(createCharacterDataObserver(config, _config, onObserved, anchor, characterDatasFound, key));
+		createCharacterDataObserver(observers, config, _config, onObserved, anchor, characterDatas, characterDataParents, key);
 	}
 }
 
