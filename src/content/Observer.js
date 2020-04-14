@@ -63,7 +63,7 @@ function completeConfig(config){
 }
 
 function onCharacterDataObserved(characterDataParent, config, _config, onObserved, anchor, characterDatas, characterDataParents, characterDatasKey){
-	let characterData = characterDataParent.innerHTML.trim();
+	let characterData = characterDataParent.innerText;
 
 	if(config.observeOnCharacterData === "all"){
 		//update characterDatas

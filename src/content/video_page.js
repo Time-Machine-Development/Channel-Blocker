@@ -18,6 +18,7 @@ function insertAfter(element, blockBtn){
 	$(element).after(blockBtn);
 }
 
+
 /* Comment */
 
 const COMMENT_CONFIG = Object.freeze({
@@ -44,9 +45,9 @@ async function onCommentObserved(comment, characterDatas){
 		because "a#author-text" is hidden.
 		This seems to be the case, if the user/channel-name is inside a visual badge.*/
 
-		userChannelName = $(comment).find("yt-formatted-string[class='style-scope ytd-channel-name']")[0].innerHTML.trim();
+		userChannelName = $(comment).find("yt-formatted-string[class='style-scope ytd-channel-name']")[0].innerText;
 	}else{
-		userChannelName = $(authorText).find("span")[0].innerHTML.trim();
+		userChannelName = $(authorText).find("span")[0].innerText;
 	}
 
 	insertBefore(authorText, createBtnNode(userChannelName));
@@ -123,7 +124,7 @@ async function onVideowallVideoObserved(videowallVideo, characterDatas){
 	let userChannelNameArray = characterDatas.userChannelName.split(USER_CHANNEL_NAME_VIEW_SEPERATOR);
 	userChannelNameArray.pop();
 
-	let userChannelName = userChannelNameArray.join("").trim();
+	let userChannelName = userChannelNameArray.join("");
 
 	toggleVisibilty(videowallVideo, await checkVideoTitle(userChannelName, characterDatas.videoTitle));
 }
@@ -166,7 +167,7 @@ const IRON_DROPDOWN_ANCHOR = Object.freeze({
 });
 
 function onIronDropdownObserved(ironDropdown){
-	$(ironDropdown).find("yt-formatted-string[class='style-scope ytd-menu-service-item-renderer']")[0].innerHTML = "IRON DROPDOWN";
+	$(ironDropdown).find("yt-formatted-string[class='style-scope ytd-menu-service-item-renderer']")[0].innerText = "IRON DROPDOWN";
 }
 
 
