@@ -1,3 +1,14 @@
+function createAddBlockedUserMsg(userChannelName){
+	return {
+		sender: "content_event_dispatcher",
+		receiver: "background_filter_storage",
+		info: "add_blocked_user",
+		content: {
+			user_channel_name: userChannelName
+		}
+	};
+}
+
 //create the svg blockBtn
 function createSVG(){
 	// create svg
@@ -21,12 +32,10 @@ function createBtnNode(userChannelName){
 	btn.setAttribute("class", "cb_button");
 	btn.setAttribute("type", "button");
 	btn.setAttribute("title", "Block '" + userChannelName + "' (Channel Blocker)");
-	btn.addEventListener("click", createBlockUserChannelFunction(userChannelName));
 	btn.setAttribute("style", "padding-left:0em; border:none; background-color:Transparent; cursor:pointer; width:" + 1.4 + "em");
-
-	let svg = document.createElement("img");
-	svg.setAttribute("src", browser.extension.getURL("content/img/close.svg"));
-	svg.setAttribute("width", "11em");
+	btn.addEventListener("click", () => {
+		browser.runtime.sendMessage(createAddBlockedUserMsg(userChannelName));
+	});
 
 	btn.appendChild(createSVG());
 
