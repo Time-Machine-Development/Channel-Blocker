@@ -40,7 +40,6 @@ function createBlockBtnElement(userChannelName, style){
 
 	//add new click-event-listener which blocks user/channel-name userChannelName when clicked
 	$(btn).on("click", () => {
-		console.log("test");
 		browser.runtime.sendMessage(createAddBlockedUserMsg(userChannelName));
 	});
 
