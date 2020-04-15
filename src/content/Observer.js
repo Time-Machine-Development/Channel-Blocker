@@ -1,62 +1,56 @@
 /*
-Observer:
-Runs onObserverd on all current and future Elements of $(window.document).find(config.anchorSelector), if config.observeOnAnchor is true
-by creating a new MutationSummary for all future Elements of $(window.document).find(config.anchorSelector).
-On any found Element anchor of $(config.anchorSelector), a new MutationSummary is created
-which observes newly added characterData on Elements describe by config.characterDataSelectors.
-Depending on config.observeOnCharacterData, onObserved is called if newly added characterData
-was found for any or for all Elements described by config.characterDataSelectors.
-
 Parameters:
 config: {
-	anchorSelector: <String>,
-	[characterDataSelectors: <Object>,]		//default: {}
-	[observeOnCharacterData: ("any"|"all")]	//default: "all"
-}
-
-onObserved: <Function>
+	anchorSelector: <Aray of Strings>,						//not optional
+	characterDataSelectors: (key: <Array of Strings>,)+,	//not optional
+	[observeOnCharacterData: ("any"|"all")]					//optional, default: "all"
+},
+onObserved: function with signature (
+	anchor: Element,
+	characterDatas: {
+		(key: <String>,)+
+	},
+	characterDataParents: {
+		(key: <Element>,)+
+	},
+	config: <Object>
+) -> undefined.
 
 Semantic of config
-anchorSelector: A selector which defines the properties of Elements (descendants of window.document) which shall be observed.
-
-observeOnAnchor: If and only if observeOnAnchor is true, onObserved(...) is called on any newly found anchor in $(anchorSelector).
+anchorSelector: An Array of selector-Strings [selector_0, selector_1, ..., selector_n] which describes how to find an existing or future Element of
+$($($(window.document).find(selector_0)).find(selector_1))...).find(selector_n) which shall be observed for characterData changes according to characterDataSelectors.
 
 characterDataSelectors: {
-	[key: selectors,]+
+	(key: selector,)+
 }
-where key is a user-defined String which is later passed as a part of a parameter in onObserved
-and selectors is an Array of selector-Strings [selector_0, selector_1, ..., selector_n] which describe how to find an Element
-$($($(anchor).find(selector_0)).find(selector_1))...).find(selector_n)[0] which is observed for characterData changes.
+where key is a user-defined String which is later passed as a property of characterDatas and characterDataParents in onObserved.
+and selector is an Array of selector-Strings [selector_0, selector_1, ..., selector_n] which describes how to find an existing or future Element
+$($($(anchor).find(selector_0)[0]).find(selector_1)[0])...).find(selector_n)[0] which is observed for characterData changes.
 
 observeOnCharacterData:
-Let (key, selectors) be a key-value-pair defined in characterDataSelectors.
-If observeOnCharacterData is "any", onObserved(anchor, characterDatas) is called with
-anchor being of $(window.document).find(config.anchorSelector) and characterDatas being {key: characterData} with
-characterData the newly observed characterData in $($($(anchor).find(selector_0)[0]).find(selector_1)[0])...)[0].find(selector_n)[0].
-If observeOnCharacterData is "all", onObserved(anchor, characterDatas) is called with
-anchor being of $(window.document).find(config.anchorSelector) and characterDatas containing (key, characterData) key-value-pairs
-for all (key, selectors) key-value-pairs defined in characterDataSelectors, when new characterData was observed for every (key, selectors) key-value-pair
-at least ones.
+Let anchorSelector be an Array of selector-Strings [anchor_0, anchor_1, ..., anchor_m].
+Let (key, selector) be a key-value-pair defined in characterDataSelectors with selector being an Array of selector-Strings [selector_0, selector_1, ..., selector_n].
 
-Semantic of onObserved
-onObserved(anchor, characterDatas) where
+If observeOnCharacterData is "any":
+onObserved(anchor, characterDatas, characterDataParents, config) is called with
+anchor being of $($($(window.document).find(anchor_0)).find(anchor_1))...).find(anchor_n),
+characterDatas being {key: characterData}
+	with characterData being the newly observed characterData in $($($(anchor).find(selector_0)[0]).find(selector_1)[0])...)[0].find(selector_n)[0],
+characterDataParents being {[key: characterDataParent]+}
+	with characterDataParent being the Element $($($(anchor).find(selector_0)[0]).find(selector_1)[0])...)[0].find(selector_n)[0]
+	for every (key, selector) in characterDataSelectors with selector being being an Array of selector-Strings [selector_0, selector_1, ..., selector_n],
+and config being the config-parameter the Observer-constructor was called with.
 
-anchor: An Element which is of $(window.document).find(config.anchorSelector).
-
-characterDatas: {
-	[key: characterData]+
-}
-where key was defined by user in config.characterDataSelectors and characterData is the newly observed characterData
-in $($($(anchor).find(selector_0)).find(selector_1))...).find(selector_n)[0]
-for a given Array of selector-Strings [selector_0, selector_1, ..., selector_n] by the user in config.characterDataSelector.
+If observeOnCharacterData is "all", onObserved(anchor, characterDatas, characterDataParents, config) is called with
+anchor, characterDataParents and config being as explained in the case of "any" above
+and characterDatas being {(key: characterData,)+}
+	with characterData being the newly observed characterData in $($($(anchor).find(selector_0)[0]).find(selector_1)[0])...)[0].find(selector_n)[0]
+	for every (key, selector) in characterDataSelectors with selector being being an Array of selector-Strings [selector_0, selector_1, ..., selector_n],
+when new characterData was observed for every key at least ones.
 */
 
 //completes the passed config by adding missing default values
 function completeConfig(config){
-	if(config.characterDataSelectors === undefined){
-		config.characterDataSelectors = {};
-	}
-
 	if(config.observeOnCharacterData === undefined){
 		config.observeOnCharacterData = "all";
 	}
@@ -85,12 +79,12 @@ function onCharacterDataObserved(characterDataParent, config, _config, onObserve
 	}
 }
 
-//builds a MutationSummary-chain which always only follow the first found Element
+//builds a MutationSummary-chain which always only follows the first found Element
 function createCharacterDataObserverRec(characterDataSelectorIndex, subCharacterData, observers, config, _config, onObserved, anchor, characterDatas, characterDataParents, characterDatasKey){
 	let characterDataSelector = config.characterDataSelectors[characterDatasKey];
 
 	if(characterDataSelectorIndex < characterDataSelector.length){
-		//find current Elements of $($($(anchor).find(characterDataSelector[0])).find(characterDataSelector[1])...).find(characterDataSelector[characterDataSelectorIndex])
+		//find current Elements of $($($(anchor).find(characterDataSelector[0])[0]).find(characterDataSelector[1])[0]...).find(characterDataSelector[characterDataSelectorIndex])
 		let subSubCharacterDatas = $(subCharacterData).find(characterDataSelector[characterDataSelectorIndex]);
 
 		if(subSubCharacterDatas.length > 0){
@@ -148,6 +142,7 @@ function onAnchorFound(observers, config, _config, onObserved, anchor){
 	}
 }
 
+//builds a MutationSummary-tree
 function createaAnchorObserverRec(anchorSelectorIndex, subAnchor, observers, config, _config, onObserved){
 	if(anchorSelectorIndex < config.anchorSelector.length-1){
 		//find current Elements of $($($(document).find(config.anchorSelector[0])).find(config.anchorSelector[1])...).find(config.anchorSelector[anchorSelectorIndex])

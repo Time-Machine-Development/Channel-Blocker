@@ -25,7 +25,7 @@ function createBlockBtnSVG(){
 	return svg;
 }
 
-//creates and returns a block-button and applies (optionally) passed style options style WITHOUT click-event-listener
+//creates and returns a block-button and applies (optionally) passed style options style which blocks user/channel-name userChannelName which clicked
 function createBlockBtnElement(userChannelName, style){
 	let btn = document.createElement("button");
 	btn.setAttribute("class", "cb_button");
@@ -37,6 +37,12 @@ function createBlockBtnElement(userChannelName, style){
 	if(style !== undefined){
 		$.extend(btn.style, style);
 	}
+
+	//add new click-event-listener which blocks user/channel-name userChannelName when clicked
+	$(btn).on("click", () => {
+		console.log("test");
+		browser.runtime.sendMessage(createAddBlockedUserMsg(userChannelName));
+	});
 
 	btn.appendChild(createBlockBtnSVG());
 
@@ -58,7 +64,6 @@ function insertBlockBtnBefore(element, userChannelName, style){
 
 		//add new click-event-listener which blocks user/channel-name userChannelName when clicked
 		$(blockBtn).on("click", () => {
-			console.log("test");
 			browser.runtime.sendMessage(createAddBlockedUserMsg(userChannelName));
 		});
 	}else{
