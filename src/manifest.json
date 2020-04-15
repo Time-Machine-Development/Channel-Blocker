@@ -55,10 +55,11 @@
 				"shared/jquery-3.4.1.min.js",
 				"shared/shared.js",
 				"content/is_blocked_lib.js",
+				"content/block_button_lib.js",
+				"content/display_lib.js",
 
 				"content/mutation-summary.js",
 				"content/Observer.js",
-				"content/block_button_lib.js",
 				"content/new_controller.js",
 				"content/video_page.js"
 			]
