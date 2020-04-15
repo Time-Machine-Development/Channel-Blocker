@@ -119,7 +119,7 @@
 			}
 			*/
 
-			if(msg.sender === "content_event_dispatcher"){
+			if(msg.sender === "content_block_button_lib"){
 				onAddMsg({
 					info: "add",
 					filter_type: FilterType.BLOCKED_USERS,

@@ -50,13 +50,13 @@ async function onCommentObserved(comment, characterDatas){
 		userChannelName = $(authorText).find("span")[0].innerText;
 	}
 
-	insertBefore(authorText, createBtnNode(userChannelName));
+	insertBefore(authorText, createBlockBtnElement(userChannelName));
 
 	toggleVisibilty(comment, await isCommentContentBlocked(userChannelName, characterDatas.commentContent));
 }
 
 async function onReplyCommentObserved(replyComment, characterDatas){
-	insertBefore($(replyComment).find("a#author-text")[0], createBtnNode(characterDatas.userChannelName));
+	insertBefore($(replyComment).find("a#author-text")[0], createBlockBtnElement(characterDatas.userChannelName));
 
 	toggleVisibilty(replyComment, await isCommentContentBlocked(characterDatas.userChannelName, characterDatas.commentContent));
 }
@@ -92,7 +92,7 @@ async function onNextObserved(next, characterDatas, characterDataParents, config
 		beforeBlockBtn = $(next).find("a[class='yt-simple-endpoint style-scope ytd-compact-playlist-renderer']")[0];
 	}
 
-	let blockBtn = createBtnNode(characterDatas.userChannelName);
+	let blockBtn = createBlockBtnElement(characterDatas.userChannelName);
 	blockBtn.style.position = "absolute";
 	blockBtn.style.top = "50%";
 	blockBtn.style.right = "0%";
@@ -145,7 +145,7 @@ const MAIN_VIDEO_CONFIG = Object.freeze({
 
 async function onMainVideoObserved(mainVideo, characterDatas, characterDataParents){
 	//add block-btn
-	insertBefore(characterDataParents.userChannelName, createBtnNode(characterDatas.userChannelName));
+	insertBefore(characterDataParents.userChannelName, createBlockBtnElement(characterDatas.userChannelName));
 
 	//(hide and pause) or show player
 	let player = $(mainVideo).find("ytd-player")[0];

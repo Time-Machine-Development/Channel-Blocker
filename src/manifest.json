@@ -58,7 +58,7 @@
 
 				"content/mutation-summary.js",
 				"content/Observer.js",
-				"content/new_button_lib.js",
+				"content/block_button_lib.js",
 				"content/new_controller.js",
 				"content/video_page.js"
 			]
