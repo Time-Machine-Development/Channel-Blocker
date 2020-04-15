@@ -25,18 +25,71 @@ function createBlockBtnSVG(){
 	return svg;
 }
 
-//creates and returns a block-button which blocks user/channel-name userChannelName when pressed
-function createBlockBtnElement(userChannelName){
+//creates and returns a block-button and applies (optionally) passed style options style WITHOUT click-event-listener
+function createBlockBtnElement(userChannelName, style){
 	let btn = document.createElement("button");
 	btn.setAttribute("class", "cb_button");
 	btn.setAttribute("type", "button");
 	btn.setAttribute("title", "Block '" + userChannelName + "' (Channel Blocker)");
 	btn.setAttribute("style", "padding-left:0em; border:none; background-color:Transparent; cursor:pointer; width:" + 1.4 + "em");
-	btn.addEventListener("click", () => {
-		browser.runtime.sendMessage(createAddBlockedUserMsg(userChannelName));
-	});
+
+	//apply passed style options (if passed)
+	if(style !== undefined){
+		$.extend(btn.style, style);
+	}
 
 	btn.appendChild(createBlockBtnSVG());
 
 	return btn;
+}
+
+/* inserts or updates block-button with (optionally) passed style options style before Element element which blocks user/channel-name userChannelName which clicked
+   NOTE: style is only applied if no block-btn exists previous to element */
+function insertBlockBtnBefore(element, userChannelName, style){
+	if($(element).prev("button.cb_button").length > 0){
+		//a block-btn with (possibly) wrong click-event-handler exists because it would block the user/channel-name related to the last call of this function on Element element
+		let blockBtn = $(element).prev("button.cb_button")[0];
+
+		//update title
+		blockBtn.setAttribute("title", "Block '" + userChannelName + "' (Channel Blocker)");
+
+		//remove old click-event-handler
+		$(blockBtn).off("click");
+
+		//add new click-event-listener which blocks user/channel-name userChannelName when clicked
+		$(blockBtn).on("click", () => {
+			console.log("test");
+			browser.runtime.sendMessage(createAddBlockedUserMsg(userChannelName));
+		});
+	}else{
+		//no block-btn exists
+
+		//create new block-btn
+		$(element).before(createBlockBtnElement(userChannelName, style));
+	}
+}
+
+/* inserts or updates block-button with (optionally) passed style options style after Element element which blocks user/channel-name userChannelName which clicked
+   NOTE: style is only applied if no block-btn exists next to element */
+function insertBlockBtnAfter(element, userChannelName, style){
+	if($(element).next("button.cb_button").length > 0){
+		//a block-btn with (possibly) wrong click-event-handler exists because it would block the user/channel-name related to the last call of this function on Element element
+		let blockBtn = $(element).next("button.cb_button")[0];
+
+		//update title
+		blockBtn.setAttribute("title", "Block '" + userChannelName + "' (Channel Blocker)");
+
+		//remove old click-event-handler
+		$(blockBtn).off("click");
+
+		//add new click-event-listener which blocks user/channel-name userChannelName when clicked
+		$(blockBtn).on("click", () => {
+			browser.runtime.sendMessage(createAddBlockedUserMsg(userChannelName));
+		});
+	}else{
+		//no block-btn exists
+
+		//create new block-btn
+		$(element).after(createBlockBtnElement(userChannelName, style));
+	}
 }

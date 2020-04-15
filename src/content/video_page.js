@@ -6,19 +6,6 @@ function toggleVisibilty(element, isBlocked){
 	}
 }
 
-function insertBefore(element, blockBtn){
-	$(element).prev("button.cb_button").remove();
-
-	$(element).before(blockBtn);
-}
-
-function insertAfter(element, blockBtn){
-	$(element).next("button.cb_button").remove();
-
-	$(element).after(blockBtn);
-}
-
-
 /* Comment */
 
 const COMMENT_CONFIG = Object.freeze({
@@ -50,13 +37,13 @@ async function onCommentObserved(comment, characterDatas){
 		userChannelName = $(authorText).find("span")[0].innerText;
 	}
 
-	insertBefore(authorText, createBlockBtnElement(userChannelName));
+	insertBlockBtnBefore(authorText, userChannelName);
 
 	toggleVisibilty(comment, await isCommentContentBlocked(userChannelName, characterDatas.commentContent));
 }
 
 async function onReplyCommentObserved(replyComment, characterDatas){
-	insertBefore($(replyComment).find("a#author-text")[0], createBlockBtnElement(characterDatas.userChannelName));
+	insertBlockBtnBefore($(replyComment).find("a#author-text")[0], characterDatas.userChannelName);
 
 	toggleVisibilty(replyComment, await isCommentContentBlocked(characterDatas.userChannelName, characterDatas.commentContent));
 }
@@ -92,12 +79,11 @@ async function onNextObserved(next, characterDatas, characterDataParents, config
 		beforeBlockBtn = $(next).find("a[class='yt-simple-endpoint style-scope ytd-compact-playlist-renderer']")[0];
 	}
 
-	let blockBtn = createBlockBtnElement(characterDatas.userChannelName);
-	blockBtn.style.position = "absolute";
-	blockBtn.style.top = "50%";
-	blockBtn.style.right = "0%";
-
-	insertAfter(beforeBlockBtn, blockBtn);
+	insertBlockBtnAfter(beforeBlockBtn, characterDatas.userChannelName, {
+		position: "absolute",
+		top: "50%",
+		right: "0%"
+	});
 
 	toggleVisibilty(next, await isVideoTitleBlocked(characterDatas.userChannelName, characterDatas.videoTitle));
 }
@@ -145,7 +131,7 @@ const MAIN_VIDEO_CONFIG = Object.freeze({
 
 async function onMainVideoObserved(mainVideo, characterDatas, characterDataParents){
 	//add block-btn
-	insertBefore(characterDataParents.userChannelName, createBlockBtnElement(characterDatas.userChannelName));
+	insertBlockBtnBefore(characterDataParents.userChannelName, characterDatas.userChannelName);
 
 	//(hide and pause) or show player
 	let player = $(mainVideo).find("ytd-player")[0];
