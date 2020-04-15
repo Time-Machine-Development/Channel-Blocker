@@ -54,7 +54,7 @@
 
 				"shared/jquery-3.4.1.min.js",
 				"shared/shared.js",
-				"content/checker_module.js",
+				"content/is_blocked_lib.js",
 				"content/event_dispatcher.js",
 
 				"content/mutation-summary.js",

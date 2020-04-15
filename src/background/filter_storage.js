@@ -104,7 +104,7 @@
 			where <Type> is ("comment"|"title").
 			*/
 
-			if(msg.sender === "content_checker_module"){
+			if(msg.sender === "content_is_blocked_lib"){
 				//send repsond-Promise containing a message which is either true or false
 				return new Promise((resolve) => {
 					resolve(storageManager.isBlocked(msg.content));

@@ -6,7 +6,6 @@
 
 	//current context to make an update if a "filter_storage_modified"-message is received
 	let curContext;
-	let curAnimationSpeed = 1000;
 
 	function createContextRequestMsg(){
 		return {
@@ -16,7 +15,7 @@
 		};
 	}
 
-	function createConfigValueRequestMsg(configId){
+	/*function createConfigValueRequestMsg(configId){
 		return {
 			sender: SENDER,
 			receiver: "background_config_storage",
@@ -25,7 +24,7 @@
 				config_id: configId
 			}
 		};
-	}
+	}*/
 
 	//removes all old observers and creates new observers based on the current yt-context
 	function updateObservers(){
@@ -34,8 +33,6 @@
 		while(curObservers.length > 0){
 			curObservers.pop().disconnect();
 		}
-
-		//Setup the menuBtnFilter
 
 		//Start(https://www.youtube.com/)
 		if(curContext === YTContext.HOME){
@@ -86,9 +83,6 @@
 			*/
 
 			if(msg.sender === "background_filter_storage"){
-				//note that animationSpeed is declared and init. in checker_module
-				animationSpeed = curAnimationSpeed;
-
 				//wait for document to be ready
 				$(document).ready(updateObservers());
 			}
@@ -103,9 +97,6 @@
 			*/
 
 			if(msg.sender === "background_url_update"){
-				//note that animationSpeed is declared and init. in checker_module
-				animationSpeed = 0;
-
 				//update current context
 				curContext = msg.content.context;
 

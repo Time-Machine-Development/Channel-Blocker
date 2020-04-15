@@ -52,13 +52,13 @@ async function onCommentObserved(comment, characterDatas){
 
 	insertBefore(authorText, createBtnNode(userChannelName));
 
-	toggleVisibilty(comment, await checkCommentContent(userChannelName, characterDatas.commentContent));
+	toggleVisibilty(comment, await isCommentContentBlocked(userChannelName, characterDatas.commentContent));
 }
 
 async function onReplyCommentObserved(replyComment, characterDatas){
 	insertBefore($(replyComment).find("a#author-text")[0], createBtnNode(characterDatas.userChannelName));
 
-	toggleVisibilty(replyComment, await checkCommentContent(characterDatas.userChannelName, characterDatas.commentContent));
+	toggleVisibilty(replyComment, await isCommentContentBlocked(characterDatas.userChannelName, characterDatas.commentContent));
 }
 
 
@@ -99,7 +99,7 @@ async function onNextObserved(next, characterDatas, characterDataParents, config
 
 	insertAfter(beforeBlockBtn, blockBtn);
 
-	toggleVisibilty(next, await checkVideoTitle(characterDatas.userChannelName, characterDatas.videoTitle));
+	toggleVisibilty(next, await isVideoTitleBlocked(characterDatas.userChannelName, characterDatas.videoTitle));
 }
 
 
@@ -126,7 +126,7 @@ async function onVideowallVideoObserved(videowallVideo, characterDatas){
 
 	let userChannelName = userChannelNameArray.join("");
 
-	toggleVisibilty(videowallVideo, await checkVideoTitle(userChannelName, characterDatas.videoTitle));
+	toggleVisibilty(videowallVideo, await isVideoTitleBlocked(userChannelName, characterDatas.videoTitle));
 }
 
 
@@ -149,7 +149,7 @@ async function onMainVideoObserved(mainVideo, characterDatas, characterDataParen
 
 	//(hide and pause) or show player
 	let player = $(mainVideo).find("ytd-player")[0];
-	if(await checkVideoTitle(characterDatas.userChannelName, characterDatas.videoTitle)){
+	if(await isVideoTitleBlocked(characterDatas.userChannelName, characterDatas.videoTitle)){
 		$(player).fadeOut("fast");
 
 		$(player).find("video")[0].pause();
