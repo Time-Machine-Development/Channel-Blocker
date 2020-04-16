@@ -2,7 +2,7 @@
 Parameters:
 config: {
 	anchorSelector: <Aray of Strings>,						//not optional
-	characterDataSelectors: (key: <Array of Strings>,)+,	//not optional
+	characterDataSelectors: {(key: <Array of Strings>,)+},	//not optional
 	[observeOnCharacterData: ("any"|"all")]					//optional, default: "all"
 },
 onObserved: function with signature (
