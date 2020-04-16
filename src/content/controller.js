@@ -1,4 +1,4 @@
-
+{
 	const SENDER = "content_controller";
 
 	//all observers that are currently active
@@ -60,12 +60,12 @@
 		}
 	}
 
-	//requests initial context and the initial visibility of block-btn, afterwards update filters (for the first time on this tab-id)
+	//requests initial context and afterwards update observers (for the first time on this tab-id)
 	async function init(){
 		//request initial context (and register this tab as a yt-tab in background as a side-effect)
 		curContext = await browser.runtime.sendMessage(createContextRequestMsg());
 
-		//wait for document to be ready
+		//update observers
 		$(document).ready(updateObservers());
 	}
 
@@ -83,7 +83,7 @@
 			*/
 
 			if(msg.sender === "background_filter_storage"){
-				//wait for document to be ready
+				//update observers
 				$(document).ready(updateObservers());
 			}
 		}
@@ -100,37 +100,37 @@
 				//update current context
 				curContext = msg.content.context;
 
-				//wait for document to be ready
+				//update observers
 				$(document).ready(updateObservers());
 			}
 		}
 
-		if(msg.info === "block_btn_modified"){
+		/*if(msg.info === "block_btn_modified"){
 			/* msg.content is of the form:
 			{
 				block_btn_visibility: <Block Button visibility>
 			}
 			where <Block Button visibility> is of type Boolean.
-			*/
+			*//*
 
 			if(msg.sender === "background_config_storage"){
 				//requests initial context and the initial visibility of block-btn, afterwards update filters (for the first time on this tab-id)
 				init();
 			}
-		}
+		}*/
 
-		if(msg.info === "animation_speed_modified"){
+		/*if(msg.info === "animation_speed_modified"){
 			/* msg.content is of the form:
 			{
 				animation_speed: <Animation Speed>
 			}
 			where <Animation Speed> is of type Number.
-			*/
+			*//*
 
 			if(msg.sender === "background_config_storage"){
 				curAnimationSpeed = msg.content.animation_speed;
 			}
-		}
+		}*/
 
 		if(msg.info === "html_data_request"){
 			/* msg.content is of the form:
@@ -139,10 +139,11 @@
 
 			if(msg.sender === "background_bug_report"){
 				return new Promise((resolve) => {
-                    resolve(String(document.querySelector("html").innerHTML));
+                    resolve(document.querySelector("html").outerHTML);
                 });
 			}
 		}
 	});
 
 	init();
+}

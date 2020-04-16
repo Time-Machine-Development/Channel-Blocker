@@ -60,8 +60,10 @@
 
 				"content/mutation-summary.js",
 				"content/Observer.js",
-				"content/new_controller.js",
-				"content/video_page.js"
+
+				"content/video_page.js",
+
+				"content/controller.js"
 			]
 		}
 	],
