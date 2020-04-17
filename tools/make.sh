@@ -9,8 +9,8 @@ fi
 #copy src to build
 cp -r ./src ./build
 
-#writing all *.js files without comments from ./src into ./build (exclude jquery-3.3.1.min.js, browser-polyfill\.min\.js)
-for i in $(find ./src  | grep -v "browser-polyfill\.min\.js" | grep -v "jquery-3\.4\.1\.min\.js" | grep "\.js$" | grep -v "build"); do
+#writing all *.js files without comments from ./src into ./build (exclude jquery-3.3.1.min.js, browser-polyfill\.min\.js and mutation-summary.js)
+for i in $(find ./src  | grep -v "browser-polyfill\.min\.js" | grep -v "jquery-3\.4\.1\.min\.js" | grep -v "mutation-summary\.js" | grep "\.js$" | grep -v "build"); do
 	j=./build/$(echo $i| cut -c 7-)
 
 	#pcregrep -h -v -M -e "^\h*\/\*((.|\n)*?)\*\/\h*$" $i	-> remove multi-line comments
