@@ -59,9 +59,14 @@
 				"content/libs/block_button_lib.js",
 				"content/libs/display_lib.js",
 
+				"content/observer_components/video/comment.js",
+				"content/observer_components/video/main_video.js",
+				"content/observer_components/video/next.js",
+				"content/observer_components/video/videowall_video.js",
+
 				"content/Observer.js",
 
-				"content/video_page.js",
+				"content/observer_creator.js",
 
 				"content/controller.js"
 			]

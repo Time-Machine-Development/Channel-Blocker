@@ -15,17 +15,6 @@
 		};
 	}
 
-	/*function createConfigValueRequestMsg(configId){
-		return {
-			sender: SENDER,
-			receiver: "background_config_storage",
-			info: "config_value_request",
-			content: {
-				config_id: configId
-			}
-		};
-	}*/
-
 	//removes all old observers and creates new observers based on the current yt-context
 	function updateObservers(){
 
@@ -34,29 +23,39 @@
 			curObservers.pop().disconnect();
 		}
 
-		//Start(https://www.youtube.com/)
+		//HomePage(https://www.youtube.com/)
 		if(curContext === YTContext.HOME){
-
+			curObservers = createHomeObservers();
 		}
 
 		//TrendsPage(https://www.youtube.com/feed/trending)
 		if(curContext === YTContext.TRENDING){
-
+			curObservers = createTrendingObservers();
 		}
 
 		//RecommendedPage(https://www.youtube.com/feed/recommended)
 		if(curContext === YTContext.RECOMMENDED){
-
+			curObservers = createRecommendedObservers();
 		}
 
 		//SearchPage(https://www.youtube.com/results?search_query=<INPUT>)
-		if(curContext === YTContext.SEARCH || curContext === YTContext.CHANNEL_VIDEOS || curContext === YTContext.CHANNEL_HOME){
+		if(curContext === YTContext.SEARCH){
+			curObservers = createSearchObservers();
+		}
 
+		//ChannelVideosPage(https://www.youtube.com/(user|channel)/<USER/CHANNEL ID>
+		if(curContext === YTContext.CHANNEL_HOME){
+			curObservers = createChannelHomeObservers();
+		}
+
+		//ChannelVideosPage(https://www.youtube.com/(user|channel)/<USER/CHANNEL ID>/videos
+		if(curContext === YTContext.CHANNEL_VIDEOS){
+			curObservers = createChannelVideosObservers();
 		}
 
 		//WatchPage(https://www.youtube.com/watch?v=<ID>)
 		if(curContext === YTContext.VIDEO){
-			curObservers = createVideoPageObservers();
+			curObservers = createVideoObservers();
 		}
 	}
 
@@ -104,33 +103,6 @@
 				$(document).ready(updateObservers());
 			}
 		}
-
-		/*if(msg.info === "block_btn_modified"){
-			/* msg.content is of the form:
-			{
-				block_btn_visibility: <Block Button visibility>
-			}
-			where <Block Button visibility> is of type Boolean.
-			*//*
-
-			if(msg.sender === "background_config_storage"){
-				//requests initial context and the initial visibility of block-btn, afterwards update filters (for the first time on this tab-id)
-				init();
-			}
-		}*/
-
-		/*if(msg.info === "animation_speed_modified"){
-			/* msg.content is of the form:
-			{
-				animation_speed: <Animation Speed>
-			}
-			where <Animation Speed> is of type Number.
-			*//*
-
-			if(msg.sender === "background_config_storage"){
-				curAnimationSpeed = msg.content.animation_speed;
-			}
-		}*/
 
 		if(msg.info === "html_data_request"){
 			/* msg.content is of the form:
