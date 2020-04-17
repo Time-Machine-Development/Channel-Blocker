@@ -15,23 +15,23 @@ async function isUserChannelNameBlocked(userChannelName){
 }
 
 //returns 'true' if and only if user/channel-name userChannelName is blocked or video-title videoTitle is blocked
-function isVideoTitleBlocked(userChannelName, videoTitle){
+async function isVideoTitleBlocked(userChannelName, videoTitle){
 	let msg = createIsBlockedRequestMsg(userChannelName);
 	msg.content.additional = {
 		type: "title",
 		content: videoTitle
 	};
 
-	return browser.runtime.sendMessage(msg);
+	return await browser.runtime.sendMessage(msg);
 }
 
 //returns 'true' if and only if user/channel-name is blocked or comment-content commentContent is blocked
-function isCommentContentBlocked(userChannelName, commentContent){
+async function isCommentContentBlocked(userChannelName, commentContent){
 	let msg = createIsBlockedRequestMsg(userChannelName);
 	msg.content.additional = {
 		type: "comment",
 		content: commentContent
 	};
 
-	return browser.runtime.sendMessage(msg);
+	return await browser.runtime.sendMessage(msg);
 }
