@@ -66,7 +66,7 @@
 
 				"content/Observer.js",
 
-				"content/observer_creator.js",
+				"content/observers_creator.js",
 
 				"content/controller.js"
 			]
