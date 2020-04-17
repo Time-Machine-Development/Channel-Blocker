@@ -51,14 +51,14 @@
 			"matches": ["*://www.youtube.com/*"],
 			"js": [
 				"shared/browser-polyfill.min.js",
-
 				"shared/jquery-3.4.1.min.js",
 				"shared/shared.js",
-				"content/is_blocked_lib.js",
-				"content/block_button_lib.js",
-				"content/display_lib.js",
 
-				"content/mutation-summary.js",
+				"content/libs/mutation-summary.js",
+				"content/libs/is_blocked_lib.js",
+				"content/libs/block_button_lib.js",
+				"content/libs/display_lib.js",
+
 				"content/Observer.js",
 
 				"content/video_page.js",
@@ -66,9 +66,5 @@
 				"content/controller.js"
 			]
 		}
-	],
-
-	"web_accessible_resources": [
-		"content/img/blockedVideo.svg"
 	]
 }
