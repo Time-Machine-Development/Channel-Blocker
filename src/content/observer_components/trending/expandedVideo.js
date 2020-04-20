@@ -6,10 +6,8 @@ const EXPANDEDVIDEO_CONFIG = Object.freeze({
 	}
 });
 
-async function onExpandedVideoObserved(expandedVideo, characterDatas){
-	let beforeBlockBtn = $(expandedVideo).find("a[class='yt-simple-endpoint style-scope yt-formatted-string']")[0];
-
-	insertBlockBtnBefore(beforeBlockBtn, characterDatas.userChannelName, undefined);
+async function onExpandedVideoObserved(expandedVideo, characterDatas, characterDataParents){
+	insertBlockBtnBefore(characterDataParents.userChannelName, characterDatas.userChannelName, undefined);
 
 	toggleVisibilty(expandedVideo, await isVideoTitleBlocked(characterDatas.userChannelName, characterDatas.videoTitle));
 }

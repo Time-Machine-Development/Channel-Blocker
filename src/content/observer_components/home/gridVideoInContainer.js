@@ -6,10 +6,9 @@ const GRIDVIDEO_IN_CONTAINER_CONFIG = Object.freeze({
 	}
 });
 
-async function onGridVideoInContainerObserved(gridVideo, characterDatas){
-	let beforeBlockBtn = $(gridVideo).find("a[class='yt-simple-endpoint style-scope yt-formatted-string']")[0];
+async function onGridVideoInContainerObserved(gridVideo, characterDatas, characterDataParents){
 
-	insertBlockBtnBefore(beforeBlockBtn, characterDatas.userChannelName, undefined);
+	insertBlockBtnBefore(characterDataParents.userChannelName, characterDatas.userChannelName, undefined);
 
 	toggleVisibilty(gridVideo, await isVideoTitleBlocked(characterDatas.userChannelName, characterDatas.videoTitle));
 }

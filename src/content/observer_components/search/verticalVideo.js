@@ -6,10 +6,8 @@ const VERTICAL_VIDEO_CONFIG = Object.freeze({
 	}
 });
 
-async function onVerticalVideoObserved(verticalVideo, characterDatas){
-	let beforeBlockBtn = $(verticalVideo).find("a[class='yt-simple-endpoint style-scope yt-formatted-string']")[0];
-
-	insertBlockBtnBefore(beforeBlockBtn, characterDatas.userChannelName, undefined);
+async function onVerticalVideoObserved(verticalVideo, characterDatas, characterDataParents){
+	insertBlockBtnBefore(characterDataParents.userChannelName, characterDatas.userChannelName, undefined);
 
 	toggleVisibilty(verticalVideo, await isVideoTitleBlocked(characterDatas.userChannelName, characterDatas.videoTitle));
 }

@@ -6,10 +6,8 @@ const HORIZONTAL_GRIDVIDEO_CONFIG = Object.freeze({
 	}
 });
 
-async function onHorizontalGridVideoObserved(horizontalGridVideo, characterDatas){
-	let beforeBlockBtn = $(horizontalGridVideo).find("a[class='yt-simple-endpoint style-scope yt-formatted-string']")[0];
-
-	insertBlockBtnBefore(beforeBlockBtn, characterDatas.userChannelName, undefined);
+async function onHorizontalGridVideoObserved(horizontalGridVideo, characterDatas, characterDataParents){
+	insertBlockBtnBefore(characterDataParents.userChannelName, characterDatas.userChannelName, undefined);
 
 	toggleVisibilty(horizontalGridVideo, await isVideoTitleBlocked(characterDatas.userChannelName, characterDatas.videoTitle));
 }
