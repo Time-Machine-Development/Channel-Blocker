@@ -62,6 +62,9 @@
 				"content/observer_components/home/gridVideo.js",
 				"content/observer_components/home/post.js",
 				"content/observer_components/home/gridVideoInContainer.js",
+				
+				"content/observer_components/trending/expandedVideo.js",
+				"content/observer_components/trending/horizontalGridVideo.js",
 
 				"content/observer_components/video/comment.js",
 				"content/observer_components/video/main_video.js",

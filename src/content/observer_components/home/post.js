@@ -6,10 +6,10 @@ const POST_CONFIG = Object.freeze({
 	}
 });
 
-async function onPostObserved(item, characterDatas){
-	let beforeBlockBtn = $(item).find("div#author-thumbnail[class='style-scope ytd-post-renderer']")[0];
+async function onPostObserved(post, characterDatas){
+	let beforeBlockBtn = $(post).find("div#author-thumbnail[class='style-scope ytd-post-renderer']")[0];
 
 	insertBlockBtnBefore(beforeBlockBtn, characterDatas.userChannelName, undefined);
 
-	toggleVisibilty(item, await isCommentContentBlocked(characterDatas.userChannelName, characterDatas.commentContent));
+	toggleVisibilty(post, await isCommentContentBlocked(characterDatas.userChannelName, characterDatas.commentContent));
 }
