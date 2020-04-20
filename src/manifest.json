@@ -66,6 +66,10 @@
 				"content/observer_components/trending/expandedVideo.js",
 				"content/observer_components/trending/horizontalGridVideo.js",
 
+				"content/observer_components/search/video.js",
+				"content/observer_components/search/playlist.js",
+				"content/observer_components/search/channel.js",
+
 				"content/observer_components/video/comment.js",
 				"content/observer_components/video/main_video.js",
 				"content/observer_components/video/next.js",
