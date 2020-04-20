@@ -18,7 +18,7 @@ function createBlockBtnSVG(){
 
 	let path = document.createElementNS(svgURI, "path");
 	path.setAttribute("d", "M 15,15 L 85,85 M 85,15 L 15,85");
-	path.setAttribute("style", "stroke: #717171;fill: transparent;stroke-linecap: round;stroke-width: 25;");
+	path.setAttribute("style", "fill: transparent;stroke-linecap: round;stroke-width: 25;");
 
 	svg.appendChild(path);
 
@@ -31,7 +31,6 @@ function createBlockBtnElement(userChannelName, style){
 	btn.setAttribute("class", "cb_button");
 	btn.setAttribute("type", "button");
 	btn.setAttribute("title", "Block '" + userChannelName + "' (Channel Blocker)");
-	btn.setAttribute("style", "padding-left:0em; border:none; background-color:Transparent; cursor:pointer; width:" + 1.4 + "em");
 
 	//apply passed style options (if passed)
 	if(style !== undefined){
@@ -97,3 +96,41 @@ function insertBlockBtnAfter(element, userChannelName, style){
 		$(element).after(createBlockBtnElement(userChannelName, style));
 	}
 }
+
+//add a new cb_style element and add css rules
+function addCssStyle(){
+	//check if an cb_style element already exists. If not create and add it to the head
+	if(document.getElementById("cb_style") === null){
+		let style = document.createElement('style');
+		style.id = "cb_style";
+		document.head.appendChild(style);
+	}
+	
+	//set new css rules
+	changeCssStyle();
+}
+
+//change the css rules
+function changeCssStyle(width = "1.4em", strokeColor = "#717171", display = "flex"){
+	//get the cb_style element
+	let style = document.getElementById("cb_style");
+	//remove all old rules
+	while(style.sheet.rules.length > 0){
+		style.sheet.deleteRule(0);
+	}
+	//add the new rules
+	style.sheet.insertRule(`
+		.cb_button {
+			padding-left: 0em;
+			border: none;
+			background-color: Transparent;
+			cursor: pointer;
+			width: ${width};
+			stroke: ${strokeColor};
+			display: ${display};
+		}
+	`);
+}
+
+//TODO: add the css in config or controller
+addCssStyle();
