@@ -1,6 +1,10 @@
 function createHomeObservers(){
 	let obs = [];
 
+	obs.push(new Observer(GRIDVIDEO_CONFIG, onGridVideoObserved));
+	obs.push(new Observer(POST_CONFIG, onPostObserved));
+	obs.push(new Observer(GRIDVIDEO_IN_CONTAINER_CONFIG, onGridVideoInContainerObserved));
+
 	return obs;
 }
 
