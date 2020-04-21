@@ -31,14 +31,11 @@ let contentConfig;
 	browser.runtime.sendMessage(createContentConfigRequestMsg()).then((updatedContentConfig) => {
 		contentConfig = updatedContentConfig;
 		console.log(contentConfig);
+		updateBlockBtnCSS();
 	});
 
 	//init. CSS for block-buttons
-	try {
-		initBlockBtnCSS();
-	} catch (error) {
-		console.log(error);
-	}
+	initBlockBtnCSS();
 
 	/*
 	INSTALLING LISTENER FOR MESSAGES FROM background-scripts

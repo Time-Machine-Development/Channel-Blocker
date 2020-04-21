@@ -121,7 +121,6 @@ function updateBlockBtnCSS(){
 	}
 
 	//define width, strokeColor and display depending on contentConfig (defined in config.js)
-	//TODO:
 	width = contentConfig[5] * 0.01 + "em";
 	strokeColor = contentConfig[4];
 	if(contentConfig[2]){
