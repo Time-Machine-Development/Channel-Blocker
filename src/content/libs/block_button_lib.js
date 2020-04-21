@@ -107,16 +107,11 @@ function initBlockBtnCSS(){
 	}
 
 	//set new css rules
-	changeCssStyle();
+	updateBlockBtnCSS();
 }
 
-<<<<<<< HEAD
 //updates CSS depending on contentConfig (defined in config.js)
 function updateBlockBtnCSS(){
-=======
-//change the css rules
-function changeCssStyle(width = "1.4em", strokeColor = "#717171", display = "inline"){
->>>>>>> 47544ad534935279477ed398d55b53bfe1973b7c
 	//get the cb_style element
 	let style = document.getElementById("cb_style");
 
