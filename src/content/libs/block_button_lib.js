@@ -28,7 +28,7 @@ function createBlockBtnSVG(){
 //creates and returns a block-button and applies (optionally) passed style options style which blocks user/channel-name userChannelName which clicked
 function createBlockBtnElement(userChannelName, style){
 	let btn = document.createElement("button");
-	btn.setAttribute("class", "cb_button");
+	btn.setAttribute("class", "cb_block_button");
 	btn.setAttribute("type", "button");
 	btn.setAttribute("title", "Block '" + userChannelName + "' (Channel Blocker)");
 
@@ -50,9 +50,9 @@ function createBlockBtnElement(userChannelName, style){
 /* inserts or updates block-button with (optionally) passed style options style before Element element which blocks user/channel-name userChannelName which clicked
    NOTE: style is only applied if no block-btn exists previous to element */
 function insertBlockBtnBefore(element, userChannelName, style){
-	if($(element).prev("button.cb_button").length > 0){
+	if($(element).prev("button.cb_block_button").length > 0){
 		//a block-btn with (possibly) wrong click-event-handler exists because it would block the user/channel-name related to the last call of this function on Element element
-		let blockBtn = $(element).prev("button.cb_button")[0];
+		let blockBtn = $(element).prev("button.cb_block_button")[0];
 
 		//update title
 		blockBtn.setAttribute("title", "Block '" + userChannelName + "' (Channel Blocker)");
@@ -75,9 +75,9 @@ function insertBlockBtnBefore(element, userChannelName, style){
 /* inserts or updates block-button with (optionally) passed style options style after Element element which blocks user/channel-name userChannelName which clicked
    NOTE: style is only applied if no block-btn exists next to element */
 function insertBlockBtnAfter(element, userChannelName, style){
-	if($(element).next("button.cb_button").length > 0){
+	if($(element).next("button.cb_block_button").length > 0){
 		//a block-btn with (possibly) wrong click-event-handler exists because it would block the user/channel-name related to the last call of this function on Element element
-		let blockBtn = $(element).next("button.cb_button")[0];
+		let blockBtn = $(element).next("button.cb_block_button")[0];
 
 		//update title
 		blockBtn.setAttribute("title", "Block '" + userChannelName + "' (Channel Blocker)");
@@ -110,8 +110,13 @@ function initBlockBtnCSS(){
 	changeCssStyle();
 }
 
+<<<<<<< HEAD
 //updates CSS depending on contentConfig (defined in config.js)
 function updateBlockBtnCSS(){
+=======
+//change the css rules
+function changeCssStyle(width = "1.4em", strokeColor = "#717171", display = "inline"){
+>>>>>>> 47544ad534935279477ed398d55b53bfe1973b7c
 	//get the cb_style element
 	let style = document.getElementById("cb_style");
 
@@ -128,7 +133,7 @@ function updateBlockBtnCSS(){
 
 	//add the new rules
 	style.sheet.insertRule(`
-		.cb_button {
+		.cb_block_button {
 			padding-left: 0em;
 			border: none;
 			background-color: Transparent;

@@ -1,9 +1,9 @@
 function createHomeObservers(){
 	let obs = [];
 
-	obs.push(new Observer(GRIDVIDEO_CONFIG, onGridVideoObserved));
+	obs.push(new Observer(HOME_VIDEO_CONFIG, onHomeVideoObserved));
 	obs.push(new Observer(POST_CONFIG, onPostObserved));
-	obs.push(new Observer(GRIDVIDEO_IN_CONTAINER_CONFIG, onGridVideoInContainerObserved));
+	obs.push(new Observer(VIDEO_IN_CONTAINER_CONFIG, onVideoInContainerObserved));
 
 	return obs;
 }
@@ -11,8 +11,8 @@ function createHomeObservers(){
 function createTrendingObservers(){
 	let obs = [];
 
-	obs.push(new Observer(EXPANDEDVIDEO_CONFIG, onExpandedVideoObserved));
-	obs.push(new Observer(HORIZONTAL_GRIDVIDEO_CONFIG, onHorizontalGridVideoObserved));
+	obs.push(new Observer(EXPANDED_VIDEO_CONFIG, onExpandedVideoObserved));
+	obs.push(new Observer(HORIZONTAL_VIDEO_CONFIG, onHorizontalVideoObserved));
 
 	return obs;
 }
@@ -26,7 +26,7 @@ function createRecommendedObservers(){
 function createSearchObservers(){
 	let obs = [];
 	
-	obs.push(new Observer(VIDEO_CONFIG, onVideoObserved));
+	obs.push(new Observer(SEARCH_VIDEO_CONFIG, onSearchVideoObserved));
 	obs.push(new Observer(VERTICAL_VIDEO_CONFIG, onVerticalVideoObserved));
 	obs.push(new Observer(PLAYLIST_CONFIG, onPlaylistObserved));
 	obs.push(new Observer(CHANNEL_CONFIG, onChannelObserved));

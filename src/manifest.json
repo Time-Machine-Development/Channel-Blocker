@@ -61,15 +61,15 @@
 				"content/libs/block_button_lib.js",
 				"content/libs/display_lib.js",
 
-				"content/observer_components/home/gridVideo.js",
+				"content/observer_components/home/home_video.js",
 				"content/observer_components/home/post.js",
-				"content/observer_components/home/gridVideoInContainer.js",
+				"content/observer_components/home/video_in_container.js",
 
-				"content/observer_components/trending/expandedVideo.js",
-				"content/observer_components/trending/horizontalGridVideo.js",
+				"content/observer_components/trending/expanded_video.js",
+				"content/observer_components/trending/horizontal_video.js",
 
-				"content/observer_components/search/video.js",
-				"content/observer_components/search/verticalVideo.js",
+				"content/observer_components/search/search_video.js",
+				"content/observer_components/search/vertical_video.js",
 				"content/observer_components/search/playlist.js",
 				"content/observer_components/search/channel.js",
 
