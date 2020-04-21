@@ -33,11 +33,6 @@
 			curObservers = createTrendingObservers();
 		}
 
-		//RecommendedPage(https://www.youtube.com/feed/recommended)
-		if(curContext === YTContext.RECOMMENDED){
-			curObservers = createRecommendedObservers();
-		}
-
 		//SearchPage(https://www.youtube.com/results?search_query=<INPUT>)
 		if(curContext === YTContext.SEARCH){
 			curObservers = createSearchObservers();

@@ -99,7 +99,7 @@ function insertBlockBtnAfter(element, userChannelName, style){
 
 //adds a new Element with id "cb_style" and updates CSS depending on contentConfig (defined in config.js)
 function initBlockBtnCSS(){
-	//check if an cb_style element already exists. If not create and add it to the head
+	//if cb_style Element does not already exist add it to the head
 	if(document.getElementById("cb_style") === null){
 		let style = document.createElement('style');
 		style.id = "cb_style";
@@ -121,9 +121,9 @@ function updateBlockBtnCSS(){
 	}
 
 	//define width, strokeColor and display depending on contentConfig (defined in config.js)
-	width = contentConfig[5] * 0.01 + "em";
-	strokeColor = contentConfig[4];
-	if(contentConfig[2]){
+	width = contentConfig[ConfigId.CONTENT_BLOCK_BTN_SIZE] * 0.01 + "em";
+	strokeColor = contentConfig[ConfigId.CONTENT_BLOCK_BTN_COLOR];
+	if(contentConfig[ConfigId.CONTENT_BLOCK_BTN_VISIBILITY]){
 		display = "inline";
 	}else{
 		display = "none";

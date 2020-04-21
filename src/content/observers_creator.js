@@ -18,15 +18,9 @@ function createTrendingObservers(){
 	return obs;
 }
 
-function createRecommendedObservers(){
-	let obs = [];
-
-	return obs;
-}
-
 function createSearchObservers(){
 	let obs = [];
-	
+
 	obs.push(new Observer(SEARCH_VIDEO_CONFIG, onSearchVideoObserved));
 	obs.push(new Observer(VERTICAL_VIDEO_CONFIG, onVerticalVideoObserved));
 	obs.push(new Observer(PLAYLIST_CONFIG, onPlaylistObserved));

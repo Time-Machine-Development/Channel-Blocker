@@ -20,8 +20,7 @@ const YTContext = Object.freeze({
 	TRENDING: 3,
 	CHANNEL_HOME: 4,
 	CHANNEL_VIDEOS: 5,
-	RECOMMENDED: 6,
-	OTHER: 7
+	OTHER: 6
 });
 
 //NOTE: DO NOT USE THE VALUE '3' ANYMORE. It was formerly used for the block-main-video-on-video-page feature up to version 2.1.0.
