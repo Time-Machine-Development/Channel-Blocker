@@ -111,7 +111,7 @@ function addCssStyle(){
 }
 
 //change the css rules
-function changeCssStyle(width = "1.4em", strokeColor = "#717171", display = "flex"){
+function changeCssStyle(width = "1.4em", strokeColor = "#717171", display = "inline"){
 	//get the cb_style element
 	let style = document.getElementById("cb_style");
 	//remove all old rules
