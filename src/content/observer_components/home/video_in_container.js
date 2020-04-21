@@ -5,10 +5,3 @@ const VIDEO_IN_CONTAINER_CONFIG = Object.freeze({
         userChannelName: ["a[class='yt-simple-endpoint style-scope yt-formatted-string']"]
 	}
 });
-
-async function onVideoInContainerObserved(gridVideo, characterDatas, characterDataParents){
-
-	insertBlockBtnBefore(characterDataParents.userChannelName, characterDatas.userChannelName, undefined);
-
-	toggleVisibilty(gridVideo, await isVideoTitleBlocked(characterDatas.userChannelName, characterDatas.videoTitle));
-}

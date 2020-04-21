@@ -8,7 +8,7 @@ const CHANNEL_CONFIG = Object.freeze({
 async function onChannelObserved(channel, characterDatas){
 	let beforeBlockBtn = $(channel).find("div#avatar-section[class='style-scope ytd-channel-renderer']")[0];
 
-	insertBlockBtnBefore(beforeBlockBtn, characterDatas.userChannelName, undefined);
+	insertBlockBtnBefore(beforeBlockBtn, characterDatas.userChannelName);
 
 	toggleVisibilty(channel, await isUserChannelNameBlocked(characterDatas.userChannelName));
 }

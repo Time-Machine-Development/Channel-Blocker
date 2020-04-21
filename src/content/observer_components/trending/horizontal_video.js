@@ -5,9 +5,3 @@ const HORIZONTAL_VIDEO_CONFIG = Object.freeze({
         userChannelName: ["a[class='yt-simple-endpoint style-scope yt-formatted-string']"]
 	}
 });
-
-async function onHorizontalVideoObserved(horizontalVideo, characterDatas, characterDataParents){
-	insertBlockBtnBefore(characterDataParents.userChannelName, characterDatas.userChannelName, undefined);
-
-	toggleVisibilty(horizontalVideo, await isVideoTitleBlocked(characterDatas.userChannelName, characterDatas.videoTitle));
-}

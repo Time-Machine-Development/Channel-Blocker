@@ -5,9 +5,3 @@ const HOME_VIDEO_CONFIG = Object.freeze({
         userChannelName: ["a[class='yt-simple-endpoint style-scope yt-formatted-string']"]
 	}
 });
-
-async function onHomeVideoObserved(video, characterDatas, characterDataParents){
-	insertBlockBtnBefore(characterDataParents.userChannelName, characterDatas.userChannelName, undefined);
-
-	toggleVisibilty(video, await isVideoTitleBlocked(characterDatas.userChannelName, characterDatas.videoTitle));
-}

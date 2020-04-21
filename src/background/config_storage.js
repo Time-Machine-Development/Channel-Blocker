@@ -52,9 +52,9 @@ config_storage.js also and solely enables and disables the Popup. */
 		{});
 	}
 
-	//If the setting for ConfigId.USE_POPUP is true, overwrite browserAction-button functionality s.t. Popup will open instead of the Configuration-page or vice versa.
+	//If the setting for ConfigId.CONFIG_USE_POPUP is true, overwrite browserAction-button functionality s.t. Popup will open instead of the Configuration-page or vice versa.
 	function changeBrowserActionFunc(){
-		if(config[ConfigId.USE_POPUP]){
+		if(config[ConfigId.CONFIG_USE_POPUP]){
 			browser.browserAction.setPopup({popup: "ui/popup/html/popup.html"});
 		}else{
 			browser.browserAction.setPopup({popup: ""});
@@ -83,7 +83,7 @@ config_storage.js also and solely enables and disables the Popup. */
 			updateStorage();
 		}
 
-		//apply the setting for ConfigId.USE_POPUP
+		//apply the setting for ConfigId.CONFIG_USE_POPUP
 		changeBrowserActionFunc();
 	}
 
@@ -112,8 +112,8 @@ config_storage.js also and solely enables and disables the Popup. */
 				}
 			}
 
-			if(configId === ConfigId.USE_POPUP){
-				//apply the setting for ConfigId.USE_POPUP
+			if(configId === ConfigId.CONFIG_USE_POPUP){
+				//apply the setting for ConfigId.CONFIG_USE_POPUP
 				changeBrowserActionFunc();
 			}
 

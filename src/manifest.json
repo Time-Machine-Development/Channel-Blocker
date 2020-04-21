@@ -58,8 +58,10 @@
 				"content/libs/is_blocked_lib.js",
 				"content/libs/block_button_lib.js",
 				"content/libs/display_lib.js",
-				
+
 				"content/config.js",
+
+				"content/observer_components/shared/shared.js",
 
 				"content/observer_components/home/home_video.js",
 				"content/observer_components/home/post.js",

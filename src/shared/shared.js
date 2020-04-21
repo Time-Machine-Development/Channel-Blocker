@@ -20,8 +20,7 @@ const YTContext = Object.freeze({
 	TRENDING: 3,
 	CHANNEL_HOME: 4,
 	CHANNEL_VIDEOS: 5,
-	RECOMMENDED: 6,
-	OTHER: 7
+	OTHER: 6
 });
 
 //NOTE: DO NOT USE THE VALUE '3' ANYMORE. It was formerly used for the block-main-video-on-video-page feature up to version 2.1.0.
@@ -32,7 +31,7 @@ const ConfigId = Object.freeze({
 	CONTENT_BLOCK_BTN_COLOR: 4,
 	CONTENT_BLOCK_BTN_SIZE: 5,
 	CONTENT_ANIMATION_SPEED: 6,
-	USE_POPUP: 7
+	CONFIG_USE_POPUP: 7
 });
 
 const DEFAULT_CONFIG = Object.freeze({
@@ -42,5 +41,5 @@ const DEFAULT_CONFIG = Object.freeze({
 	[ConfigId.CONTENT_BLOCK_BTN_COLOR]: "#717171",
 	[ConfigId.CONTENT_BLOCK_BTN_SIZE]: 140,
 	[ConfigId.CONTENT_ANIMATION_SPEED]: 200,
-	[ConfigId.USE_POPUP]: false
+	[ConfigId.CONFIG_USE_POPUP]: false
 });

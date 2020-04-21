@@ -9,7 +9,7 @@ const POST_CONFIG = Object.freeze({
 async function onPostObserved(post, characterDatas){
 	let beforeBlockBtn = $(post).find("div#author-thumbnail[class='style-scope ytd-post-renderer']")[0];
 
-	insertBlockBtnBefore(beforeBlockBtn, characterDatas.userChannelName, undefined);
+	insertBlockBtnBefore(beforeBlockBtn, characterDatas.userChannelName);
 
 	toggleVisibilty(post, await isCommentContentBlocked(characterDatas.userChannelName, characterDatas.commentContent));
 }
