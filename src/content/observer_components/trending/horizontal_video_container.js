@@ -1,4 +1,3 @@
-//ytd-item-section-renderer
 const HORIZONTAL_VIDEO_CONTAINER_CONFIG = Object.freeze({
 	anchorSelector: ["ytd-item-section-renderer[class='style-scope ytd-section-list-renderer']"],
 	characterDataSelectors: {
@@ -11,6 +10,6 @@ async function onHorizontalVideoContainerObserved(horizontalVideoContainer, char
         paddingLeft: "8px",
         paddingRight: "0",
     });
-    
+
 	toggleVisibilty(horizontalVideoContainer, await isUserChannelNameBlocked(characterDatas.userChannelName));
 }
