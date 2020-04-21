@@ -61,7 +61,7 @@
 
 				"content/config.js",
 
-				"content/observer_components/home/shared.js",
+				"content/observer_components/shared/shared.js",
 
 				"content/observer_components/home/home_video.js",
 				"content/observer_components/home/post.js",
