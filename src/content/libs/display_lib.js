@@ -1,7 +1,7 @@
 function toggleVisibilty(element, isBlocked){
 	if(isBlocked){
-		$(element).hide("fast");
+		$(element).hide(contentConfig[ConfigId.CONTENT_ANIMATION_SPEED]);
 	}else{
-		$(element).show("fast");
+		$(element).show(contentConfig[ConfigId.CONTENT_ANIMATION_SPEED]);
 	}
 }

@@ -34,3 +34,14 @@ const ConfigId = Object.freeze({
 	CONTENT_ANIMATION_SPEED: 6,
 	USE_POPUP: 7
 });
+
+const DEFAULT_CONFIG = Object.freeze({
+	[ConfigId.CONFIG_PAGE_DESIGN]: 0,
+	[ConfigId.CONFIG_ADVANCED_VIEW]: false,
+	[ConfigId.CONTENT_BLOCK_BTN_VISIBILITY]: true,
+	[ConfigId.CONTENT_BLOCK_VIDEOS_ON_VIDEOPAGE_VISIBILITY]: false,
+	[ConfigId.CONTENT_BLOCK_BTN_COLOR]: "#717171",
+	[ConfigId.CONTENT_BLOCK_BTN_SIZE]: 140,
+	[ConfigId.CONTENT_ANIMATION_SPEED]: 1000,
+	[ConfigId.USE_POPUP]: false
+});

@@ -97,27 +97,35 @@ function insertBlockBtnAfter(element, userChannelName, style){
 	}
 }
 
-//add a new cb_style element and add css rules
-function addCssStyle(){
+//adds a new Element with id "cb_style" and updates CSS depending on contentConfig (defined in config.js)
+function initBlockBtnCSS(){
 	//check if an cb_style element already exists. If not create and add it to the head
 	if(document.getElementById("cb_style") === null){
 		let style = document.createElement('style');
 		style.id = "cb_style";
 		document.head.appendChild(style);
 	}
-	
+
 	//set new css rules
 	changeCssStyle();
 }
 
-//change the css rules
-function changeCssStyle(width = "1.4em", strokeColor = "#717171", display = "flex"){
+//updates CSS depending on contentConfig (defined in config.js)
+function updateBlockBtnCSS(){
 	//get the cb_style element
 	let style = document.getElementById("cb_style");
+
 	//remove all old rules
 	while(style.sheet.rules.length > 0){
 		style.sheet.deleteRule(0);
 	}
+
+	//define width, strokeColor and display depending on contentConfig (defined in config.js)
+	//TODO:
+	width = "1.4em";
+	strokeColor = "#717171";
+	display = "flex";
+
 	//add the new rules
 	style.sheet.insertRule(`
 		.cb_button {
@@ -131,6 +139,3 @@ function changeCssStyle(width = "1.4em", strokeColor = "#717171", display = "fle
 		}
 	`);
 }
-
-//TODO: add the css in config or controller
-addCssStyle();

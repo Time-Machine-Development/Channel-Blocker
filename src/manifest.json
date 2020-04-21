@@ -54,15 +54,17 @@
 				"shared/jquery-3.4.1.min.js",
 				"shared/shared.js",
 
+				"content/config.js",
+
 				"content/libs/mutation-summary.js",
 				"content/libs/is_blocked_lib.js",
 				"content/libs/block_button_lib.js",
 				"content/libs/display_lib.js",
-				
+
 				"content/observer_components/home/gridVideo.js",
 				"content/observer_components/home/post.js",
 				"content/observer_components/home/gridVideoInContainer.js",
-				
+
 				"content/observer_components/trending/expandedVideo.js",
 				"content/observer_components/trending/horizontalGridVideo.js",
 

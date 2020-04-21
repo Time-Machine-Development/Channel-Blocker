@@ -1,26 +1,15 @@
-/*Manages the part of the storage which is not affilliated to filter settings made by the user.
+/* Manages the part of the storage which is not affilliated to filter settings made by the user.
 Due to the fact that it is not possible to completly outsource the Popup feature into browser_action.js,
-config_storage.js also and solely enables and disables the Popup.*/
+config_storage.js also and solely enables and disables the Popup. */
 
 {
 	const SENDER = "background_config_storage";
-
-	const DEFAULT_CONFIG = {};
-	DEFAULT_CONFIG[ConfigId.CONFIG_PAGE_DESIGN] = 0;
-	DEFAULT_CONFIG[ConfigId.CONFIG_ADVANCED_VIEW] = false;
-	DEFAULT_CONFIG[ConfigId.CONTENT_BLOCK_BTN_VISIBILITY] = true;
-	DEFAULT_CONFIG[ConfigId.CONTENT_BLOCK_VIDEOS_ON_VIDEOPAGE_VISIBILITY] = false;
-	DEFAULT_CONFIG[ConfigId.CONTENT_BLOCK_BTN_COLOR] = "#717171";
-	DEFAULT_CONFIG[ConfigId.CONTENT_BLOCK_BTN_SIZE] = 140;
-	DEFAULT_CONFIG[ConfigId.CONTENT_ANIMATION_SPEED] = 1000;
-	DEFAULT_CONFIG[ConfigId.USE_POPUP] = false;
-	Object.freeze(DEFAULT_CONFIG);
 
 	//represents the current configuration
 	let config = {};
 	initConfig();
 
-	function createConfigStorageModifiedMsg(configId) {
+	function createConfigStorageModifiedMsg(configId){
 		return {
 			sender: SENDER,
 			receiver: "config_config_user_interaction",
@@ -32,26 +21,35 @@ config_storage.js also and solely enables and disables the Popup.*/
 		};
 	}
 
-	function createBlockBtnModifiedMsg() {
+	function createContentConfigStorageModifiedMsg(configId){
 		return {
 			sender: SENDER,
-			receiver: "content_controller",
-			info: "block_btn_modified",
+			receiver: "content_config",
+			info: "content_config_storage_modified",
 			content: {
-				block_btn_visibility: config[ConfigId.CONTENT_BLOCK_BTN_VISIBILITY]
+				config_id: configId,
+				config_val: config[configId]
 			}
-		};
+		}
 	}
 
-	function createAnimationSpeedModifiedMsg() {
-		return {
-			sender: SENDER,
-			receiver: "content_controller",
-			info: "animation_speed_modified",
-			content: {
-				animation_speed: parseInt(config[ConfigId.CONTENT_ANIMATION_SPEED])
+	//returns true if and only if configId represents a content-related configId
+	function isContentConfigId(configId){
+		return Object.entries(ConfigId).reduce((acc, [key, val]) => {
+			return acc || (val === configId && key.substr(0, 7) === "CONTENT")},
+		false);
+	}
+
+	//returns an object containing the same key/value-pairs as config, excluding all where key represents a non-content-related configId
+	function createContentConfigFromConfig(){
+		return Object.entries(ConfigId).reduce((acc, [key, val]) => {
+			if(key.substr(0, 7) === "CONTENT"){
+				acc[val] = config[val];
 			}
-		};
+
+			return acc;
+		},
+		{});
 	}
 
 	//If the setting for ConfigId.USE_POPUP is true, overwrite browserAction-button functionality s.t. Popup will open instead of the Configuration-page or vice versa.
@@ -96,29 +94,25 @@ config_storage.js also and solely enables and disables the Popup.*/
 		});
 	}
 
-	/* sets config[configId] to val, if config[configId] was changed a "config_storage_modified"-message is sent to the config-tab
-	and if configId is ConfigId.CONTENT_BLOCK_BTN_VISIBILITY a "block_btn_visibility_modified"-message is also sent to all YT_TAB_IDS
-	and the STORAGE is updated*/
+	/* sets config[configId] to val,
+	if config[configId] was changed a "config_storage_modified"-message is sent to the config-tab,
+	if configId is content-related it a "content_config_storage_modified"-message is sent to all YT_TAB_IDS
+	and the STORAGE is updated */
 	function setConfigVal(configId, val) {
 		if (config[configId] !== val) {
 			config[configId] = val;
 
-			if (configTabId !== null)
+			if(configTabId !== null){
 				browser.tabs.sendMessage(configTabId, createConfigStorageModifiedMsg(configId));
+			}
 
-			if (configId === ConfigId.CONTENT_BLOCK_BTN_VISIBILITY || configId === ConfigId.CONTENT_BLOCK_BTN_SIZE || configId === ConfigId.CONTENT_BLOCK_BTN_COLOR) {
-				for (let tabId of YT_TAB_IDS.keys()) {
-					browser.tabs.sendMessage(Number(tabId), createBlockBtnModifiedMsg());
+			if(isContentConfigId(configId)){
+				for(let tabId of YT_TAB_IDS.keys()){
+					browser.tabs.sendMessage(Number(tabId), createContentConfigStorageModifiedMsg(configId));
 				}
 			}
 
-			if (configId === ConfigId.CONTENT_ANIMATION_SPEED) {
-				for (let tabId of YT_TAB_IDS.keys()) {
-					browser.tabs.sendMessage(Number(tabId), createAnimationSpeedModifiedMsg());
-				}
-			}
-
-			if (configId === ConfigId.USE_POPUP) {
+			if(configId === ConfigId.USE_POPUP){
 				//apply the setting for ConfigId.USE_POPUP
 				changeBrowserActionFunc();
 			}
@@ -172,6 +166,18 @@ config_storage.js also and solely enables and disables the Popup.*/
 				//answer message with config[<Config ID>]
 				return new Promise((resolve) => {
 					resolve(config[msg.content.config_id]);
+				});
+			}
+		}
+
+		if(msg.info === "content_config_request"){
+			/* msg.content is of the form:
+			undefined
+			*/
+
+			if(msg.sender === "content_config"){
+				return new Promise((resolve) => {
+					resolve(createContentConfigFromConfig());
 				});
 			}
 		}
