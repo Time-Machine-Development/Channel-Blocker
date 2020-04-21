@@ -7,7 +7,10 @@ const HORIZONTAL_VIDEO_CONTAINER_CONFIG = Object.freeze({
 });
 
 async function onHorizontalVideoContainerObserved(horizontalVideoContainer, characterDatas, characterDataParents){
-    insertBlockBtnBefore(characterDataParents.userChannelName, characterDatas.userChannelName, undefined);
+    insertBlockBtnAfter(characterDataParents.userChannelName, characterDatas.userChannelName, {
+        paddingLeft: "8px",
+        paddingRight: "0",
+    });
     
 	toggleVisibilty(horizontalVideoContainer, await isUserChannelNameBlocked(characterDatas.userChannelName));
 }
