@@ -30,7 +30,6 @@ let contentConfig;
 	//update contentConfig with its current values
 	browser.runtime.sendMessage(createContentConfigRequestMsg()).then((updatedContentConfig) => {
 		contentConfig = updatedContentConfig;
-		console.log(contentConfig);
 		updateBlockBtnCSS();
 	});
 
@@ -58,7 +57,6 @@ let contentConfig;
 				contentConfig[msg.content.config_id] = msg.content.config_val;
 
 				updateBlockBtnCSS();
-				console.log(contentConfig);
 			}
 		}
 	});
