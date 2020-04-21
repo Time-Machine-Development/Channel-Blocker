@@ -122,9 +122,13 @@ function updateBlockBtnCSS(){
 
 	//define width, strokeColor and display depending on contentConfig (defined in config.js)
 	//TODO:
-	width = "1.4em";
-	strokeColor = "#717171";
-	display = "inline";
+	width = contentConfig[5] * 0.01 + "em";
+	strokeColor = contentConfig[4];
+	if(contentConfig[2]){
+		display = "inline";
+	}else{
+		display = "none";
+	}
 
 	//add the new rules
 	style.sheet.insertRule(`

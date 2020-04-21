@@ -34,7 +34,11 @@ let contentConfig;
 	});
 
 	//init. CSS for block-buttons
-	//initBlockBtnCSS();
+	try {
+		initBlockBtnCSS();
+	} catch (error) {
+		console.log(error);
+	}
 
 	/*
 	INSTALLING LISTENER FOR MESSAGES FROM background-scripts
@@ -56,7 +60,7 @@ let contentConfig;
 			if(msg.sender === "background_config_storage"){
 				contentConfig[msg.content.config_id] = msg.content.config_val;
 
-				//updateBlockBtnCSS();
+				updateBlockBtnCSS();
 				console.log(contentConfig);
 			}
 		}
