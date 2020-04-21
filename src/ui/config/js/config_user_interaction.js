@@ -66,7 +66,7 @@
 		//tell the user agent that if the event does not get explicitly handled
 		e.preventDefault();
 		//send a msg to the background_config_storage to activate/deactivate the BtnVisibility
-		browser.runtime.sendMessage(createConfigValueSetMsg(ConfigId.USE_POPUP, document.getElementById("configPopupCheckbox").checked));
+		browser.runtime.sendMessage(createConfigValueSetMsg(ConfigId.CONFIG_USE_POPUP, document.getElementById("configPopupCheckbox").checked));
 	}
 
 	//handle the event from the configBtnVisibilityCheckbox
@@ -244,7 +244,7 @@
 		val = await browser.runtime.sendMessage(createConfigValueRequestMsg(ConfigId.CONFIG_ADVANCED_VIEW));
 		changeAdvancedView(val);
 
-		val = await browser.runtime.sendMessage(createConfigValueRequestMsg(ConfigId.USE_POPUP));
+		val = await browser.runtime.sendMessage(createConfigValueRequestMsg(ConfigId.CONFIG_USE_POPUP));
 		changePopup(val);
 
 		val = await browser.runtime.sendMessage(createConfigValueRequestMsg(ConfigId.CONTENT_BLOCK_BTN_VISIBILITY));
@@ -285,7 +285,7 @@
 					changePageDesign(msg.content.config_val);
 				} else if (msg.content.config_id === ConfigId.CONFIG_ADVANCED_VIEW) {
 					changeAdvancedView(msg.content.config_val);
-				} else if (msg.content.config_id === ConfigId.USE_POPUP) {
+				} else if (msg.content.config_id === ConfigId.CONFIG_USE_POPUP) {
 					changePopup(msg.content.config_val);
 				} else if (msg.content.config_id === ConfigId.CONTENT_BLOCK_BTN_VISIBILITY) {
 					changeBtnVisibility(msg.content.config_val);
