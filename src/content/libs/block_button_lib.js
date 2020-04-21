@@ -124,7 +124,7 @@ function updateBlockBtnCSS(){
 	//TODO:
 	width = "1.4em";
 	strokeColor = "#717171";
-	display = "flex";
+	display = "inline";
 
 	//add the new rules
 	style.sheet.insertRule(`
