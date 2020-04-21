@@ -78,15 +78,6 @@
 		browser.runtime.sendMessage(createConfigValueSetMsg(ConfigId.CONTENT_BLOCK_BTN_VISIBILITY, document.getElementById("configBtnVisibilityCheckbox").checked));
 	}
 
-	//handle the event from the configBlockVideosOnVideopageCheckbox
-	//send a massage to the background to activate/deactivate blocking on videopage
-	function configBlockVideosOnVideopageCheckboxHandler(e) {
-		//tell the user agent that if the event does not get explicitly handled
-		e.preventDefault();
-		//send a msg to the background_config_storage to activate/deactivate blocking on videopage
-		browser.runtime.sendMessage(createConfigValueSetMsg(ConfigId.CONTENT_BLOCK_VIDEOS_ON_VIDEOPAGE_VISIBILITY, document.getElementById("configBlockVideosOnVideopageCheckbox").checked));
-	}
-
 	//handle the event from the configBtnColor
 	//send a massage to the background to change the color of the block btns
 	function configBtnColorHandler(e) {
@@ -184,12 +175,6 @@
 		document.getElementById("configBtnVisibilityCheckbox").checked = configValue;
 	}
 
-	//change the configBlockVideosOnVideopageCheckbox
-	function changeBlockVideosOnVideopage(configValue) {
-		document.getElementById("configBlockVideosOnVideopageCheckbox").value = configValue;
-		document.getElementById("configBlockVideosOnVideopageCheckbox").checked = configValue;
-	}
-
 	//change the configBtnColor
 	function changeBtnColor(configValue) {
 		document.getElementById("configBtnColor").value = configValue;
@@ -232,11 +217,6 @@
 		configBtnVisibilityCheckboxHandler(event);
 	});
 
-	//define behavior for clicking the configBlockVideosOnVideopageCheckbox
-	document.getElementById("configBlockVideosOnVideopageCheckbox").addEventListener('click', function (event) {
-		configBlockVideosOnVideopageCheckboxHandler(event);
-	});
-
 	//define behavior for changing the color
 	document.getElementById("configBtnColor").onchange = configBtnColorHandler;
 
@@ -264,22 +244,17 @@
 		val = await browser.runtime.sendMessage(createConfigValueRequestMsg(ConfigId.CONFIG_ADVANCED_VIEW));
 		changeAdvancedView(val);
 
-
 		val = await browser.runtime.sendMessage(createConfigValueRequestMsg(ConfigId.USE_POPUP));
 		changePopup(val);
 
 		val = await browser.runtime.sendMessage(createConfigValueRequestMsg(ConfigId.CONTENT_BLOCK_BTN_VISIBILITY));
 		changeBtnVisibility(val);
 
-		val = await browser.runtime.sendMessage(createConfigValueRequestMsg(ConfigId.CONTENT_BLOCK_VIDEOS_ON_VIDEOPAGE_VISIBILITY));
-		changeBlockVideosOnVideopage(val);
-
 		val = await browser.runtime.sendMessage(createConfigValueRequestMsg(ConfigId.CONTENT_BLOCK_BTN_COLOR));
 		changeBtnColor(val);
 
 		val = await browser.runtime.sendMessage(createConfigValueRequestMsg(ConfigId.CONTENT_BLOCK_BTN_SIZE));
 		changeBtnSize(val);
-
 
 		val = await browser.runtime.sendMessage(createConfigValueRequestMsg(ConfigId.CONTENT_ANIMATION_SPEED));
 		changeAnimationSpeed(val);
@@ -314,8 +289,6 @@
 					changePopup(msg.content.config_val);
 				} else if (msg.content.config_id === ConfigId.CONTENT_BLOCK_BTN_VISIBILITY) {
 					changeBtnVisibility(msg.content.config_val);
-				} else if (msg.content.config_id === ConfigId.CONTENT_BLOCK_VIDEOS_ON_VIDEOPAGE_VISIBILITY) {
-					changeBlockVideosOnVideopage(msg.content.config_val);
 				} else if (msg.content.config_id === ConfigId.CONTENT_BLOCK_BTN_COLOR) {
 					changeBtnColor(msg.content.config_val);
 				} else if (msg.content.config_id === ConfigId.CONTENT_BLOCK_BTN_SIZE) {
