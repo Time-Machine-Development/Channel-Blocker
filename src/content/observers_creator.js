@@ -13,6 +13,7 @@ function createTrendingObservers(){
 
 	obs.push(new Observer(EXPANDED_VIDEO_CONFIG, onExpandedVideoObserved));
 	obs.push(new Observer(HORIZONTAL_VIDEO_CONFIG, onHorizontalVideoObserved));
+	obs.push(new Observer(HORIZONTAL_VIDEO_CONTAINER_CONFIG, onHorizontalVideoContainerObserved));
 
 	return obs;
 }
