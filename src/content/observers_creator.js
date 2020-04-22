@@ -11,9 +11,9 @@ function createHomeObservers(){
 function createTrendingObservers(){
 	let obs = [];
 
-	obs.push(new Observer(EXPANDED_VIDEO_CONFIG, onVideoObserved));
-	obs.push(new Observer(HORIZONTAL_VIDEO_CONFIG, onVideoObserved));
-	obs.push(new Observer(HORIZONTAL_VIDEO_CONTAINER_CONFIG, onHorizontalVideoContainerObserved));
+	obs.push(new Observer(EXPANDED_VIDEO_CONFIG, onVerticalVideoObserved));
+	obs.push(new Observer(HORIZONTAL_VIDEO_CONFIG, onHorizontalVideoObserved));
+	obs.push(new Observer(VIDEO_CONTAINER_CONFIG, onVideoContainerObserved));
 
 	return obs;
 }

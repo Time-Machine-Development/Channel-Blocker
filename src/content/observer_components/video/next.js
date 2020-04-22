@@ -32,5 +32,5 @@ async function onNextObserved(next, characterDatas, characterDataParents, config
 		right: "0%"
 	});
 
-	toggleVisibilty(next, await isVideoTitleBlocked(characterDatas.userChannelName, characterDatas.videoTitle));
+	toggleVisibiltyHorizontal(next, await isVideoTitleBlocked(characterDatas.userChannelName, characterDatas.videoTitle));
 }

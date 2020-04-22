@@ -29,11 +29,11 @@ async function onCommentObserved(comment, characterDatas){
 
 	insertBlockBtnBefore(authorText, userChannelName);
 
-	toggleVisibilty(comment, await isCommentContentBlocked(userChannelName, characterDatas.commentContent));
+	toggleVisibiltyHorizontal(comment, await isCommentContentBlocked(userChannelName, characterDatas.commentContent));
 }
 
 async function onReplyCommentObserved(replyComment, characterDatas){
 	insertBlockBtnBefore($(replyComment).find("a#author-text")[0], characterDatas.userChannelName);
 
-	toggleVisibilty(replyComment, await isCommentContentBlocked(characterDatas.userChannelName, characterDatas.commentContent));
+	toggleVisibiltyHorizontal(replyComment, await isCommentContentBlocked(characterDatas.userChannelName, characterDatas.commentContent));
 }

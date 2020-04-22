@@ -17,7 +17,7 @@ async function onVideowallVideoObserved(videowallVideo, characterDatas){
 	let userChannelNameArray = characterDatas.userChannelName.split(USER_CHANNEL_NAME_VIEW_SEPERATOR);
 	userChannelNameArray.pop();
 
-	let userChannelName = userChannelNameArray.join("");
+	let userChannelName = userChannelNameArray.join("").trim();
 
-	toggleVisibilty(videowallVideo, await isVideoTitleBlocked(userChannelName, characterDatas.videoTitle));
+	fade(videowallVideo, await isVideoTitleBlocked(userChannelName, characterDatas.videoTitle));
 }
