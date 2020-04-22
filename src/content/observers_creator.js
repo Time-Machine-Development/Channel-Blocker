@@ -21,8 +21,8 @@ function createTrendingObservers(){
 function createSearchObservers(){
 	let obs = [];
 
-	obs.push(new Observer(SEARCH_VIDEO_CONFIG, onVideoObserved));
-	obs.push(new Observer(VERTICAL_VIDEO_CONFIG, onVideoObserved));
+	obs.push(new Observer(SEARCH_VIDEO_CONFIG, onVerticalVideoObserved));
+	obs.push(new Observer(VERTICAL_VIDEO_CONFIG, onVerticalVideoObserved));
 	obs.push(new Observer(PLAYLIST_CONFIG, onPlaylistObserved));
 	obs.push(new Observer(CHANNEL_CONFIG, onChannelObserved));
 

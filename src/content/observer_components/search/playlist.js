@@ -11,5 +11,5 @@ async function onPlaylistObserved(playlist, characterDatas){
 
 	insertBlockBtnBefore(beforeBlockBtn, characterDatas.userChannelName);
 
-	toggleVisibilty(playlist, await isVideoTitleBlocked(characterDatas.userChannelName, characterDatas.videoTitle));
+	toggleVisibiltyHorizontal(playlist, await isVideoTitleBlocked(characterDatas.userChannelName, characterDatas.videoTitle));
 }
