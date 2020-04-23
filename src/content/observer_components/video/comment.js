@@ -22,9 +22,9 @@ async function onCommentObserved(comment, characterDatas){
 		because "a#author-text" is hidden.
 		This seems to be the case, if the user/channel-name is inside a visual badge.*/
 
-		userChannelName = $(comment).find("yt-formatted-string[class='style-scope ytd-channel-name']")[0].innerText;
+		userChannelName = $(comment).find("yt-formatted-string[class='style-scope ytd-channel-name']")[0].innerText.trim();
 	}else{
-		userChannelName = $(authorText).find("span")[0].innerText;
+		userChannelName = $(authorText).find("span")[0].innerText.trim();
 	}
 
 	insertBlockBtnBefore(authorText, userChannelName);
