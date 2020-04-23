@@ -25,6 +25,13 @@ const YT_TAB_IDS = new HashSet();
 		"^https://www\\.youtube\\.com/(\\?(.)*|)$":								YTContext.HOME
 	});
 
+	//TODO:
+	//add https://www.youtube.com/feed/history
+	//add https://www.youtube.com/feed/library
+	//add https://www.youtube.com/feed/subscriptions
+	//add https://www.youtube.com/gaming
+	//add https://www.youtube.com/feed/storefront ?
+
 	function createContextSwitchMsg(context){
 		return {
 			sender: SENDER,

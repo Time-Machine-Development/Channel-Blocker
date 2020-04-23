@@ -72,6 +72,7 @@
 				"content/observer_components/home/home_video.js",
 				"content/observer_components/home/post.js",
 				"content/observer_components/home/video_in_container.js",
+				"content/observer_components/home/film.js",
 
 				"content/observer_components/trending/expanded_video.js",
 				"content/observer_components/trending/horizontal_video.js",
