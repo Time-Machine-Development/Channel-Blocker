@@ -16,9 +16,20 @@ function fade(element, isBlocked){
 
 function toggleVisibiltyVertical(element, isBlocked){
 	if(isBlocked){
-		$(element).animate({width: "hide"}, contentConfig[ConfigId.CONTENT_ANIMATION_SPEED]);
-	}else{
-		$(element).animate({width: "show"}, contentConfig[ConfigId.CONTENT_ANIMATION_SPEED]);
+		if(element.style.display !== "none"){
+			// set the style of children
+			for (let child of element.children) {
+				child.style.width = child.clientWidth + "px";
+			}
+			$(element).animate({width: "hide"}, contentConfig[ConfigId.CONTENT_ANIMATION_SPEED]);
+		}
+	}else if(element.style.display === "none"){
+		$(element).animate({width: "show"}, contentConfig[ConfigId.CONTENT_ANIMATION_SPEED], function() {
+			// animation complete. Reset children style
+			for (let child of element.children) {
+				child.style.width = "";
+			}
+		});
 	}
 }
 
