@@ -7,9 +7,7 @@ const PLAYLIST_CONFIG = Object.freeze({
 });
 
 async function onPlaylistObserved(playlist, characterDatas){
-	let beforeBlockBtn = $(playlist).find("a[class='yt-simple-endpoint style-scope ytd-playlist-renderer']")[0];
-
-	insertBlockBtnBefore(beforeBlockBtn, characterDatas.userChannelName);
+	insertBlockBtnBefore($(playlist).find("div#byline-container[class='style-scope ytd-video-meta-block']")[0], characterDatas.userChannelName);
 
 	toggleVisibilty(playlist, await isVideoTitleBlocked(characterDatas.userChannelName, characterDatas.videoTitle));
 }
