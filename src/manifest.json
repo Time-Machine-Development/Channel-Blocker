@@ -48,7 +48,8 @@
 			"background/config_storage.js",
 			"background/filter_storage.js",
 			"background/savefile_export.js",
-			"background/bug_report.js"
+			"background/bug_report.js",
+			"background/contextmenu_blocking.js"
 		]
 	},
 
