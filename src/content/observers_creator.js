@@ -4,7 +4,7 @@ function createHomeObservers(){
 	obs.push(new Observer(HOME_VIDEO_CONFIG, onVideoObserved));
 	obs.push(new Observer(POST_CONFIG, onPostObserved));
 	obs.push(new Observer(VIDEO_IN_CONTAINER_CONFIG, onVideoObserved));
-	obs.push(new Observer(FILM_CONFIG, onVideoObserved));
+	obs.push(new Observer(HOME_VIDEO_CONFIG, onVideoObserved));
 
 	return obs;
 }
@@ -55,6 +55,8 @@ function createVideoObservers(){
 	obs.push(new Observer(VIDEOWALL_VIDEO_CONFIG, onVideowallVideoObserved));
 
 	obs.push(new Observer(MAIN_VIDEO_CONFIG, onMainVideoObserved));
+
+	obs.push(new Observer(VIDEO_MOVIE_CONFIG, onVideoObserved));
 
 	return obs;
 }
