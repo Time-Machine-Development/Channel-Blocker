@@ -19,18 +19,7 @@ const NEXT_PLAYLIST_CONFIG = Object.freeze({
 });
 
 async function onNextObserved(next, characterDatas, characterDataParents, config){
-	let beforeBlockBtn;
-	if(config === NEXT_AUTOPLAY_CONFIG || config === NEXT_VIDEO_CONFIG){
-		beforeBlockBtn = $(next).find("a[class='yt-simple-endpoint style-scope ytd-compact-video-renderer']")[0];
-	}else if(config === NEXT_PLAYLIST_CONFIG){
-		beforeBlockBtn = $(next).find("a[class='yt-simple-endpoint style-scope ytd-compact-playlist-renderer']")[0];
-	}
-
-	insertBlockBtnAfter(beforeBlockBtn, characterDatas.userChannelName, {
-		position: "absolute",
-		top: "50%",
-		right: "0%"
-	});
+	insertBlockBtnBefore($(next).find("div#container[class='style-scope ytd-channel-name']")[0], characterDatas.userChannelName);
 
 	toggleVisibilty(next, await isVideoTitleBlocked(characterDatas.userChannelName, characterDatas.videoTitle));
 }
