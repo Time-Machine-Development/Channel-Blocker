@@ -40,6 +40,7 @@ function createBlockBtnElement(userChannelName, style){
 	//add new click-event-listener which blocks user/channel-name userChannelName when clicked
 	$(btn).on("click", () => {
 		browser.runtime.sendMessage(createAddBlockedUserMsg(userChannelName));
+		return false;
 	});
 
 	btn.appendChild(createBlockBtnSVG());
@@ -63,6 +64,7 @@ function insertBlockBtnBefore(element, userChannelName, style){
 		//add new click-event-listener which blocks user/channel-name userChannelName when clicked
 		$(blockBtn).on("click", () => {
 			browser.runtime.sendMessage(createAddBlockedUserMsg(userChannelName));
+			return false;
 		});
 	}else{
 		//no block-btn exists
@@ -88,6 +90,7 @@ function insertBlockBtnAfter(element, userChannelName, style){
 		//add new click-event-listener which blocks user/channel-name userChannelName when clicked
 		$(blockBtn).on("click", () => {
 			browser.runtime.sendMessage(createAddBlockedUserMsg(userChannelName));
+			return false;
 		});
 	}else{
 		//no block-btn exists

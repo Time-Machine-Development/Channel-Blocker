@@ -6,7 +6,7 @@ const CHANNEL_CONFIG = Object.freeze({
 });
 
 async function onChannelObserved(channel, characterDatas){
-	let beforeBlockBtn = $(channel).find("div#avatar-section[class='style-scope ytd-channel-renderer']")[0];
+	let beforeBlockBtn = $(channel).find("div#text-container[class='style-scope ytd-channel-name']")[0];
 
 	insertBlockBtnBefore(beforeBlockBtn, characterDatas.userChannelName);
 
