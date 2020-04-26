@@ -68,6 +68,8 @@
 
 				"content/config.js",
 
+				"content/contextmenu_blocking.js",
+
 				"content/observer_components/shared/shared.js",
 
 				"content/observer_components/home/home_video.js",
