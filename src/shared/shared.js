@@ -23,7 +23,40 @@ const YTContext = Object.freeze({
 	OTHER: 6
 });
 
-//NOTE: DO NOT USE THE VALUE '3' ANYMORE. It was formerly used for the block-main-video-on-video-page feature up to version 2.1.0.
+/* NOTE:
+DO NOT USE/CHANGE THE VALUES IN RANGE [0, 7] IN Object.values(ContentUI) OR Object.values(ContentUI) ANYMORE,
+INSTEAD USE VALUES >= 8 WHEN ADDING NEW ENTRIES TO ENUMS ContentUI AND SettingsUI.
+THE INTERSECTION OF Object.values(ContentUI) AND Object.values(ContentUI) MUST BE EMPTY.
+
+(This is due to the layout of STORAGE and backward compatibility of export-files from older versions.)
+*/
+const ContentUI = Object.freeze({
+	BLOCK_BTN_VISIBILITY: 2,
+	BLOCK_BTN_COLOR: 4,
+	BLOCK_BTN_SIZE: 5,
+	ANIMATION_SPEED: 6,
+});
+
+const SettingsUI = Object.freeze({
+	PAGE_DESIGN: 0,
+	ADVANCED_VIEW: 1,
+	POPUP: 7
+});
+
+const DEFAULT_CONTENT_UI_CONFIG = Object.freeze({
+	[ContentUI.BLOCK_BTN_VISIBILITY]: true,
+	[ContentUI.BLOCK_BTN_COLOR]: "#717171",
+	[ContentUI.BLOCK_BTN_SIZE]: 140,
+	[ContentUI.ANIMATION_SPEED]: 200
+});
+
+const DEFAULT_SETTINGS_UI_CONFIG = Object.freeze({
+	[SettingsUI.PAGE_DESIGN]: 0,
+	[SettingsUI.ADVANCED_VIEW]: false,
+	[SettingsUI.POPUP]: false
+});
+
+/*
 const ConfigId = Object.freeze({
 	CONFIG_PAGE_DESIGN: 0,
 	CONFIG_ADVANCED_VIEW: 1,
@@ -34,7 +67,7 @@ const ConfigId = Object.freeze({
 	CONFIG_USE_POPUP: 7
 });
 
-const DEFAULT_CONFIG = Object.freeze({
+const DEFAULT_UI_CONFIG = Object.freeze({
 	[ConfigId.CONFIG_PAGE_DESIGN]: 0,
 	[ConfigId.CONFIG_ADVANCED_VIEW]: false,
 	[ConfigId.CONTENT_BLOCK_BTN_VISIBILITY]: true,
@@ -43,3 +76,4 @@ const DEFAULT_CONFIG = Object.freeze({
 	[ConfigId.CONTENT_ANIMATION_SPEED]: 200,
 	[ConfigId.CONFIG_USE_POPUP]: false
 });
+*/
