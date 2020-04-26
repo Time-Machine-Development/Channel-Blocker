@@ -1,4 +1,9 @@
 function toggleVisibilty(element, isBlocked){
+	//return if and only if either element is hidden and should be blocked or element is not hidden and should not be blocked
+	if((element.style.display === "none") === isBlocked){
+		return;
+	}
+
 	if(isBlocked){
 		$(element).hide(contentConfig[ConfigId.CONTENT_ANIMATION_SPEED]);
 	}else{
@@ -7,6 +12,11 @@ function toggleVisibilty(element, isBlocked){
 }
 
 function fade(element, isBlocked){
+	//return if and only if either element is hidden and should be blocked or element is not hidden and should not be blocked
+	if((element.style.display === "none") === isBlocked){
+		return;
+	}
+
 	if(isBlocked){
 		$(element).fadeOut(contentConfig[ConfigId.CONTENT_ANIMATION_SPEED]);
 	}else{
@@ -40,6 +50,11 @@ function toggleVisibiltyVertical(element, isBlocked){
 }
 
 function toggleVisibiltyHorizontal(element, isBlocked){
+	//return if and only if either element is hidden and should be blocked or element is not hidden and should not be blocked
+	if((element.style.display === "none") === isBlocked){
+		return;
+	}
+
 	if(isBlocked){
 		$(element).animate({height: "hide"}, contentConfig[ConfigId.CONTENT_ANIMATION_SPEED]);
 	}else{
