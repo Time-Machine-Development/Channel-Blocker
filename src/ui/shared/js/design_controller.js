@@ -1,24 +1,24 @@
 {
     const SENDER = "shared_design_controller";
 
-	function createConfigValueRequestMsg(configId) {
+	function createSettingsUIPageDesignConfigValueRequestMsg() {
 		return {
 			sender: SENDER,
-			receiver: "background_config_storage",
-			info: "config_value_request",
+			receiver: "background_storage_settings_ui",
+			info: "settings_ui_config_value_request",
 			content: {
-				config_id: configId
+				settings_ui_id: SettingsUI.PAGE_DESIGN
 			}
 		};
 	}
 
     //request the design of this page
     async function requestDesignStyle(){
-        let val = await browser.runtime.sendMessage(createConfigValueRequestMsg(ConfigId.CONFIG_PAGE_DESIGN));
+        let val = await browser.runtime.sendMessage(createSettingsUIPageDesignConfigValueRequestMsg());
         changePageDesign(val);
     }
 
-    //change the css-style of the config page
+    //change the CSS-style of the settings page
     function changePageDesign(configValue) {
         if (configValue === "0") {
             document.getElementById("css").href = "../../shared/css/dark_root.css";

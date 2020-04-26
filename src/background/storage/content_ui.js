@@ -115,7 +115,7 @@
 			where <Content UI ID> is of Object.values(ContentUI).
 			*/
 
-			if(msg.sender === "shared_design_controller" || msg.sender === "config_config_user_interaction" || msg.sender === "content_controller"){
+			if(msg.sender === "config_config_user_interaction" || msg.sender === "content_controller"){
 				//answer message with contentUIConfig[<Content UI ID>]
 				return new Promise((resolve) => {
 					resolve(contentUIConfig[msg.content.content_ui_id]);

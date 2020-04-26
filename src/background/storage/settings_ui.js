@@ -119,6 +119,15 @@ settings_ui_storage.js also and solely enables and disables the Popup. */
 					resolve(settingsUIConfig[msg.content.settings_ui_id]);
 				});
 			}
+
+			if(msg.sender === "shared_design_controller"){
+				//shared_design_controller may only request SettingsUI.PAGE_DESIGN
+				if(msg.content.settings_ui_id === SettingsUI.PAGE_DESIGN){
+					return new Promise((resolve) => {
+						resolve(settingsUIConfig[msg.content.settings_ui_id]);
+					});
+				}
+			}
 		}
 	});
 }
