@@ -17,8 +17,8 @@ let contentUIConfig;
 
 	//update contentUIConfig with its current values
 	browser.runtime.sendMessage(createContentUIConfigRequestMsg())
-	.then((updatedcontentUIConfig) => {
-		contentUIConfig = updatedcontentUIConfig;
+	.then((updatedContentUIConfig) => {
+		contentUIConfig = updatedContentUIConfig;
 
 		updateBlockBtnCSS();
 	});

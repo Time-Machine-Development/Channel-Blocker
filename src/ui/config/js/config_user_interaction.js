@@ -305,6 +305,7 @@
 			if(msg.sender === "background_storage_settings_ui"){
 				switch(msg.content.settings_ui_id){
 					case SettingsUI.PAGE_DESIGN:
+						console.log(msg.content.settings_ui_config_val);
 						changePageDesign(msg.content.settings_ui_config_val);
 						break;
 

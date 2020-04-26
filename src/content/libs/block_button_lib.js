@@ -124,9 +124,9 @@ function updateBlockBtnCSS(){
 	}
 
 	//define width, strokeColor and display depending on contentUIConfig (defined in config.js)
-	width = contentUIConfig[ContentID.BLOCK_BTN_SIZE] * 0.01 + "em";
-	strokeColor = contentUIConfig[ContentID.BLOCK_BTN_COLOR];
-	if(contentUIConfig[ContentID.BLOCK_BTN_VISIBILITY]){
+	width = contentUIConfig[ContentUI.BLOCK_BTN_SIZE] * 0.01 + "em";
+	strokeColor = contentUIConfig[ContentUI.BLOCK_BTN_COLOR];
+	if(contentUIConfig[ContentUI.BLOCK_BTN_VISIBILITY]){
 		display = "inline";
 	}else{
 		display = "none";

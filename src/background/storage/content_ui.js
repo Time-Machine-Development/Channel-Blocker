@@ -25,7 +25,7 @@
 	async function initContentUIConfig() {
 		let config = await STORAGE.get("config");
 
-		if(storageContainer["config"] !== undefined){
+		if(config["config"] !== undefined){
 			//configuation was found in STORAGE
 
 			//load configuration from STORAGE
@@ -42,16 +42,7 @@
 		}
 
 		//an update of storage is necessary if configuration was (paritially) not found in STORAGE
-		updateStorage();
-	}
-
-	//synchronize STORAGE with contentUIConfig
-	async function updateStorage() {
-		let updatedConfig = Object.assign(await STORAGE.get("config"), contentUIConfig);
-
-		await STORAGE.set({
-			"config": updatedConfig
-		});
+		UI_CONFIG_STORAGE_UPDATER.update(contentUIConfig);
 	}
 
 	/* Sets contentUIConfig[contentUIID] to val.
@@ -70,7 +61,8 @@
 				browser.tabs.sendMessage(Number(tabId), createContentUIStorageModifiedMsg("content_config", contentUIID));
 			}
 
-			updateStorage();
+			//an update of storage is necessary if configuration was (paritially) not found in STORAGE
+			UI_CONFIG_STORAGE_UPDATER.update(contentUIConfig);
 		}
 	}
 

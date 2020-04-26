@@ -33,10 +33,10 @@ settings_ui_storage.js also and solely enables and disables the Popup. */
 	/* Init. settingsUIConfig with the the settings UI configuration which is stored in STORAGE (defined in shared).
 	If this function is called for the first time after the installation of this webextension,
 	it is also necessary to set settingsUIConfig to DEFAULT_SETTINGS_UI_CONFIG (defined in shared). */
-	async function initContentUIConfig() {
+	async function initSettingsUIConfig() {
 		let config = await STORAGE.get("config");
 
-		if(storageContainer["config"] !== undefined){
+		if(config["config"] !== undefined){
 			//configuation was found in STORAGE
 
 			//load configuration from STORAGE
@@ -53,33 +53,28 @@ settings_ui_storage.js also and solely enables and disables the Popup. */
 		}
 
 		//an update of storage is necessary if configuration was (paritially) not found in STORAGE
-		updateStorage();
+		UI_CONFIG_STORAGE_UPDATER.update(settingsUIConfig);
 
 		//change browserAction functionality depending on configuration of SettingsUI.POPUP
 		changeBrowserActionFunc();
-	}
-
-	//synchronize STORAGE with settingsUIConfig
-	async function updateStorage() {
-		let updatedConfig = Object.assign(await STORAGE.get("config"), settingsUIConfig);
-
-		await STORAGE.set({
-			"config": updatedConfig
-		});
 	}
 
 	/* Sets settingsUIConfig[settingsUIID] to val.
 	If settingsUIConfig[settingsUIID] was changed a "settings_ui_storage_modified"-message is sent to the config-tab.
 	Finally the STORAGE is updated. */
 	function setSettingsUIConfigVal(settingsUIID, val) {
-		if(contentUIConfig[contentUIID] !== val){
-			contentUIConfig[contentUIID] = val;
+		if(settingsUIConfig[settingsUIID] !== val){
+			settingsUIConfig[settingsUIID] = val;
 
 			if(configTabId !== null){
-				browser.tabs.sendMessage(configTabId, createSettingsUIStorageModifiedMsg(contentUIID));
+				browser.tabs.sendMessage(configTabId, createSettingsUIStorageModifiedMsg(settingsUIID));
 			}
 
-			updateStorage();
+			//an update of storage is necessary if configuration was (paritially) not found in STORAGE
+			UI_CONFIG_STORAGE_UPDATER.update(settingsUIConfig);
+
+			//change browserAction functionality depending on configuration of SettingsUI.POPUP
+			changeBrowserActionFunc();
 		}
 	}
 
@@ -101,7 +96,7 @@ settings_ui_storage.js also and solely enables and disables the Popup. */
 			*/
 
 			if(msg.sender === "config_savefile_import" || msg.sender === "config_config_user_interaction"){
-				setSettingsUIConfigVal(msg.content.config_id, msg.content.config_val);
+				setSettingsUIConfigVal(msg.content.settings_ui_id, msg.content.settings_ui_config_val);
 			}
 		}
 

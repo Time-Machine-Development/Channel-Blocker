@@ -46,9 +46,12 @@
 			"background/browser_action.js",
 			"background/url_update.js",
 
-			"background/storage/FilterStorageManager.js",
+			"background/storage/UIConfigStorageUpdater.js",
+			"background/storage/ui.js",
 			"background/storage/content_ui.js",
 			"background/storage/settings_ui.js",
+
+			"background/storage/FilterStorageManager.js",
 			"background/storage/filter.js",
 
 			"background/savefile_export.js",
