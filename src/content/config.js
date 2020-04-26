@@ -1,5 +1,5 @@
 //a reflection of await STORAGE.get("config") in background, containing all and only key/value-pairs which are content-related
-let contentConfig;
+let contentUIConfig;
 
 {
 	SENDER = "content_config";
@@ -15,10 +15,10 @@ let contentConfig;
 	//init. contentUIConfig with its default values
 	contentUIConfig = Object.assign({}, DEFAULT_CONTENT_UI_CONFIG);
 
-	//update contentConfig with its current values
+	//update contentUIConfig with its current values
 	browser.runtime.sendMessage(createContentUIConfigRequestMsg())
-	.then((updatedContentConfig) => {
-		contentConfig = updatedContentConfig;
+	.then((updatedcontentUIConfig) => {
+		contentUIConfig = updatedcontentUIConfig;
 
 		updateBlockBtnCSS();
 	});
