@@ -7,10 +7,10 @@
 	let contentUIConfig = {};
 	initContentUIConfig();
 
-	function createContentUIStorageModifiedMsg(contentUIID){
+	function createContentUIStorageModifiedMsg(receiver, contentUIID){
 		return {
 			sender: SENDER,
-			receiver: "config_config_user_interaction",
+			receiver: receiver,
 			info: "content_ui_storage_modified",
 			content: {
 				content_ui_id: contentUIID,
@@ -63,11 +63,11 @@
 			contentUIConfig[contentUIID] = val;
 
 			if(configTabId !== null){
-				browser.tabs.sendMessage(configTabId, createContentUIStorageModifiedMsg(contentUIID));
+				browser.tabs.sendMessage(configTabId, createContentUIStorageModifiedMsg("config_config_user_interaction", contentUIID));
 			}
 
 			for(let tabId of YT_TAB_IDS.keys()){
-				browser.tabs.sendMessage(Number(tabId), createContentUIStorageModifiedMsg(contentUIID));
+				browser.tabs.sendMessage(Number(tabId), createContentUIStorageModifiedMsg("content_config", contentUIID));
 			}
 
 			updateStorage();
