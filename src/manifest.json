@@ -82,6 +82,7 @@
 				"content/observer_components/search/vertical_video.js",
 				"content/observer_components/search/playlist.js",
 				"content/observer_components/search/channel.js",
+				"content/observer_components/search/search_movie.js",
 
 				"content/observer_components/video/comment.js",
 				"content/observer_components/video/main_video.js",

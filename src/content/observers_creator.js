@@ -4,8 +4,8 @@ function createHomeObservers(){
 	obs.push(new Observer(HOME_VIDEO_CONFIG, onVideoObserved));
 	obs.push(new Observer(POST_CONFIG, onPostObserved));
 	obs.push(new Observer(VIDEO_IN_CONTAINER_CONFIG, onVideoObserved));
-	obs.push(new Observer(HOME_VIDEO_CONFIG, onVideoObserved));
-
+	obs.push(new Observer(HOME_MOVIE_CONFIG, onVideoObserved));
+	
 	return obs;
 }
 
@@ -26,6 +26,7 @@ function createSearchObservers(){
 	obs.push(new Observer(VERTICAL_VIDEO_CONFIG, onVideoObserved));
 	obs.push(new Observer(PLAYLIST_CONFIG, onPlaylistObserved));
 	obs.push(new Observer(CHANNEL_CONFIG, onChannelObserved));
+	obs.push(new Observer(SEARCH_MOVIE_CONFIG, onVideoObserved));
 
 	return obs;
 }
