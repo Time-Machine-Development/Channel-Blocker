@@ -3,7 +3,7 @@ Due to the fact that it is not possible to completly outsource the Popup feature
 settings_ui_storage.js also and solely enables and disables the Popup. */
 
 {
-	const SENDER = "background_settings_ui_storage";
+	const SENDER = "background_storage_settings_ui";
 
 	//represents the current settings ui configuration
 	let settingsUIConfig = {};

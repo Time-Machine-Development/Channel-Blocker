@@ -1,7 +1,7 @@
 {
 	const SENDER = "config_savefile_import";
 
-	/* creates an "add"-message for background_filter_storage
+	/* creates an "add"-message for background_storage_filter
 	If an user/channel name is added regExType must be undefined (e.g. not passed) and userChannelNameOrRegEx has to be the user/channel name.
 	If a regular expression is added regExType has to be either RegExType.CASE_SENSITIVE or RegExType.CASE_INSENSITIVE
 	and userChannelNameOrRegEx has to be a regular expression.
@@ -9,7 +9,7 @@
 	function createAddMsg(filterType, userChannelNameOrRegExp, regExpType){
 		let msg = {
 			sender: SENDER,
-			receiver: "background_filter_storage",
+			receiver: "background_storage_filter",
 			info: "add",
 			content: {
 				filter_type: filterType

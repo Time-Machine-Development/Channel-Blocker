@@ -1,7 +1,7 @@
 function createIsBlockedRequestMsg(userChannelName){
 	return {
 		sender: "content_is_blocked_lib",
-		receiver: "background_filter_storage",
+		receiver: "background_storage_filter",
 		info: "is_blocked_request",
 		content: {
 			user_channel_name: userChannelName

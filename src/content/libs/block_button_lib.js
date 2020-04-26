@@ -1,7 +1,7 @@
 function createAddBlockedUserMsg(userChannelName){
 	return {
 		sender: "content_block_button_lib",
-		receiver: "background_filter_storage",
+		receiver: "background_storage_filter",
 		info: "add_blocked_user",
 		content: {
 			user_channel_name: userChannelName

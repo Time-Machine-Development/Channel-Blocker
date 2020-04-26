@@ -4,7 +4,7 @@
 	function createAddMsg(userChannelName){
 		return {
 			sender: SENDER,
-			receiver: "background_filter_storage",
+			receiver: "background_storage_filter",
 			info: "add",
 			content: {
 				filter_type: FilterType.BLOCKED_USERS,
@@ -16,7 +16,7 @@
 	function createDeleteMsg(filterVal){
 		return {
 			sender: SENDER,
-			receiver: "background_filter_storage",
+			receiver: "background_storage_filter",
 			info: "delete",
 			content: {
 				filter_type: FilterType.BLOCKED_USERS,
@@ -28,7 +28,7 @@
 	function createFilterValuesRequestMsg(){
 		return {
 			sender: SENDER,
-			receiver: "background_filter_storage",
+			receiver: "background_storage_filter",
 			info: "filter_values_request",
 			content: {
 				filter_type: FilterType.BLOCKED_USERS
@@ -67,8 +67,8 @@
 	//get the filter values of type FilterType.BLOCKED_USERS, clear the selection and add the new values
 	async function sendAndProcessFilterValuesRequestMsg(){
 		/* sendAndProcessFilterValuesRequestMsg() receives the currently stored values including the newly added resp. newly deleted
-		(probably) because the messages the background_filter_storage receives are added in a queue and therefore the
-		message sent in createFilterValuesRequestMsg() will always be processed by background_filter_storage after the storage was altered
+		(probably) because the messages the background_storage_filter receives are added in a queue and therefore the
+		message sent in createFilterValuesRequestMsg() will always be processed by background_storage_filter after the storage was altered
 		by messages sent in addBtnHandler() and popupDelBtnHandler(). */
 		let values = await browser.runtime.sendMessage(createFilterValuesRequestMsg());
 

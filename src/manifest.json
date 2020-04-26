@@ -42,13 +42,14 @@
 			"shared/browser-polyfill.min.js",
 			"shared/shared.js",
 			"background/HashSet.js",
-			"background/FilterStorageManager.js",
+
 			"background/browser_action.js",
 			"background/url_update.js",
 
-			"background/content_ui_storage.js",
-			"background/settings_ui_storage.js",
-			"background/filter_storage.js",
+			"background/storage/FilterStorageManager.js",
+			"background/storage/content_ui.js",
+			"background/storage/settings_ui.js",
+			"background/storage/filter.js",
 
 			"background/savefile_export.js",
 			"background/bug_report.js"

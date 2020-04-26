@@ -1,7 +1,7 @@
 // Manages the part of the storage which is affilliated to content UI configuration.
 
 {
-	const SENDER = "background_content_ui_storage";
+	const SENDER = "background_storage_content_ui";
 
 	//represents the current content ui configuration
 	let contentUIConfig = {};
