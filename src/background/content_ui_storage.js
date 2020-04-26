@@ -19,7 +19,7 @@
 		};
 	}
 
-	/* Init. contentUIConfig with the the content ui configuration which is stored in STORAGE (defined in shared).
+	/* Init. contentUIConfig with the the content UI configuration which is stored in STORAGE (defined in shared).
 	If this function is called for the first time after the installation of this webextension,
 	it is also necessary to set contentUIConfig to DEFAULT_CONTENT_UI_CONFIG (defined in shared). */
 	async function initContentUIConfig() {
@@ -102,8 +102,8 @@
 			*/
 
 			if(msg.sender === "config_config_user_interaction"){
-				setConfigVal(ContentUI.BLOCK_BTN_COLOR, DEFAULT_CONTENT_UI_CONFIG[ContentUI.BLOCK_BTN_COLOR]);
-				setConfigVal(ContentUI.BLOCK_BTN_SIZE, DEFAULT_CONTENT_UI_CONFIG[ContentUI.BLOCK_BTN_SIZE]);
+				setContentUIConfigVal(ContentUI.BLOCK_BTN_COLOR, DEFAULT_CONTENT_UI_CONFIG[ContentUI.BLOCK_BTN_COLOR]);
+				setContentUIConfigVal(ContentUI.BLOCK_BTN_SIZE, DEFAULT_CONTENT_UI_CONFIG[ContentUI.BLOCK_BTN_SIZE]);
 			}
 		}
 
