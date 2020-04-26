@@ -66,6 +66,10 @@
 
 	//get the filter values of type FilterType.BLOCKED_USERS, clear the selection and add the new values
 	async function sendAndProcessFilterValuesRequestMsg(){
+		/* sendAndProcessFilterValuesRequestMsg() receives the currently stored values including the newly added resp. newly deleted
+		(probably) because the messages the background_filter_storage receives are added in a queue and therefore the
+		message sent in createFilterValuesRequestMsg() will always be processed by background_filter_storage after the storage was altered
+		by messages sent in addBtnHandler() and popupDelBtnHandler(). */
 		let values = await browser.runtime.sendMessage(createFilterValuesRequestMsg());
 
 		clearSelection();
@@ -89,8 +93,6 @@
 		browser.runtime.sendMessage(createAddMsg(document.getElementById("popupTextField").value));
 		document.getElementById("popupTextField").value = "";
 
-		/*TODO: Running sendAndProcessFilterValuesRequestMsg() here DOES NOT guarantee receiving the currently stored values
-		but it will most-likely work because the storage modifications that are performed are small in most use-cases.*/
 		sendAndProcessFilterValuesRequestMsg();
 	}
 
@@ -113,8 +115,6 @@
 			browser.runtime.sendMessage(createDeleteMsg(filterVal));
 		}
 
-		/*TODO: Running sendAndProcessFilterValuesRequestMsg() here DOES NOT guarantee receiving the currently stored values
-		but it will most-likely work because the storage modifications that are performed are small in most use-cases.*/
 		sendAndProcessFilterValuesRequestMsg();
 	}
 
