@@ -10,5 +10,5 @@ async function onChannelObserved(channel, characterDatas){
 
 	insertBlockBtnBefore(beforeBlockBtn, characterDatas.userChannelName);
 
-	toggleVisibilty(channel, await isUserChannelNameBlocked(characterDatas.userChannelName));
+	toggleVisibiltyHorizontal(channel, await isUserChannelNameBlocked(characterDatas.userChannelName));
 }

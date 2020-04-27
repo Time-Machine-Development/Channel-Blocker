@@ -21,5 +21,5 @@ const NEXT_PLAYLIST_CONFIG = Object.freeze({
 async function onNextObserved(next, characterDatas, characterDataParents, config){
 	insertBlockBtnBefore($(next).find("div#container[class='style-scope ytd-channel-name']")[0], characterDatas.userChannelName);
 
-	toggleVisibilty(next, await isVideoTitleBlocked(characterDatas.userChannelName, characterDatas.videoTitle));
+	toggleVisibiltyHorizontal(next, await isVideoTitleBlocked(characterDatas.userChannelName, characterDatas.videoTitle));
 }

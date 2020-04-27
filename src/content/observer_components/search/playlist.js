@@ -9,5 +9,5 @@ const PLAYLIST_CONFIG = Object.freeze({
 async function onPlaylistObserved(playlist, characterDatas){
 	insertBlockBtnBefore($(playlist).find("div#byline-container[class='style-scope ytd-video-meta-block']")[0], characterDatas.userChannelName);
 
-	toggleVisibilty(playlist, await isVideoTitleBlocked(characterDatas.userChannelName, characterDatas.videoTitle));
+	toggleVisibiltyHorizontal(playlist, await isVideoTitleBlocked(characterDatas.userChannelName, characterDatas.videoTitle));
 }

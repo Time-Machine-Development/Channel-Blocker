@@ -1,15 +1,15 @@
-const HORIZONTAL_VIDEO_CONTAINER_CONFIG = Object.freeze({
+const VIDEO_CONTAINER_CONFIG = Object.freeze({
 	anchorSelector: ["ytd-item-section-renderer[class='style-scope ytd-section-list-renderer']"],
 	characterDataSelectors: {
         userChannelName: ["div#title-text[class='style-scope ytd-shelf-renderer']"]
 	}
 });
 
-async function onHorizontalVideoContainerObserved(horizontalVideoContainer, characterDatas, characterDataParents){
+async function onVideoContainerObserved(videoContainer, characterDatas, characterDataParents){
     insertBlockBtnAfter(characterDataParents.userChannelName, characterDatas.userChannelName, {
         paddingLeft: "8px",
         paddingRight: "0",
     });
 
-	toggleVisibilty(horizontalVideoContainer, await isUserChannelNameBlocked(characterDatas.userChannelName));
+	toggleVisibiltyHorizontal(videoContainer, await isUserChannelNameBlocked(characterDatas.userChannelName));
 }

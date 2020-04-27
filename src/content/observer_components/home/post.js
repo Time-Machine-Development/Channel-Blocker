@@ -11,5 +11,5 @@ async function onPostObserved(post, characterDatas){
 
 	insertBlockBtnBefore(beforeBlockBtn, characterDatas.userChannelName);
 
-	toggleVisibilty(post, await isCommentContentBlocked(characterDatas.userChannelName, characterDatas.commentContent));
+	toggleVisibiltyVertical(post, await isCommentContentBlocked(characterDatas.userChannelName, characterDatas.commentContent));
 }

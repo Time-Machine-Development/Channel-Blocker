@@ -1,4 +1,3 @@
-
 const SEARCH_MOVIE_CONFIG = Object.freeze({
 	anchorSelector: ["ytd-movie-renderer[class='style-scope ytd-item-section-renderer']"],
 	characterDataSelectors: {

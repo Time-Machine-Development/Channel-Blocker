@@ -83,7 +83,7 @@
 
 				"content/observer_components/trending/expanded_video.js",
 				"content/observer_components/trending/horizontal_video.js",
-				"content/observer_components/trending/horizontal_video_container.js",
+				"content/observer_components/trending/video_container.js",
 
 				"content/observer_components/search/search_video.js",
 				"content/observer_components/search/vertical_video.js",
