@@ -80,14 +80,26 @@
 			}
 		}
 
-		if(jsonSaveFile["config"] !== undefined){
+		if(jsonSaveFile[CONTENT_UI_STORAGE_ID] !== undefined && jsonSaveFile[SETTINGS_UI_STORAGE_ID] !== undefined){
+			//Assume savefile from version higher than 2.2.1
+
+			for(let contentUIID of Object.values(ContentUI)){
+				browser.runtime.sendMessage(createContentUIConfigValueSetMsg(contentUIID, jsonSaveFile[CONTENT_UI_STORAGE_ID][contentUIID]));
+			}
+
+			for(let settingsUIID of Object.values(SettingsUI)){
+				browser.runtime.sendMessage(createSettingsUIConfigValueSetMsg(settingsUIID, jsonSaveFile[SETTINGS_UI_STORAGE_ID][settingsUIID]));
+			}
+
+		}else if(jsonSaveFile["config"] !== undefined){
 			//Assume savefile from version 2.2.1 or below
 
 			for(deprecatedID of Object.values(DeprecatedConfig)){
 				let mappedConfig = DeprecatedConfigToConfigMapping[deprecatedID];
 
+				/* DeprecatedConfig.PAGE_DESIGN, DeprecatedConfig.ANIMATION_SPEED, DeprecatedConfig.BLOCK_BTN_SIZE may be saved as String rather than Number,
+				therefore they are converted */
 				if(mappedConfig.storageID === SETTINGS_UI_STORAGE_ID){
-					// the PAGE_DESIGN is not longer of type string, parse it to an int when found
 					if(deprecatedID === DeprecatedConfig.PAGE_DESIGN){
 						browser.runtime.sendMessage(createSettingsUIConfigValueSetMsg(mappedConfig.ID, Number(jsonSaveFile["config"][deprecatedID])));
 					}else{
@@ -100,18 +112,6 @@
 						browser.runtime.sendMessage(createContentUIConfigValueSetMsg(mappedConfig.ID, jsonSaveFile["config"][deprecatedID]));
 					}
 				}
-			}
-		}
-
-		if(jsonSaveFile[CONTENT_UI_STORAGE_ID] !== undefined && jsonSaveFile[SETTINGS_UI_STORAGE_ID] !== undefined){
-			//Assume savefile from version higher than 2.2.1
-
-			for(let contentUIID of Object.values(ContentUI)){
-				browser.runtime.sendMessage(createContentUIConfigValueSetMsg(contentUIID, jsonSaveFile[CONTENT_UI_STORAGE_ID][contentUIID]));
-			}
-
-			for(let settingsUIID of Object.values(SettingsUI)){
-				browser.runtime.sendMessage(createSettingsUIConfigValueSetMsg(settingsUIID, jsonSaveFile[SETTINGS_UI_STORAGE_ID][settingsUIID]));
 			}
 		}
 	}
