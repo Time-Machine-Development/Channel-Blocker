@@ -23,23 +23,62 @@ const YTContext = Object.freeze({
 	OTHER: 6
 });
 
-//NOTE: DO NOT USE THE VALUE '3' ANYMORE. It was formerly used for the block-main-video-on-video-page feature up to version 2.1.0.
-const ConfigId = Object.freeze({
-	CONFIG_PAGE_DESIGN: 0,
-	CONFIG_ADVANCED_VIEW: 1,
-	CONTENT_BLOCK_BTN_VISIBILITY: 2,
-	CONTENT_BLOCK_BTN_COLOR: 4,
-	CONTENT_BLOCK_BTN_SIZE: 5,
-	CONTENT_ANIMATION_SPEED: 6,
-	CONFIG_USE_POPUP: 7
+
+const CONTENT_UI_STORAGE_ID = "content_ui";
+
+const ContentUI = Object.freeze({
+	BLOCK_BTN_VISIBILITY: 0,
+	BLOCK_BTN_COLOR: 1,
+	BLOCK_BTN_SIZE: 2,
+	ANIMATION_SPEED: 3
 });
 
-const DEFAULT_CONFIG = Object.freeze({
-	[ConfigId.CONFIG_PAGE_DESIGN]: 0,
-	[ConfigId.CONFIG_ADVANCED_VIEW]: false,
-	[ConfigId.CONTENT_BLOCK_BTN_VISIBILITY]: true,
-	[ConfigId.CONTENT_BLOCK_BTN_COLOR]: "#717171",
-	[ConfigId.CONTENT_BLOCK_BTN_SIZE]: 140,
-	[ConfigId.CONTENT_ANIMATION_SPEED]: 200,
-	[ConfigId.CONFIG_USE_POPUP]: false
+const DEFAULT_CONTENT_UI_CONFIG = Object.freeze({
+	[ContentUI.BLOCK_BTN_VISIBILITY]: true,
+	[ContentUI.BLOCK_BTN_COLOR]: "#717171",
+	[ContentUI.BLOCK_BTN_SIZE]: 140,
+	[ContentUI.ANIMATION_SPEED]: 200
+});
+
+
+const SETTINGS_UI_STORAGE_ID = "settings_ui";
+
+const SettingsUI = Object.freeze({
+	PAGE_DESIGN: 0,
+	ADVANCED_VIEW: 1,
+	POPUP: 2
+});
+
+const DEFAULT_SETTINGS_UI_CONFIG = Object.freeze({
+	[SettingsUI.PAGE_DESIGN]: 0,
+	[SettingsUI.ADVANCED_VIEW]: false,
+	[SettingsUI.POPUP]: false
+});
+
+/* NOTE:
+ONLY USE FOR IMPLEMENTATION OF BACKWARD-COMPATIBILITY E.G. IMPORT OF OLD SAVE-FILES.
+*/
+
+const DeprecatedConfig = Object.freeze({
+	PAGE_DESIGN: 0,
+	ADVANCED_VIEW: 1,
+	BLOCK_BTN_VISIBILITY: 2,
+	BLOCK_BTN_COLOR: 4,
+	BLOCK_BTN_SIZE: 5,
+	ANIMATION_SPEED: 6,
+	POPUP: 7
+});
+
+/* Maps the DeprecatedConfigID to the
+storageID of the storage which now manages the configuration for DeprecatedConfigID
+and to the ID in storageID which supersedes DeprecatedConfigID.
+*/
+const DeprecatedConfigToConfigMapping = Object.freeze({
+	[DeprecatedConfig.PAGE_DESIGN]: 			{storageID: SETTINGS_UI_STORAGE_ID, ID: SettingsUI.PAGE_DESIGN},
+	[DeprecatedConfig.ADVANCED_VIEW]: 			{storageID: SETTINGS_UI_STORAGE_ID, ID: SettingsUI.ADVANCED_VIEW},
+	[DeprecatedConfig.BLOCK_BTN_VISIBILITY]:	{storageID: CONTENT_UI_STORAGE_ID, 	ID: ContentUI.BLOCK_BTN_VISIBILITY},
+	[DeprecatedConfig.BLOCK_BTN_COLOR]:			{storageID: CONTENT_UI_STORAGE_ID, 	ID: ContentUI.BLOCK_BTN_COLOR},
+	[DeprecatedConfig.BLOCK_BTN_SIZE]: 			{storageID: CONTENT_UI_STORAGE_ID, 	ID: ContentUI.BLOCK_BTN_SIZE},
+	[DeprecatedConfig.ANIMATION_SPEED]: 		{storageID: CONTENT_UI_STORAGE_ID, 	ID: ContentUI.ANIMATION_SPEED},
+	[DeprecatedConfig.POPUP]: 					{storageID: SETTINGS_UI_STORAGE_ID, ID: SettingsUI.POPUP}
 });

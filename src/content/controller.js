@@ -76,7 +76,7 @@
 			undefined
 			*/
 
-			if(msg.sender === "background_filter_storage"){
+			if(msg.sender === "background_storage_filter"){
 				//update observers
 				$(document).ready(updateObservers());
 			}

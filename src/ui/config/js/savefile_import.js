@@ -1,7 +1,7 @@
 {
 	const SENDER = "config_savefile_import";
 
-	/* creates an "add"-message for background_filter_storage
+	/* creates an "add"-message for background_storage_filter
 	If an user/channel name is added regExType must be undefined (e.g. not passed) and userChannelNameOrRegEx has to be the user/channel name.
 	If a regular expression is added regExType has to be either RegExType.CASE_SENSITIVE or RegExType.CASE_INSENSITIVE
 	and userChannelNameOrRegEx has to be a regular expression.
@@ -9,7 +9,7 @@
 	function createAddMsg(filterType, userChannelNameOrRegExp, regExpType){
 		let msg = {
 			sender: SENDER,
-			receiver: "background_filter_storage",
+			receiver: "background_storage_filter",
 			info: "add",
 			content: {
 				filter_type: filterType
@@ -26,14 +26,26 @@
 		return msg;
 	}
 
-	function createConfigValueSetMsg(configId, configVal) {
+	function createContentUIConfigValueSetMsg(contentUIID, contentUIConfigVal) {
 		return {
 			sender: SENDER,
-			receiver: "background_config_storage",
-			info: "config_value_set",
+			receiver: "background_storage_content_ui",
+			info: "content_ui_config_value_set",
 			content: {
-				config_id: configId,
-				config_val: configVal
+				content_ui_id: contentUIID,
+				content_ui_config_val: contentUIConfigVal
+			}
+		};
+	}
+
+	function createSettingsUIConfigValueSetMsg(settingsUIID, settingsUIConfigVal) {
+		return {
+			sender: SENDER,
+			receiver: "background_storage_settings_ui",
+			info: "settings_ui_config_value_set",
+			content: {
+				settings_ui_id: settingsUIID,
+				settings_ui_config_val: settingsUIConfigVal
 			}
 		};
 	}
@@ -69,9 +81,28 @@
 		}
 
 		if(jsonSaveFile["config"] !== undefined){
-			//New savefile-format
-			for(let configId of Object.values(ConfigId)){
-				browser.runtime.sendMessage(createConfigValueSetMsg(configId, jsonSaveFile["config"][configId]));
+			//Assume savefile from version 2.2.1 or below
+
+			for(deprecatedID of Object.values(DeprecatedConfig)){
+				let mappedConfig = DeprecatedConfigToConfigMapping[deprecatedID];
+
+				if(mappedConfig.storageID === SETTINGS_UI_STORAGE_ID){
+					browser.runtime.sendMessage(createSettingsUIConfigValueSetMsg(mappedConfig.ID, jsonSaveFile["config"][deprecatedID]));
+				}else if(mappedConfig.storageID === CONTENT_UI_STORAGE_ID){
+					browser.runtime.sendMessage(createContentUIConfigValueSetMsg(mappedConfig.ID, jsonSaveFile["config"][deprecatedID]));
+				}
+			}
+		}
+
+		if(jsonSaveFile[CONTENT_UI_STORAGE_ID] !== undefined && jsonSaveFile[SETTINGS_UI_STORAGE_ID] !== undefined){
+			//Assume savefile from version higher than 2.2.1
+
+			for(let contentUIID of Object.values(ContentUI)){
+				browser.runtime.sendMessage(createContentUIConfigValueSetMsg(contentUIID, jsonSaveFile[CONTENT_UI_STORAGE_ID][contentUIID]));
+			}
+
+			for(let settingsUIID of Object.values(SettingsUI)){
+				browser.runtime.sendMessage(createSettingsUIConfigValueSetMsg(settingsUIID, jsonSaveFile[SETTINGS_UI_STORAGE_ID][settingsUIID]));
 			}
 		}
 	}
@@ -86,6 +117,6 @@
 	}
 
 	document.getElementById('visibleFileLoaderBtn').addEventListener('click', () => {
-			document.getElementById('fileLoaderBtn').click();
+		document.getElementById('fileLoaderBtn').click();
 	});
 }

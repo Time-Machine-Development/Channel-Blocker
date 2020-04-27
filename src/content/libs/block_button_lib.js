@@ -1,7 +1,7 @@
 function createAddBlockedUserMsg(userChannelName){
 	return {
 		sender: "content_block_button_lib",
-		receiver: "background_filter_storage",
+		receiver: "background_storage_filter",
 		info: "add_blocked_user",
 		content: {
 			user_channel_name: userChannelName
@@ -100,7 +100,7 @@ function insertBlockBtnAfter(element, userChannelName, style){
 	}
 }
 
-//adds a new Element with id "cb_style" and updates CSS depending on contentConfig (defined in config.js)
+//adds a new Element with id "cb_style" and updates CSS depending on contentUIConfig (defined in config.js)
 function initBlockBtnCSS(){
 	//if cb_style Element does not already exist add it to the head
 	if(document.getElementById("cb_style") === null){
@@ -113,7 +113,7 @@ function initBlockBtnCSS(){
 	updateBlockBtnCSS();
 }
 
-//updates CSS depending on contentConfig (defined in config.js)
+//updates CSS depending on contentUIConfig (defined in config.js)
 function updateBlockBtnCSS(){
 	//get the cb_style element
 	let style = document.getElementById("cb_style");
@@ -123,10 +123,10 @@ function updateBlockBtnCSS(){
 		style.sheet.deleteRule(0);
 	}
 
-	//define width, strokeColor and display depending on contentConfig (defined in config.js)
-	width = contentConfig[ConfigId.CONTENT_BLOCK_BTN_SIZE] * 0.01 + "em";
-	strokeColor = contentConfig[ConfigId.CONTENT_BLOCK_BTN_COLOR];
-	if(contentConfig[ConfigId.CONTENT_BLOCK_BTN_VISIBILITY]){
+	//define width, strokeColor and display depending on contentUIConfig (defined in config.js)
+	width = contentUIConfig[ContentUI.BLOCK_BTN_SIZE] * 0.01 + "em";
+	strokeColor = contentUIConfig[ContentUI.BLOCK_BTN_COLOR];
+	if(contentUIConfig[ContentUI.BLOCK_BTN_VISIBILITY]){
 		display = "inline";
 	}else{
 		display = "none";

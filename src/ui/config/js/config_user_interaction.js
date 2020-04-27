@@ -1,33 +1,56 @@
 {
 	const SENDER = "config_config_user_interaction";
 
-	function createConfigValueSetMsg(configId, configVal) {
+	function createContentUIConfigValueSetMsg(contentUIID, contentUIConfigVal) {
 		return {
 			sender: SENDER,
-			receiver: "background_config_storage",
-			info: "config_value_set",
+			receiver: "background_storage_content_ui",
+			info: "content_ui_config_value_set",
 			content: {
-				config_id: configId,
-				config_val: configVal
+				content_ui_id: contentUIID,
+				content_ui_config_val: contentUIConfigVal
 			}
 		};
 	}
 
-	function createConfigValueResetMsg() {
+	function createSettingsUIConfigValueSetMsg(settingsUIID, settingsUIConfigVal) {
 		return {
 			sender: SENDER,
-			receiver: "background_config_storage",
-			info: "config_value_reset"
+			receiver: "background_storage_settings_ui",
+			info: "settings_ui_config_value_set",
+			content: {
+				settings_ui_id: settingsUIID,
+				settings_ui_config_val: settingsUIConfigVal
+			}
 		};
 	}
 
-	function createConfigValueRequestMsg(configId) {
+	function createContentUIConfigValueResetMsg() {
 		return {
 			sender: SENDER,
-			receiver: "background_config_storage",
-			info: "config_value_request",
+			receiver: "background_storage_content_ui",
+			info: "content_ui_config_value_reset"
+		};
+	}
+
+	function createContentUIConfigValueRequestMsg(contentUIID) {
+		return {
+			sender: SENDER,
+			receiver: "background_storage_content_ui",
+			info: "content_ui_config_value_request",
 			content: {
-				config_id: configId
+				content_ui_id: contentUIID
+			}
+		};
+	}
+
+	function createSettingsUIConfigValueRequestMsg(settingsUIID) {
+		return {
+			sender: SENDER,
+			receiver: "background_storage_settings_ui",
+			info: "settings_ui_config_value_request",
+			content: {
+				settings_ui_id: settingsUIID
 			}
 		};
 	}
@@ -46,8 +69,8 @@
 		//tell the user agent that if the event does not get explicitly handled
 		e.preventDefault();
 
-		//send a msg to the background_config_storage to activate/deactivate the advanced view
-		browser.runtime.sendMessage(createConfigValueSetMsg(ConfigId.CONFIG_PAGE_DESIGN, document.getElementById("DesignSelect").value));
+		//send a msg to the background_config_storage to change PageDesign
+		browser.runtime.sendMessage(createSettingsUIConfigValueSetMsg(SettingsUI.PAGE_DESIGN, Number(document.getElementById("DesignSelect").value)));
 	}
 
 	//handle the event from the configAdvancedViewCheckbox
@@ -57,7 +80,7 @@
 		e.preventDefault();
 
 		//send a msg to the background_config_storage to activate/deactivate the advanced view
-		browser.runtime.sendMessage(createConfigValueSetMsg(ConfigId.CONFIG_ADVANCED_VIEW, document.getElementById("configAdvancedViewCheckbox").checked));
+		browser.runtime.sendMessage(createSettingsUIConfigValueSetMsg(SettingsUI.ADVANCED_VIEW, document.getElementById("configAdvancedViewCheckbox").checked));
 	}
 
 	//handle the event from the configPopupCheckbox
@@ -66,7 +89,7 @@
 		//tell the user agent that if the event does not get explicitly handled
 		e.preventDefault();
 		//send a msg to the background_config_storage to activate/deactivate the BtnVisibility
-		browser.runtime.sendMessage(createConfigValueSetMsg(ConfigId.CONFIG_USE_POPUP, document.getElementById("configPopupCheckbox").checked));
+		browser.runtime.sendMessage(createSettingsUIConfigValueSetMsg(SettingsUI.POPUP, document.getElementById("configPopupCheckbox").checked));
 	}
 
 	//handle the event from the configBtnVisibilityCheckbox
@@ -75,7 +98,7 @@
 		//tell the user agent that if the event does not get explicitly handled
 		e.preventDefault();
 		//send a msg to the background_config_storage to activate/deactivate the BtnVisibility
-		browser.runtime.sendMessage(createConfigValueSetMsg(ConfigId.CONTENT_BLOCK_BTN_VISIBILITY, document.getElementById("configBtnVisibilityCheckbox").checked));
+		browser.runtime.sendMessage(createContentUIConfigValueSetMsg(ContentUI.BLOCK_BTN_VISIBILITY, document.getElementById("configBtnVisibilityCheckbox").checked));
 	}
 
 	//handle the event from the configBtnColor
@@ -84,7 +107,7 @@
 		//tell the user agent that if the event does not get explicitly handled
 		e.preventDefault();
 		//send a msg to the background_config_storage to change the color of the block btns
-		browser.runtime.sendMessage(createConfigValueSetMsg(ConfigId.CONTENT_BLOCK_BTN_COLOR, document.getElementById("configBtnColor").value));
+		browser.runtime.sendMessage(createContentUIConfigValueSetMsg(ContentUI.BLOCK_BTN_COLOR, document.getElementById("configBtnColor").value));
 	}
 
 	//handle the event from the configAnimationSpeedSlider
@@ -93,7 +116,7 @@
 		//tell the user agent that if the event does not get explicitly handled
 		e.preventDefault();
 		//send a msg to the background_config_storage to change the size of the block btns
-		browser.runtime.sendMessage(createConfigValueSetMsg(ConfigId.CONTENT_ANIMATION_SPEED, document.getElementById("configAnimationSpeedSlider").value));
+		browser.runtime.sendMessage(createContentUIConfigValueSetMsg(ContentUI.ANIMATION_SPEED, Number(document.getElementById("configAnimationSpeedSlider").value)));
 	}
 
 	//handle the event from the configBtnSizeSliderHandler
@@ -102,7 +125,7 @@
 		//tell the user agent that if the event does not get explicitly handled
 		e.preventDefault();
 		//send a msg to the background_config_storage to change the size of the block btns
-		browser.runtime.sendMessage(createConfigValueSetMsg(ConfigId.CONTENT_BLOCK_BTN_SIZE, document.getElementById("configBtnSizeSlider").value));
+		browser.runtime.sendMessage(createContentUIConfigValueSetMsg(ContentUI.BLOCK_BTN_SIZE, Number(document.getElementById("configBtnSizeSlider").value)));
 	}
 
 	//handle the event from the exportBtn
@@ -117,7 +140,7 @@
 	//handle the event from the resetBtn
 	//reset
 	function resetBtnHandler() {
-		browser.runtime.sendMessage(createConfigValueResetMsg());
+		browser.runtime.sendMessage(createContentUIConfigValueResetMsg());
 	}
 
 	//set all configboxes unviable and set the selected configboxe viable
@@ -135,9 +158,9 @@
 	//change the css-style of the config page
 	function changePageDesign(configValue) {
 		document.getElementById("DesignSelect").value = configValue;
-		if (configValue === "0") {
+		if(configValue === 0){
             document.getElementById("css").href = "../../shared/css/dark_root.css";
-        } else if (configValue === "1") {
+        }else if(configValue === 1){
             document.getElementById("css").href = "../../shared/css/light_root.css";
 		}
 	}
@@ -178,7 +201,7 @@
 	//change the configBtnColor
 	function changeBtnColor(configValue) {
 		document.getElementById("configBtnColor").value = configValue;
-			document.getElementById("cpBtn").style.background = configValue;
+		document.getElementById("cpBtn").style.background = configValue;
 		document.getElementById("showColorBtn").style.stroke = configValue;
 	}
 
@@ -195,27 +218,19 @@
 
 	/*
 	INSTALLING LISTENER FOR EVENTS FROM userinteraction
-	 */
+	*/
 
 	//define behavior for changing the DesignSelect
-	document.getElementById("DesignSelect").onchange = function (event) {
-		configPageDesignSelectHandler(event);
-	};
+	document.getElementById("DesignSelect").onchange = configPageDesignSelectHandler;
 
 	//define behavior for clicking the configAdvancedViewCheckbox
-	document.getElementById("configAdvancedViewCheckbox").addEventListener('click', function (event) {
-		configAdvancedViewCheckboxHandler(event);
-	});
+	document.getElementById("configAdvancedViewCheckbox").addEventListener('click', configAdvancedViewCheckboxHandler);
 
 	//define behavior for clicking the configPopupCheckbox
-	document.getElementById("configPopupCheckbox").addEventListener('click', function (event) {
-		configPopupCheckboxHandler(event);
-	});
+	document.getElementById("configPopupCheckbox").addEventListener('click', configPopupCheckboxHandler);
 
 	//define behavior for clicking the configBtnVisibilityCheckbox
-	document.getElementById("configBtnVisibilityCheckbox").addEventListener('click', function (event) {
-		configBtnVisibilityCheckboxHandler(event);
-	});
+	document.getElementById("configBtnVisibilityCheckbox").addEventListener('click', configBtnVisibilityCheckboxHandler);
 
 	//define behavior for changing the color
 	document.getElementById("configBtnColor").onchange = configBtnColorHandler;
@@ -237,26 +252,25 @@
 
 	//send a config_value_request
 	async function initRequests() {
-		let val = await browser.runtime.sendMessage(createConfigValueRequestMsg(ConfigId.CONFIG_PAGE_DESIGN));
+		let val = await browser.runtime.sendMessage(createSettingsUIConfigValueRequestMsg(SettingsUI.PAGE_DESIGN));
 		changePageDesign(val);
 
-		//AdvancedView
-		val = await browser.runtime.sendMessage(createConfigValueRequestMsg(ConfigId.CONFIG_ADVANCED_VIEW));
+		val = await browser.runtime.sendMessage(createSettingsUIConfigValueRequestMsg(SettingsUI.ADVANCED_VIEW));
 		changeAdvancedView(val);
 
-		val = await browser.runtime.sendMessage(createConfigValueRequestMsg(ConfigId.CONFIG_USE_POPUP));
+		val = await browser.runtime.sendMessage(createSettingsUIConfigValueRequestMsg(SettingsUI.POPUP));
 		changePopup(val);
 
-		val = await browser.runtime.sendMessage(createConfigValueRequestMsg(ConfigId.CONTENT_BLOCK_BTN_VISIBILITY));
+		val = await browser.runtime.sendMessage(createContentUIConfigValueRequestMsg(ContentUI.BLOCK_BTN_VISIBILITY));
 		changeBtnVisibility(val);
 
-		val = await browser.runtime.sendMessage(createConfigValueRequestMsg(ConfigId.CONTENT_BLOCK_BTN_COLOR));
+		val = await browser.runtime.sendMessage(createContentUIConfigValueRequestMsg(ContentUI.BLOCK_BTN_COLOR));
 		changeBtnColor(val);
 
-		val = await browser.runtime.sendMessage(createConfigValueRequestMsg(ConfigId.CONTENT_BLOCK_BTN_SIZE));
+		val = await browser.runtime.sendMessage(createContentUIConfigValueRequestMsg(ContentUI.BLOCK_BTN_SIZE));
 		changeBtnSize(val);
 
-		val = await browser.runtime.sendMessage(createConfigValueRequestMsg(ConfigId.CONTENT_ANIMATION_SPEED));
+		val = await browser.runtime.sendMessage(createContentUIConfigValueRequestMsg(ContentUI.ANIMATION_SPEED));
 		changeAnimationSpeed(val);
 	}
 
@@ -264,37 +278,64 @@
 
 	/*
 	INSTALLING LISTENER FOR MESSAGES FROM background-scripts
-	 */
+	*/
 
 	browser.runtime.onMessage.addListener((msg, sender) => {
 		if(msg.receiver !== SENDER)
 			return;
 
-		if(msg.info === "config_storage_modified"){
+		if(msg.info === "settings_ui_storage_modified"){
 			/* msg.content is of the form:
 			{
-				config_id: <Config ID>,
-				config_val: <Config Value>
+				settings_ui_id: <Settings UI ID>,
+				settings_ui_config_val: <Settings UI Config Value>
 			}
-			where <Config ID> is of Object.values(ConfigId).
+			where <Settings UI ID> is of Object.values(SettingsUI).
 			*/
 
-			if(msg.sender === "background_config_storage"){
-				//react on config-storage modification
-				if (msg.content.config_id === ConfigId.CONFIG_PAGE_DESIGN) {
-					changePageDesign(msg.content.config_val);
-				} else if (msg.content.config_id === ConfigId.CONFIG_ADVANCED_VIEW) {
-					changeAdvancedView(msg.content.config_val);
-				} else if (msg.content.config_id === ConfigId.CONFIG_USE_POPUP) {
-					changePopup(msg.content.config_val);
-				} else if (msg.content.config_id === ConfigId.CONTENT_BLOCK_BTN_VISIBILITY) {
-					changeBtnVisibility(msg.content.config_val);
-				} else if (msg.content.config_id === ConfigId.CONTENT_BLOCK_BTN_COLOR) {
-					changeBtnColor(msg.content.config_val);
-				} else if (msg.content.config_id === ConfigId.CONTENT_BLOCK_BTN_SIZE) {
-					changeBtnSize(msg.content.config_val);
-				} else if (msg.content.config_id === ConfigId.CONTENT_BLOCK_BTN_SIZE) {
-					changeAnimationSpeed(msg.content.config_val);
+			if(msg.sender === "background_storage_settings_ui"){
+				switch(msg.content.settings_ui_id){
+					case SettingsUI.PAGE_DESIGN:
+						changePageDesign(msg.content.settings_ui_config_val);
+						break;
+
+					case SettingsUI.ADVANCED_VIEW:
+						changeAdvancedView(msg.content.settings_ui_config_val);
+						break;
+
+					case SettingsUI.POPUP:
+						changePopup(msg.content.settings_ui_config_val);
+						break;
+				}
+			}
+		}
+
+		if(msg.info === "content_ui_storage_modified"){
+			/* msg.content is of the form:
+			{
+				content_ui_id: <Content UI ID>,
+				content_ui_config_val: <Content UI Config Value>
+			}
+			where <Content UI ID> is of Object.values(ContentUI).
+			*/
+
+			if(msg.sender === "background_storage_content_ui"){
+				switch(msg.content.content_ui_id){
+					case ContentUI.BLOCK_BTN_VISIBILITY:
+						changeBtnVisibility(msg.content.content_ui_config_val);
+						break;
+
+					case ContentUI.BLOCK_BTN_COLOR:
+						changeBtnColor(msg.content.content_ui_config_val);
+						break;
+
+					case ContentUI.BLOCK_BTN_SIZE:
+						changeBtnSize(msg.content.content_ui_config_val);
+						break;
+
+					case ContentUI.ANIMATION_SPEED:
+						changeAnimationSpeed(msg.content.content_ui_config_val);
+						break;
 				}
 			}
 		}
