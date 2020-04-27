@@ -661,6 +661,10 @@ input:checked + .slider:before {
 	.innerDivExp aside {
 		width:52%;
 	}
+
+	.saveFileDiv{
+		flex-direction:column;
+	}
 }
 
 /*Smaller screen*/
