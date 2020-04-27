@@ -18,9 +18,9 @@ function fade(element, isBlocked){
 	}
 
 	if(isBlocked){
-		$(element).fadeOut(contentConfig[ContentUI.ANIMATION_SPEED]);
+		$(element).fadeOut(contentUIConfig[ContentUI.ANIMATION_SPEED]);
 	}else{
-		$(element).fadeIn(contentConfig[ContentUI.ANIMATION_SPEED]);
+		$(element).fadeIn(contentUIConfig[ContentUI.ANIMATION_SPEED]);
 	}
 }
 
@@ -38,9 +38,9 @@ function toggleVisibiltyVertical(element, isBlocked){
 			child.style.width = child.clientWidth + "px";
 		}
 
-		$(element).animate({width: "hide"}, contentConfig[ContentUI.ANIMATION_SPEED]);
+		$(element).animate({width: "hide"}, contentUIConfig[ContentUI.ANIMATION_SPEED]);
 	}else if(element.style.display === "none"){
-		$(element).animate({width: "show"}, contentConfig[ContentUI.ANIMATION_SPEED], () => {
+		$(element).animate({width: "show"}, contentUIConfig[ContentUI.ANIMATION_SPEED], () => {
 			//To "enable" the default behaviour (e.g. a forced width-height-ratio) the style.width is set to "" s.t. the "default" style.width is used.
 			for (let child of element.children) {
 				child.style.width = "";
@@ -56,8 +56,8 @@ function toggleVisibiltyHorizontal(element, isBlocked){
 	}
 
 	if(isBlocked){
-		$(element).animate({height: "hide"}, contentConfig[ContentUI.ANIMATION_SPEED]);
+		$(element).animate({height: "hide"}, contentUIConfig[ContentUI.ANIMATION_SPEED]);
 	}else{
-		$(element).animate({height: "show"}, contentConfig[ContentUI.ANIMATION_SPEED]);
+		$(element).animate({height: "show"}, contentUIConfig[ContentUI.ANIMATION_SPEED]);
 	}
 }
