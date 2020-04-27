@@ -74,11 +74,11 @@ storageID of the storage which now manages the configuration for DeprecatedConfi
 and to the ID in storageID which supersedes DeprecatedConfigID.
 */
 const DeprecatedConfigToConfigMapping = Object.freeze({
-	PAGE_DESIGN: 			{storageID: SETTINGS_UI_STORAGE_ID, ID: SettingsUI.PAGE_DESIGN},
-	ADVANCED_VIEW: 			{storageID: SETTINGS_UI_STORAGE_ID, ID: SettingsUI.ADVANCED_VIEW},
-	BLOCK_BTN_VISIBILITY:	{storageID: CONTENT_UI_STORAGE_ID, 	ID: ContentUI.BLOCK_BTN_VISIBILITY},
-	BLOCK_BTN_COLOR:		{storageID: CONTENT_UI_STORAGE_ID, 	ID: ContentUI.BLOCK_BTN_COLOR},
-	BLOCK_BTN_SIZE: 		{storageID: CONTENT_UI_STORAGE_ID, 	ID: ContentUI.BLOCK_BTN_SIZE},
-	ANIMATION_SPEED: 		{storageID: CONTENT_UI_STORAGE_ID, 	ID: ContentUI.ANIMATION_SPEED},
-	POPUP: 					{storageID: SETTINGS_UI_STORAGE_ID, ID: SettingsUI.POPUP}
+	[DeprecatedConfig.PAGE_DESIGN]: 			{storageID: SETTINGS_UI_STORAGE_ID, ID: SettingsUI.PAGE_DESIGN},
+	[DeprecatedConfig.ADVANCED_VIEW]: 			{storageID: SETTINGS_UI_STORAGE_ID, ID: SettingsUI.ADVANCED_VIEW},
+	[DeprecatedConfig.BLOCK_BTN_VISIBILITY]:	{storageID: CONTENT_UI_STORAGE_ID, 	ID: ContentUI.BLOCK_BTN_VISIBILITY},
+	[DeprecatedConfig.BLOCK_BTN_COLOR]:			{storageID: CONTENT_UI_STORAGE_ID, 	ID: ContentUI.BLOCK_BTN_COLOR},
+	[DeprecatedConfig.BLOCK_BTN_SIZE]: 			{storageID: CONTENT_UI_STORAGE_ID, 	ID: ContentUI.BLOCK_BTN_SIZE},
+	[DeprecatedConfig.ANIMATION_SPEED]: 		{storageID: CONTENT_UI_STORAGE_ID, 	ID: ContentUI.ANIMATION_SPEED},
+	[DeprecatedConfig.POPUP]: 					{storageID: SETTINGS_UI_STORAGE_ID, ID: SettingsUI.POPUP}
 });

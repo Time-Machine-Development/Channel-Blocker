@@ -81,14 +81,28 @@
 		}
 
 		if(jsonSaveFile["config"] !== undefined){
-			//New savefile-format
+			//Assume savefile from version 2.2.1 or below
+
+			for(deprecatedID of Object.values(DeprecatedConfig)){
+				let mappedConfig = DeprecatedConfigToConfigMapping[deprecatedID];
+
+				if(mappedConfig.storageID === SETTINGS_UI_STORAGE_ID){
+					browser.runtime.sendMessage(createSettingsUIConfigValueSetMsg(mappedConfig.ID, jsonSaveFile["config"][deprecatedID]));
+				}else if(mappedConfig.storageID === CONTENT_UI_STORAGE_ID){
+					browser.runtime.sendMessage(createContentUIConfigValueSetMsg(mappedConfig.ID, jsonSaveFile["config"][deprecatedID]));
+				}
+			}
+		}
+
+		if(jsonSaveFile[CONTENT_UI_STORAGE_ID] !== undefined && jsonSaveFile[SETTINGS_UI_STORAGE_ID] !== undefined){
+			//Assume savefile from version higher than 2.2.1
 
 			for(let contentUIID of Object.values(ContentUI)){
-				browser.runtime.sendMessage(createContentUIConfigValueSetMsg(contentUIID, jsonSaveFile["config"][contentUIID]));
+				browser.runtime.sendMessage(createContentUIConfigValueSetMsg(contentUIID, jsonSaveFile[CONTENT_UI_STORAGE_ID][contentUIID]));
 			}
 
 			for(let settingsUIID of Object.values(SettingsUI)){
-				browser.runtime.sendMessage(createSettingsUIConfigValueSetMsg(settingsUIID, jsonSaveFile["config"][settingsUIID]));
+				browser.runtime.sendMessage(createSettingsUIConfigValueSetMsg(settingsUIID, jsonSaveFile[SETTINGS_UI_STORAGE_ID][settingsUIID]));
 			}
 		}
 	}
@@ -103,6 +117,6 @@
 	}
 
 	document.getElementById('visibleFileLoaderBtn').addEventListener('click', () => {
-			document.getElementById('fileLoaderBtn').click();
+		document.getElementById('fileLoaderBtn').click();
 	});
 }

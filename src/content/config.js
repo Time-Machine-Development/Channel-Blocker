@@ -1,4 +1,4 @@
-//a reflection of await STORAGE.get("config") in background, containing all and only key/value-pairs which are content-related
+//a reflection of await STORAGE.get(CONTENT_UI_STORAGE_ID)[CONTENT_UI_STORAGE_ID] in background
 let contentUIConfig;
 
 {
@@ -15,6 +15,9 @@ let contentUIConfig;
 	//init. contentUIConfig with its default values
 	contentUIConfig = Object.assign({}, DEFAULT_CONTENT_UI_CONFIG);
 
+	//init. CSS for block-buttons
+	initBlockBtnCSS();
+
 	//update contentUIConfig with its current values
 	browser.runtime.sendMessage(createContentUIConfigRequestMsg())
 	.then((updatedContentUIConfig) => {
@@ -22,9 +25,6 @@ let contentUIConfig;
 
 		updateBlockBtnCSS();
 	});
-
-	//init. CSS for block-buttons
-	initBlockBtnCSS();
 
 	/*
 	INSTALLING LISTENER FOR MESSAGES FROM background-scripts
