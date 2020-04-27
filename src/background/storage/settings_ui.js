@@ -34,29 +34,31 @@ settings_ui_storage.js also and solely enables and disables the Popup. */
 	If this function is called for the first time after the installation of this webextension,
 	it is also necessary to set settingsUIConfig to DEFAULT_SETTINGS_UI_CONFIG (defined in shared). */
 	async function initSettingsUIConfig() {
-		let config = await STORAGE.get("config");
+		let storage = await STORAGE.get(SETTINGS_UI_STORAGE_ID);
 
-		if(config["config"] !== undefined){
-			//configuation was found in STORAGE
-
-			//load configuration from STORAGE
-			for(let settingsUIID of Object.values(SettingsUI)){
-				settingsUIConfig[settingsUIID] = config[settingsUIID];
-			}
+		if(storage[SETTINGS_UI_STORAGE_ID] !== undefined){
+			//load configuration from STORAGE if it was found
+			settingsUIConfig = storage[SETTINGS_UI_STORAGE_ID];
 		}
 
 		//set all not already set configurations to their default
 		for(let settingsUIID of Object.values(SettingsUI)){
-			if(config[settingsUIID] === undefined){
+			if(settingsUIConfig[settingsUIID] === undefined){
 				settingsUIConfig[settingsUIID] = DEFAULT_SETTINGS_UI_CONFIG[settingsUIID];
 			}
 		}
 
 		//an update of storage is necessary if configuration was (paritially) not found in STORAGE
-		UI_CONFIG_STORAGE_UPDATER.update(settingsUIConfig);
+		updateSettingsUIConfigStorage();
 
 		//change browserAction functionality depending on configuration of SettingsUI.POPUP
 		changeBrowserActionFunc();
+	}
+
+	async function updateSettingsUIConfigStorage(){
+		await STORAGE.set({
+			[SETTINGS_UI_STORAGE_ID]: settingsUIConfig
+		});
 	}
 
 	/* Sets settingsUIConfig[settingsUIID] to val.
@@ -71,7 +73,7 @@ settings_ui_storage.js also and solely enables and disables the Popup. */
 			}
 
 			//an update of storage is necessary if configuration was (paritially) not found in STORAGE
-			UI_CONFIG_STORAGE_UPDATER.update(settingsUIConfig);
+			updateSettingsUIConfigStorage();
 
 			//change browserAction functionality depending on configuration of SettingsUI.POPUP
 			changeBrowserActionFunc();

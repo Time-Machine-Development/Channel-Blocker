@@ -23,24 +23,14 @@ const YTContext = Object.freeze({
 	OTHER: 6
 });
 
-/* NOTE:
-DO NOT USE/CHANGE THE VALUES IN RANGE [0, 7] IN Object.values(ContentUI) OR Object.values(ContentUI) ANYMORE,
-INSTEAD USE VALUES >= 8 WHEN ADDING NEW ENTRIES TO ENUMS ContentUI AND SettingsUI.
-THE INTERSECTION OF Object.values(ContentUI) AND Object.values(ContentUI) MUST BE EMPTY.
 
-(This is due to the layout of STORAGE and backward compatibility of export-files from older versions.)
-*/
+const CONTENT_UI_STORAGE_ID = "content_ui";
+
 const ContentUI = Object.freeze({
-	BLOCK_BTN_VISIBILITY: 2,
-	BLOCK_BTN_COLOR: 4,
-	BLOCK_BTN_SIZE: 5,
-	ANIMATION_SPEED: 6
-});
-
-const SettingsUI = Object.freeze({
-	PAGE_DESIGN: 0,
-	ADVANCED_VIEW: 1,
-	POPUP: 7
+	BLOCK_BTN_VISIBILITY: 0,
+	BLOCK_BTN_COLOR: 1,
+	BLOCK_BTN_SIZE: 2,
+	ANIMATION_SPEED: 3
 });
 
 const DEFAULT_CONTENT_UI_CONFIG = Object.freeze({
@@ -50,8 +40,45 @@ const DEFAULT_CONTENT_UI_CONFIG = Object.freeze({
 	[ContentUI.ANIMATION_SPEED]: 200
 });
 
+
+const SETTINGS_UI_STORAGE_ID = "settings_ui";
+
+const SettingsUI = Object.freeze({
+	PAGE_DESIGN: 0,
+	ADVANCED_VIEW: 1,
+	POPUP: 2
+});
+
 const DEFAULT_SETTINGS_UI_CONFIG = Object.freeze({
 	[SettingsUI.PAGE_DESIGN]: 0,
 	[SettingsUI.ADVANCED_VIEW]: false,
 	[SettingsUI.POPUP]: false
+});
+
+/* NOTE:
+ONLY USE FOR IMPLEMENTATION OF BACKWARD-COMPATIBILITY E.G. IMPORT OF OLD SAVE-FILES.
+*/
+
+const DeprecatedConfig = Object.freeze({
+	PAGE_DESIGN: 0,
+	ADVANCED_VIEW: 1,
+	BLOCK_BTN_VISIBILITY: 2,
+	BLOCK_BTN_COLOR: 4,
+	BLOCK_BTN_SIZE: 5,
+	ANIMATION_SPEED: 6,
+	POPUP: 7
+});
+
+/* Maps the DeprecatedConfigID to the
+storageID of the storage which now manages the configuration for DeprecatedConfigID
+and to the ID in storageID which supersedes DeprecatedConfigID.
+*/
+const DeprecatedConfigToConfigMapping = Object.freeze({
+	PAGE_DESIGN: 			{storageID: SETTINGS_UI_STORAGE_ID, ID: SettingsUI.PAGE_DESIGN},
+	ADVANCED_VIEW: 			{storageID: SETTINGS_UI_STORAGE_ID, ID: SettingsUI.ADVANCED_VIEW},
+	BLOCK_BTN_VISIBILITY:	{storageID: CONTENT_UI_STORAGE_ID, 	ID: ContentUI.BLOCK_BTN_VISIBILITY},
+	BLOCK_BTN_COLOR:		{storageID: CONTENT_UI_STORAGE_ID, 	ID: ContentUI.BLOCK_BTN_COLOR},
+	BLOCK_BTN_SIZE: 		{storageID: CONTENT_UI_STORAGE_ID, 	ID: ContentUI.BLOCK_BTN_SIZE},
+	ANIMATION_SPEED: 		{storageID: CONTENT_UI_STORAGE_ID, 	ID: ContentUI.ANIMATION_SPEED},
+	POPUP: 					{storageID: SETTINGS_UI_STORAGE_ID, ID: SettingsUI.POPUP}
 });

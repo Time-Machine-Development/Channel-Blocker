@@ -16,8 +16,6 @@
     async function requestDesignStyle(){
         let val = await browser.runtime.sendMessage(createSettingsUIPageDesignConfigValueRequestMsg());
 
-		console.log(typeof val + ": "+ val);
-
         changePageDesign(val);
     }
 

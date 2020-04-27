@@ -23,26 +23,28 @@
 	If this function is called for the first time after the installation of this webextension,
 	it is also necessary to set contentUIConfig to DEFAULT_CONTENT_UI_CONFIG (defined in shared). */
 	async function initContentUIConfig() {
-		let config = await STORAGE.get("config");
+		let storage = await STORAGE.get(CONTENT_UI_STORAGE_ID);
 
-		if(config["config"] !== undefined){
-			//configuation was found in STORAGE
-
-			//load configuration from STORAGE
-			for(let contentUIID of Object.values(ContentUI)){
-				contentUIConfig[contentUIID] = config[contentUIID];
-			}
+		if(storage[CONTENT_UI_STORAGE_ID] !== undefined){
+			//load configuration from STORAGE if it was found
+			contentUIConfig = storage[CONTENT_UI_STORAGE_ID];
 		}
 
 		//set all not already set configurations to their default
 		for(let contentUIID of Object.values(ContentUI)){
-			if(config[contentUIID] === undefined){
+			if(contentUIConfig[contentUIID] === undefined){
 				contentUIConfig[contentUIID] = DEFAULT_CONTENT_UI_CONFIG[contentUIID];
 			}
 		}
 
 		//an update of storage is necessary if configuration was (paritially) not found in STORAGE
-		UI_CONFIG_STORAGE_UPDATER.update(contentUIConfig);
+		updateContentUIConfigStorage();
+	}
+
+	async function updateContentUIConfigStorage(){
+		await STORAGE.set({
+			[CONTENT_UI_STORAGE_ID]: contentUIConfig
+		});
 	}
 
 	/* Sets contentUIConfig[contentUIID] to val.
@@ -62,7 +64,7 @@
 			}
 
 			//an update of storage is necessary if configuration was (paritially) not found in STORAGE
-			UI_CONFIG_STORAGE_UPDATER.update(contentUIConfig);
+			updateContentUIConfigStorage();
 		}
 	}
 
