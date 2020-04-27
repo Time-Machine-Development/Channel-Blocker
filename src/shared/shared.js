@@ -34,7 +34,7 @@ const ContentUI = Object.freeze({
 	BLOCK_BTN_VISIBILITY: 2,
 	BLOCK_BTN_COLOR: 4,
 	BLOCK_BTN_SIZE: 5,
-	ANIMATION_SPEED: 6,
+	ANIMATION_SPEED: 6
 });
 
 const SettingsUI = Object.freeze({

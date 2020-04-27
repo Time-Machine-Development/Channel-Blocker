@@ -69,8 +69,8 @@
 		//tell the user agent that if the event does not get explicitly handled
 		e.preventDefault();
 
-		//send a msg to the background_config_storage to activate/deactivate the advanced view
-		browser.runtime.sendMessage(createSettingsUIConfigValueSetMsg(SettingsUI.PAGE_DESIGN, document.getElementById("DesignSelect").value));
+		//send a msg to the background_config_storage to change PageDesign
+		browser.runtime.sendMessage(createSettingsUIConfigValueSetMsg(SettingsUI.PAGE_DESIGN, Number(document.getElementById("DesignSelect").value)));
 	}
 
 	//handle the event from the configAdvancedViewCheckbox
@@ -116,7 +116,7 @@
 		//tell the user agent that if the event does not get explicitly handled
 		e.preventDefault();
 		//send a msg to the background_config_storage to change the size of the block btns
-		browser.runtime.sendMessage(createContentUIConfigValueSetMsg(ContentUI.ANIMATION_SPEED, document.getElementById("configAnimationSpeedSlider").value));
+		browser.runtime.sendMessage(createContentUIConfigValueSetMsg(ContentUI.ANIMATION_SPEED, Number(document.getElementById("configAnimationSpeedSlider").value)));
 	}
 
 	//handle the event from the configBtnSizeSliderHandler
@@ -125,7 +125,7 @@
 		//tell the user agent that if the event does not get explicitly handled
 		e.preventDefault();
 		//send a msg to the background_config_storage to change the size of the block btns
-		browser.runtime.sendMessage(createContentUIConfigValueSetMsg(ContentUI.BLOCK_BTN_SIZE, document.getElementById("configBtnSizeSlider").value));
+		browser.runtime.sendMessage(createContentUIConfigValueSetMsg(ContentUI.BLOCK_BTN_SIZE, Number(document.getElementById("configBtnSizeSlider").value)));
 	}
 
 	//handle the event from the exportBtn
@@ -140,7 +140,7 @@
 	//handle the event from the resetBtn
 	//reset
 	function resetBtnHandler() {
-		browser.runtime.sendMessage(createConfigValueResetMsg());
+		browser.runtime.sendMessage(createContentUIConfigValueResetMsg());
 	}
 
 	//set all configboxes unviable and set the selected configboxe viable
@@ -158,9 +158,9 @@
 	//change the css-style of the config page
 	function changePageDesign(configValue) {
 		document.getElementById("DesignSelect").value = configValue;
-		if (configValue === "0") {
+		if(configValue === 0){
             document.getElementById("css").href = "../../shared/css/dark_root.css";
-        } else if (configValue === "1") {
+        }else if(configValue === 1){
             document.getElementById("css").href = "../../shared/css/light_root.css";
 		}
 	}
@@ -201,7 +201,7 @@
 	//change the configBtnColor
 	function changeBtnColor(configValue) {
 		document.getElementById("configBtnColor").value = configValue;
-			document.getElementById("cpBtn").style.background = configValue;
+		document.getElementById("cpBtn").style.background = configValue;
 		document.getElementById("showColorBtn").style.stroke = configValue;
 	}
 
@@ -218,27 +218,19 @@
 
 	/*
 	INSTALLING LISTENER FOR EVENTS FROM userinteraction
-	 */
+	*/
 
 	//define behavior for changing the DesignSelect
-	document.getElementById("DesignSelect").onchange = function (event) {
-		configPageDesignSelectHandler(event);
-	};
+	document.getElementById("DesignSelect").onchange = configPageDesignSelectHandler;
 
 	//define behavior for clicking the configAdvancedViewCheckbox
-	document.getElementById("configAdvancedViewCheckbox").addEventListener('click', function (event) {
-		configAdvancedViewCheckboxHandler(event);
-	});
+	document.getElementById("configAdvancedViewCheckbox").addEventListener('click', configAdvancedViewCheckboxHandler);
 
 	//define behavior for clicking the configPopupCheckbox
-	document.getElementById("configPopupCheckbox").addEventListener('click', function (event) {
-		configPopupCheckboxHandler(event);
-	});
+	document.getElementById("configPopupCheckbox").addEventListener('click', configPopupCheckboxHandler);
 
 	//define behavior for clicking the configBtnVisibilityCheckbox
-	document.getElementById("configBtnVisibilityCheckbox").addEventListener('click', function (event) {
-		configBtnVisibilityCheckboxHandler(event);
-	});
+	document.getElementById("configBtnVisibilityCheckbox").addEventListener('click', configBtnVisibilityCheckboxHandler);
 
 	//define behavior for changing the color
 	document.getElementById("configBtnColor").onchange = configBtnColorHandler;
@@ -263,7 +255,6 @@
 		let val = await browser.runtime.sendMessage(createSettingsUIConfigValueRequestMsg(SettingsUI.PAGE_DESIGN));
 		changePageDesign(val);
 
-		//AdvancedView
 		val = await browser.runtime.sendMessage(createSettingsUIConfigValueRequestMsg(SettingsUI.ADVANCED_VIEW));
 		changeAdvancedView(val);
 
@@ -305,7 +296,6 @@
 			if(msg.sender === "background_storage_settings_ui"){
 				switch(msg.content.settings_ui_id){
 					case SettingsUI.PAGE_DESIGN:
-						console.log(msg.content.settings_ui_config_val);
 						changePageDesign(msg.content.settings_ui_config_val);
 						break;
 
