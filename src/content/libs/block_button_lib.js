@@ -142,6 +142,7 @@ function updateBlockBtnCSS(){
 			width: ${width};
 			stroke: ${strokeColor};
 			display: ${display};
+			flex-shrink: 0;
 		}
 	`);
 }
