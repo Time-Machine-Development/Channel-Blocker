@@ -89,12 +89,16 @@
 				if(mappedConfig.storageID === SETTINGS_UI_STORAGE_ID){
 					// the PAGE_DESIGN is not longer of type string, parse it to an int when found
 					if(deprecatedID === DeprecatedConfig.PAGE_DESIGN){
-						browser.runtime.sendMessage(createSettingsUIConfigValueSetMsg(mappedConfig.ID, parseInt(jsonSaveFile["config"][deprecatedID])));
+						browser.runtime.sendMessage(createSettingsUIConfigValueSetMsg(mappedConfig.ID, Number(jsonSaveFile["config"][deprecatedID])));
 					}else{
 						browser.runtime.sendMessage(createSettingsUIConfigValueSetMsg(mappedConfig.ID, jsonSaveFile["config"][deprecatedID]));
 					}
 				}else if(mappedConfig.storageID === CONTENT_UI_STORAGE_ID){
-					browser.runtime.sendMessage(createContentUIConfigValueSetMsg(mappedConfig.ID, jsonSaveFile["config"][deprecatedID]));
+					if(deprecatedID === DeprecatedConfig.ANIMATION_SPEED || deprecatedID === DeprecatedConfig.BLOCK_BTN_SIZE){
+						browser.runtime.sendMessage(createContentUIConfigValueSetMsg(mappedConfig.ID, Number(jsonSaveFile["config"][deprecatedID])));
+					}else{
+						browser.runtime.sendMessage(createContentUIConfigValueSetMsg(mappedConfig.ID, jsonSaveFile["config"][deprecatedID]));
+					}
 				}
 			}
 		}
