@@ -22,6 +22,8 @@
 		while(curObservers.length > 0){
 			curObservers.pop().disconnect();
 		}
+		
+		console.log("curContext", Object.keys(YTContext).find(key => YTContext[key] === curContext));
 
 		//HomePage(https://www.youtube.com/)
 		if(curContext === YTContext.HOME){

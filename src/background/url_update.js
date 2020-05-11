@@ -22,15 +22,15 @@ const YT_TAB_IDS = new HashSet();
 		"^https://www\\.youtube\\.com/user/[^/]+/videos(\\?(.)*|)$":			YTContext.CHANNEL_VIDEOS,
 		"^https://www\\.youtube\\.com/channel/[^/]+/videos(\\?(.)*|)$":			YTContext.CHANNEL_VIDEOS,
 		"^https://www\\.youtube\\.com/feed/trending(\\?(.)*|)$":				YTContext.TRENDING,
-		"^https://www\\.youtube\\.com/(\\?(.)*|)$":								YTContext.HOME
-	});
+		"^https://www\\.youtube\\.com/(\\?(.)*|)$":								YTContext.HOME,
+		"^https://www\\.youtube\\.com/feed/subscriptions(\\?(.)*|)$":			YTContext.SUBSCRIPTIONS,
+		"^https://www\\.youtube\\.com/feed/history(\\?(.)*|)$":					YTContext.HISTORY,
+		"^https://www\\.youtube\\.com/feed/library(\\?(.)*|)$":					YTContext.LIBRARY,
+		"^https://www\\.youtube\\.com/gaming(\\?(.)*|)$":						YTContext.GAMING,
+		"^https://www\\.youtube\\.com/learning(\\?(.)*|)$":						YTContext.LEARNING,
+		"^https://www\\.youtube\\.com/feed/storefront(\\?(.)*|)$":				YTContext.STOREFRONT
 
-	//TODO:
-	//add https://www.youtube.com/feed/history
-	//add https://www.youtube.com/feed/library
-	//add https://www.youtube.com/feed/subscriptions
-	//add https://www.youtube.com/gaming
-	//add https://www.youtube.com/feed/storefront ?
+	});
 
 	function createContextSwitchMsg(context){
 		return {

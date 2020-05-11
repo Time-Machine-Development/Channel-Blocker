@@ -1,20 +1,17 @@
 async function onVideoObserved(video, characterDatas, characterDataParents){
 	insertBlockBtnBefore(characterDataParents.userChannelName, characterDatas.userChannelName);
-	console.log("onVideoObserved");
 
 	toggleVisibilty(video, await isVideoTitleBlocked(characterDatas.userChannelName, characterDatas.videoTitle));
 }
 
 async function onVerticalVideoObserved(video, characterDatas, characterDataParents){
 	insertBlockBtnBefore(characterDataParents.userChannelName, characterDatas.userChannelName);
-	console.log("onVerticalVideoObserved");
 
 	toggleVisibiltyHorizontal(video, await isVideoTitleBlocked(characterDatas.userChannelName, characterDatas.videoTitle));
 }
 
 async function onHorizontalVideoObserved(video, characterDatas, characterDataParents){
 	insertBlockBtnBefore(characterDataParents.userChannelName, characterDatas.userChannelName);
-	console.log("onHorizontalVideoObserved");
 
 	toggleVisibiltyVertical(video, await isVideoTitleBlocked(characterDatas.userChannelName, characterDatas.videoTitle));
 }
