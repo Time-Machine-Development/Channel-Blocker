@@ -99,9 +99,20 @@ function createLibraryObservers(){
 function createHistoryObservers(){
 	let obs = [];
 
-	console.log("createLibraryObservers");
+	console.log("createHistoryObservers");
 
 	obs.push(new Observer(HISTORY_VIDEO_CONFIG, onVideoObserved));
+
+	return obs;
+}
+
+function createLearningObservers(){
+	let obs = [];
+
+	console.log("createLearningObservers");
+
+	obs.push(new Observer(LEARNING_VIDEO_CONFIG, onVideoObserved));
+	obs.push(new Observer(LEARNING_PLAYLIST_CONFIG, onVideoObserved));
 
 	return obs;
 }

@@ -101,6 +101,8 @@
 				"content/observer_components/gaming/gaming_video.js",
 				"content/observer_components/library/library_playlist.js",
 				"content/observer_components/history/history_video.js",
+				"content/observer_components/learning/learning_video.js",
+				"content/observer_components/learning/learning_playlist.js",
 
 				"content/Observer.js",
 
