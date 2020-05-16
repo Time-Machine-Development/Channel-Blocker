@@ -10,7 +10,7 @@ const YT_TAB_IDS = new HashSet();
 {
 	const SENDER = "background_url_update";
 
-	const YTRegEx = new RegExp("^https://www\\.youtube\\.com(.)*$");
+	const YTRegEx = new RegExp("^https://(www)|(m)\\.youtube\\.com(.)*$");
 
 	const RegExToContextMapping = Object.freeze({
 		"^https://www\\.youtube\\.com/watch\\?(.)*$":							YTContext.VIDEO,
@@ -28,6 +28,11 @@ const YT_TAB_IDS = new HashSet();
 		"^https://www\\.youtube\\.com/feed/library(\\?(.)*|)$":					YTContext.LIBRARY,
 		"^https://www\\.youtube\\.com/gaming(\\?(.)*|)$":						YTContext.GAMING,
 		"^https://www\\.youtube\\.com/learning(\\?(.)*|)$":						YTContext.LEARNING,
+		"^https://m\\.youtube\\.com/feed/trending(\\?(.)*|)$":					YTContext.MOBILE_TRENDING,
+		"^https://m\\.youtube\\.com/(\\?(.)*|)$":								YTContext.MOBILE_HOME,
+		"^https://m\\.youtube\\.com/feed/trending(\\?(.)*|)$":					YTContext.MOBILE_TRENDING,
+		"^https://m\\.youtube\\.com/feed/subscriptions(\\?(.)*|)$":				YTContext.MOBILE_SUBSCRIPTIONS,
+		"^https://m\\.youtube\\.com/watch\\?(.)*$":								YTContext.MOBILE_VIDEO,
 		"^https://www\\.youtube\\.com/feed/storefront(\\?(.)*|)$":				YTContext.STOREFRONT
 
 	});

@@ -54,6 +54,12 @@
 		if(curContext === YTContext.VIDEO){
 			curObservers = createVideoObservers();
 		}
+
+		
+		//WatchPage(https://www.youtube.com/feed/subscriptions)
+		if(curContext === YTContext.SUBSCRIPTIONS){
+			curObservers = createSubscriptionsObservers();
+		}
 	}
 
 	//requests initial context and afterwards update observers (for the first time on this tab-id)

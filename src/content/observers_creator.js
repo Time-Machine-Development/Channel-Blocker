@@ -61,3 +61,13 @@ function createVideoObservers(){
 
 	return obs;
 }
+
+function createSubscriptionsObservers(){
+	let obs = [];
+
+	console.log("createSubscriptionsObservers");
+
+	obs.push(new Observer(SUBSCRIPTIONS_VIDEO_CONFIG, onVideoObserved));
+
+	return obs;
+}
