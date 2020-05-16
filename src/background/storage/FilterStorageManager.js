@@ -51,17 +51,20 @@ FilterStorageManager.prototype.isBlocked = function(input){
 	where <t> is ("comment"|"title")
 	*/
 
-	//if input.name exists in list of BLOCKED_USERS, return true
-	if(this.sets[FilterType.BLOCKED_USERS].contains(input.user_channel_name))
-		return true;
+	//if input.user_channel_name is defined check if it is blocked
+	if(input.user_channel_name !== undefined){
+		//if input.name exists in list of BLOCKED_USERS, return true
+		if(this.sets[FilterType.BLOCKED_USERS].contains(input.user_channel_name))
+			return true;
 
-	//if input.name exists in list of EXCLUDED_USERS, return false
-	if(this.sets[FilterType.EXCLUDED_USERS].contains(input.user_channel_name))
-		return false;
+		//if input.name exists in list of EXCLUDED_USERS, return false
+		if(this.sets[FilterType.EXCLUDED_USERS].contains(input.user_channel_name))
+			return false;
 
-	//if input.additional.content matches any RegEx in RegEx-list of NAME_REGEXS, return true
-	if(this.sets[FilterType.NAME_REGEXS].matches(input.user_channel_name))
-		return true;
+		//if input.additional.content matches any RegEx in RegEx-list of NAME_REGEXS, return true
+		if(this.sets[FilterType.NAME_REGEXS].matches(input.user_channel_name))
+			return true;
+	}
 
 	//if input.additional is not defined, return false
 	if(input.additional === undefined)

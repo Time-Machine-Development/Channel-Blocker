@@ -38,6 +38,7 @@ function createChannelHomeObservers(){
 
 	obs.push(new Observer(SHARED_HORIZONTAL_VIDEO_CONFIG, onVideoObserved));
 	obs.push(new Observer(SHARED_HORIZONTAL_PLAYLIST_CONFIG, onVideoObserved));
+	obs.push(new Observer(CHANNEL_HOME_VIDEO_CONFIG, onChannelHomeVideoObserved));
 
 	return obs;
 }
@@ -45,7 +46,7 @@ function createChannelHomeObservers(){
 function createChannelVideosObservers(){
 	let obs = [];
 
-	obs.push(new Observer(SHARED_GRIDVIDEO_CONFIG, onVideoObserved));
+	obs.push(new Observer(CHANNEL_VIDEO_CONFIG, onChannelVideoObserved));
 
 	return obs;
 }
