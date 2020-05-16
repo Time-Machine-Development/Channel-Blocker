@@ -97,7 +97,9 @@
 				"content/observer_components/video/videowall_video.js",
 				"content/observer_components/video/video_movie.js",
 
-				"content/observer_components/subscriptions/subscriptions_video.js",
+				"content/observer_components/shared/shared_gridvideo.js",
+				"content/observer_components/gaming/gaming_video.js",
+				"content/observer_components/library/library_playlist.js",
 
 				"content/Observer.js",
 

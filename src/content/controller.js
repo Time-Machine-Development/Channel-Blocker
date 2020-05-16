@@ -54,11 +54,20 @@
 		if(curContext === YTContext.VIDEO){
 			curObservers = createVideoObservers();
 		}
-
 		
 		//WatchPage(https://www.youtube.com/feed/subscriptions)
 		if(curContext === YTContext.SUBSCRIPTIONS){
 			curObservers = createSubscriptionsObservers();
+		}
+		
+		//WatchPage(https://www.youtube.com/gaming)
+		if(curContext === YTContext.GAMING){
+			curObservers = createGamingObservers();
+		}
+		
+		//WatchPage(https://www.youtube.com/feed/library)
+		if(curContext === YTContext.LIBRARY){
+			curObservers = createLibraryObservers();
 		}
 	}
 

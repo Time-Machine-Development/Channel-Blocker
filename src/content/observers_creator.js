@@ -40,6 +40,8 @@ function createChannelHomeObservers(){
 function createChannelVideosObservers(){
 	let obs = [];
 
+	obs.push(new Observer(SHARED_GRIDVIDEO_CONFIG, onVideoObserved));
+
 	return obs;
 }
 
@@ -65,9 +67,31 @@ function createVideoObservers(){
 function createSubscriptionsObservers(){
 	let obs = [];
 
-	console.log("createSubscriptionsObservers");
+	console.log("createSubscriptionsObserversr");
 
-	obs.push(new Observer(SUBSCRIPTIONS_VIDEO_CONFIG, onVideoObserved));
+	obs.push(new Observer(SHARED_GRIDVIDEO_CONFIG, onVideoObserved));
+
+	return obs;
+}
+
+function createGamingObservers(){
+	let obs = [];
+
+	console.log("createGamingObservers");
+
+	obs.push(new Observer(SHARED_GRIDVIDEO_CONFIG, onVideoObserved));
+	obs.push(new Observer(GAMING_VIDEO_CONFIG, onVideoObserved));
+
+	return obs;
+}
+
+function createLibraryObservers(){
+	let obs = [];
+
+	console.log("createLibraryObservers");
+
+	obs.push(new Observer(SHARED_GRIDVIDEO_CONFIG, onVideoObserved));
+	obs.push(new Observer(LIBRARY_PLAYLIST_CONFIG, onVideoObserved));
 
 	return obs;
 }

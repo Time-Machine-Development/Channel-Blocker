@@ -15,25 +15,25 @@ const YT_TAB_IDS = new HashSet();
 	const RegExToContextMapping = Object.freeze({
 		"^https://www\\.youtube\\.com/watch\\?(.)*$":							YTContext.VIDEO,
 		"^https://www\\.youtube\\.com/results\\?search_query=(.)*$":			YTContext.SEARCH,
-		"^https://www\\.youtube\\.com/user/[^/]*(\\?(.)*|)$":					YTContext.CHANNEL_HOME,
-		"^https://www\\.youtube\\.com/channel/[^/]*(\\?(.)*|)$":				YTContext.CHANNEL_HOME,
-		"^https://www\\.youtube\\.com/user/[^/]+/featured(\\?(.)*|)$":			YTContext.CHANNEL_HOME,
-		"^https://www\\.youtube\\.com/channel/[^/]+/featured(\\?(.)*|)$":		YTContext.CHANNEL_HOME,
-		"^https://www\\.youtube\\.com/user/[^/]+/videos(\\?(.)*|)$":			YTContext.CHANNEL_VIDEOS,
-		"^https://www\\.youtube\\.com/channel/[^/]+/videos(\\?(.)*|)$":			YTContext.CHANNEL_VIDEOS,
+		"^https://www\\.youtube\\.com/user/[^/]*(\\?(.)*|)$":					YTContext.CHANNEL_HOME,			//not supported yet
+		"^https://www\\.youtube\\.com/channel/[^/]*(\\?(.)*|)$":				YTContext.CHANNEL_HOME,			//not supported yet
+		"^https://www\\.youtube\\.com/user/[^/]+/featured(\\?(.)*|)$":			YTContext.CHANNEL_HOME,			//not supported yet
+		"^https://www\\.youtube\\.com/channel/[^/]+/featured(\\?(.)*|)$":		YTContext.CHANNEL_HOME,			//not supported yet
+		"^https://www\\.youtube\\.com/user/[^/]+/videos(\\?(.)*|)$":			YTContext.CHANNEL_VIDEOS,		//not supported yet
+		"^https://www\\.youtube\\.com/channel/[^/]+/videos(\\?(.)*|)$":			YTContext.CHANNEL_VIDEOS,		//not supported yet
 		"^https://www\\.youtube\\.com/feed/trending(\\?(.)*|)$":				YTContext.TRENDING,
 		"^https://www\\.youtube\\.com/(\\?(.)*|)$":								YTContext.HOME,
 		"^https://www\\.youtube\\.com/feed/subscriptions(\\?(.)*|)$":			YTContext.SUBSCRIPTIONS,
-		"^https://www\\.youtube\\.com/feed/history(\\?(.)*|)$":					YTContext.HISTORY,
-		"^https://www\\.youtube\\.com/feed/library(\\?(.)*|)$":					YTContext.LIBRARY,
+		"^https://www\\.youtube\\.com/feed/history(\\?(.)*|)$":					YTContext.HISTORY,				//not supported yet
+		"^https://www\\.youtube\\.com/feed/library(\\?(.)*|)$":					YTContext.LIBRARY,				//not supported yet
 		"^https://www\\.youtube\\.com/gaming(\\?(.)*|)$":						YTContext.GAMING,
-		"^https://www\\.youtube\\.com/learning(\\?(.)*|)$":						YTContext.LEARNING,
-		"^https://m\\.youtube\\.com/feed/trending(\\?(.)*|)$":					YTContext.MOBILE_TRENDING,
-		"^https://m\\.youtube\\.com/(\\?(.)*|)$":								YTContext.MOBILE_HOME,
-		"^https://m\\.youtube\\.com/feed/trending(\\?(.)*|)$":					YTContext.MOBILE_TRENDING,
-		"^https://m\\.youtube\\.com/feed/subscriptions(\\?(.)*|)$":				YTContext.MOBILE_SUBSCRIPTIONS,
-		"^https://m\\.youtube\\.com/watch\\?(.)*$":								YTContext.MOBILE_VIDEO,
-		"^https://www\\.youtube\\.com/feed/storefront(\\?(.)*|)$":				YTContext.STOREFRONT
+		"^https://www\\.youtube\\.com/learning(\\?(.)*|)$":						YTContext.LEARNING,				//not supported yet
+		"^https://m\\.youtube\\.com/feed/trending(\\?(.)*|)$":					YTContext.MOBILE_TRENDING,		//not supported yet
+		"^https://m\\.youtube\\.com/(\\?(.)*|)$":								YTContext.MOBILE_HOME,			//not supported yet
+		"^https://m\\.youtube\\.com/feed/trending(\\?(.)*|)$":					YTContext.MOBILE_TRENDING,		//not supported yet
+		"^https://m\\.youtube\\.com/feed/subscriptions(\\?(.)*|)$":				YTContext.MOBILE_SUBSCRIPTIONS,	//not supported yet
+		"^https://m\\.youtube\\.com/watch\\?(.)*$":								YTContext.MOBILE_VIDEO,			//not supported yet
+		"^https://www\\.youtube\\.com/feed/storefront(\\?(.)*|)$":				YTContext.STOREFRONT			//not supported yet
 
 	});
 
