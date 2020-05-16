@@ -34,6 +34,11 @@ function createSearchObservers(){
 function createChannelHomeObservers(){
 	let obs = [];
 
+	console.log("createChannelHomeObservers");
+
+	obs.push(new Observer(SHARED_HORIZONTAL_VIDEO_CONFIG, onVideoObserved));
+	obs.push(new Observer(SHARED_HORIZONTAL_PLAYLIST_CONFIG, onVideoObserved));
+
 	return obs;
 }
 
@@ -111,8 +116,8 @@ function createLearningObservers(){
 
 	console.log("createLearningObservers");
 
-	obs.push(new Observer(LEARNING_VIDEO_CONFIG, onVideoObserved));
-	obs.push(new Observer(LEARNING_PLAYLIST_CONFIG, onVideoObserved));
+	obs.push(new Observer(SHARED_HORIZONTAL_VIDEO_CONFIG, onVideoObserved));
+	obs.push(new Observer(SHARED_HORIZONTAL_PLAYLIST_CONFIG, onVideoObserved));
 
 	return obs;
 }

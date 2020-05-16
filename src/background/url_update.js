@@ -27,13 +27,13 @@ const YT_TAB_IDS = new HashSet();
 		"^https://www\\.youtube\\.com/feed/history(\\?(.)*|)$":					YTContext.HISTORY,
 		"^https://www\\.youtube\\.com/feed/library(\\?(.)*|)$":					YTContext.LIBRARY,
 		"^https://www\\.youtube\\.com/gaming(\\?(.)*|)$":						YTContext.GAMING,
-		"^https://www\\.youtube\\.com/learning(\\?(.)*|)$":						YTContext.LEARNING,				//not supported yet
+		"^https://www\\.youtube\\.com/learning(\\?(.)*|)$":						YTContext.LEARNING,
+		"^https://www\\.youtube\\.com/feed/storefront(\\?(.)*|)$":				YTContext.STOREFRONT,			//not supported yet
 		"^https://m\\.youtube\\.com/feed/trending(\\?(.)*|)$":					YTContext.MOBILE_TRENDING,		//not supported yet
 		"^https://m\\.youtube\\.com/(\\?(.)*|)$":								YTContext.MOBILE_HOME,			//not supported yet
 		"^https://m\\.youtube\\.com/feed/trending(\\?(.)*|)$":					YTContext.MOBILE_TRENDING,		//not supported yet
 		"^https://m\\.youtube\\.com/feed/subscriptions(\\?(.)*|)$":				YTContext.MOBILE_SUBSCRIPTIONS,	//not supported yet
-		"^https://m\\.youtube\\.com/watch\\?(.)*$":								YTContext.MOBILE_VIDEO,			//not supported yet
-		"^https://www\\.youtube\\.com/feed/storefront(\\?(.)*|)$":				YTContext.STOREFRONT			//not supported yet
+		"^https://m\\.youtube\\.com/watch\\?(.)*$":								YTContext.MOBILE_VIDEO			//not supported yet
 
 	});
 
