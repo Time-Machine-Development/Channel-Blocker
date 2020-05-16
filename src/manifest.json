@@ -100,6 +100,7 @@
 				"content/observer_components/shared/shared_gridvideo.js",
 				"content/observer_components/gaming/gaming_video.js",
 				"content/observer_components/library/library_playlist.js",
+				"content/observer_components/history/history_video.js",
 
 				"content/Observer.js",
 

@@ -95,3 +95,13 @@ function createLibraryObservers(){
 
 	return obs;
 }
+
+function createHistoryObservers(){
+	let obs = [];
+
+	console.log("createLibraryObservers");
+
+	obs.push(new Observer(HISTORY_VIDEO_CONFIG, onVideoObserved));
+
+	return obs;
+}

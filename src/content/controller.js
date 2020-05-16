@@ -69,6 +69,11 @@
 		if(curContext === YTContext.LIBRARY){
 			curObservers = createLibraryObservers();
 		}
+		
+		//WatchPage(https://www.youtube.com/feed/history)
+		if(curContext === YTContext.HISTORY){
+			curObservers = createHistoryObservers();
+		}
 	}
 
 	//requests initial context and afterwards update observers (for the first time on this tab-id)
