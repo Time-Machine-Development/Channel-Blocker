@@ -421,6 +421,7 @@ ul {
 	min-height:130px;
 	background: var(--background-color-2);
 	border: var(--border-simple);
+	color: var(--text-color-1);
 }
 
 .moreOptionsDiv h4{
@@ -575,6 +576,11 @@ input:checked + .slider:before {
 	-ms-transform: translateX(var(--main-size-3));
 	transform: translateX(var(--main-size-3));
 }
+
+input:disabled + .slider{
+	background-color: #8f3f34;
+}
+
 
 #questionmarkSVGPath{
 		fill: var(--main-color);
