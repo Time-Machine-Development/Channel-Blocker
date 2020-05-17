@@ -216,6 +216,29 @@
 		document.getElementById("showSizeBtn").style.width = configValue * 0.01 + "em";
 	}
 	
+	function getConfigFilteredPagesCheckboxHandler(pageName){
+		return (e) => {
+			//tell the user agent that if the event does not get explicitly handled
+			e.preventDefault();
+
+			console.log("pageName", pageName);
+			console.log("pageName", document.getElementById(pageName + "FilteredCheckbox").checked);
+
+			let arr = [];
+
+			for (let input of document.getElementsByClassName("filteredPagesInput")) {
+				if(input.checked){
+					str = input.id.replace("FilteredCheckbox","").toUpperCase();
+					arr.push(YTContext[str]);
+				}
+			}
+			console.log("arr", arr);
+
+			//send a msg to the background_config_storage to change the filteredPages
+			browser.runtime.sendMessage(createContentUIConfigValueSetMsg(ContentUI.FILTERED_PAGES, arr));
+		}
+	}
+
 	//filtered pages
 	async function setupFilteredPagesConfig(filteredPages) {
 
@@ -243,7 +266,9 @@
 			lable.children[0].id = pageName + "FilteredCheckbox";
 			if(UNSUPPORTED_YTCONTEXTS.includes(YTContext[pageName.toUpperCase()])){
 				lable.children[0].disabled = true;
-				td.setAttribute("title", "not supported")
+				td.setAttribute("title", "not supported");
+			}else{
+				lable.children[0].addEventListener('click', getConfigFilteredPagesCheckboxHandler(pageName));
 			}
 			
 
@@ -262,13 +287,20 @@
 		container.append(table);
 		sampleSwitch.remove();
 
-		for (let pageID of filteredPages) {
-			pageID = Object.keys(YTContext).find(key => YTContext[key] === parseInt(pageID)).toLowerCase();
-			document.getElementById(pageID + "FilteredCheckbox").checked = true;
-			console.log("pageID", pageID);
+		updateFilteredPagesConfig(filteredPages);
+	}
+	
+	function updateFilteredPagesConfig(filteredPages) {
+		for (let pageID of Object.values(YTContext)) {
+			if(filteredPages.includes(pageID)){
+				pageID = Object.keys(YTContext).find(key => YTContext[key] === parseInt(pageID)).toLowerCase();
+				document.getElementById(pageID + "FilteredCheckbox").checked = true;
+			}else{
+				pageID = Object.keys(YTContext).find(key => YTContext[key] === parseInt(pageID)).toLowerCase();
+				document.getElementById(pageID + "FilteredCheckbox").checked = false;
+			}
 		}
 	}
-
 
 
 	/*
@@ -396,6 +428,10 @@
 
 					case ContentUI.ANIMATION_SPEED:
 						changeAnimationSpeed(msg.content.content_ui_config_val);
+						break;
+
+					case ContentUI.FILTERED_PAGES:
+						updateFilteredPagesConfig(msg.content.content_ui_config_val);
 						break;
 				}
 			}

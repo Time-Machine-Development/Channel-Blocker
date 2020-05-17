@@ -1,6 +1,9 @@
 //a reflection of await STORAGE.get(CONTENT_UI_STORAGE_ID)[CONTENT_UI_STORAGE_ID] in background
 let contentUIConfig;
 
+//is set to true when updateObservers was invoked by controller.js
+let alreadyUpdatedObservers = false;
+
 {
 	SENDER = "content_config";
 
@@ -23,6 +26,12 @@ let contentUIConfig;
 	.then((updatedContentUIConfig) => {
 		contentUIConfig = updatedContentUIConfig;
 
+		//if the observer where set before the config was ready invoke updateObserversAfterInit, which is defined in controller.js
+		if(alreadyUpdatedObservers){
+			//updateObserversAfterInit is defined in controller.js.
+			//controller.js is added in the manifest after config.js, but when alreadyUpdatedObservers is true updateObserversAfterInit is always defined
+			updateObserversAfterInit();
+		}
 		updateBlockBtnCSS();
 	});
 
@@ -47,6 +56,7 @@ let contentUIConfig;
 				contentUIConfig[msg.content.content_ui_id] = msg.content.content_ui_config_val;
 
 				updateBlockBtnCSS();
+				updateObserversAfterInit();
 			}
 		}
 	});

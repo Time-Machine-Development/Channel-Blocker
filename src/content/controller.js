@@ -1,18 +1,23 @@
-{
-	const SENDER = "content_controller";
-
 	//all observers that are currently active
 	let curObservers = [];
 
 	//current context to make an update if a "filter_storage_modified"-message is received
 	let curContext;
 
-	function createContextRequestMsg(){
-		return {
-			sender: SENDER,
-			receiver: "background_url_update",
-			info: "context_request"
-		};
+	//if updateObservers was invoked by controller.js before the config was "ready" this function is invoked
+	function updateObserversAfterInit(){
+		//remove all old btns
+		for (let btn of document.getElementsByClassName("cb_block_button")) {
+			btn.remove();
+		}
+
+		//the curContext is not included in FILTERED_PAGES, but there are some Observer active -> updateObservers
+		if(curObservers.length > 0 && !contentUIConfig[ContentUI.FILTERED_PAGES].includes(curContext)){
+			updateObservers();
+		//the curContext is included in FILTERED_PAGES, but there are no Observer active -> updateObservers
+		}else if(curObservers.length === 0 && contentUIConfig[ContentUI.FILTERED_PAGES].includes(curContext)){
+			updateObservers();
+		}
 	}
 
 	//removes all old observers and creates new observers based on the current yt-context
@@ -22,8 +27,16 @@
 		while(curObservers.length > 0){
 			curObservers.pop().disconnect();
 		}
+
+		
 		
 		console.log("curContext", Object.keys(YTContext).find(key => YTContext[key] === curContext));
+		console.log("contentUIConfig", contentUIConfig);
+
+		if(!contentUIConfig[ContentUI.FILTERED_PAGES].includes(curContext)){
+			
+			return;
+		}
 
 		//HomePage(https://www.youtube.com/)
 		if(curContext === YTContext.HOME){
@@ -101,13 +114,27 @@
 		}
 	}
 
+{
+	const SENDER = "content_controller";
+
+	function createContextRequestMsg(){
+		return {
+			sender: SENDER,
+			receiver: "background_url_update",
+			info: "context_request"
+		};
+	}
+
 	//requests initial context and afterwards update observers (for the first time on this tab-id)
 	async function init(){
 		//request initial context (and register this tab as a yt-tab in background as a side-effect)
 		curContext = await browser.runtime.sendMessage(createContextRequestMsg());
 
 		//update observers
-		$(document).ready(updateObservers());
+		$(document).ready(() => {
+			updateObservers();
+			alreadyUpdatedObservers = true;
+		});
 	}
 
 	/*
