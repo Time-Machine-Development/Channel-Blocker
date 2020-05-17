@@ -115,6 +115,9 @@
 				"content/observer_components/mobile/search/mobile_search_channel.js",
 				"content/observer_components/mobile/search/moblie_search_playlist.js",
 
+				"content/observer_components/mobile/video/mobile_comment.js",
+				"content/observer_components/mobile/video/response.js",
+
 				"content/Observer.js",
 
 				"content/observers_creator.js",

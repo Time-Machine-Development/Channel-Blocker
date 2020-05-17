@@ -94,6 +94,11 @@
 		if(curContext === YTContext.MOBILE_SEARCH){
 			curObservers = createMobileSearchObservers();
 		}
+
+		//WatchPage(https://m.youtube.com/watch?v=<ID>)
+		if(curContext === YTContext.MOBILE_VIDEO){
+			curObservers = createMobileVideoObservers();
+		}
 	}
 
 	//requests initial context and afterwards update observers (for the first time on this tab-id)

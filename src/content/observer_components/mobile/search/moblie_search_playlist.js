@@ -8,6 +8,5 @@ const MOBILE_SEARCH_PLAYLIST_CONFIG = Object.freeze({
 });
 
 async function onMobileSearchPlaylistObserved(video, characterDatas){
-    console.log("onMobileSearchPlaylistObserved", characterDatas.userChannelName, characterDatas.videoTitle);
 	toggleVisibiltyHorizontal(video, await isVideoTitleBlocked(characterDatas.userChannelName, characterDatas.videoTitle));
 }

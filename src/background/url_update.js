@@ -31,7 +31,7 @@ const YT_TAB_IDS = new HashSet();
 		"^https://www\\.youtube\\.com/feed/storefront(\\?(.)*|)$":				YTContext.STOREFRONT,			//not supported yet
 
 		"^https://m\\.youtube\\.com/watch\\?(.)*$":								YTContext.MOBILE_VIDEO,			//not supported yet
-		"^https://m\\.youtube\\.com/results\\?search_query=(.)*$":				YTContext.MOBILE_SEARCH,		//not supported yet
+		"^https://m\\.youtube\\.com/results\\?search_query=(.)*$":				YTContext.MOBILE_SEARCH,
 		"^https://m\\.youtube\\.com/user/[^/]*(\\?(.)*|)$":						YTContext.MOBILE_CHANNEL_HOME,	//not supported yet
 		"^https://m\\.youtube\\.com/channel/[^/]*(\\?(.)*|)$":					YTContext.MOBILE_CHANNEL_HOME,	//not supported yet
 		"^https://m\\.youtube\\.com/user/[^/]+/featured(\\?(.)*|)$":			YTContext.MOBILE_CHANNEL_HOME,	//not supported yet

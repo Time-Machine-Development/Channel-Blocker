@@ -154,3 +154,17 @@ function createMobileSearchObservers(){
 
 	return obs;
 }
+
+function createMobileVideoObservers(){
+	let obs = [];
+
+	console.log("createMobileVideoObservers");
+
+	obs.push(new Observer(MOBILE_SEARCH_VIDEO_CONFIG, onMobileSearchVideoObserved));
+	obs.push(new Observer(MOBILE_SEARCH_CHANNEL_CONFIG, onMobileSearchChannelObserved));
+	obs.push(new Observer(MOBILE_SEARCH_PLAYLIST_CONFIG, onMobileSearchPlaylistObserved));
+	obs.push(new Observer(MOBILE_COMMENT_CONFIG, onMobileCommentObserved));
+	obs.push(new Observer(RESPONSE_CONFIG, onResponseObserved));
+
+	return obs;
+}
