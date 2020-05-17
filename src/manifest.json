@@ -111,6 +111,10 @@
 				"content/observer_components/channel/channel_home_video.js",
 				"content/observer_components/channel/channel_video.js",
 
+				"content/observer_components/mobile/search/mobile_search_video.js",
+				"content/observer_components/mobile/search/mobile_search_channel.js",
+				"content/observer_components/mobile/search/moblie_search_playlist.js",
+
 				"content/Observer.js",
 
 				"content/observers_creator.js",

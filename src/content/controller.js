@@ -89,6 +89,11 @@
 		if(curContext === YTContext.MOBILE_TRENDING){
 			curObservers = createMobileTrendingObservers();
 		}
+
+		//WatchPage(https://m.youtube.com/results?search_query=<INPUT>)
+		if(curContext === YTContext.MOBILE_SEARCH){
+			curObservers = createMobileSearchObservers();
+		}
 	}
 
 	//requests initial context and afterwards update observers (for the first time on this tab-id)

@@ -29,11 +29,23 @@ const YT_TAB_IDS = new HashSet();
 		"^https://www\\.youtube\\.com/gaming(\\?(.)*|)$":						YTContext.GAMING,
 		"^https://www\\.youtube\\.com/learning(\\?(.)*|)$":						YTContext.LEARNING,
 		"^https://www\\.youtube\\.com/feed/storefront(\\?(.)*|)$":				YTContext.STOREFRONT,			//not supported yet
+
+		"^https://m\\.youtube\\.com/watch\\?(.)*$":								YTContext.MOBILE_VIDEO,			//not supported yet
+		"^https://m\\.youtube\\.com/results\\?search_query=(.)*$":				YTContext.MOBILE_SEARCH,		//not supported yet
+		"^https://m\\.youtube\\.com/user/[^/]*(\\?(.)*|)$":						YTContext.MOBILE_CHANNEL_HOME,	//not supported yet
+		"^https://m\\.youtube\\.com/channel/[^/]*(\\?(.)*|)$":					YTContext.MOBILE_CHANNEL_HOME,	//not supported yet
+		"^https://m\\.youtube\\.com/user/[^/]+/featured(\\?(.)*|)$":			YTContext.MOBILE_CHANNEL_HOME,	//not supported yet
+		"^https://m\\.youtube\\.com/channel/[^/]+/featured(\\?(.)*|)$":			YTContext.MOBILE_CHANNEL_HOME,	//not supported yet
+		"^https://m\\.youtube\\.com/user/[^/]+/videos(\\?(.)*|)$":				YTContext.MOBILE_CHANNEL_VIDEOS,//not supported yet
+		"^https://m\\.youtube\\.com/channel/[^/]+/videos(\\?(.)*|)$":			YTContext.MOBILE_CHANNEL_VIDEOS,//not supported yet
 		"^https://m\\.youtube\\.com/feed/trending(\\?(.)*|)$":					YTContext.MOBILE_TRENDING,
 		"^https://m\\.youtube\\.com/(\\?(.)*|)$":								YTContext.MOBILE_HOME,
-		"^https://m\\.youtube\\.com/feed/trending(\\?(.)*|)$":					YTContext.MOBILE_TRENDING,		//not supported yet
 		"^https://m\\.youtube\\.com/feed/subscriptions(\\?(.)*|)$":				YTContext.MOBILE_SUBSCRIPTIONS,	//not supported yet
-		"^https://m\\.youtube\\.com/watch\\?(.)*$":								YTContext.MOBILE_VIDEO			//not supported yet
+		"^https://m\\.youtube\\.com/feed/history(\\?(.)*|)$":					YTContext.MOBILE_HISTORY,		//not supported yet
+		"^https://m\\.youtube\\.com/feed/library(\\?(.)*|)$":					YTContext.MOBILE_LIBRARY,		//not supported yet
+		"^https://m\\.youtube\\.com/gaming(\\?(.)*|)$":							YTContext.MOBILE_GAMING,		//not supported yet
+		"^https://m\\.youtube\\.com/learning(\\?(.)*|)$":						YTContext.MOBILE_LEARNING,		//not supported yet
+		"^https://m\\.youtube\\.com/feed/storefront(\\?(.)*|)$":				YTContext.MOBILE_STOREFRONT,	//not supported yet
 
 	});
 
