@@ -259,6 +259,7 @@ ul {
 	margin:0%;
 	padding:0%;
 	position: relative;
+	z-index: 10;
 }
 
 .innerDivExp .selectionContainer select {
@@ -418,7 +419,7 @@ ul {
 
 .moreOptionsDiv{
 	padding-top:0.5em;
-	min-height:130px;
+	height:90%;
 	background: var(--background-color-2);
 	border: var(--border-simple);
 	color: var(--text-color-1);
@@ -700,18 +701,26 @@ input:disabled + .slider{
 	}
 
 	.moreOptionsDiv{
-		min-height:135px;
+		height:90%;
 	}
 }
 
 /*Smallest screen*/
 @media screen and (max-width:40em) {
+	.donationDiv {
+		width:100%;
+	}
+
 	.donationDiv .donationTextDiv {
 		width:100%;
 	}
 
 	.donationDiv .donationBtnDiv {
-		float:left;
+		width:100%;
+	}
+
+	.donationDiv .donationBtnDiv form input{
+		width:100%;
 	}
 
 	.innerDivExp .selectionContainer {
@@ -733,6 +742,16 @@ input:disabled + .slider{
 	}
 
 	.innerDivExp aside {
-		width:51.5%;
+		width:100%;
+	}
+
+	.containerSelect{
+		width: 98%;
+	}
+
+	
+	.deleteButtonText {
+		font-size: 3em;
+		line-height: 0.4em;
 	}
 }

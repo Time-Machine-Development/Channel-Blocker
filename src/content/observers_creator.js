@@ -122,3 +122,23 @@ function createLearningObservers(){
 
 	return obs;
 }
+
+function createMobileHomeObservers(){
+	let obs = [];
+
+	console.log("createMobileHomeObservers");
+
+	obs.push(new Observer(SHARED_MOBILE_VIDEO_CONFIG, onSharedMobileVideoObserved));
+
+	return obs;
+}
+
+function createMobileTrendingObservers(){
+	let obs = [];
+
+	console.log("createMobileTrendingObservers");
+
+	obs.push(new Observer(SHARED_MOBILE_VIDEO_CONFIG, onSharedMobileVideoObserved));
+
+	return obs;
+}

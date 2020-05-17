@@ -215,6 +215,61 @@
 		document.getElementById("configBtnSizeSlider").value = configValue;
 		document.getElementById("showSizeBtn").style.width = configValue * 0.01 + "em";
 	}
+	
+	//filtered pages
+	async function setupFilteredPagesConfig(filteredPages) {
+
+		console.log("filteredPages", filteredPages);
+
+		let container = document.getElementById("filteredPagesConfigContainer");
+		let table = document.createElement("table");
+		table.style.width = "100%";
+
+		let tbody = document.createElement("tbody");
+		let tr;
+		let sampleSwitch = document.getElementById("sampleSwitch");
+
+		for (let index = 0; index < Object.keys(YTContext).length; index++) {
+			if(index % 3 == 0){
+				if(tr !== undefined){
+					tbody.append(tr);
+				}
+				tr = document.createElement("tr");
+			}
+			let pageName = Object.keys(YTContext)[index].toLowerCase();
+			let td = document.createElement("td");
+
+			let lable = sampleSwitch.cloneNode(true);
+			lable.children[0].id = pageName + "FilteredCheckbox";
+			if(UNSUPPORTED_YTCONTEXTS.includes(YTContext[pageName.toUpperCase()])){
+				lable.children[0].disabled = true;
+				td.setAttribute("title", "not supported")
+			}
+			
+
+			let span = document.createElement("span");
+			span.append(document.createTextNode(pageName));
+
+			td.append(lable);
+			span.setAttribute("style","overflow: hidden; text-overflow: ellipsis; width: 70%; display: inline-block; line-height: 1;");
+			td.append(span);
+
+			tr.append(td);
+		}
+
+		tbody.append(tr);
+		table.append(tbody);
+		container.append(table);
+		sampleSwitch.remove();
+
+		for (let pageID of filteredPages) {
+			pageID = Object.keys(YTContext).find(key => YTContext[key] === parseInt(pageID)).toLowerCase();
+			document.getElementById(pageID + "FilteredCheckbox").checked = true;
+			console.log("pageID", pageID);
+		}
+	}
+
+
 
 	/*
 	INSTALLING LISTENER FOR EVENTS FROM userinteraction
@@ -250,6 +305,9 @@
 	//define behavior for exportBtn
 	document.getElementById("resetBtn").addEventListener('click', resetBtnHandler);
 
+
+
+
 	//send a config_value_request
 	async function initRequests() {
 		let val = await browser.runtime.sendMessage(createSettingsUIConfigValueRequestMsg(SettingsUI.PAGE_DESIGN));
@@ -272,6 +330,9 @@
 
 		val = await browser.runtime.sendMessage(createContentUIConfigValueRequestMsg(ContentUI.ANIMATION_SPEED));
 		changeAnimationSpeed(val);
+
+		val = await browser.runtime.sendMessage(createContentUIConfigValueRequestMsg(ContentUI.FILTERED_PAGES));
+		setupFilteredPagesConfig(val);
 	}
 
 	initRequests();

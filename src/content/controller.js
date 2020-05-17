@@ -79,6 +79,16 @@
 		if(curContext === YTContext.LEARNING){
 			curObservers = createLearningObservers();
 		}
+
+		//WatchPage(https://m.youtube.com)
+		if(curContext === YTContext.MOBILE_HOME){
+			curObservers = createMobileHomeObservers();
+		}
+
+		//WatchPage(https://m.youtube.com/feed/trending)
+		if(curContext === YTContext.MOBILE_TRENDING){
+			curObservers = createMobileTrendingObservers();
+		}
 	}
 
 	//requests initial context and afterwards update observers (for the first time on this tab-id)
