@@ -208,12 +208,14 @@
 	//change the animationSpeed
 	function changeAnimationSpeed(configValue) {
 		document.getElementById("configAnimationSpeedSlider").value = configValue;
+		document.getElementById("configAnimationSpeedSlider").title = configValue;
 	}
 
 	//change the configBtnSizeSlider
 	function changeBtnSize(configValue) {
 		document.getElementById("configBtnSizeSlider").value = configValue;
 		document.getElementById("showSizeBtn").style.width = configValue * 0.01 + "em";
+		document.getElementById("configBtnSizeSlider").title = configValue;
 	}
 
 	/*
