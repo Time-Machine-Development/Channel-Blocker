@@ -34,8 +34,6 @@ function createSearchObservers(){
 function createChannelHomeObservers(){
 	let obs = [];
 
-	console.log("createChannelHomeObservers");
-
 	obs.push(new Observer(SHARED_HORIZONTAL_VIDEO_CONFIG, onVideoObserved));
 	obs.push(new Observer(SHARED_HORIZONTAL_PLAYLIST_CONFIG, onVideoObserved));
 	obs.push(new Observer(CHANNEL_HOME_VIDEO_CONFIG, onChannelHomeVideoObserved));
@@ -73,8 +71,6 @@ function createVideoObservers(){
 function createSubscriptionsObservers(){
 	let obs = [];
 
-	console.log("createSubscriptionsObserversr");
-
 	obs.push(new Observer(SHARED_GRIDVIDEO_CONFIG, onVideoObserved));
 
 	return obs;
@@ -82,8 +78,6 @@ function createSubscriptionsObservers(){
 
 function createGamingObservers(){
 	let obs = [];
-
-	console.log("createGamingObservers");
 
 	obs.push(new Observer(SHARED_GRIDVIDEO_CONFIG, onVideoObserved));
 	obs.push(new Observer(GAMING_VIDEO_CONFIG, onVideoObserved));
@@ -94,8 +88,6 @@ function createGamingObservers(){
 function createLibraryObservers(){
 	let obs = [];
 
-	console.log("createLibraryObservers");
-
 	obs.push(new Observer(SHARED_GRIDVIDEO_CONFIG, onVideoObserved));
 	obs.push(new Observer(LIBRARY_PLAYLIST_CONFIG, onVideoObserved));
 
@@ -105,8 +97,6 @@ function createLibraryObservers(){
 function createHistoryObservers(){
 	let obs = [];
 
-	console.log("createHistoryObservers");
-
 	obs.push(new Observer(HISTORY_VIDEO_CONFIG, onVideoObserved));
 
 	return obs;
@@ -114,8 +104,6 @@ function createHistoryObservers(){
 
 function createLearningObservers(){
 	let obs = [];
-
-	console.log("createLearningObservers");
 
 	obs.push(new Observer(SHARED_HORIZONTAL_VIDEO_CONFIG, onVideoObserved));
 	obs.push(new Observer(SHARED_HORIZONTAL_PLAYLIST_CONFIG, onVideoObserved));
@@ -126,8 +114,6 @@ function createLearningObservers(){
 function createMobileHomeObservers(){
 	let obs = [];
 
-	console.log("createMobileHomeObservers");
-
 	obs.push(new Observer(SHARED_MOBILE_VIDEO_CONFIG, onSharedMobileVideoObserved));
 
 	return obs;
@@ -136,8 +122,6 @@ function createMobileHomeObservers(){
 function createMobileTrendingObservers(){
 	let obs = [];
 
-	console.log("createMobileTrendingObservers");
-
 	obs.push(new Observer(SHARED_MOBILE_VIDEO_CONFIG, onSharedMobileVideoObserved));
 
 	return obs;
@@ -145,8 +129,6 @@ function createMobileTrendingObservers(){
 
 function createMobileSearchObservers(){
 	let obs = [];
-
-	console.log("createMobileSearchObservers");
 
 	obs.push(new Observer(MOBILE_SEARCH_VIDEO_CONFIG, onMobileSearchVideoObserved));
 	obs.push(new Observer(MOBILE_SEARCH_CHANNEL_CONFIG, onMobileSearchChannelObserved));
@@ -157,8 +139,6 @@ function createMobileSearchObservers(){
 
 function createMobileVideoObservers(){
 	let obs = [];
-
-	console.log("createMobileVideoObservers");
 
 	obs.push(new Observer(MOBILE_SEARCH_VIDEO_CONFIG, onMobileSearchVideoObserved));
 	obs.push(new Observer(MOBILE_SEARCH_CHANNEL_CONFIG, onMobileSearchChannelObserved));

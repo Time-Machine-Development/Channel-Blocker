@@ -221,9 +221,6 @@
 			//tell the user agent that if the event does not get explicitly handled
 			e.preventDefault();
 
-			console.log("pageName", pageName);
-			console.log("pageName", document.getElementById(pageName + "FilteredCheckbox").checked);
-
 			let arr = [];
 
 			for (let input of document.getElementsByClassName("filteredPagesInput")) {
@@ -232,7 +229,6 @@
 					arr.push(YTContext[str]);
 				}
 			}
-			console.log("arr", arr);
 
 			//send a msg to the background_config_storage to change the filteredPages
 			browser.runtime.sendMessage(createContentUIConfigValueSetMsg(ContentUI.FILTERED_PAGES, arr));
@@ -241,8 +237,6 @@
 
 	//filtered pages
 	async function setupFilteredPagesConfig(filteredPages) {
-
-		console.log("filteredPages", filteredPages);
 
 		let container = document.getElementById("filteredPagesConfigContainer");
 		let table = document.createElement("table");
@@ -253,7 +247,7 @@
 		let sampleSwitch = document.getElementById("sampleSwitch");
 
 		for (let index = 0; index < Object.keys(YTContext).length; index++) {
-			if(index % 3 == 0){
+			if(index % 3 === 0){
 				if(tr !== undefined){
 					tbody.append(tr);
 				}
@@ -265,6 +259,7 @@
 			let lable = sampleSwitch.cloneNode(true);
 			lable.children[0].id = pageName + "FilteredCheckbox";
 			if(UNSUPPORTED_YTCONTEXTS.includes(YTContext[pageName.toUpperCase()])){
+				//YTCONTEXT is not supportet yet.
 				lable.children[0].disabled = true;
 				td.setAttribute("title", "not supported");
 			}else{

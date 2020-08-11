@@ -8,6 +8,5 @@ const SHARED_MOBILE_VIDEO_CONFIG = Object.freeze({
 });
 
 async function onSharedMobileVideoObserved(video, characterDatas){
-    console.log(characterDatas.userChannelName, characterDatas.videoTitle);
 	toggleVisibiltyHorizontal(video, await isVideoTitleBlocked(characterDatas.userChannelName, characterDatas.videoTitle));
 }

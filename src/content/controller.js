@@ -28,11 +28,6 @@
 			curObservers.pop().disconnect();
 		}
 
-		
-		
-		console.log("curContext", Object.keys(YTContext).find(key => YTContext[key] === curContext));
-		console.log("contentUIConfig", contentUIConfig);
-
 		if(!contentUIConfig[ContentUI.FILTERED_PAGES].includes(curContext)){
 			
 			return;
