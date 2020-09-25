@@ -7,6 +7,13 @@
     flex-direction: $direction;
 }
 
+@mixin app-background($color) {
+    #{if(&, '&.app-background', '.app-background')} {
+        background-color: $color;
+        color: rgba(#fff, 0.75);
+    }
+}
+  
 html{
     
     body{
@@ -47,8 +54,8 @@ html{
 
             z-index: 100;
 
-            background: $primaryBackgroundColor;
-            border-bottom: 1px solid $primaryBorderColor;
+            background: $secondaryBackgroundColor;
+            //border-bottom: 1px solid $primaryBorderColor;
 
             #header-title{
                 @include flexCenter(row, center,  space-between);
@@ -93,15 +100,15 @@ html{
 
             font-size: 15px;
             
-            background: $primaryBackgroundColor;
-            border-right: 1px solid $primaryBorderColor;
+            background: $secondaryBackgroundColor;
+            //border-right: 1px solid $primaryBorderColor;
 
             ul{
                 list-style: none;
-                padding-left: 2rem;
+                padding-left: 0;
 
                 li{
-                    margin-bottom: 2rem;
+                    
 
                     a{
                         color: $primaryTextColor;
@@ -109,7 +116,17 @@ html{
                         font-size: 1.23rem;
                         font-weight: 600;
                         line-height: 1.25;
+
+                        display: block;
+                        width: calc(100%-1rem);
+                        padding-top: 0.5rem;
+                        padding-bottom: 0.5rem;
+                        padding-left: 1rem;
                     }
+                }
+
+                li a:hover{
+                    background: $primaryHoverColor;
                 }
             }
         }
