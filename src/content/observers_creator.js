@@ -53,6 +53,8 @@ function createVideoObservers(){
 	obs.push(new Observer(NEXT_AUTOPLAY_CONFIG, onNextObserved));
 	obs.push(new Observer(NEXT_VIDEO_CONFIG, onNextObserved));
 	obs.push(new Observer(NEXT_PLAYLIST_CONFIG, onNextObserved));
+	obs.push(new Observer(NEXT_ITEM_SECTION_VIDEO_CONFIG, onNextObserved));
+	obs.push(new Observer(NEXT_ITEM_SECTION_PLAYLIST_CONFIG, onNextObserved));
 
 	obs.push(new Observer(VIDEOWALL_VIDEO_CONFIG, onVideowallVideoObserved));
 
