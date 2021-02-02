@@ -22,6 +22,7 @@ const YT_TAB_IDS = new HashSet();
 		"^https://www\\.youtube\\.com/user/[^/]+/videos(\\?(.)*|)$":			YTContext.CHANNEL_VIDEOS,
 		"^https://www\\.youtube\\.com/channel/[^/]+/videos(\\?(.)*|)$":			YTContext.CHANNEL_VIDEOS,
 		"^https://www\\.youtube\\.com/feed/trending(\\?(.)*|)$":				YTContext.TRENDING,
+		"^https://www\\.youtube\\.com/feed/explore(\\?(.)*|)$":					YTContext.TRENDING,				// TODO
 		"^https://www\\.youtube\\.com/(\\?(.)*|)$":								YTContext.HOME,
 		"^https://www\\.youtube\\.com/feed/subscriptions(\\?(.)*|)$":			YTContext.SUBSCRIPTIONS,
 		"^https://www\\.youtube\\.com/feed/history(\\?(.)*|)$":					YTContext.HISTORY,
