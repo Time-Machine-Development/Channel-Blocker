@@ -150,7 +150,9 @@
 			sendDeleteMessage(filterType);
 	 	};
 		document.getElementById(inputTextfieldId).onkeypress = (e) => {
-			if(e.keyCode===13){
+			//Pressed enter
+			//e.keyCode is deprecated (kept for compatibility purposes)
+			if(e.key==="Enter" || e.keyCode===13){
 	 			sendAddMessage(filterType);
 			}
 	 	};

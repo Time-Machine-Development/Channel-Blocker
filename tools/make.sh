@@ -1,16 +1,16 @@
 #!/bin/bash
 
-#print error and exit, if not executed inside folder */ytc
-if [[ $(pwd | grep -v -E "ytc$") ]]; then
-	echo "ERROR: needs to be executed in */ytc"
+#print error and exit, if not executed inside the project root directory
+if ! [[ -d "tools" ]]; then
+	echo "ERROR: needs to be executed in the project root directory"
 	exit
 fi
 
 #copy src to build
 cp -r ./src ./build
 
-#writing all *.js files without comments from ./src into ./build (exclude jquery-3.3.1.min.js, browser-polyfill\.min\.js and mutation-summary.js)
-for i in $(find ./src  | grep -v "browser-polyfill\.min\.js" | grep -v "jquery-3\.4\.1\.min\.js" | grep -v "mutation-summary\.js" | grep "\.js$" | grep -v "build"); do
+#writing all *.js files without comments from ./src into ./build (exclude all jquery.min.js-versions, browser-polyfill\.min\.js and mutation-summary.js)
+for i in $(find ./src  | grep -v "browser-polyfill\.min\.js" | egrep -v "jquery-[0-9]+\.[0-9]+\.[0-9]+\.min\.js" | grep -v "mutation-summary\.js" | grep "\.js$" | grep -v "build"); do
 	j=./build/$(echo $i| cut -c 7-)
 
 	#pcregrep -h -v -M -e "^\h*\/\*((.|\n)*?)\*\/\h*$" $i	-> remove multi-line comments

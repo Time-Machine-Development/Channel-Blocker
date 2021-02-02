@@ -130,7 +130,8 @@
 	//define behavior for popupTextField
 	document.getElementById("popupTextField").onkeypress = (e) => {
 		//Pressed enter
-		if(e.keyCode===13){
+		//e.keyCode is deprecated (kept for compatibility purposes)
+		if(e.key==="Enter" || e.keyCode===13){
 			addBtnHandler();
 		}
 	};
