@@ -27,13 +27,21 @@ async function onCommentObserved(comment, characterDatas){
 		userChannelName = $(authorText).find("span")[0].innerText.trim();
 	}
 
+	// Set the authorText's style to inline to prevent it from creating a new line
+	authorText.style.display = "inline";
+
 	insertBlockBtnBefore(authorText, userChannelName);
 
 	toggleVisibiltyHorizontal(comment, await isCommentContentBlocked(userChannelName, characterDatas.commentContent));
 }
 
 async function onReplyCommentObserved(replyComment, characterDatas){
-	insertBlockBtnBefore($(replyComment).find("a#author-text")[0], characterDatas.userChannelName);
+	let channelNameElem = $(replyComment).find("a#author-text")[0];
+
+	// Set the authorText's style to inline to prevent it from creating a new line
+	channelNameElem.style.display = "inline";
+	
+	insertBlockBtnBefore(channelNameElem, characterDatas.userChannelName);
 
 	toggleVisibiltyHorizontal(replyComment, await isCommentContentBlocked(characterDatas.userChannelName, characterDatas.commentContent));
 }
