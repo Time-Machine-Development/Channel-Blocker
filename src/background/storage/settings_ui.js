@@ -1,5 +1,5 @@
-/* Manages the part of the storage which is affilliated to settings UI configuration..
-Due to the fact that it is not possible to completly outsource the Popup feature into browser_action.js,
+/* Manages the part of the storage which is affiliated to settings UI configuration..
+Due to the fact that it is not possible to completely outsource the Popup feature into browser_action.js,
 settings_ui_storage.js also and solely enables and disables the Popup. */
 
 {
@@ -48,7 +48,7 @@ settings_ui_storage.js also and solely enables and disables the Popup. */
 			}
 		}
 
-		//an update of storage is necessary if configuration was (paritially) not found in STORAGE
+		//an update of storage is necessary if configuration was (partially) not found in STORAGE
 		updateSettingsUIConfigStorage();
 
 		//change browserAction functionality depending on configuration of SettingsUI.POPUP
@@ -72,7 +72,7 @@ settings_ui_storage.js also and solely enables and disables the Popup. */
 				browser.tabs.sendMessage(configTabId, createSettingsUIStorageModifiedMsg(settingsUIID));
 			}
 
-			//an update of storage is necessary if configuration was (paritially) not found in STORAGE
+			//an update of storage is necessary if configuration was (partially) not found in STORAGE
 			updateSettingsUIConfigStorage();
 
 			//change browserAction functionality depending on configuration of SettingsUI.POPUP
