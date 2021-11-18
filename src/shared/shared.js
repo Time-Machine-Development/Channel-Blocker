@@ -36,7 +36,7 @@ const ContentUI = Object.freeze({
 const DEFAULT_CONTENT_UI_CONFIG = Object.freeze({
 	[ContentUI.BLOCK_BTN_VISIBILITY]: true,
 	[ContentUI.BLOCK_BTN_COLOR]: "#717171",
-	[ContentUI.BLOCK_BTN_SIZE]: 140,
+	[ContentUI.BLOCK_BTN_SIZE]: 120,
 	[ContentUI.ANIMATION_SPEED]: 200
 });
 
