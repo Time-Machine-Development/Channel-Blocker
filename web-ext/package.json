@@ -1,0 +1,27 @@
+{
+  "name": "channel-blocker-web-ext",
+  "version": "1.0.0",
+  "description": "Test and build the web-extension",
+  "main": "web-ext.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "web-ext run --firefox-profile='./firefox-profile' --browser-console --source-dir ../src/",
+    "start:keep-changes": "web-ext run --keep-profile-changes --firefox-profile='./firefox-profile' --browser-console --source-dir ../src/",
+    "start:firefox-android": "web-ext run --target=firefox-android --source-dir ./src/ --android-device=GS4CTMC02741",
+    "build": "web-ext build --source-dir ../src/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Time-Machine-Development/Channel-Blocker-Private.git"
+  },
+  "author": "Marc Beyer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Time-Machine-Development/Channel-Blocker-Private/issues"
+  },
+  "homepage": "https://github.com/Time-Machine-Development/Channel-Blocker-Private#readme",
+  "devDependencies": {
+    "web-ext": "^6.4.0",
+    "webextension-polyfill": "^0.8.0"
+  }
+}

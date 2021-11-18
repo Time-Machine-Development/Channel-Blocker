@@ -6,3 +6,8 @@ tools/web-ext-config.js
 tools/web-ext.bat
 tools/web-ext.sh
 tools/cxamm8z1.ytc
+
+# Ignore web-ext related files
+firefox-profile/
+node_modules/
+web-ext-artifacts/
