@@ -2,6 +2,7 @@ function createHomeObservers(){
 	let obs = [];
 
 	obs.push(new Observer(HOME_VIDEO_CONFIG, onHorizontalVideoObserved));
+	obs.push(new Observer(HOME_VIDEO_CONFIG_V2, onHorizontalVideoObserved));
 	obs.push(new Observer(POST_CONFIG, onPostObserved));
 	obs.push(new Observer(VIDEO_IN_CONTAINER_CONFIG, onVideoObserved));
 	obs.push(new Observer(VIDEO_IN_SECTION_CONFIG, onVideoObserved));
