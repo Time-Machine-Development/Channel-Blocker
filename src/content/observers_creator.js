@@ -68,5 +68,5 @@ function createVideoObservers() {
 
 function createShortsVideosObservers() {
     console.log("install observer");
-    return [new Observer(SHORTS_VIDEO_CONFIG, onHorizontalVideoObserved)];
+    return [new Observer(SHORTS_VIDEO_CONFIG, onShortsVideoObserved)];
 }

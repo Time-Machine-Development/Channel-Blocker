@@ -7,13 +7,13 @@ const SHORTS_VIDEO_CONFIG = Object.freeze({
     },
 });
 
-async function onShortsVideoObserved(channel, characterData) {
-    console.log("channel", channel);
-    console.log("characterData.userChannelName", characterData.userChannelName);
-    let beforeBlockBtn = $(channel).find("div#text-container[class='style-scope ytd-channel-name']")[0];
+async function onShortsVideoObserved(video, characterData, characterDataParents) {
+    insertBlockBtnBefore(characterDataParents.userChannelName, characterData.userChannelName);
 
-    console.log("beforeBlockBtn", beforeBlockBtn);
-    insertBlockBtnBefore(beforeBlockBtn, characterData.userChannelName);
-
-    toggleVisibiltyHorizontal(channel, await isUserChannelNameBlocked(characterDatas.userChannelName));
+    if (video.nextElementSibling.tagName === "YTD-REEL-VIDEO-RENDERER") {
+        toggleVisibiltyHorizontal(
+            video,
+            await isVideoTitleBlocked(characterData.userChannelName, characterData.videoTitle),
+        );
+    }
 }
