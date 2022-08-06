@@ -146,6 +146,14 @@ function updateBlockBtnCSS() {
 			stroke: ${strokeColor};
 			display: ${display};
 			flex-shrink: 0;
+			justify-content: center;
+    		align-items: center;
+		}
+	`);
+
+    style.sheet.insertRule(`
+		.cb_block_button svg{
+			display: block;
 		}
 	`);
 }
