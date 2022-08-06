@@ -1,116 +1,119 @@
 {
-	const SENDER = "content_controller";
+    const SENDER = "content_controller";
 
-	//all observers that are currently active
-	let curObservers = [];
+    //all observers that are currently active
+    let curObservers = [];
 
-	//current context to make an update if a "filter_storage_modified"-message is received
-	let curContext;
+    //current context to make an update if a "filter_storage_modified"-message is received
+    let curContext;
 
-	function createContextRequestMsg(){
-		return {
-			sender: SENDER,
-			receiver: "background_url_update",
-			info: "context_request"
-		};
-	}
+    function createContextRequestMsg() {
+        return {
+            sender: SENDER,
+            receiver: "background_url_update",
+            info: "context_request",
+        };
+    }
 
-	//removes all old observers and creates new observers based on the current yt-context
-	function updateObservers(){
+    //removes all old observers and creates new observers based on the current yt-context
+    function updateObservers() {
+        //disconnects all currently active observers
+        while (curObservers.length > 0) {
+            curObservers.pop().disconnect();
+        }
 
-		//disconnects all currently active observers
-		while(curObservers.length > 0){
-			curObservers.pop().disconnect();
-		}
+        //HomePage(https://www.youtube.com/)
+        if (curContext === YTContext.HOME) {
+            curObservers = createHomeObservers();
+        }
 
-		//HomePage(https://www.youtube.com/)
-		if(curContext === YTContext.HOME){
-			curObservers = createHomeObservers();
-		}
+        //TrendsPage(https://www.youtube.com/feed/trending)
+        if (curContext === YTContext.TRENDING) {
+            curObservers = createTrendingObservers();
+        }
 
-		//TrendsPage(https://www.youtube.com/feed/trending)
-		if(curContext === YTContext.TRENDING){
-			curObservers = createTrendingObservers();
-		}
+        //SearchPage(https://www.youtube.com/results?search_query=<INPUT>)
+        if (curContext === YTContext.SEARCH) {
+            curObservers = createSearchObservers();
+        }
 
-		//SearchPage(https://www.youtube.com/results?search_query=<INPUT>)
-		if(curContext === YTContext.SEARCH){
-			curObservers = createSearchObservers();
-		}
+        //ChannelVideosPage(https://www.youtube.com/(user|channel)/<USER/CHANNEL ID>
+        if (curContext === YTContext.CHANNEL_HOME) {
+            curObservers = createChannelHomeObservers();
+        }
 
-		//ChannelVideosPage(https://www.youtube.com/(user|channel)/<USER/CHANNEL ID>
-		if(curContext === YTContext.CHANNEL_HOME){
-			curObservers = createChannelHomeObservers();
-		}
+        //ChannelVideosPage(https://www.youtube.com/(user|channel)/<USER/CHANNEL ID>/videos
+        if (curContext === YTContext.CHANNEL_VIDEOS) {
+            curObservers = createChannelVideosObservers();
+        }
 
-		//ChannelVideosPage(https://www.youtube.com/(user|channel)/<USER/CHANNEL ID>/videos
-		if(curContext === YTContext.CHANNEL_VIDEOS){
-			curObservers = createChannelVideosObservers();
-		}
+        //WatchPage(https://www.youtube.com/watch?v=<ID>)
+        if (curContext === YTContext.VIDEO) {
+            curObservers = createVideoObservers();
+        }
 
-		//WatchPage(https://www.youtube.com/watch?v=<ID>)
-		if(curContext === YTContext.VIDEO){
-			curObservers = createVideoObservers();
-		}
-	}
+        //ShortsPage(https://www.youtube.com/shorts/<ID>)
+        if (curContext === YTContext.SHORTS) {
+            curObservers = createShortsVideosObservers();
+        }
+    }
 
-	//requests initial context and afterwards update observers (for the first time on this tab-id)
-	async function init(){
-		//request initial context (and register this tab as a yt-tab in background as a side-effect)
-		curContext = await browser.runtime.sendMessage(createContextRequestMsg());
+    //requests initial context and afterwards update observers (for the first time on this tab-id)
+    async function init() {
+        //request initial context (and register this tab as a yt-tab in background as a side-effect)
+        curContext = await browser.runtime.sendMessage(createContextRequestMsg());
 
-		//update observers
-		$(document).ready(updateObservers());
-	}
+        //update observers
+        $(document).ready(updateObservers());
+    }
 
-	/*
+    /*
 	INSTALLING LISTENER FOR MESSAGES FROM background-scripts
 	*/
 
-	browser.runtime.onMessage.addListener((msg) => {
-		if(msg.receiver !== SENDER)
-			return;
+    browser.runtime.onMessage.addListener((msg) => {
+        if (msg.receiver !== SENDER) return;
 
-		if(msg.info === "filter_storage_modified"){
-			/* msg.content is of the form:
+        if (msg.info === "filter_storage_modified") {
+            /* msg.content is of the form:
 			undefined
 			*/
 
-			if(msg.sender === "background_storage_filter"){
-				//update observers
-				$(document).ready(updateObservers());
-			}
-		}
+            if (msg.sender === "background_storage_filter") {
+                //update observers
+                $(document).ready(updateObservers());
+            }
+        }
 
-		if(msg.info === "context_switch"){
-			/* msg.content is of the form:
+        if (msg.info === "context_switch") {
+            /* msg.content is of the form:
 			{
 				context: <Context>
 			}
 			where <Context> is of Object.values(YTContext) or undefined.
 			*/
 
-			if(msg.sender === "background_url_update"){
-				//update current context
-				curContext = msg.content.context;
+            if (msg.sender === "background_url_update") {
+                //update current context
+                curContext = msg.content.context;
 
-				//update observers
-				$(document).ready(updateObservers());
-			}
-		}
+                //update observers
+                $(document).ready(updateObservers());
+            }
+        }
 
-		if(msg.info === "html_data_request"){
-			/* msg.content is of the form:
+        if (msg.info === "html_data_request") {
+            /* msg.content is of the form:
             undefined
             */
 
-			if(msg.sender === "background_bug_report"){
-				return new Promise((resolve) => {
+            if (msg.sender === "background_bug_report") {
+                return new Promise((resolve) => {
                     resolve(document.querySelector("html").outerHTML);
                 });
-			}
-		}
-	});
+            }
+        }
+    });
 
-	init();
+    init();
 }
